@@ -6,3 +6,4 @@ lib
 .env
 *.log
 .DS_Store
+tsconfig.tsbuildinfo
