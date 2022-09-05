@@ -1,0 +1,9 @@
+# package directories
+node_modules
+lib
+
+# Other
+.env
+*.log
+.DS_Store
+tsconfig.tsbuildinfo
