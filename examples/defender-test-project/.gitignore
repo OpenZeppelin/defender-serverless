@@ -8,6 +8,7 @@ jspm_packages
 # Other
 .env
 *.log
+.DS_Store
 
 # Defender
 secrets*.yml

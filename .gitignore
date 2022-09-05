@@ -5,3 +5,4 @@ lib
 # Other
 .env
 *.log
+.DS_Store
