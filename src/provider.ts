@@ -231,13 +231,14 @@ export default class DefenderProvider implements Aws {
       },
       resources: {
         type: 'object',
+        additionalProperties: false,
         properties: {
-          // notifications: { type: 'object', additionalProperties: { $ref: '#/definitions/notification' } },
-          // relayers: { type: 'array', items: { $ref: '#/definitions/relayer' } },
-          // policies: { type: 'array', items: { $ref: '#/definitions/policy' } },
-          // contracts: { type: 'array', items: { $ref: '#/definitions/contract' } },
-          // secrets: { type: 'array', items: tstring },
-          // sentinels: { type: 'array', items: { $ref: '#/definitions/sentinel' } },
+          notifications: { type: 'object', additionalProperties: { $ref: '#/definitions/notification' } },
+          relayers: { type: 'object', additionalProperties: { $ref: '#/definitions/relayer' } },
+          policies: { type: 'object', additionalProperties: { $ref: '#/definitions/policy' } },
+          contracts: { type: 'object', additionalProperties: { $ref: '#/definitions/contract' } },
+          secrets: { type: 'object', additionalProperties: tstring },
+          sentinels: { type: 'object', additionalProperties: { $ref: '#/definitions/sentinel' } },
         },
       },
       function: {
