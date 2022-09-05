@@ -57,7 +57,7 @@ resources:
       address: "0xA91382E82fB676d4c935E601305E5253b3829dCD"
       network: "rinkeby"
       # optional
-      abi: ${file(./abis/demoflash.json)}
+      abi: ${file(./abis/demoflash.json.abi)}
       # optional
       nat-spec: null
 
@@ -106,7 +106,7 @@ resources:
       addresses: 
         - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
       # optional
-      abi: ${file(./abis/erc721.json)}
+      abi: ${file(./abis/erc721.json.abi)}
       # optional
       alert-threshold: 
         amount: 2
@@ -144,7 +144,7 @@ resources:
         - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
         - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f3"
       # optional
-      abi: ${file(./abis/erc721.json)}
+      abi: ${file(./abis/erc721.json.abi)}
       # optional
       alert-threshold: 
         amount: 2
