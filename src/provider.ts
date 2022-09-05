@@ -131,7 +131,7 @@ export default class DefenderProvider implements Aws {
               properties: {
                 timeout: tnumber,
                 message: tstring,
-                channels: { $ref: '#/definitions/notification' },
+                channels: { type: 'array', items: { $ref: '#/definitions/notification' } },
               },
               required: ['channels'],
             },
@@ -177,7 +177,7 @@ export default class DefenderProvider implements Aws {
               properties: {
                 timeout: tnumber,
                 message: tstring,
-                channels: { $ref: '#/definitions/notification' },
+                channels: { type: 'array', items: { $ref: '#/definitions/notification' } },
               },
               required: ['channels'],
             },
