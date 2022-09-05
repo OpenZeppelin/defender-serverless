@@ -62,13 +62,7 @@ export default class DefenderProvider implements Aws {
           },
           required: ['api-key', 'metric-prefix'],
         },
-        webhookConfig: {
-          properties: {
-            url: { type: 'string', format: 'uri' },
-          },
-          required: ['url'],
-        },
-        discordConfig: {
+        urlConfig: {
           properties: {
             url: { type: 'string', format: 'uri' },
           },
@@ -80,12 +74,6 @@ export default class DefenderProvider implements Aws {
             'chat-id': { type: 'string' },
           },
           required: ['bot-token', 'chat-id'],
-        },
-        slackConfig: {
-          properties: {
-            url: { type: 'string', format: 'uri' },
-          },
-          required: ['url'],
         },
         emailConfig: {
           properties: {
@@ -100,13 +88,12 @@ export default class DefenderProvider implements Aws {
             name: tstring,
             paused: tboolean,
             config: {
+              type: 'object',
               oneOf: [
                 { $ref: '#/definitions/emailConfig' },
-                { $ref: '#/definitions/slackConfig' },
                 { $ref: '#/definitions/telegramBotConfig' },
-                { $ref: '#/definitions/discordConfig' },
                 { $ref: '#/definitions/datadogConfig' },
-                { $ref: '#/definitions/webhookConfig' },
+                { $ref: '#/definitions/urlConfig' },
               ],
             },
           },
