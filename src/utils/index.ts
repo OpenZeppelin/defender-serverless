@@ -1,12 +1,11 @@
 import Serverless from 'serverless';
 
-import { differenceWith, isEqual } from 'lodash';
+import { isEqual } from 'lodash';
 import { AutotaskClient } from 'defender-autotask-client';
 import { SentinelClient } from 'defender-sentinel-client';
 import { RelayClient } from 'defender-relay-client';
 import { AdminClient } from 'defender-admin-client';
 
-import Logger from './logger';
 import {
   YSentinel,
   YNotification,
@@ -20,13 +19,8 @@ import {
   DefenderBlockSentinel,
   DefenderFortaSentinel,
   TeamKey,
-  DeployResponse,
-  DefenderRelayerApiKey,
-  DeployOutput,
-  DefenderAPIError,
   YContract,
   DefenderContract,
-  DefenderRelayer,
 } from '../types';
 
 /**
@@ -63,43 +57,6 @@ export const isTemplateResource = <Y, D>(
         getResourceID(getStackName(context), a[0]) === (resource as D & { stackResourceId: string }).stackResourceId,
   );
 };
-
-export const infoWrapper = async <Y, D>(
-  context: Serverless,
-  resourceType: 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets',
-  resources: Y[],
-  retrieveExistingResources: () => Promise<D[]>,
-  format: (resource: D) => string,
-  output: any[],
-) => {
-  const logger = Logger.getInstance();
-  logger.progress('component-info', `Retrieving ${resourceType}`);
-  logger.notice(`${resourceType}`);
-  const existing = (await retrieveExistingResources()).filter((e) =>
-    isTemplateResource<Y, D>(context, e, resourceType, resources),
-  );
-
-  await Promise.all(
-    existing.map(async (e) => {
-      logger.notice(`${format(e)}`, 1);
-      let keys: DefenderRelayerApiKey[] = [];
-      // Also print relayer API keys
-      if (resourceType === 'Relayers') {
-        const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(
-          (e as unknown as DefenderRelayer).relayerId,
-        );
-        listRelayerAPIKeys.map((k) => {
-          logger.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
-        });
-        keys = listRelayerAPIKeys;
-      }
-      if (resourceType === 'Relayers') output.push({ ...e, relayerKeys: keys });
-      else output.push(e);
-    }),
-  );
-};
-
-
 
 export const getResourceID = (stackName: string, resourceName: string): string => {
   return `${stackName}.${resourceName}`;
