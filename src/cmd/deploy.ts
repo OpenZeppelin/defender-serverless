@@ -15,7 +15,6 @@ import {
   getTeamAPIkeysOrThrow,
   getStackName,
   getResourceID,
-  deployWrapper,
   getEquivalentResource,
   isSSOT,
 } from '../utils';
@@ -34,6 +33,9 @@ import {
   YSecret,
   YSentinel,
   DeployOutput,
+  DeployResponse,
+  DefenderAPIError,
+  ResourceType,
 } from '../types';
 
 export default class DefenderDeploy {
@@ -66,7 +68,7 @@ export default class DefenderDeploy {
     const client = getAutotaskClient(this.teamKey!);
     const retrieveExisting = () => client.listSecrets().then((r) => r.secretNames ?? []);
 
-    await deployWrapper<YSecret, string>(
+    await this.wrapper<YSecret, string>(
       this.serverless,
       'Secrets',
       secrets,
@@ -121,7 +123,7 @@ export default class DefenderDeploy {
     const client = getAdminClient(this.teamKey!);
     const retrieveExisting = () => client.listContracts();
 
-    await deployWrapper<YContract, DefenderContract>(
+    await this.wrapper<YContract, DefenderContract>(
       this.serverless,
       'Contracts',
       contracts,
@@ -171,7 +173,7 @@ export default class DefenderDeploy {
     const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
     const client = getRelayClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
-    await deployWrapper<YRelayer, DefenderRelayer>(
+    await this.wrapper<YRelayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
       relayers,
@@ -294,7 +296,7 @@ export default class DefenderDeploy {
     const client = getSentinelClient(this.teamKey!);
     const retrieveExisting = () => client.listNotificationChannels();
 
-    await deployWrapper<YNotification, DefenderNotification>(
+    await this.wrapper<YNotification, DefenderNotification>(
       this.serverless,
       'Notifications',
       notifications,
@@ -340,7 +342,7 @@ export default class DefenderDeploy {
     const notifications = await client.listNotificationChannels();
     const retrieveExisting = () => client.list().then((r) => r.items);
 
-    await deployWrapper<YSentinel, DefenderSentinel>(
+    await this.wrapper<YSentinel, DefenderSentinel>(
       this.serverless,
       'Sentinels',
       sentinels,
@@ -385,7 +387,7 @@ export default class DefenderDeploy {
     const client = getAutotaskClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
 
-    await deployWrapper<YAutotask, DefenderAutotask>(
+    await this.wrapper<YAutotask, DefenderAutotask>(
       this.serverless,
       'Autotasks',
       autotasks,
@@ -465,6 +467,95 @@ export default class DefenderDeploy {
       undefined,
       output,
     );
+  }
+
+  private async wrapper<Y, D>(
+    context: Serverless,
+    resourceType: ResourceType,
+    resources: Y[],
+    retrieveExistingResources: () => Promise<D[]>,
+    onUpdate: (resource: Y, match: D) => Promise<DeployResponse>,
+    onCreate: (resource: Y, stackResourceId: string) => Promise<DeployResponse>,
+    onRemove?: (resources: D[]) => Promise<void>,
+    overrideMatchDefinition?: (a: D, b: Y) => boolean,
+    output: DeployOutput<any> = { removed: [], created: [], updated: [] },
+  ) {
+    try {
+      const stackName = getStackName(context);
+      this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
+      this.log.notice(`${resourceType}`);
+
+      const existing = await retrieveExistingResources();
+
+      // only remove if template is considered single source of truth
+      if (isSSOT(context) && onRemove) {
+        const inDefenderButNotInTemplate = differenceWith(existing, Object.keys(resources), (a: any, b: any) =>
+          overrideMatchDefinition ? overrideMatchDefinition(a, b) : a.stackResourceId === getResourceID(stackName, b),
+        );
+
+        if (inDefenderButNotInTemplate.length > 0) {
+          this.log.info(`Unused resources found on Defender:`);
+          this.log.info(JSON.stringify(inDefenderButNotInTemplate, null, 2));
+          this.log.progress('component-deploy-extra', `Removing resources from Defender`);
+          await onRemove(inDefenderButNotInTemplate);
+          this.log.success(`Removed resources from Defender`);
+          output.removed.push(...inDefenderButNotInTemplate);
+        }
+      }
+
+      for (const [id, resource] of Object.entries(resources)) {
+        // always refresh list after each addition as some resources rely on the previous one
+        const existing = await retrieveExistingResources();
+
+        const entryStackResourceId = getResourceID(stackName, id);
+        let match;
+        if (overrideMatchDefinition) {
+          match = existing.find((e: D) =>
+            resourceType === 'Secrets' ? overrideMatchDefinition(e, id as any) : overrideMatchDefinition(e, resource),
+          );
+        } else {
+          match = existing.find((e: any) => e.stackResourceId === entryStackResourceId);
+        }
+
+        if (match) {
+          this.log.progress(
+            'component-deploy-extra',
+            `Updating ${
+              resourceType === 'Contracts'
+                ? (match as unknown as DefenderContract).name
+                : resourceType === 'Secrets'
+                ? id
+                : (match as D & { stackResourceId: string }).stackResourceId
+            }`,
+          );
+          const result = await onUpdate(resource, match);
+          if (result.success) {
+            this.log.success(`Updated ${result.name} (${result.id})`);
+            output.updated.push(result.response);
+          }
+          if (result.notice) this.log.info(`${result.notice}`, 1);
+          if (result.error) this.log.error(`${result.error}`);
+        } else {
+          this.log.progress(
+            'component-deploy-extra',
+            `Creating ${resourceType === 'Secrets' ? id : entryStackResourceId}`,
+          );
+          const result = await onCreate(resource, entryStackResourceId);
+          if (result.success) {
+            this.log.success(`Created ${result.name} (${result.id})`);
+            output.created.push(result.response);
+          }
+          if (result.notice) this.log.info(`${result.notice}`, 1);
+          if (result.error) this.log.error(`${result.error}`);
+        }
+      }
+    } catch (e) {
+      try {
+        this.log.error(((e as DefenderAPIError).response.data as any).message);
+      } catch {
+        this.log.error(e);
+      }
+    }
   }
 
   public async deploy() {
