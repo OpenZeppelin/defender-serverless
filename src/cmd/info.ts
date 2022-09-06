@@ -20,6 +20,7 @@ import {
   DefenderRelayer,
   DefenderRelayerApiKey,
   DefenderSentinel,
+  ResourceType,
   TeamKey,
   YAutotask,
   YContract,
@@ -56,7 +57,7 @@ export default class DefenderInfo {
 
   private async wrapper<Y, D>(
     context: Serverless,
-    resourceType: 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets',
+    resourceType: ResourceType,
     resources: Y[],
     retrieveExistingResources: () => Promise<D[]>,
     format: (resource: D) => string,

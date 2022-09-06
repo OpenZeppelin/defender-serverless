@@ -21,6 +21,7 @@ import {
   TeamKey,
   YContract,
   DefenderContract,
+  ResourceType,
 } from '../types';
 
 /**
@@ -42,7 +43,7 @@ export const getEquivalentResource = <Y, D>(
 export const isTemplateResource = <Y, D>(
   context: Serverless,
   resource: D,
-  resourceType: 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets',
+  resourceType: ResourceType,
   resources: Y[],
 ): boolean => {
   return !!Object.entries(resources).find((a) =>
