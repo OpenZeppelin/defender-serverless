@@ -36,6 +36,8 @@ export type DefenderDiscordConfig = DiscordConfig;
 export type DefenderTelegramConfig = TelegramBotConfig;
 export type DefenderEmailConfig = EmailConfig;
 
+export type ResourceType = 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets';
+
 export type YPolicy = {
   'gas-price-cap'?: number;
   'whitelist-receivers'?: string[];
