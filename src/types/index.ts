@@ -1,8 +1,8 @@
-import { Contract } from 'defender-admin-client';
 import { Network } from 'defender-base-client';
-import { DefenderApiResponseError } from 'defender-base-client/lib/api/api-error';
+import { Contract } from 'defender-admin-client';
+import { RelayerGetResponse, RelayerApiKey } from 'defender-relay-client';
 
-import { NotificationType } from 'defender-sentinel-client';
+import { DefenderApiResponseError } from 'defender-base-client/lib/api/api-error';
 import {
   SaveNotificationRequest,
   NotificationSummary,
@@ -11,6 +11,7 @@ import {
   TelegramBotConfig,
   EmailConfig,
   DiscordConfig,
+  NotificationType,
 } from 'defender-sentinel-client/lib/models/notification';
 import { CreateSentinelResponse } from 'defender-sentinel-client/lib/models/response';
 import {
@@ -18,7 +19,6 @@ import {
   ExternalCreateFortaSubscriberRequest,
 } from 'defender-sentinel-client/lib/models/subscriber';
 import { Autotask, SecretsMap } from 'defender-autotask-client/lib/models/autotask';
-import { RelayerGetResponse, RelayerApiKey } from 'defender-relay-client';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -103,7 +103,11 @@ export type YBlockSentinel = {
   'autotask-condition'?: YAutotask;
   'autotask-trigger'?: string;
   'confirm-level'?: number | 'safe' | 'finalized';
-  'notify-config': { timeout?: number; message?: string; channels: YNotification[] };
+  'notify-config': {
+    timeout?: number;
+    message?: string;
+    channels: YNotification[];
+  };
   conditions?: {
     event: { signature: string; expression?: string }[];
     function: { signature: string; expression?: string }[];
@@ -122,7 +126,11 @@ export type YFortaSentinel = {
   'autotask-condition'?: YAutotask;
   'autotask-trigger'?: string;
   'confirm-level'?: number | 'safe' | 'finalized';
-  'notify-config': { timeout?: number; message?: string; channels: YNotification[] };
+  'notify-config': {
+    timeout?: number;
+    message?: string;
+    channels: YNotification[];
+  };
   conditions?: {
     'min-scanner-count': number;
     severity?: 0 | 1 | 2 | 3 | 4 | 5;

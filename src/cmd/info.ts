@@ -54,6 +54,7 @@ export default class DefenderInfo {
   }
 
   async info() {
+    this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
     this.log.progress('info', `Running Defender Info on stack: ${stackName}`);
     const stdOut = {
@@ -73,8 +74,7 @@ export default class DefenderInfo {
     await infoWrapper<YSentinel, DefenderSentinel>(
       this.serverless,
       'Sentinels',
-      // @ts-ignore
-      this.serverless.service.resources.sentinels,
+      this.serverless.service.resources.Resources.sentinels,
       listSentinels,
       (resource: DefenderSentinel) => `${resource.stackResourceId}: ${resource.subscriberId}`,
       stdOut.sentinels,
@@ -88,8 +88,7 @@ export default class DefenderInfo {
     await infoWrapper<YAutotask, DefenderAutotask>(
       this.serverless,
       'Autotasks',
-      // @ts-ignore
-      this.serverless.service.functions,
+      this.serverless.service.functions as unknown as YAutotask[],
       listAutotasks,
       (resource: DefenderAutotask) => `${resource.stackResourceId}: ${resource.autotaskId}`,
       stdOut.autotasks,
@@ -100,10 +99,9 @@ export default class DefenderInfo {
     await infoWrapper<YContract, DefenderContract>(
       this.serverless,
       'Contracts',
-      // @ts-ignore
-      this.serverless.service.resources.contracts,
+      this.serverless.service.resources.Resources.contracts,
       listContracts,
-      (resource: DefenderContract) => `${resource.name}: ${resource.network}-${resource.address}`,
+      (resource: DefenderContract) => `${resource.network}-${resource.address}: ${resource.name}`,
       stdOut.contracts,
     );
 
@@ -115,8 +113,7 @@ export default class DefenderInfo {
     await infoWrapper<YRelayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
-      // @ts-ignore
-      this.serverless.service.resources.relayers,
+      this.serverless.service.resources.Resources.relayers,
       listRelayers,
       (resource: DefenderRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
       stdOut.relayers,
@@ -127,8 +124,7 @@ export default class DefenderInfo {
     await infoWrapper<YNotification, DefenderNotification>(
       this.serverless,
       'Notifications',
-      // @ts-ignore
-      this.serverless.service.resources.notifications,
+      this.serverless.service.resources.Resources.notifications,
       listNotifications,
       (resource: DefenderNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
       stdOut.notifications,
@@ -142,13 +138,12 @@ export default class DefenderInfo {
     await infoWrapper<YSecret, string>(
       this.serverless,
       'Secrets',
-      // @ts-ignore
-      this.serverless.service.resources.secrets,
+      this.serverless.service.resources.Resources.secrets,
       listSecrets,
       (resource: string) => `${resource}`,
       stdOut.secrets,
     );
-
+    this.log.notice('========================================================');
     this.log.stdOut(JSON.stringify(stdOut, null, 2));
   }
 }

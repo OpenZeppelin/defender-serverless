@@ -20,7 +20,7 @@ class DefenderPlugin {
 
     Logger.getInstance(logging);
 
-    this.serverless.setProvider('defender', new DefenderProvider(this.serverless));
+    this.serverless.setProvider('defender', new DefenderProvider(this.serverless) as any);
     this.serverless.pluginManager.addPlugin(DefenderDeploy);
     this.serverless.pluginManager.addPlugin(DefenderInfo);
     // this.serverless.pluginManager.addPlugin(DefenderInvoke);

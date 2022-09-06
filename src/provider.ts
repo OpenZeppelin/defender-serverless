@@ -1,7 +1,6 @@
 import Serverless from 'serverless';
-import Aws from 'serverless/plugins/aws/provider/awsProvider';
 
-export default class DefenderProvider implements Aws {
+export default class DefenderProvider {
   constructor(serverless: Serverless) {
     const tstring = { type: 'string' };
     const tboolean = { type: 'boolean' };
@@ -58,7 +57,11 @@ export default class DefenderProvider implements Aws {
         datadogConfig: {
           properties: {
             'api-key': { type: 'string' },
-            'metric-prefix': { type: 'string', maxLength: 100, pattern: '^[A-Za-z]+[A-Za-z0-9_\\.]*\\.$' },
+            'metric-prefix': {
+              type: 'string',
+              maxLength: 100,
+              pattern: '^[A-Za-z]+[A-Za-z0-9_\\.]*\\.$',
+            },
           },
           required: ['api-key', 'metric-prefix'],
         },
@@ -77,7 +80,11 @@ export default class DefenderProvider implements Aws {
         },
         emailConfig: {
           properties: {
-            emails: { type: 'array', items: { type: 'string', format: 'email' }, default: [] },
+            emails: {
+              type: 'array',
+              items: { type: 'string', format: 'email' },
+              default: [],
+            },
           },
           required: ['emails'],
         },
@@ -108,7 +115,10 @@ export default class DefenderProvider implements Aws {
             network: tstring,
             addresses: { type: 'array', items: taddress },
             abi: tstring,
-            'alert-threshold': { type: 'object', properties: { amount: tnumber, 'window-seconds': tnumber } },
+            'alert-threshold': {
+              type: 'object',
+              properties: { amount: tnumber, 'window-seconds': tnumber },
+            },
             paused: tboolean,
             'autotask-condition': { $ref: '#/definitions/autotask' },
             'autotask-trigger': tstring,
@@ -118,7 +128,10 @@ export default class DefenderProvider implements Aws {
               properties: {
                 timeout: tnumber,
                 message: tstring,
-                channels: { type: 'array', items: { $ref: '#/definitions/notification' } },
+                channels: {
+                  type: 'array',
+                  items: { $ref: '#/definitions/notification' },
+                },
               },
               required: ['channels'],
             },
@@ -155,7 +168,10 @@ export default class DefenderProvider implements Aws {
             network: tstring,
             addresses: { type: 'array', items: taddress },
             abi: tstring,
-            'alert-threshold': { type: 'object', properties: { amount: tnumber, 'window-seconds': tnumber } },
+            'alert-threshold': {
+              type: 'object',
+              properties: { amount: tnumber, 'window-seconds': tnumber },
+            },
             paused: tboolean,
             'autotask-condition': { $ref: '#/definitions/autotask' },
             'autotask-trigger': tstring,
@@ -164,7 +180,10 @@ export default class DefenderProvider implements Aws {
               properties: {
                 timeout: tnumber,
                 message: tstring,
-                channels: { type: 'array', items: { $ref: '#/definitions/notification' } },
+                channels: {
+                  type: 'array',
+                  items: { $ref: '#/definitions/notification' },
+                },
               },
               required: ['channels'],
             },
@@ -233,12 +252,32 @@ export default class DefenderProvider implements Aws {
         type: 'object',
         additionalProperties: false,
         properties: {
-          notifications: { type: 'object', additionalProperties: { $ref: '#/definitions/notification' } },
-          relayers: { type: 'object', additionalProperties: { $ref: '#/definitions/relayer' } },
-          policies: { type: 'object', additionalProperties: { $ref: '#/definitions/policy' } },
-          contracts: { type: 'object', additionalProperties: { $ref: '#/definitions/contract' } },
-          secrets: { type: 'object', additionalProperties: tstring },
-          sentinels: { type: 'object', additionalProperties: { $ref: '#/definitions/sentinel' } },
+          Resources: {
+            type: 'object',
+            properties: {
+              notifications: {
+                type: 'object',
+                additionalProperties: { $ref: '#/definitions/notification' },
+              },
+              relayers: {
+                type: 'object',
+                additionalProperties: { $ref: '#/definitions/relayer' },
+              },
+              policies: {
+                type: 'object',
+                additionalProperties: { $ref: '#/definitions/policy' },
+              },
+              contracts: {
+                type: 'object',
+                additionalProperties: { $ref: '#/definitions/contract' },
+              },
+              secrets: { type: 'object', additionalProperties: tstring },
+              sentinels: {
+                type: 'object',
+                additionalProperties: { $ref: '#/definitions/sentinel' },
+              },
+            },
+          },
         },
       },
       function: {
@@ -268,33 +307,5 @@ export default class DefenderProvider implements Aws {
         required: ['name', 'path', 'trigger', 'paused'],
       },
     });
-  }
-
-  naming: { [key: string]: () => string } = {};
-  getCredentials(): Aws.Credentials {
-    throw new Error('Method not implemented.');
-  }
-  getProviderName(): string {
-    throw new Error('Method not implemented.');
-  }
-  getRegion(): string {
-    throw new Error('Method not implemented.');
-  }
-  getServerlessDeploymentBucketName(): Promise<string> {
-    throw new Error('Method not implemented.');
-  }
-  getStage(): string {
-    throw new Error('Method not implemented.');
-  }
-  getAccountId(): Promise<string> {
-    throw new Error('Method not implemented.');
-  }
-  request(
-    service: string,
-    method: string,
-    params?: {} | undefined,
-    options?: { useCache?: boolean | undefined; region?: string | undefined } | undefined,
-  ): Promise<any> {
-    throw new Error('Method not implemented.');
   }
 }

@@ -62,8 +62,7 @@ export default class DefenderDeploy {
   }
 
   private async deploySecrets(output: DeployOutput<string>) {
-    // @ts-ignore
-    const secrets: YSecret[] = this.serverless.service.resources.secrets;
+    const secrets: YSecret[] = this.serverless.service.resources.Resources.secrets;
     const client = getAutotaskClient(this.teamKey!);
     const retrieveExisting = () => client.listSecrets().then((r) => r.secretNames ?? []);
 
@@ -118,8 +117,7 @@ export default class DefenderDeploy {
   }
 
   private async deployContracts(output: DeployOutput<DefenderContract>) {
-    // @ts-ignore
-    const contracts: YContract[] = this.serverless.service.resources.contracts;
+    const contracts: YContract[] = this.serverless.service.resources.Resources.contracts;
     const client = getAdminClient(this.teamKey!);
     const retrieveExisting = () => client.listContracts();
 
@@ -153,8 +151,10 @@ export default class DefenderDeploy {
           response: importedContract,
         };
       },
-      // on remove // TODO: implement remove contract in admin-client
-      undefined,
+      // on remove
+      async (contracts: DefenderContract[]) => {
+        await Promise.all(contracts.map(async (c) => await client.deleteContract(`${c.network}-${c.address}`)));
+      },
       // overrideMatchDefinition
       (a: DefenderContract, b: YContract) => {
         return a.address === b.address && a.network === b.network;
@@ -164,10 +164,11 @@ export default class DefenderDeploy {
   }
 
   private async deployRelayers(
-    output: DeployOutput<DefenderRelayer> & { relayerKeys: DeployOutput<DefenderRelayerApiKey> },
+    output: DeployOutput<DefenderRelayer> & {
+      relayerKeys: DeployOutput<DefenderRelayerApiKey>;
+    },
   ) {
-    // @ts-ignore
-    const relayers: YRelayer[] = this.serverless.service.resources.relayers;
+    const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
     const client = getRelayClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
     await deployWrapper<YRelayer, DefenderRelayer>(
@@ -237,8 +238,7 @@ export default class DefenderDeploy {
       },
       // on create
       async (relayer: YRelayer, stackResourceId: string) => {
-        // @ts-ignore
-        const relayers: YRelayer[] = this.serverless.service.resources.relayers;
+        const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
         const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
           this.serverless,
@@ -290,8 +290,7 @@ export default class DefenderDeploy {
   }
 
   private async deployNotifications(output: DeployOutput<DefenderNotification>) {
-    // @ts-ignore
-    const notifications: YNotification[] = this.serverless.service.resources.notifications;
+    const notifications: YNotification[] = this.serverless.service.resources.Resources.notifications;
     const client = getSentinelClient(this.teamKey!);
     const retrieveExisting = () => client.listNotificationChannels();
 
@@ -335,8 +334,7 @@ export default class DefenderDeploy {
   }
 
   private async deploySentinels(output: DeployOutput<DefenderSentinel>) {
-    // @ts-ignore
-    const sentinels: YSentinel[] = this.serverless.service.resources.sentinels;
+    const sentinels: YSentinel[] = this.serverless.service.resources.Resources.sentinels;
     const client = getSentinelClient(this.teamKey!);
     const autotasks = await getAutotaskClient(this.teamKey!).list();
     const notifications = await client.listNotificationChannels();
@@ -432,8 +430,7 @@ export default class DefenderDeploy {
       // on create
       async (autotask: YAutotask, stackResourceId: string) => {
         const autotaskRelayer = autotask.relayer;
-        // @ts-ignore
-        const relayers: YRelayer[] = this.serverless.service.resources.relayers;
+        const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
         const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
           this.serverless,
@@ -471,15 +468,38 @@ export default class DefenderDeploy {
   }
 
   public async deploy() {
+    this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
     this.log.progress('deploy', `Running Defender Deploy on stack: ${stackName}`);
 
-    const sentinels: DeployOutput<DefenderSentinel> = { removed: [], created: [], updated: [] };
-    const autotasks: DeployOutput<DefenderAutotask> = { removed: [], created: [], updated: [] };
-    const contracts: DeployOutput<DefenderContract> = { removed: [], created: [], updated: [] };
-    const notifications: DeployOutput<DefenderNotification> = { removed: [], created: [], updated: [] };
-    const secrets: DeployOutput<string> = { removed: [], created: [], updated: [] };
-    const relayers: DeployOutput<DefenderRelayer> & { relayerKeys: DeployOutput<DefenderRelayerApiKey> } = {
+    const sentinels: DeployOutput<DefenderSentinel> = {
+      removed: [],
+      created: [],
+      updated: [],
+    };
+    const autotasks: DeployOutput<DefenderAutotask> = {
+      removed: [],
+      created: [],
+      updated: [],
+    };
+    const contracts: DeployOutput<DefenderContract> = {
+      removed: [],
+      created: [],
+      updated: [],
+    };
+    const notifications: DeployOutput<DefenderNotification> = {
+      removed: [],
+      created: [],
+      updated: [],
+    };
+    const secrets: DeployOutput<string> = {
+      removed: [],
+      created: [],
+      updated: [],
+    };
+    const relayers: DeployOutput<DefenderRelayer> & {
+      relayerKeys: DeployOutput<DefenderRelayerApiKey>;
+    } = {
       removed: [],
       created: [],
       updated: [],
@@ -509,12 +529,13 @@ export default class DefenderDeploy {
     await this.deployNotifications(stdOut.notifications);
     await this.deploySentinels(stdOut.sentinels);
 
+    this.log.notice('========================================================');
+
     this.log.stdOut(JSON.stringify(stdOut, null, 2));
+
     await this.serverless.utils.appendFileSync(
       `${process.cwd()}/.serverless/deployment-log.${stackName}.json`,
-      JSON.stringify(stdOut, null, 0),
+      JSON.stringify(stdOut, null, 0) + '\r\n',
     );
-    // add new line for next object
-    await this.serverless.utils.appendFileSync(`${process.cwd()}/.serverless/deployment-log.${stackName}.json`, '\r\n');
   }
 }
