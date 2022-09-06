@@ -24,16 +24,19 @@ import {
   DefenderRelayerApiKey,
   DeployOutput,
   DefenderAPIError,
+  YContract,
+  DefenderContract,
+  DefenderRelayer,
 } from '../types';
 
 /**
  * @dev this function retrieves the Defender equivalent object of the provided template resource
  * This will not work for resources that do not have the stackResourceId property, ie. secrets and contracts
  */
-export const getEquivalentResource = <R, D>(
+export const getEquivalentResource = <Y, D>(
   context: Serverless,
-  resource: R,
-  resources: R[],
+  resource: Y,
+  resources: Y[],
   currentResources: D[],
 ) => {
   if (resource) {
@@ -42,28 +45,29 @@ export const getEquivalentResource = <R, D>(
   }
 };
 
-export const isTemplateResource = <R, D>(
+export const isTemplateResource = <Y, D>(
   context: Serverless,
   resource: D,
   resourceType: 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets',
-  resources: R[],
+  resources: Y[],
 ): boolean => {
   return !!Object.entries(resources).find((a) =>
     resourceType === 'Secrets'
       ? // if secret, just compare key
-        a[0] === (resource as any)
+        a[0] === (resource as unknown as string)
       : resourceType === 'Contracts'
       ? // if contracts, compare network and address
-        (a[1] as any).network === (resource as any).network && (a[1] as any).address === (resource as any).address
+        (a[1] as unknown as YContract).network === (resource as unknown as DefenderContract).network &&
+        (a[1] as unknown as YContract).address === (resource as unknown as DefenderContract).address
       : // anything else, compare stackResourceId
-        getResourceID(getStackName(context), a[0]) === (resource as any).stackResourceId,
+        getResourceID(getStackName(context), a[0]) === (resource as D & { stackResourceId: string }).stackResourceId,
   );
 };
 
-export const infoWrapper = async <R, D>(
+export const infoWrapper = async <Y, D>(
   context: Serverless,
   resourceType: 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets',
-  resources: R[],
+  resources: Y[],
   retrieveExistingResources: () => Promise<D[]>,
   format: (resource: D) => string,
   output: any[],
@@ -72,16 +76,18 @@ export const infoWrapper = async <R, D>(
   logger.progress('component-info', `Retrieving ${resourceType}`);
   logger.notice(`${resourceType}`);
   const existing = (await retrieveExistingResources()).filter((e) =>
-    isTemplateResource<R, D>(context, e, resourceType, resources),
+    isTemplateResource<Y, D>(context, e, resourceType, resources),
   );
+
   await Promise.all(
     existing.map(async (e) => {
       logger.notice(`${format(e)}`, 1);
       let keys: DefenderRelayerApiKey[] = [];
       // Also print relayer API keys
       if (resourceType === 'Relayers') {
-        // @ts-ignore
-        const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(e.relayerId);
+        const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(
+          (e as unknown as DefenderRelayer).relayerId,
+        );
         listRelayerAPIKeys.map((k) => {
           logger.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
         });
@@ -93,15 +99,15 @@ export const infoWrapper = async <R, D>(
   );
 };
 
-export const deployWrapper = async <R, D>(
+export const deployWrapper = async <Y, D>(
   context: Serverless,
   resourceType: 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets',
-  resources: R[],
+  resources: Y[],
   retrieveExistingResources: () => Promise<D[]>,
-  onUpdate: (resource: R, match: D) => Promise<DeployResponse>,
-  onCreate: (resource: R, stackResourceId: string) => Promise<DeployResponse>,
+  onUpdate: (resource: Y, match: D) => Promise<DeployResponse>,
+  onCreate: (resource: Y, stackResourceId: string) => Promise<DeployResponse>,
   onRemove?: (resources: D[]) => Promise<void>,
-  overrideMatchDefinition?: (a: D, b: R) => boolean,
+  overrideMatchDefinition?: (a: D, b: Y) => boolean,
   output: DeployOutput<any> = { removed: [], created: [], updated: [] },
 ) => {
   const logger = Logger.getInstance();
@@ -147,8 +153,11 @@ export const deployWrapper = async <R, D>(
         logger.progress(
           'component-deploy-extra',
           `Updating ${
-            // @ts-ignore
-            resourceType === 'Contracts' ? match.name : resourceType === 'Secrets' ? id : match.stackResourceId
+            resourceType === 'Contracts'
+              ? (match as unknown as DefenderContract).name
+              : resourceType === 'Secrets'
+              ? id
+              : (match as D & { stackResourceId: string }).stackResourceId
           }`,
         );
         const result = await onUpdate(resource, match);
@@ -170,7 +179,11 @@ export const deployWrapper = async <R, D>(
       }
     }
   } catch (e) {
-    logger.error(((e as DefenderAPIError).response.data as any).message);
+    try {
+      logger.error(((e as DefenderAPIError).response.data as any).message);
+    } catch {
+      logger.error(e);
+    }
   }
 };
 
@@ -179,8 +192,12 @@ export const getResourceID = (stackName: string, resourceName: string): string =
 };
 
 export const getStackName = (context: Serverless): string => {
-  // @ts-ignore
-  if (context.service.provider.stackName && typeof context.service.provider.stackName === 'string') {
+  if (
+    // @ts-ignore
+    context.service.provider.stackName &&
+    // @ts-ignore
+    typeof context.service.provider.stackName === 'string'
+  ) {
     // @ts-ignore
     return context.service.provider.stackName;
   }
@@ -306,8 +323,7 @@ export const constructSentinel = (
         const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
           context,
           notification,
-          // @ts-ignore
-          context.service.resources.notifications,
+          context.service.resources.Resources.notifications,
           notifications,
         );
         return maybeNotification?.notificationId;
