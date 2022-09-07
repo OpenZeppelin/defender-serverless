@@ -4,9 +4,13 @@ import { Logging } from 'serverless/classes/Plugin';
 
 import Logger from '../utils/logger';
 
+import { tailLogsFor } from 'defender-autotask-client/lib/utils';
+
 import {
   getAdminClient,
   getAutotaskClient,
+  getEquivalentResource,
+  getEquivalentResourceByKey,
   getRelayClient,
   getResourceID,
   getSentinelClient,
@@ -58,9 +62,14 @@ export default class DefenderLogs {
 
   async logs() {
     this.log.notice('========================================================');
-    this.log.progress('info', `Running Defender Logs on stack function: ${this.options.function}`);
+    this.log.progress('logs', `Running Defender Logs on stack function: ${this.options.function}`);
+    const client = getAutotaskClient(this.teamKey!);
+    const list = (await client.list()).items;
 
+    const defenderAutotask = getEquivalentResourceByKey<DefenderAutotask>(this.options.function!, list);
+
+    if (defenderAutotask) await tailLogsFor(client, defenderAutotask!.autotaskId);
+    else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
     this.log.notice('========================================================');
-    // this.log.stdOut(JSON.stringify(stdOut, null, 2));
   }
 }
