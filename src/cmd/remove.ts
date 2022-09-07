@@ -4,6 +4,8 @@ import { Logging } from 'serverless/classes/Plugin';
 
 import Logger from '../utils/logger';
 
+import prompt from 'prompt';
+
 import {
   getAdminClient,
   getAutotaskClient,
@@ -47,7 +49,7 @@ export default class DefenderRemove {
 
     this.hooks = {
       'before:remove:remove': () => this.validateKeys(),
-      'remove:remove': this.remove.bind(this),
+      'remove:remove': this.requestConfirmation.bind(this),
     };
   }
 
@@ -72,7 +74,29 @@ export default class DefenderRemove {
     output.push(...existing);
   }
 
-  public async remove() {
+  private async requestConfirmation() {
+    const properties = [
+      {
+        name: 'confirm',
+        validator: /^(y|n){1}$/i,
+        warning: 'Confirmation must be `y` (yes) or `n` (no)',
+      },
+    ];
+    prompt.start({
+      message:
+        'This action will remove your resources from Defender permanently. Are you sure you wish to continue [y/n]?',
+    });
+    const { confirm } = await prompt.get(properties);
+
+    if (confirm.toString().toLowerCase() !== 'y') {
+      this.log.error('Confirmation not acquired. Terminating command');
+      return;
+    }
+    this.log.success('Confirmation acquired');
+    await this.remove();
+  }
+
+  private async remove() {
     this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
     this.log.progress('remove', `Running Defender Remove on stack: ${stackName}`);
