@@ -6,34 +6,8 @@ import Logger from '../utils/logger';
 
 import { tailLogsFor } from 'defender-autotask-client/lib/utils';
 
-import {
-  getAdminClient,
-  getAutotaskClient,
-  getEquivalentResource,
-  getEquivalentResourceByKey,
-  getRelayClient,
-  getResourceID,
-  getSentinelClient,
-  getStackName,
-  getTeamAPIkeysOrThrow,
-  isTemplateResource,
-} from '../utils';
-import {
-  DefenderAutotask,
-  DefenderContract,
-  DefenderNotification,
-  DefenderRelayer,
-  DefenderRelayerApiKey,
-  DefenderSentinel,
-  ResourceType,
-  TeamKey,
-  YAutotask,
-  YContract,
-  YNotification,
-  YRelayer,
-  YSecret,
-  YSentinel,
-} from '../types';
+import { getAutotaskClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
+import { DefenderAutotask, TeamKey } from '../types';
 
 export default class DefenderLogs {
   serverless: Serverless;
