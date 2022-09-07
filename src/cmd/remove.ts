@@ -75,7 +75,7 @@ export default class DefenderRemove {
   }
 
   private async requestConfirmation() {
-    if (process.stdin.isTTY) {
+    if (process.stdout.isTTY) {
       const properties = [
         {
           name: 'confirm',
