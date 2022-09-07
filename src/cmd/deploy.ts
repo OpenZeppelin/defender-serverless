@@ -1,4 +1,5 @@
 import Serverless from 'serverless';
+import prompt from 'prompt';
 
 import { Logging } from 'serverless/classes/Plugin';
 import { differenceWith } from 'lodash';
@@ -55,12 +56,37 @@ export default class DefenderDeploy {
 
     this.hooks = {
       'before:deploy:deploy': () => this.validateKeys(),
-      'deploy:deploy': this.deploy.bind(this),
+      'deploy:deploy': this.requestConfirmation.bind(this),
     };
   }
 
   validateKeys() {
     this.teamKey = getTeamAPIkeysOrThrow(this.serverless);
+  }
+
+  private async requestConfirmation() {
+    if (isSSOT(this.serverless) && process.stdout.isTTY) {
+      const properties = [
+        {
+          name: 'confirm',
+          validator: /^(y|n){1}$/i,
+          warning: 'Confirmation must be `y` (yes) or `n` (no)',
+        },
+      ];
+      prompt.start({
+        message:
+          'You have SSOT enabled. This might remove resources from Defender permanently. Are you sure you wish to continue [y/n]?',
+      });
+      const { confirm } = await prompt.get(properties);
+
+      if (confirm.toString().toLowerCase() !== 'y') {
+        this.log.error('Confirmation not acquired. Terminating command');
+        return;
+      }
+      this.log.success('Confirmation acquired');
+    }
+
+    await this.deploy();
   }
 
   private async deploySecrets(output: DeployOutput<string>) {
