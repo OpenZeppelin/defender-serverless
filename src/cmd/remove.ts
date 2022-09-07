@@ -228,8 +228,7 @@ export default class DefenderRemove {
       },
       stdOut.secrets,
     );
-
     this.log.notice('========================================================');
-    this.log.stdOut(JSON.stringify(stdOut, null, 2));
+    if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(stdOut, null, 2));
   }
 }

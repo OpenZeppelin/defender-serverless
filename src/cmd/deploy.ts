@@ -622,7 +622,7 @@ export default class DefenderDeploy {
 
     this.log.notice('========================================================');
 
-    this.log.stdOut(JSON.stringify(stdOut, null, 2));
+    if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(stdOut, null, 2));
 
     await this.serverless.utils.appendFileSync(
       `${process.cwd()}/.serverless/deployment-log.${stackName}.json`,
