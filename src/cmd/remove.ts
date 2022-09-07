@@ -75,24 +75,27 @@ export default class DefenderRemove {
   }
 
   private async requestConfirmation() {
-    const properties = [
-      {
-        name: 'confirm',
-        validator: /^(y|n){1}$/i,
-        warning: 'Confirmation must be `y` (yes) or `n` (no)',
-      },
-    ];
-    prompt.start({
-      message:
-        'This action will remove your resources from Defender permanently. Are you sure you wish to continue [y/n]?',
-    });
-    const { confirm } = await prompt.get(properties);
+    if (process.stdin.isTTY) {
+      const properties = [
+        {
+          name: 'confirm',
+          validator: /^(y|n){1}$/i,
+          warning: 'Confirmation must be `y` (yes) or `n` (no)',
+        },
+      ];
+      prompt.start({
+        message:
+          'This action will remove your resources from Defender permanently. Are you sure you wish to continue [y/n]?',
+      });
+      const { confirm } = await prompt.get(properties);
 
-    if (confirm.toString().toLowerCase() !== 'y') {
-      this.log.error('Confirmation not acquired. Terminating command');
-      return;
+      if (confirm.toString().toLowerCase() !== 'y') {
+        this.log.error('Confirmation not acquired. Terminating command');
+        return;
+      }
+      this.log.success('Confirmation acquired');
     }
-    this.log.success('Confirmation acquired');
+
     await this.remove();
   }
 
