@@ -31,11 +31,11 @@ import {
 export const getEquivalentResource = <Y, D>(
   context: Serverless,
   resource: Y,
-  resources: Y[],
+  resources: Y[] | undefined,
   currentResources: D[],
 ) => {
   if (resource) {
-    const [key, _] = Object.entries(resources).find((a) => isEqual(a[1], resource))!;
+    const [key, _] = Object.entries(resources ?? []).find((a) => isEqual(a[1], resource))!;
     return currentResources.find((e: D) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
   }
 };
@@ -199,7 +199,7 @@ export const constructSentinel = (
         const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
           context,
           notification,
-          context.service.resources.Resources.notifications,
+          context.service.resources?.Resources?.notifications,
           notifications,
         );
         return maybeNotification?.notificationId;

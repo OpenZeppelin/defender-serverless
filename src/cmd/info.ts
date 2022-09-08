@@ -111,7 +111,7 @@ export default class DefenderInfo {
     await this.wrapper<YSentinel, DefenderSentinel>(
       this.serverless,
       'Sentinels',
-      this.serverless.service.resources.Resources.sentinels,
+      this.serverless.service.resources?.Resources?.sentinels,
       listSentinels,
       (resource: DefenderSentinel) => `${resource.stackResourceId}: ${resource.subscriberId}`,
       stdOut.sentinels,
@@ -136,7 +136,7 @@ export default class DefenderInfo {
     await this.wrapper<YContract, DefenderContract>(
       this.serverless,
       'Contracts',
-      this.serverless.service.resources.Resources.contracts,
+      this.serverless.service.resources?.Resources?.contracts,
       listContracts,
       (resource: DefenderContract) => `${resource.network}-${resource.address}: ${resource.name}`,
       stdOut.contracts,
@@ -150,7 +150,7 @@ export default class DefenderInfo {
     await this.wrapper<YRelayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
-      this.serverless.service.resources.Resources.relayers,
+      this.serverless.service.resources?.Resources?.relayers,
       listRelayers,
       (resource: DefenderRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
       stdOut.relayers,
@@ -161,7 +161,7 @@ export default class DefenderInfo {
     await this.wrapper<YNotification, DefenderNotification>(
       this.serverless,
       'Notifications',
-      this.serverless.service.resources.Resources.notifications,
+      this.serverless.service.resources?.Resources?.notifications,
       listNotifications,
       (resource: DefenderNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
       stdOut.notifications,
@@ -175,7 +175,7 @@ export default class DefenderInfo {
     await this.wrapper<YSecret, string>(
       this.serverless,
       'Secrets',
-      this.serverless.service.resources.Resources.secrets,
+      this.serverless.service.resources?.Resources?.secrets,
       listSecrets,
       (resource: string) => `${resource}`,
       stdOut.secrets,

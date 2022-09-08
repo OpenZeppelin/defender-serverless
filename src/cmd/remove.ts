@@ -125,7 +125,7 @@ export default class DefenderRemove {
     await this.wrapper<YSentinel, DefenderSentinel>(
       this.serverless,
       'Sentinels',
-      this.serverless.service.resources.Resources.sentinels,
+      this.serverless.service.resources?.Resources?.sentinels,
       listSentinels,
       async (sentinels: DefenderSentinel[]) => {
         await Promise.all(
@@ -172,7 +172,7 @@ export default class DefenderRemove {
     await this.wrapper<YContract, DefenderContract>(
       this.serverless,
       'Contracts',
-      this.serverless.service.resources.Resources.contracts,
+      this.serverless.service.resources?.Resources?.contracts,
       listContracts,
       async (contracts: DefenderContract[]) => {
         await Promise.all(
@@ -195,7 +195,7 @@ export default class DefenderRemove {
         this.serverless,
         e,
         'Relayers',
-        this.serverless.service.resources.Resources.relayers,
+        this.serverless.service.resources?.Resources?.relayers ?? [],
       ),
     );
     this.log.error('Deleting Relayers is currently only possible via the Defender UI.');
@@ -220,7 +220,7 @@ export default class DefenderRemove {
     await this.wrapper<YNotification, DefenderNotification>(
       this.serverless,
       'Notifications',
-      this.serverless.service.resources.Resources.notifications,
+      this.serverless.service.resources?.Resources?.notifications,
       listNotifications,
       async (notifications: DefenderNotification[]) => {
         await Promise.all(
@@ -242,7 +242,7 @@ export default class DefenderRemove {
     await this.wrapper<YSecret, string>(
       this.serverless,
       'Secrets',
-      this.serverless.service.resources.Resources.secrets,
+      this.serverless.service.resources?.Resources?.secrets,
       listSecrets,
       async (secrets: string[]) => {
         this.log.progress('component-remove-extra', `Removing (${secrets.join(', ')}) from Defender`);
