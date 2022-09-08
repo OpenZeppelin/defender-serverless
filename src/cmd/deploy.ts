@@ -134,8 +134,7 @@ export default class DefenderDeploy {
     );
 
     // Autotasks
-    // @ts-ignore
-    const autotasks: YAutotask[] = this.serverless.service.functions;
+    const autotasks: YAutotask[] = this.serverless.service.functions as any;
     const autotaskClient = getAutotaskClient(this.teamKey!);
     const dAutotasks = (await autotaskClient.list()).items;
     const autotaskDifference = differenceWith(
@@ -524,8 +523,7 @@ export default class DefenderDeploy {
   }
 
   private async deployAutotasks(output: DeployOutput<DefenderAutotask>) {
-    // @ts-ignore
-    const autotasks: YAutotask[] = this.serverless.service.functions;
+    const autotasks: YAutotask[] = this.serverless.service.functions as any;
     const client = getAutotaskClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
 

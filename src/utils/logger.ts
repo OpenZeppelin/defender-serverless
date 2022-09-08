@@ -27,12 +27,12 @@ export default class Logger {
     this.logger?.progress.get(name).remove();
   }
 
-  public info(message: any, indentLevel: number = 0) {
+  public info(message: any, indentLevel = 0) {
     const indents = ` `.repeat(2).repeat(indentLevel);
     const args = indents ? [indents + message] : [message];
     this.logger?.log.info(...args);
   }
-  public notice(message: any, indentLevel: number = 0) {
+  public notice(message: any, indentLevel = 0) {
     const indents = ` `.repeat(2).repeat(indentLevel);
     const args = indents ? [indents + message] : [message];
     this.logger?.log.notice(...args);
@@ -46,7 +46,6 @@ export default class Logger {
   public error(message: any) {
     this.logger?.log.error(message);
   }
-
   public stdOut(message: string | string[]) {
     this.logger?.writeText(message);
   }
