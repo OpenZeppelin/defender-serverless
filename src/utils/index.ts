@@ -40,6 +40,10 @@ export const getEquivalentResource = <Y, D>(
   }
 };
 
+export const getEquivalentResourceByKey = <D>(resourceKey: string, currentResources: D[]) => {
+  return currentResources.find((e: D) => (e as any).stackResourceId === resourceKey);
+};
+
 export const isTemplateResource = <Y, D>(
   context: Serverless,
   resource: D,
