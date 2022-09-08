@@ -58,7 +58,7 @@ export default class DefenderInfo {
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
-    resources: Y[],
+    resources: Y[] | undefined,
     retrieveExistingResources: () => Promise<D[]>,
     format: (resource: D) => string,
     output: any[],
@@ -66,7 +66,7 @@ export default class DefenderInfo {
     this.log.progress('component-info', `Retrieving ${resourceType}`);
     this.log.notice(`${resourceType}`);
     const existing = (await retrieveExistingResources()).filter((e) =>
-      isTemplateResource<Y, D>(context, e, resourceType, resources),
+      isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
     );
 
     await Promise.all(
@@ -107,6 +107,7 @@ export default class DefenderInfo {
       getSentinelClient(this.teamKey!)
         .list()
         .then((i) => i.items);
+
     await this.wrapper<YSentinel, DefenderSentinel>(
       this.serverless,
       'Sentinels',

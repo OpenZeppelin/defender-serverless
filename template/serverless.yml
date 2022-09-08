@@ -1,0 +1,48 @@
+service: defender-serverless-template
+configValidationMode: error
+frameworkVersion: '3'
+
+provider:
+  name: defender
+  stage: ${opt:stage, 'dev'}
+  stackName: 'mystack'
+  # SSOT: use this template as a single source of truth. 
+  # This will delete Defender resources (with the exception of Relayers) not found in this template upon deployment.
+  ssot: false
+
+defender:
+  key: "CLjepm2mdLCdeCWuaQ8gRAQw3aWiWAtD"
+  secret: "3APF57e5oxBCjtaqSgLwknMpHzSp843qWXzaWwqMzKfePcYbfpLCdBHQw5CqCvzM"
+
+functions:
+  autotask-example-1:
+    name: 'Hello world from serverless'
+    path: './autotasks/hello-world'
+    relayer: ${self:resources.Resources.relayers.relayer-1}
+    trigger:
+      type: "schedule"
+      frequency: 1500
+    paused: false
+
+resources:
+  Resources:
+    policies:
+      policy-1:
+        gas-price-cap: 1000
+        whitelist-receivers:
+          - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
+        eip1559-pricing: true
+
+    relayers:
+      relayer-1:
+        name: "Test Relayer 1"
+        network: "rinkeby"
+        min-balance: 1000
+        policy: ${self:resources.Resources.policies.policy-1}
+        api-keys:
+          - key1
+
+plugins:
+  - defender-serverless
+
+

@@ -1,8 +1,11 @@
 {
-  "name": "defender-test-project",
+  "name": "defender-serverless-template",
   "version": "1.0.0",
-  "description": "Test project for the defender-serverless plugin",
+  "description": "Template for the defender-serverless plugin",
   "main": "handler.js",
+  "engines": {
+    "node": ">14.16"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +22,6 @@
   "license": "MIT",
   "devDependencies": {
     "serverless": "^3.20.0",
-    "defender-serverless": "../../lib"
+    "defender-serverless": "../lib"
   }
 }

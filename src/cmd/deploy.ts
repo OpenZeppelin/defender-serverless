@@ -222,8 +222,7 @@ export default class DefenderDeploy {
               const keyStackResource = getResourceID(match.stackResourceId!, key);
               const createdKey = await client.createKey(match.relayerId, keyStackResource);
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${match.relayerId})`);
-              // writing to .serverless as this is in .gitIgnore by default to avoid accidentally committing this file
-              const keyPath = `${process.cwd()}/.serverless/relayer-keys/${keyStackResource}.json`;
+              const keyPath = `${process.cwd()}/.defender/relayer-keys/${keyStackResource}.json`;
               await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
               this.log.info(`API Key details stored in ${keyPath}`, 1);
               output.relayerKeys.created.push(createdKey);
@@ -269,7 +268,7 @@ export default class DefenderDeploy {
               const keyStackResource = getResourceID(stackResourceId, key);
               const createdKey = await client.createKey(createdRelayer.relayerId, keyStackResource);
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${createdRelayer.relayerId})`);
-              const keyPath = `${process.cwd()}/.serverless/relayer-keys/${keyStackResource}.json`;
+              const keyPath = `${process.cwd()}/.defender/relayer-keys/${keyStackResource}.json`;
               await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
               this.log.info(`API Key details stored in ${keyPath}`, 1);
               output.relayerKeys.created.push(createdKey);
@@ -472,7 +471,7 @@ export default class DefenderDeploy {
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
-    resources: Y[],
+    resources: Y[] | undefined,
     retrieveExistingResources: () => Promise<D[]>,
     onUpdate: (resource: Y, match: D) => Promise<DeployResponse>,
     onCreate: (resource: Y, stackResourceId: string) => Promise<DeployResponse>,
@@ -489,7 +488,7 @@ export default class DefenderDeploy {
 
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
-        const inDefenderButNotInTemplate = differenceWith(existing, Object.keys(resources), (a: any, b: any) =>
+        const inDefenderButNotInTemplate = differenceWith(existing, Object.keys(resources ?? []), (a: any, b: any) =>
           overrideMatchDefinition ? overrideMatchDefinition(a, b) : a.stackResourceId === getResourceID(stackName, b),
         );
 
@@ -503,7 +502,7 @@ export default class DefenderDeploy {
         }
       }
 
-      for (const [id, resource] of Object.entries(resources)) {
+      for (const [id, resource] of Object.entries(resources ?? [])) {
         // always refresh list after each addition as some resources rely on the previous one
         const existing = await retrieveExistingResources();
 
@@ -624,9 +623,17 @@ export default class DefenderDeploy {
 
     this.log.stdOut(JSON.stringify(stdOut, null, 2));
 
-    await this.serverless.utils.appendFileSync(
-      `${process.cwd()}/.serverless/deployment-log.${stackName}.json`,
-      JSON.stringify(stdOut, null, 0) + '\r\n',
-    );
+    const keyDir = `${process.cwd()}/.defender`;
+    if (!this.serverless.utils.dirExistsSync(keyDir)) {
+      await this.serverless.utils.writeFile(
+        `${keyDir}/deployment-log.${stackName}.json`,
+        JSON.stringify(stdOut, null, 0) + '\r\n',
+      );
+    } else {
+      await this.serverless.utils.appendFileSync(
+        `${keyDir}/deployment-log.${stackName}.json`,
+        JSON.stringify(stdOut, null, 0) + '\r\n',
+      );
+    }
   }
 }
