@@ -60,14 +60,14 @@ export default class DefenderRemove {
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
-    resources: Y[],
+    resources: Y[] | undefined,
     retrieveExistingResources: () => Promise<D[]>,
     onRemove: (resources: D[]) => Promise<void>,
     output: any[] = [],
   ) {
     this.log.progress('component-info', `Retrieving ${resourceType}`);
     const existing = (await retrieveExistingResources()).filter((e) =>
-      isTemplateResource<Y, D>(context, e, resourceType, resources),
+      isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
     );
     this.log.progress('component-remove', `Removing ${resourceType} from Defender`);
     await onRemove(existing);
