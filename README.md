@@ -8,7 +8,7 @@ A Defender plugin for the Serverless framework.
 
 ## Setup
 
-This plugin allows you to define Autotasks, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yaml` and provision them via the CLI using `serverless deploy`.
+This plugin allows you to define Autotasks, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`.
 
 ```yaml
 service: defender-serverless-template
