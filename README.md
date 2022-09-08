@@ -1,24 +1,61 @@
 # Defender Provider Serverless Framework
 
-:warning: This is a proof of concept. **Do not use in production**. :warning:
+A Defender plugin for the Serverless framework.
 
-Proof of concept for a Defender plugin for the Serverless framework. Goal is to be able to define Autotasks (and more) declaratively from a `serverless.yaml` and provision them via the CLI using `serverless deploy`.
+## Installation
+
+`sls install --url https://github.com/OpenZeppelin/defender-serverless/template`
+
+## Setup
+
+This plugin allows you to define Autotasks, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yaml` and provision them via the CLI using `serverless deploy`.
 
 ```yaml
-service: defender-test-project
-
+service: defender-serverless-template
+configValidationMode: error
 frameworkVersion: '3'
 
 provider:
   name: defender
+  stage: ${opt:stage, 'dev'}
+  stackName: 'mystack'
+  ssot: false
+
+defender:
+  key: '${env:TEAM_API_KEY}'
+  secret: '${env:TEAM_API_SECRET}'
 
 functions:
-  hello:
+  autotask-example-1:
     name: 'Hello world from serverless'
-    path: './hello-world'
+    path: './autotasks/hello-world'
+    relayer: ${self:resources.Resources.relayers.relayer-1}
+    trigger:
+      type: 'schedule'
+      frequency: 1500
+    paused: false
+
+resources:
+  Resources:
+    policies:
+      policy-1:
+        gas-price-cap: 1000
+        whitelist-receivers:
+          - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
+        eip1559-pricing: true
+
+    relayers:
+      relayer-1:
+        name: 'Test Relayer 1'
+        network: 'rinkeby'
+        min-balance: 1000
+        policy: ${self:resources.Resources.policies.policy-1}
+        api-keys:
+          - key1
 
 plugins:
-  - ../defender-serverless
+  - defender-serverless
 ```
 
-Requires setting the `API_KEY` and `API_SECRET` environment variables to a Defender Team API Key with Autotask management capabilities.
+This requires setting the `TEAM_API_KEY` and `TEAN_API_SECRET`, either in your environment variables or through a configuration file. Modify the `serverless.yaml` accordingly.
+Ensure the Defender Team API Keys are setup with all API capabilities.

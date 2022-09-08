@@ -11,8 +11,8 @@ provider:
   ssot: false
 
 defender:
-  key: "TEAM_API_KEY"
-  secret: "TEAM_API_SECRET"
+  key: "${env:TEAM_API_KEY}"
+  secret: "${env:TEAM_API_SECRET}"
 
 functions:
   autotask-example-1:
