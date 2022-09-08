@@ -77,7 +77,7 @@ export default class DefenderDeploy {
       secrets: [],
     };
     // Contracts
-    const contracts: YContract[] = this.serverless.service.resources.Resources.contracts;
+    const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
     const adminClient = getAdminClient(this.teamKey!);
     const dContracts = await adminClient.listContracts();
     const contractDifference = differenceWith(
@@ -88,7 +88,7 @@ export default class DefenderDeploy {
     );
 
     // Sentinels
-    const sentinels: YSentinel[] = this.serverless.service.resources.Resources.sentinels;
+    const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
     const sentinelClient = getSentinelClient(this.teamKey!);
     const dSentinels = (await sentinelClient.list()).items;
     const sentinelDifference = differenceWith(
@@ -99,7 +99,7 @@ export default class DefenderDeploy {
     );
 
     // Relayers
-    const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
+    const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
     const relayerClient = getRelayClient(this.teamKey!);
     const dRelayers = (await relayerClient.list()).items;
 
@@ -124,7 +124,7 @@ export default class DefenderDeploy {
     );
 
     // Notifications
-    const notifications: YNotification[] = this.serverless.service.resources.Resources.notifications;
+    const notifications: YNotification[] = this.serverless.service.resources?.Resources?.notifications ?? [];
     const dNotifications = await sentinelClient.listNotificationChannels();
     const notificationDifference = differenceWith(
       dNotifications,
@@ -146,7 +146,7 @@ export default class DefenderDeploy {
     );
 
     // Secrets
-    const secrets: YSecret[] = this.serverless.service.resources.Resources.secrets;
+    const secrets: YSecret[] = this.serverless.service.resources?.Resources?.secrets ?? [];
     const dSecrets = (await autotaskClient.listSecrets()).secretNames;
     const secretsDifference = differenceWith(dSecrets, Object.keys(secrets ?? []), (a: string, b: string) => a === b);
 
@@ -203,7 +203,7 @@ export default class DefenderDeploy {
   }
 
   private async deploySecrets(output: DeployOutput<string>) {
-    const secrets: YSecret[] = this.serverless.service.resources.Resources.secrets;
+    const secrets: YSecret[] = this.serverless.service.resources?.Resources?.secrets ?? [];
     const client = getAutotaskClient(this.teamKey!);
     const retrieveExisting = () => client.listSecrets().then((r) => r.secretNames ?? []);
 
@@ -259,7 +259,7 @@ export default class DefenderDeploy {
   }
 
   private async deployContracts(output: DeployOutput<DefenderContract>) {
-    const contracts: YContract[] = this.serverless.service.resources.Resources.contracts;
+    const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
     const client = getAdminClient(this.teamKey!);
     const retrieveExisting = () => client.listContracts();
 
@@ -311,7 +311,7 @@ export default class DefenderDeploy {
       relayerKeys: DeployOutput<DefenderRelayerApiKey>;
     },
   ) {
-    const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
+    const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
     const client = getRelayClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
     await this.wrapper<YRelayer, DefenderRelayer>(
@@ -380,7 +380,7 @@ export default class DefenderDeploy {
       },
       // on create
       async (relayer: YRelayer, stackResourceId: string) => {
-        const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
+        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
         const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
           this.serverless,
@@ -432,7 +432,7 @@ export default class DefenderDeploy {
   }
 
   private async deployNotifications(output: DeployOutput<DefenderNotification>) {
-    const notifications: YNotification[] = this.serverless.service.resources.Resources.notifications;
+    const notifications: YNotification[] = this.serverless.service.resources?.Resources?.notifications ?? [];
     const client = getSentinelClient(this.teamKey!);
     const retrieveExisting = () => client.listNotificationChannels();
 
@@ -477,7 +477,7 @@ export default class DefenderDeploy {
   }
 
   private async deploySentinels(output: DeployOutput<DefenderSentinel>) {
-    const sentinels: YSentinel[] = this.serverless.service.resources.Resources.sentinels;
+    const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
     const client = getSentinelClient(this.teamKey!);
     const autotasks = await getAutotaskClient(this.teamKey!).list();
     const notifications = await client.listNotificationChannels();
@@ -574,7 +574,7 @@ export default class DefenderDeploy {
       // on create
       async (autotask: YAutotask, stackResourceId: string) => {
         const autotaskRelayer = autotask.relayer;
-        const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
+        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
         const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
           this.serverless,
