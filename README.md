@@ -75,7 +75,7 @@ When enabled, this will use the resources defined in the template as the single 
 
 You can use `sls info` to retrieve information on every resource defined in the `serverless.yml` file, including unique identifiers, and properties unique to each Defender component.
 
-### Remove
+### Remove
 
 You can use `sls remove` to remove all defender resources defined in the `serverless.yml` file, with the exception of Relayers.
 
