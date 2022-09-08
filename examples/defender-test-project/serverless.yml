@@ -1,7 +1,5 @@
-service: defender-test-project
+service: defender-serverless-test-project
 configValidationMode: error
-disabledDeprecations:
-  - CLI_OPTIONS_SCHEMA_V3 # disables deprecation warning for secrets plugin
 frameworkVersion: '3'
 
 provider:
@@ -10,10 +8,9 @@ provider:
   stackName: 'mystack'
   # SSOT: use this template as a single source of truth. 
   # This will delete Defender resources (with the exception of Relayers) not found in this template upon deployment.
-  ssot: false  
+  ssot: true  
   
 custom:
-  # weird bug with Secret Plugin requires you to always include --stage CLI param. Otherwise this becomes undefined
   config: ${file(secrets.${self:provider.stage}.yml)}
 
 defender:
@@ -23,7 +20,7 @@ defender:
 functions:
   autotask-example-1:
     name: 'Hello world from serverless'
-    path: './hello-world'
+    path: './autotasks/hello-world'
     # optional
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
@@ -50,7 +47,6 @@ resources:
       foo: ${self:custom.config.secrets.foo}
       hello: ${self:custom.config.secrets.hello}
       test: ${self:custom.config.secrets.test}
-      world: ${self:custom.config.secrets.test}
       
     contracts:
       contract-2:
@@ -179,7 +175,3 @@ resources:
 
 plugins:
   - defender-serverless
-  - serverless-secrets-plugin
-  - serverless-confirm-command
-
-

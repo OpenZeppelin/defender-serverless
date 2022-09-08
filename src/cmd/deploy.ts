@@ -18,6 +18,7 @@ import {
   getResourceID,
   getEquivalentResource,
   isSSOT,
+  getEquivalentResourceByKey,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -37,6 +38,7 @@ import {
   DeployResponse,
   DefenderAPIError,
   ResourceType,
+  ListDefenderResources,
 } from '../types';
 
 export default class DefenderDeploy {
@@ -64,6 +66,113 @@ export default class DefenderDeploy {
     this.teamKey = getTeamAPIkeysOrThrow(this.serverless);
   }
 
+  private async getSSOTDifference(): Promise<ListDefenderResources> {
+    const difference: ListDefenderResources = {
+      sentinels: [],
+      autotasks: [],
+      notifications: [],
+      contracts: [],
+      relayerApiKeys: [],
+      secrets: [],
+    };
+    // Contracts
+    const contracts: YContract[] = this.serverless.service.resources.Resources.contracts;
+    const adminClient = getAdminClient(this.teamKey!);
+    const dContracts = await adminClient.listContracts();
+    const contractDifference = differenceWith(
+      dContracts,
+      Object.entries(contracts ?? []),
+      (a: DefenderContract, b: [string, YContract]) =>
+        `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
+    );
+
+    // Sentinels
+    const sentinels: YSentinel[] = this.serverless.service.resources.Resources.sentinels;
+    const sentinelClient = getSentinelClient(this.teamKey!);
+    const dSentinels = (await sentinelClient.list()).items;
+    const sentinelDifference = differenceWith(
+      dSentinels,
+      Object.entries(sentinels ?? []),
+      (a: DefenderSentinel, b: [string, YSentinel]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    );
+
+    // Relayers
+    const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
+    const relayerClient = getRelayClient(this.teamKey!);
+    const dRelayers = (await relayerClient.list()).items;
+
+    // Relayers API keys
+    await Promise.all(
+      Object.entries(relayers).map(async ([id, relayer]) => {
+        const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
+          getResourceID(getStackName(this.serverless), id),
+          dRelayers,
+        );
+        if (dRelayer) {
+          const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
+          const configuredKeys = relayer['api-keys'];
+          const relayerApiKeyDifference = differenceWith(
+            dRelayerApiKeys,
+            configuredKeys,
+            (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
+          );
+          difference.relayerApiKeys.push(...relayerApiKeyDifference);
+        }
+      }),
+    );
+
+    // Notifications
+    const notifications: YNotification[] = this.serverless.service.resources.Resources.notifications;
+    const dNotifications = await sentinelClient.listNotificationChannels();
+    const notificationDifference = differenceWith(
+      dNotifications,
+      Object.entries(notifications ?? []),
+      (a: DefenderNotification, b: [string, YNotification]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    );
+
+    // Autotasks
+    // @ts-ignore
+    const autotasks: YAutotask[] = this.serverless.service.functions;
+    const autotaskClient = getAutotaskClient(this.teamKey!);
+    const dAutotasks = (await autotaskClient.list()).items;
+    const autotaskDifference = differenceWith(
+      dAutotasks,
+      Object.entries(autotasks ?? []),
+      (a: DefenderAutotask, b: [string, YAutotask]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    );
+
+    // Secrets
+    const secrets: YSecret[] = this.serverless.service.resources.Resources.secrets;
+    const dSecrets = (await autotaskClient.listSecrets()).secretNames;
+    const secretsDifference = differenceWith(dSecrets, Object.keys(secrets ?? []), (a: string, b: string) => a === b);
+
+    difference.contracts = contractDifference;
+    difference.sentinels = sentinelDifference;
+    difference.notifications = notificationDifference;
+    difference.autotasks = autotaskDifference;
+    difference.secrets = secretsDifference;
+
+    return difference;
+  }
+  private async constructConfirmationMessage(withResources: ListDefenderResources): Promise<string> {
+    const start = `You have SSOT enabled. This might remove resources from Defender permanently.\nHaving SSOT enabled will interpret the resources defined in the serverless.yml file as the Single Source Of Truth, and will remove any existing Defender resource which is not defined in the YAML file (with the exception of Relayers).\nIf you continue, the following resources will be removed from Defender:`;
+    const end = `Are you sure you wish to continue [y/n]?`;
+
+    const formattedResources = {
+      autotasks: withResources.autotasks.map((a) => `${a.stackResourceId} (${a.autotaskId})`),
+      sentinels: withResources.sentinels.map((a) => `${a.stackResourceId} (${a.subscriberId})`),
+      notifications: withResources.notifications.map((a) => `${a.stackResourceId} (${a.notificationId})`),
+      contracts: withResources.contracts.map((a) => `${a.network}-${a.address} (${a.name})`),
+      relayerApiKeys: withResources.relayerApiKeys.map((a) => `${a.stackResourceId} (${a.keyId})`),
+      secrets: withResources.secrets.map((a) => `${a}`),
+    };
+
+    return `${start}\n${JSON.stringify(formattedResources, null, 2)}\n\n${end}`;
+  }
+
   private async requestConfirmation() {
     if (isSSOT(this.serverless) && process.stdout.isTTY) {
       const properties = [
@@ -73,9 +182,12 @@ export default class DefenderDeploy {
           warning: 'Confirmation must be `y` (yes) or `n` (no)',
         },
       ];
+
+      this.log.progress('component-deploy', `Retrieving list of resources`);
+
+      const withResources = await this.getSSOTDifference();
       prompt.start({
-        message:
-          'You have SSOT enabled. This might remove resources from Defender permanently. Are you sure you wish to continue [y/n]?',
+        message: await this.constructConfirmationMessage(withResources),
       });
       const { confirm } = await prompt.get(properties);
 
@@ -248,8 +360,7 @@ export default class DefenderDeploy {
               const keyStackResource = getResourceID(match.stackResourceId!, key);
               const createdKey = await client.createKey(match.relayerId, keyStackResource);
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${match.relayerId})`);
-              // writing to .serverless as this is in .gitIgnore by default to avoid accidentally committing this file
-              const keyPath = `${process.cwd()}/.serverless/relayer-keys/${keyStackResource}.json`;
+              const keyPath = `${process.cwd()}/.defender/relayer-keys/${keyStackResource}.json`;
               await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
               this.log.info(`API Key details stored in ${keyPath}`, 1);
               output.relayerKeys.created.push(createdKey);
@@ -295,7 +406,7 @@ export default class DefenderDeploy {
               const keyStackResource = getResourceID(stackResourceId, key);
               const createdKey = await client.createKey(createdRelayer.relayerId, keyStackResource);
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${createdRelayer.relayerId})`);
-              const keyPath = `${process.cwd()}/.serverless/relayer-keys/${keyStackResource}.json`;
+              const keyPath = `${process.cwd()}/.defender/relayer-keys/${keyStackResource}.json`;
               await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
               this.log.info(`API Key details stored in ${keyPath}`, 1);
               output.relayerKeys.created.push(createdKey);
@@ -498,7 +609,7 @@ export default class DefenderDeploy {
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
-    resources: Y[],
+    resources: Y[] | undefined,
     retrieveExistingResources: () => Promise<D[]>,
     onUpdate: (resource: Y, match: D) => Promise<DeployResponse>,
     onCreate: (resource: Y, stackResourceId: string) => Promise<DeployResponse>,
@@ -515,8 +626,13 @@ export default class DefenderDeploy {
 
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
-        const inDefenderButNotInTemplate = differenceWith(existing, Object.keys(resources), (a: any, b: any) =>
-          overrideMatchDefinition ? overrideMatchDefinition(a, b) : a.stackResourceId === getResourceID(stackName, b),
+        const inDefenderButNotInTemplate = differenceWith(
+          existing,
+          Object.entries(resources ?? []),
+          (a: D, b: [string, Y]) =>
+            overrideMatchDefinition
+              ? overrideMatchDefinition(a, b[1])
+              : (a as D & { stackResourceId: string }).stackResourceId === getResourceID(stackName, b[0]),
         );
 
         if (inDefenderButNotInTemplate.length > 0) {
@@ -529,7 +645,7 @@ export default class DefenderDeploy {
         }
       }
 
-      for (const [id, resource] of Object.entries(resources)) {
+      for (const [id, resource] of Object.entries(resources ?? [])) {
         // always refresh list after each addition as some resources rely on the previous one
         const existing = await retrieveExistingResources();
 
@@ -650,9 +766,17 @@ export default class DefenderDeploy {
 
     if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(stdOut, null, 2));
 
-    await this.serverless.utils.appendFileSync(
-      `${process.cwd()}/.serverless/deployment-log.${stackName}.json`,
-      JSON.stringify(stdOut, null, 0) + '\r\n',
-    );
+    const keyDir = `${process.cwd()}/.defender`;
+    if (!this.serverless.utils.dirExistsSync(keyDir)) {
+      await this.serverless.utils.writeFile(
+        `${keyDir}/deployment-log.${stackName}.json`,
+        JSON.stringify(stdOut, null, 0) + '\r\n',
+      );
+    } else {
+      await this.serverless.utils.appendFileSync(
+        `${keyDir}/deployment-log.${stackName}.json`,
+        JSON.stringify(stdOut, null, 0) + '\r\n',
+      );
+    }
   }
 }
