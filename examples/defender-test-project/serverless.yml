@@ -8,7 +8,7 @@ provider:
   stackName: 'mystack'
   # SSOT: use this template as a single source of truth. 
   # This will delete Defender resources (with the exception of Relayers) not found in this template upon deployment.
-  ssot: true  
+  ssot: false  
   
 custom:
   config: ${file(secrets.${self:provider.stage}.yml)}

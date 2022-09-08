@@ -45,7 +45,7 @@ export default class DefenderInvoke {
       this.log.notice(JSON.stringify(response, null, 2));
       if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(response, null, 2));
     } else {
-      this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
+      this.log.error(`No autotask with identifier: ${this.options.function} found.`);
     }
     this.log.notice('========================================================');
   }
