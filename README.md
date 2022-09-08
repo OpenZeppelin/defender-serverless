@@ -69,7 +69,7 @@ A caveat is when `ssot` is enabled, this will remove resources on your account t
 
 You can use `sls deploy` to deploy your current stack to Defender. The deploy takes in an optional `--stage` flag, which is defaulted to `dev`. Moreover, the `serverless.yml` contains a required `ssot` property, which stands for Single Source of Truth.
 When enabled, this will use the resources defined in the template as the single point of truth, removing Defender resources which do not exist in the template, with the exception of Relayers (given these _could_ contain funds).
-:warning: This command _will_ create a log entry and _might_ create a `relayer-keys` folder in the `.defender` folder. The `.defender` folder _should_ be in the `.gitignore` file, as it could contain sensitive information, such as relayer keys and secrets.
+:warning: This command _will_ create a log entry and _might_ create a `relayer-keys` folder in the `.defender` folder of the current working directory. The `.defender` folder _should_ be in the `.gitignore` file, as it could contain sensitive information, such as relayer keys and secrets.
 
 ### Info
 
