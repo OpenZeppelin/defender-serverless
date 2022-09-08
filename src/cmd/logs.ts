@@ -61,15 +61,19 @@ export default class DefenderLogs {
   }
 
   async logs() {
-    this.log.notice('========================================================');
-    this.log.progress('logs', `Running Defender Logs on stack function: ${this.options.function}`);
-    const client = getAutotaskClient(this.teamKey!);
-    const list = (await client.list()).items;
+    try {
+      this.log.notice('========================================================');
+      this.log.progress('logs', `Running Defender Logs on stack function: ${this.options.function}`);
+      const client = getAutotaskClient(this.teamKey!);
+      const list = (await client.list()).items;
 
-    const defenderAutotask = getEquivalentResourceByKey<DefenderAutotask>(this.options.function!, list);
+      const defenderAutotask = getEquivalentResourceByKey<DefenderAutotask>(this.options.function!, list);
 
-    if (defenderAutotask) await tailLogsFor(client, defenderAutotask!.autotaskId);
-    else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
-    this.log.notice('========================================================');
+      if (defenderAutotask) await tailLogsFor(client, defenderAutotask!.autotaskId);
+      else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
+      this.log.notice('========================================================');
+    } catch (e) {
+      this.log.error(e);
+    }
   }
 }
