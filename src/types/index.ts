@@ -172,3 +172,12 @@ export type DeployResponse = {
 };
 
 export type DeployOutput<T> = { removed: T[]; created: T[]; updated: T[] };
+
+export type ListDefenderResources = {
+  sentinels: DefenderSentinel[];
+  autotasks: DefenderAutotask[];
+  notifications: DefenderNotification[];
+  contracts: DefenderContract[];
+  relayerApiKeys: DefenderRelayerApiKey[];
+  secrets: string[];
+};

@@ -47,7 +47,6 @@ resources:
       foo: ${self:custom.config.secrets.foo}
       hello: ${self:custom.config.secrets.hello}
       test: ${self:custom.config.secrets.test}
-      world: ${self:custom.config.secrets.test}
       
     contracts:
       contract-2:

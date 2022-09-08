@@ -1,11 +1,11 @@
 import Serverless from 'serverless';
 
 import { Logging } from 'serverless/classes/Plugin';
-import { TeamKey } from '../types';
-
-import { getTeamAPIkeysOrThrow, getAutotaskClient } from '../utils';
 
 import Logger from '../utils/logger';
+
+import { getAutotaskClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
+import { DefenderAutotask, TeamKey } from '../types';
 
 export default class DefenderInvoke {
   serverless: Serverless;
@@ -13,7 +13,7 @@ export default class DefenderInvoke {
   logging: Logging;
   log: any;
   hooks: any;
-  key?: TeamKey;
+  teamKey?: TeamKey;
 
   constructor(serverless: Serverless, options: Serverless.Options, logging: Logging) {
     this.serverless = serverless;
@@ -23,32 +23,30 @@ export default class DefenderInvoke {
     this.log = Logger.getInstance();
 
     this.hooks = {
-      'before:invoke:invoke': this.beforeInvoke(),
+      'before:invoke:invoke': () => this.validateKeys(),
       'invoke:invoke': this.invoke.bind(this),
     };
   }
 
-  beforeInvoke() {
-    this.key = getTeamAPIkeysOrThrow(this.serverless);
+  validateKeys() {
+    this.teamKey = getTeamAPIkeysOrThrow(this.serverless);
   }
 
-  public async invoke() {
-    const serverless = this.serverless;
-    const options = this.options;
-    this.log.info(serverless, 'Defender Invoke');
+  async invoke() {
+    this.log.notice('========================================================');
+    this.log.progress('logs', `Running Defender Invoke on stack function: ${this.options.function}`);
     // @ts-ignore
-    const slsfn = serverless.service.functions[options.f || options.function];
-    // @ts-ignore
-    if (!slsfn) throw new Error(`Function ${slsfname} not defined`);
-    const functionName = slsfn.name;
-    // @ts-ignore
-    const payload = JSON.parse(options.d || options.data);
-    const client = getAutotaskClient(this.key!);
-    const existing = await client.list().then((r) => r.items);
-    // @ts-ignore
-    const match = existing.find((e) => e.name === functionName);
-    if (!match) throw new Error(`Function '${functionName}' not found on Defender`);
-    const response = await client.runAutotask(match.autotaskId, payload);
-    this.log.info(response);
+    const payload = JSON.parse(this.options?.data ?? '{}');
+    const client = getAutotaskClient(this.teamKey!);
+    const list = (await client.list()).items;
+    const defenderAutotask = getEquivalentResourceByKey<DefenderAutotask>(this.options.function!, list);
+    if (defenderAutotask) {
+      const response = await client.runAutotask(defenderAutotask.autotaskId, payload);
+      this.log.notice(JSON.stringify(response, null, 2));
+      if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(response, null, 2));
+    } else {
+      this.log.error(`No autotask with identifier: ${this.options.function} found.`);
+    }
+    this.log.notice('========================================================');
   }
 }

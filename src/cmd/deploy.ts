@@ -1,4 +1,5 @@
 import Serverless from 'serverless';
+import prompt from 'prompt';
 
 import { Logging } from 'serverless/classes/Plugin';
 import { differenceWith } from 'lodash';
@@ -17,6 +18,7 @@ import {
   getResourceID,
   getEquivalentResource,
   isSSOT,
+  getEquivalentResourceByKey,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -36,6 +38,7 @@ import {
   DeployResponse,
   DefenderAPIError,
   ResourceType,
+  ListDefenderResources,
 } from '../types';
 
 export default class DefenderDeploy {
@@ -45,6 +48,7 @@ export default class DefenderDeploy {
   log: any;
   hooks: any;
   teamKey?: TeamKey;
+  ssotDifference?: ListDefenderResources;
 
   constructor(serverless: Serverless, options: Serverless.Options, logging: Logging) {
     this.serverless = serverless;
@@ -55,12 +59,147 @@ export default class DefenderDeploy {
 
     this.hooks = {
       'before:deploy:deploy': () => this.validateKeys(),
-      'deploy:deploy': this.deploy.bind(this),
+      'deploy:deploy': this.requestConfirmation.bind(this),
     };
   }
 
   validateKeys() {
     this.teamKey = getTeamAPIkeysOrThrow(this.serverless);
+  }
+
+  private async getSSOTDifference(): Promise<ListDefenderResources> {
+    const difference: ListDefenderResources = {
+      sentinels: [],
+      autotasks: [],
+      notifications: [],
+      contracts: [],
+      relayerApiKeys: [],
+      secrets: [],
+    };
+    // Contracts
+    const contracts: YContract[] = this.serverless.service.resources.Resources.contracts;
+    const adminClient = getAdminClient(this.teamKey!);
+    const dContracts = await adminClient.listContracts();
+    const contractDifference = differenceWith(
+      dContracts,
+      Object.entries(contracts ?? []),
+      (a: DefenderContract, b: [string, YContract]) =>
+        `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
+    );
+
+    // Sentinels
+    const sentinels: YSentinel[] = this.serverless.service.resources.Resources.sentinels;
+    const sentinelClient = getSentinelClient(this.teamKey!);
+    const dSentinels = (await sentinelClient.list()).items;
+    const sentinelDifference = differenceWith(
+      dSentinels,
+      Object.entries(sentinels ?? []),
+      (a: DefenderSentinel, b: [string, YSentinel]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    );
+
+    // Relayers
+    const relayers: YRelayer[] = this.serverless.service.resources.Resources.relayers;
+    const relayerClient = getRelayClient(this.teamKey!);
+    const dRelayers = (await relayerClient.list()).items;
+
+    // Relayers API keys
+    await Promise.all(
+      Object.entries(relayers).map(async ([id, relayer]) => {
+        const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
+          getResourceID(getStackName(this.serverless), id),
+          dRelayers,
+        );
+        if (dRelayer) {
+          const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
+          const configuredKeys = relayer['api-keys'];
+          const relayerApiKeyDifference = differenceWith(
+            dRelayerApiKeys,
+            configuredKeys,
+            (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
+          );
+          difference.relayerApiKeys.push(...relayerApiKeyDifference);
+        }
+      }),
+    );
+
+    // Notifications
+    const notifications: YNotification[] = this.serverless.service.resources.Resources.notifications;
+    const dNotifications = await sentinelClient.listNotificationChannels();
+    const notificationDifference = differenceWith(
+      dNotifications,
+      Object.entries(notifications ?? []),
+      (a: DefenderNotification, b: [string, YNotification]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    );
+
+    // Autotasks
+    // @ts-ignore
+    const autotasks: YAutotask[] = this.serverless.service.functions;
+    const autotaskClient = getAutotaskClient(this.teamKey!);
+    const dAutotasks = (await autotaskClient.list()).items;
+    const autotaskDifference = differenceWith(
+      dAutotasks,
+      Object.entries(autotasks ?? []),
+      (a: DefenderAutotask, b: [string, YAutotask]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    );
+
+    // Secrets
+    const secrets: YSecret[] = this.serverless.service.resources.Resources.secrets;
+    const dSecrets = (await autotaskClient.listSecrets()).secretNames;
+    const secretsDifference = differenceWith(dSecrets, Object.keys(secrets ?? []), (a: string, b: string) => a === b);
+
+    difference.contracts = contractDifference;
+    difference.sentinels = sentinelDifference;
+    difference.notifications = notificationDifference;
+    difference.autotasks = autotaskDifference;
+    difference.secrets = secretsDifference;
+
+    return difference;
+  }
+  private async constructConfirmationMessage(withResources: ListDefenderResources): Promise<string> {
+    const start = `You have SSOT enabled. This might remove resources from Defender permanently.\nHaving SSOT enabled will interpret the resources defined in the serverless.yml file as the Single Source Of Truth, and will remove any existing Defender resource which is not defined in the YAML file (with the exception of Relayers).\nIf you continue, the following resources will be removed from Defender:`;
+    const end = `Are you sure you wish to continue [y/n]?`;
+
+    const formattedResources = {
+      autotasks: withResources.autotasks.map((a) => `${a.stackResourceId ?? a.name} (${a.autotaskId})`),
+      sentinels: withResources.sentinels.map((a) => `${a.stackResourceId ?? a.name} (${a.subscriberId})`),
+      notifications: withResources.notifications.map((a) => `${a.stackResourceId ?? a.name} (${a.notificationId})`),
+      contracts: withResources.contracts.map((a) => `${a.network}-${a.address} (${a.name})`),
+      relayerApiKeys: withResources.relayerApiKeys.map((a) => `${a.stackResourceId ?? a.apiKey} (${a.keyId})`),
+      secrets: withResources.secrets.map((a) => `${a}`),
+    };
+
+    return `${start}\n${JSON.stringify(formattedResources, null, 2)}\n\n${end}`;
+  }
+
+  private async requestConfirmation() {
+    if (isSSOT(this.serverless) && process.stdout.isTTY) {
+      const properties = [
+        {
+          name: 'confirm',
+          validator: /^(y|n){1}$/i,
+          warning: 'Confirmation must be `y` (yes) or `n` (no)',
+        },
+      ];
+
+      this.log.progress('component-deploy', `Retrieving list of resources`);
+
+      this.ssotDifference = await this.getSSOTDifference();
+      prompt.start({
+        message: await this.constructConfirmationMessage(this.ssotDifference),
+      });
+      const { confirm } = await prompt.get(properties);
+
+      if (confirm.toString().toLowerCase() !== 'y') {
+        this.log.error('Confirmation not acquired. Terminating command');
+        return;
+      }
+      this.log.success('Confirmation acquired');
+    }
+
+    await this.deploy();
   }
 
   private async deploySecrets(output: DeployOutput<string>) {
@@ -115,6 +254,7 @@ export default class DefenderDeploy {
       // overrideMatchDefinition
       (a: string, b: YSecret) => a === (b as unknown as string),
       output,
+      this.ssotDifference?.secrets,
     );
   }
 
@@ -162,6 +302,7 @@ export default class DefenderDeploy {
         return a.address === b.address && a.network === b.network;
       },
       output,
+      this.ssotDifference?.contracts,
     );
   }
 
@@ -331,6 +472,7 @@ export default class DefenderDeploy {
       },
       undefined,
       output,
+      this.ssotDifference?.notifications,
     );
   }
 
@@ -377,6 +519,7 @@ export default class DefenderDeploy {
       },
       undefined,
       output,
+      this.ssotDifference?.sentinels,
     );
   }
 
@@ -465,6 +608,7 @@ export default class DefenderDeploy {
       },
       undefined,
       output,
+      this.ssotDifference?.autotasks,
     );
   }
 
@@ -478,27 +622,22 @@ export default class DefenderDeploy {
     onRemove?: (resources: D[]) => Promise<void>,
     overrideMatchDefinition?: (a: D, b: Y) => boolean,
     output: DeployOutput<any> = { removed: [], created: [], updated: [] },
+    ssotDifference: D[] = [],
   ) {
     try {
       const stackName = getStackName(context);
       this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
       this.log.notice(`${resourceType}`);
 
-      const existing = await retrieveExistingResources();
-
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
-        const inDefenderButNotInTemplate = differenceWith(existing, Object.keys(resources ?? []), (a: any, b: any) =>
-          overrideMatchDefinition ? overrideMatchDefinition(a, b) : a.stackResourceId === getResourceID(stackName, b),
-        );
-
-        if (inDefenderButNotInTemplate.length > 0) {
+        if (ssotDifference.length > 0) {
           this.log.info(`Unused resources found on Defender:`);
-          this.log.info(JSON.stringify(inDefenderButNotInTemplate, null, 2));
+          this.log.info(JSON.stringify(ssotDifference, null, 2));
           this.log.progress('component-deploy-extra', `Removing resources from Defender`);
-          await onRemove(inDefenderButNotInTemplate);
+          await onRemove(ssotDifference);
           this.log.success(`Removed resources from Defender`);
-          output.removed.push(...inDefenderButNotInTemplate);
+          output.removed.push(...ssotDifference);
         }
       }
 

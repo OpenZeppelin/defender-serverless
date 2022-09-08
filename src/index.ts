@@ -7,9 +7,9 @@ import DefenderDeploy from './cmd/deploy';
 import DefenderInfo from './cmd/info';
 import DefenderRemove from './cmd/remove';
 import DefenderLogs from './cmd/logs';
+import DefenderInvoke from './cmd/invoke';
 
 import Logger from './utils/logger';
-// import DefenderInvoke from './src/invoke';
 
 class DefenderPlugin {
   serverless: Serverless;
@@ -27,8 +27,7 @@ class DefenderPlugin {
     this.serverless.pluginManager.addPlugin(DefenderInfo);
     this.serverless.pluginManager.addPlugin(DefenderRemove);
     this.serverless.pluginManager.addPlugin(DefenderLogs);
-
-    // this.serverless.pluginManager.addPlugin(DefenderInvoke);
+    this.serverless.pluginManager.addPlugin(DefenderInvoke);
   }
 }
 

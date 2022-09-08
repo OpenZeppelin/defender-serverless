@@ -1,10 +1,9 @@
 import Serverless from 'serverless';
+import prompt from 'prompt';
 
 import { Logging } from 'serverless/classes/Plugin';
 
 import Logger from '../utils/logger';
-
-import prompt from 'prompt';
 
 import {
   getAdminClient,
