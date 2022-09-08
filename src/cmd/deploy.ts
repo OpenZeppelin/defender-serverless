@@ -48,6 +48,7 @@ export default class DefenderDeploy {
   log: any;
   hooks: any;
   teamKey?: TeamKey;
+  ssotDifference?: ListDefenderResources;
 
   constructor(serverless: Serverless, options: Serverless.Options, logging: Logging) {
     this.serverless = serverless;
@@ -162,11 +163,11 @@ export default class DefenderDeploy {
     const end = `Are you sure you wish to continue [y/n]?`;
 
     const formattedResources = {
-      autotasks: withResources.autotasks.map((a) => `${a.stackResourceId} (${a.autotaskId})`),
-      sentinels: withResources.sentinels.map((a) => `${a.stackResourceId} (${a.subscriberId})`),
-      notifications: withResources.notifications.map((a) => `${a.stackResourceId} (${a.notificationId})`),
+      autotasks: withResources.autotasks.map((a) => `${a.stackResourceId ?? a.name} (${a.autotaskId})`),
+      sentinels: withResources.sentinels.map((a) => `${a.stackResourceId ?? a.name} (${a.subscriberId})`),
+      notifications: withResources.notifications.map((a) => `${a.stackResourceId ?? a.name} (${a.notificationId})`),
       contracts: withResources.contracts.map((a) => `${a.network}-${a.address} (${a.name})`),
-      relayerApiKeys: withResources.relayerApiKeys.map((a) => `${a.stackResourceId} (${a.keyId})`),
+      relayerApiKeys: withResources.relayerApiKeys.map((a) => `${a.stackResourceId ?? a.apiKey} (${a.keyId})`),
       secrets: withResources.secrets.map((a) => `${a}`),
     };
 
@@ -185,9 +186,9 @@ export default class DefenderDeploy {
 
       this.log.progress('component-deploy', `Retrieving list of resources`);
 
-      const withResources = await this.getSSOTDifference();
+      this.ssotDifference = await this.getSSOTDifference();
       prompt.start({
-        message: await this.constructConfirmationMessage(withResources),
+        message: await this.constructConfirmationMessage(this.ssotDifference),
       });
       const { confirm } = await prompt.get(properties);
 
@@ -253,6 +254,7 @@ export default class DefenderDeploy {
       // overrideMatchDefinition
       (a: string, b: YSecret) => a === (b as unknown as string),
       output,
+      this.ssotDifference?.secrets,
     );
   }
 
@@ -300,6 +302,7 @@ export default class DefenderDeploy {
         return a.address === b.address && a.network === b.network;
       },
       output,
+      this.ssotDifference?.contracts,
     );
   }
 
@@ -469,6 +472,7 @@ export default class DefenderDeploy {
       },
       undefined,
       output,
+      this.ssotDifference?.notifications,
     );
   }
 
@@ -515,6 +519,7 @@ export default class DefenderDeploy {
       },
       undefined,
       output,
+      this.ssotDifference?.sentinels,
     );
   }
 
@@ -603,6 +608,7 @@ export default class DefenderDeploy {
       },
       undefined,
       output,
+      this.ssotDifference?.autotasks,
     );
   }
 
@@ -616,32 +622,22 @@ export default class DefenderDeploy {
     onRemove?: (resources: D[]) => Promise<void>,
     overrideMatchDefinition?: (a: D, b: Y) => boolean,
     output: DeployOutput<any> = { removed: [], created: [], updated: [] },
+    ssotDifference: D[] = [],
   ) {
     try {
       const stackName = getStackName(context);
       this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
       this.log.notice(`${resourceType}`);
 
-      const existing = await retrieveExistingResources();
-
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
-        const inDefenderButNotInTemplate = differenceWith(
-          existing,
-          Object.entries(resources ?? []),
-          (a: D, b: [string, Y]) =>
-            overrideMatchDefinition
-              ? overrideMatchDefinition(a, b[1])
-              : (a as D & { stackResourceId: string }).stackResourceId === getResourceID(stackName, b[0]),
-        );
-
-        if (inDefenderButNotInTemplate.length > 0) {
+        if (ssotDifference.length > 0) {
           this.log.info(`Unused resources found on Defender:`);
-          this.log.info(JSON.stringify(inDefenderButNotInTemplate, null, 2));
+          this.log.info(JSON.stringify(ssotDifference, null, 2));
           this.log.progress('component-deploy-extra', `Removing resources from Defender`);
-          await onRemove(inDefenderButNotInTemplate);
+          await onRemove(ssotDifference);
           this.log.success(`Removed resources from Defender`);
-          output.removed.push(...inDefenderButNotInTemplate);
+          output.removed.push(...ssotDifference);
         }
       }
 
