@@ -81,10 +81,10 @@ You can use `sls remove` to remove all defender resources defined in the `server
 
 ### Logs
 
-You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest autotask logs for a given autotask stack resource ID (e.g. autotask-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
+You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest autotask logs for a given autotask stack resource ID (e.g. mystack.autotask-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
 
 ### Invoke
 
-You can use `sls invoke --function <stack_resource_id>` to manually run an autotask, given its stack resource ID (e.g. autotask-example-1).
+You can use `sls invoke --function <stack_resource_id>` to manually run an autotask, given its stack resource ID (e.g. mystack.autotask-example-1).
 
 Each command has a standard output to a JSON object.
