@@ -57,5 +57,34 @@ plugins:
   - defender-serverless
 ```
 
-This requires setting the `TEAM_API_KEY` and `TEAN_API_SECRET`, either in your environment variables or through a configuration file. Modify the `serverless.yaml` accordingly.
+This requires setting the `TEAM_API_KEY` and `TEAN_API_SECRET`, either in your environment variables or through a configuration file. Modify the `serverless.yml` accordingly.
 Ensure the Defender Team API Keys are setup with all API capabilities.
+
+The `stackName` is combined with the resource key to uniquely identify each resource. This allows you to deploy, remove and update various stacks within Defender.
+A caveat is when `ssot` is enabled, this will remove resources on your account that do not belong to the current stack.
+
+## Commands
+
+### Deploy
+
+You can use `sls deploy` to deploy your current stack to Defender. The deploy takes in an optional `--stage` flag, which is defaulted to `dev`. Moreover, the `serverless.yml` contains a required `ssot` property, which stands for Single Source of Truth.
+When enabled, this will use the resources defined in the template as the single point of truth, removing Defender resources which do not exist in the template, with the exception of Relayers (given these _could_ contain funds).
+:warning: This command _will_ create a log entry and _might_ create a `relayer-keys` folder in the `.defender` folder. The `.defender` folder _should_ be in the `.gitignore` file, as it could contain sensitive information, such as relayer keys and secrets.
+
+### Info
+
+You can use `sls info` to retrieve information on every resource defined in the `serverless.yml` file, including unique identifiers, and properties unique to each Defender component.
+
+### Remove
+
+You can use `sls remove` to remove all defender resources defined in the `serverless.yml` file, with the exception of Relayers.
+
+### Logs
+
+You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest autotask logs for a given autotask stack resource ID (e.g. autotask-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
+
+### Invoke
+
+You can use `sls invoke --function <stack_resource_id>` to manually run an autotask, given its stack resource ID (e.g. autotask-example-1).
+
+Each command has a standard output to a JSON object.
