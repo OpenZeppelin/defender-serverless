@@ -9,6 +9,7 @@ You can initiate your Serverless project directly using our pre-configured templ
 
 Or install into an existing project:
 `yarn install defender-serverless`
+
 ## Setup
 
 This plugin allows you to define Autotasks, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`.
