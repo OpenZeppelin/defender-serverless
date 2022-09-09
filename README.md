@@ -1,4 +1,4 @@
-# Defender Serverless Framework
+# Defender Serverless Plugin
 
 A Defender plugin for the Serverless framework.
 
