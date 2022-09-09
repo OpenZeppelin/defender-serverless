@@ -582,33 +582,33 @@ deep-is@^0.1.3:
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
 
-defender-admin-client@^1.28.1:
-  version "1.29.1"
-  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.29.1.tgz#41625d829f765d706393c1477df19f820219a04c"
-  integrity sha512-6VXo6gaNu6Bk/LOzUENICtTLAqFoiKT/zGVsAFyEzMqMp3m0HqRDiAdloswDXRlpJMOViHEnwKIoZxkHsKqN+Q==
+defender-admin-client@^1.31.0-rc.2:
+  version "1.31.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.31.0-rc.2.tgz#71315fd9c4925e0839c21db8fc7eccc7779193e6"
+  integrity sha512-CPk8LQLuu9GH4WnqOwZvU76V1et1ZN9hO1xQj7NE5op5OE+TC/0KDkqqTgAie0idKNsksqp6iY44oJNFNu576A==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "1.28.1"
+    defender-base-client "1.30.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-autotask-client@^1.28.1:
-  version "1.28.1"
-  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.28.1.tgz#33575bff85b2bc4aa2826013ec20fa6d06c7da62"
-  integrity sha512-oshhc2BIUeW+PIgmf7+5St8AQXeFZ5Az6P6eFTdF0sHKYz7eScJ9TXbpCUNDU4DuWkitvtVsZ9Kzw2JhI744jA==
+defender-autotask-client@^1.31.0-rc.2:
+  version "1.31.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.31.0-rc.2.tgz#023b244152d931a7a2d9ab787bbdaa2c45c9a608"
+  integrity sha512-4Ogpq+IeqTRPJRW36oqWZ/0gJynpS7U7WxuBV1nNz4Db6COqws6aqQhZpqb17ItjSPztlE4qvgEX3ruK5mTSPw==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "1.28.1"
+    defender-base-client "1.30.0"
     dotenv "^10.0.0"
     glob "^7.1.6"
     jszip "^3.5.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-base-client@1.28.1:
-  version "1.28.1"
-  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.28.1.tgz#13b1a67025c2c21faf29df8adf95bda1ed38c3cb"
-  integrity sha512-N1h11DRoYkk35DaoVotHSr/b25TfQIF9yN8GURLXYvtcjgAxYTr1EZqnu88ylgrgbnztgteHlyoUWkiSCQqzBg==
+defender-base-client@1.30.0:
+  version "1.30.0"
+  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.30.0.tgz#dabe6efef2355f02e6fd9ef1acdd27c3d79b1377"
+  integrity sha512-Q1jo3kNhG9Z/jkkPhZds69pyWd3BEEej3ZdbBne3+nVxsRgLyEdtIBKfYFeliFz0vYnXqfgilRdCQ1MjSB3H4g==
   dependencies:
     amazon-cognito-identity-js "^4.3.3"
     async-retry "^1.3.3"
@@ -616,25 +616,25 @@ defender-base-client@1.28.1:
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-relay-client@^1.28.1:
-  version "1.28.1"
-  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.28.1.tgz#012cf88f3bdfefad7e413bd93d443a95fcdded75"
-  integrity sha512-7E0mrzGoDk2QaOj5/aStWuImkiG3qy/bL1CNty9Jmf1EbTO9sAbnXaQAWzOhIE8UX1I5yXoaxEfwQsZhMXx80w==
+defender-relay-client@^1.31.0-rc.2:
+  version "1.31.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.31.0-rc.2.tgz#bf980bc35717c94eef69509986709b5f3674d7c8"
+  integrity sha512-DBUxhS3dIGfNsO0g/ztu8QM67PncZxMlQuB0xBpOuCe+cXyVGUlFe002hb6KAvp4sVlvyaZ6lxH9C7VMc+tF/w==
   dependencies:
     amazon-cognito-identity-js "^4.3.3"
     axios "^0.21.2"
-    defender-base-client "1.28.1"
+    defender-base-client "1.30.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-sentinel-client@^1.28.1:
-  version "1.28.1"
-  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.28.1.tgz#92e5d7c4a0bd702ab5a26802f02465b29abd29f0"
-  integrity sha512-5G3k4yKrjwtyjh2rJVGjhiWNl0v89Mq/1unyYgvL1b+fbit+O+jUrl2PSEdR/ZrMvLs48nTGJMl5eO77TZzz6g==
+defender-sentinel-client@^1.31.0-rc.2:
+  version "1.31.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.31.0-rc.2.tgz#a8e4f83524db8f027ad3dbcd5f2fbc96dd693a1c"
+  integrity sha512-i0Qviy1YZqlQMzJin5s5uD7T5zbGGHGggN0hzQqJXv9FKUm2YHObDRegim18lwcw6CyzWPcEuVHgBInpjD6SQw==
   dependencies:
     "@ethersproject/abi" "^5.6.3"
     axios "^0.21.2"
-    defender-base-client "1.28.1"
+    defender-base-client "1.30.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
