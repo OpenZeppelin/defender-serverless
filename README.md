@@ -4,7 +4,7 @@ A Defender plugin for the Serverless framework.
 
 ## Installation
 
-You can initiate your Serverless project directly using our pre-configured template:
+You can initialise your Serverless project directly using our pre-configured template:
 `sls install --url https://github.com/OpenZeppelin/defender-serverless/tree/main/template -n my-service`
 
 Or install into an existing project:
