@@ -16,7 +16,14 @@
     "format:check": "prettier --check 'src/**/*.(js|ts)'",
     "style": "yarn lint && yarn format"
   },
-  "keywords": [],
+  "keywords": [
+    "Defender",
+    "Serverless",
+    "OpenZeppelin",
+    "Deployment",
+    "Management",
+    "Plugin"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OpenZeppelin/defender-serverless.git"
