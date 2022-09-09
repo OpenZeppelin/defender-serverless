@@ -148,8 +148,7 @@ export default class DefenderRemove {
     await this.wrapper<YAutotask, DefenderAutotask>(
       this.serverless,
       'Autotasks',
-      // @ts-ignore
-      this.serverless.service.functions,
+      this.serverless.service.functions as any,
       listAutotasks,
       async (autotasks: DefenderAutotask[]) => {
         await Promise.all(

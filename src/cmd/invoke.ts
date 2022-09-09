@@ -35,8 +35,7 @@ export default class DefenderInvoke {
   async invoke() {
     this.log.notice('========================================================');
     this.log.progress('logs', `Running Defender Invoke on stack function: ${this.options.function}`);
-    // @ts-ignore
-    const payload = JSON.parse(this.options?.data ?? '{}');
+    const payload = JSON.parse((this.options as any)?.data ?? '{}');
     const client = getAutotaskClient(this.teamKey!);
     const list = (await client.list()).items;
     const defenderAutotask = getEquivalentResourceByKey<DefenderAutotask>(this.options.function!, list);

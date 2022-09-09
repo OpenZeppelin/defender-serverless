@@ -68,14 +68,8 @@ export const getResourceID = (stackName: string, resourceName: string): string =
 };
 
 export const getStackName = (context: Serverless): string => {
-  if (
-    // @ts-ignore
-    context.service.provider.stackName &&
-    // @ts-ignore
-    typeof context.service.provider.stackName === 'string'
-  ) {
-    // @ts-ignore
-    return context.service.provider.stackName;
+  if ((context.service.provider as any).stackName && typeof (context.service.provider as any).stackName === 'string') {
+    return (context.service.provider as any).stackName;
   }
   if (context.service.provider.stage) return `${context.service.service}-${context.service.provider.stage}`;
   throw new Error(
@@ -84,8 +78,7 @@ export const getStackName = (context: Serverless): string => {
 };
 
 export const isSSOT = (context: Serverless): string => {
-  // @ts-ignore
-  return context.service.provider.ssot;
+  return (context.service.provider as any).ssot;
 };
 
 export const getTeamAPIkeysOrThrow = (context: Serverless): TeamKey => {
@@ -125,8 +118,8 @@ export const constructNotification = (notification: YNotification, stackResource
     stackResourceId,
   };
 
-  var currentConfig;
-  var config;
+  let currentConfig;
+  let config;
 
   switch (notification.type) {
     case 'datadog':
