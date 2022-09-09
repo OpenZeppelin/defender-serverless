@@ -107,3 +107,5 @@ You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve t
 You can use `sls invoke --function <stack_resource_id>` to manually run an autotask, given its identifier (e.g. mystack.autotask-example-1).
 
 > Each command has a standard output to a JSON object.
+
+More information can be found on our documentation page [here](https://docs.openzeppelin.com/defender/serverless-plugin.html)
