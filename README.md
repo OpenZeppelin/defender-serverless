@@ -71,7 +71,10 @@ Ensure the Defender Team API Keys are setup with all appropriate API capabilitie
 
 The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Defender team.
 
-> A caveat is when `ssot` (single source of truth) is enabled, all resources on your account that do not belong to the current stack are removed upon deployment.
+### SSOT mode
+
+Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
+This means that all Defender resources, that are not defined in your current template file, are removed from Defender, with the exception of Relayers, upon deployment. If SSOT is not defined in the template, it will default to `false`.
 
 ## Commands
 
@@ -82,7 +85,7 @@ You can use `sls deploy` to deploy your current stack to Defender.
 The deploy takes in an optional `--stage` flag, which is defaulted to `dev` when installed from the template above.
 
 Moreover, the `serverless.yml` may contain an `ssot` property (default `false`), which stands for Single Source of Truth.
-When enabled, will use the resources defined in the template as the single source of truth, removing Defender resources which do not exist in the template, with the exception of Relayers (given these _could_ contain funds).
+When enabled, it will use the resources defined in the template as the single source of truth, removing Defender resources which do not exist in the template, with the exception of Relayers (given these _could_ contain funds).
 
 This command will append a log entry in the `.defender` folder of the current working directory. Additionally, if any new relayer keys are created, these will be stored as JSON objects in the `.defender/relayer-keys` folder.
 
