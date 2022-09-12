@@ -162,12 +162,27 @@ export default class DefenderDeploy {
     const end = `Are you sure you wish to continue [y/n]?`;
 
     const formattedResources = {
-      autotasks: withResources.autotasks.map((a) => `${a.stackResourceId ?? a.name} (${a.autotaskId})`),
-      sentinels: withResources.sentinels.map((a) => `${a.stackResourceId ?? a.name} (${a.subscriberId})`),
-      notifications: withResources.notifications.map((a) => `${a.stackResourceId ?? a.name} (${a.notificationId})`),
-      contracts: withResources.contracts.map((a) => `${a.network}-${a.address} (${a.name})`),
-      relayerApiKeys: withResources.relayerApiKeys.map((a) => `${a.stackResourceId ?? a.apiKey} (${a.keyId})`),
-      secrets: withResources.secrets.map((a) => `${a}`),
+      autotasks:
+        withResources.autotasks.length > 0
+          ? withResources.autotasks.map((a) => `${a.stackResourceId ?? a.name} (${a.autotaskId})`)
+          : undefined,
+      sentinels:
+        withResources.sentinels.length > 0
+          ? withResources.sentinels.map((a) => `${a.stackResourceId ?? a.name} (${a.subscriberId})`)
+          : undefined,
+      notifications:
+        withResources.notifications.length > 0
+          ? withResources.notifications.map((a) => `${a.stackResourceId ?? a.name} (${a.notificationId})`)
+          : undefined,
+      contracts:
+        withResources.contracts.length > 0
+          ? withResources.contracts.map((a) => `${a.network}-${a.address} (${a.name})`)
+          : undefined,
+      relayerApiKeys:
+        withResources.relayerApiKeys.length > 0
+          ? withResources.relayerApiKeys.map((a) => `${a.stackResourceId ?? a.apiKey} (${a.keyId})`)
+          : undefined,
+      secrets: withResources.secrets.length > 0 ? withResources.secrets.map((a) => `${a}`) : undefined,
     };
 
     return `${start}\n${JSON.stringify(formattedResources, null, 2)}\n\n${end}`;

@@ -1026,9 +1026,9 @@ defaults@^1.0.3:
     clone "^1.0.2"
 
 defender-admin-client@^1.31.0-rc.2:
-  version "1.31.0-rc.2"
-  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.31.0-rc.2.tgz#71315fd9c4925e0839c21db8fc7eccc7779193e6"
-  integrity sha512-CPk8LQLuu9GH4WnqOwZvU76V1et1ZN9hO1xQj7NE5op5OE+TC/0KDkqqTgAie0idKNsksqp6iY44oJNFNu576A==
+  version "1.31.0-rc.3"
+  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.31.0-rc.3.tgz#1237f47237ca4c221ad60d98003cd76a276cd6cf"
+  integrity sha512-GoKpr+QK7XyO+57bX12Pim5Y/2tQnrgQob00mR/szrErK23ndckda8b7CQ+ODLrJdqNm7RBRUsDsNg44fTx1Eg==
   dependencies:
     axios "^0.21.2"
     defender-base-client "1.30.0"
@@ -1036,9 +1036,9 @@ defender-admin-client@^1.31.0-rc.2:
     node-fetch "^2.6.0"
 
 defender-autotask-client@^1.31.0-rc.2:
-  version "1.31.0-rc.2"
-  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.31.0-rc.2.tgz#023b244152d931a7a2d9ab787bbdaa2c45c9a608"
-  integrity sha512-4Ogpq+IeqTRPJRW36oqWZ/0gJynpS7U7WxuBV1nNz4Db6COqws6aqQhZpqb17ItjSPztlE4qvgEX3ruK5mTSPw==
+  version "1.31.0-rc.3"
+  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.31.0-rc.3.tgz#583bd8aeef0a8770896fc5b961825ebf4f86b56f"
+  integrity sha512-ai0eSdUwaZrRWzNk07YkdQvKSU/o1CW4+Jkd6uPxFxaF49y5bUSeM8yRkE1DwtCqKdC50Lp3oppydwst9WupsA==
   dependencies:
     axios "^0.21.2"
     defender-base-client "1.30.0"
@@ -1060,9 +1060,9 @@ defender-base-client@1.30.0:
     node-fetch "^2.6.0"
 
 defender-relay-client@^1.31.0-rc.2:
-  version "1.31.0-rc.2"
-  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.31.0-rc.2.tgz#bf980bc35717c94eef69509986709b5f3674d7c8"
-  integrity sha512-DBUxhS3dIGfNsO0g/ztu8QM67PncZxMlQuB0xBpOuCe+cXyVGUlFe002hb6KAvp4sVlvyaZ6lxH9C7VMc+tF/w==
+  version "1.31.0-rc.3"
+  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.31.0-rc.3.tgz#b61b8577b4713cb7e68fd026c352e7581707a6e4"
+  integrity sha512-sMlis87b8ziykijwC01tbLaTpl12VZ0bHLwxnpDklwBjKKk8p/m8c3Ye37bJQ7q16OAXAP0vxdSVl6FjcTVrcA==
   dependencies:
     amazon-cognito-identity-js "^4.3.3"
     axios "^0.21.2"
@@ -1071,9 +1071,9 @@ defender-relay-client@^1.31.0-rc.2:
     node-fetch "^2.6.0"
 
 defender-sentinel-client@^1.31.0-rc.2:
-  version "1.31.0-rc.2"
-  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.31.0-rc.2.tgz#a8e4f83524db8f027ad3dbcd5f2fbc96dd693a1c"
-  integrity sha512-i0Qviy1YZqlQMzJin5s5uD7T5zbGGHGggN0hzQqJXv9FKUm2YHObDRegim18lwcw6CyzWPcEuVHgBInpjD6SQw==
+  version "1.31.0-rc.3"
+  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.31.0-rc.3.tgz#95bb8c469f68eef8341638d936ba8f0662ecf396"
+  integrity sha512-38PsiZF1ifetLuc8p50bB34gNauda/ZB4GltJuTwvON5TO5G1hT9QftgCe9xiWmj+qs56G52BBGAwbnHlVrf+g==
   dependencies:
     "@ethersproject/abi" "^5.6.3"
     axios "^0.21.2"
