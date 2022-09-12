@@ -49,12 +49,7 @@ export default class DefenderInvoke {
       }
       this.log.notice('========================================================');
     } catch (e) {
-      try {
-        const defenderAPIError = (e as DefenderAPIError).response.data as any;
-        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
-      } catch {
-        this.log.error(e);
-      }
+      this.log.tryLogDefenderError(e);
     }
   }
 }

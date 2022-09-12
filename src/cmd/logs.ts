@@ -47,12 +47,7 @@ export default class DefenderLogs {
       else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
       this.log.notice('========================================================');
     } catch (e) {
-      try {
-        const defenderAPIError = (e as DefenderAPIError).response.data as any;
-        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
-      } catch {
-        this.log.error(e);
-      }
+      this.log.tryLogDefenderError(e);
     }
   }
 }

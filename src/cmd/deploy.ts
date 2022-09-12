@@ -537,12 +537,7 @@ export default class DefenderDeploy {
         this.ssotDifference?.sentinels,
       );
     } catch (e) {
-      try {
-        const defenderAPIError = (e as DefenderAPIError).response.data as any;
-        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
-      } catch {
-        this.log.error(e);
-      }
+      this.log.tryLogDefenderError(e);
     }
   }
 
@@ -710,12 +705,7 @@ export default class DefenderDeploy {
         }
       }
     } catch (e) {
-      try {
-        const defenderAPIError = (e as DefenderAPIError).response.data as any;
-        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
-      } catch {
-        this.log.error(e);
-      }
+      this.log.tryLogDefenderError(e);
     }
   }
 
