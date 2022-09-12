@@ -59,7 +59,6 @@
     "typescript": "^3.6.2"
   },
   "dependencies": {
-    "chalk": "^5.0.1",
     "defender-admin-client": "^1.31.0-rc.2",
     "defender-autotask-client": "^1.31.0-rc.2",
     "defender-relay-client": "^1.31.0-rc.2",
