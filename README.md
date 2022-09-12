@@ -98,7 +98,7 @@ You can use `sls info` to retrieve information on every resource defined in the 
 
 You can use `sls remove` to remove all defender resources defined in the `serverless.yml` file.
 
-> Due to the nature of Relayers, these can only be deleted from the Defender UI directly, with the exception of relayer API keys.
+> To avoid potential loss of funds, Relayers can only be deleted from the Defender UI directly.
 
 ### Logs
 
