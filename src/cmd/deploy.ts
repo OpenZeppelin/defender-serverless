@@ -491,50 +491,59 @@ export default class DefenderDeploy {
   }
 
   private async deploySentinels(output: DeployOutput<DefenderSentinel>) {
-    const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
-    const client = getSentinelClient(this.teamKey!);
-    const autotasks = await getAutotaskClient(this.teamKey!).list();
-    const notifications = await client.listNotificationChannels();
-    const retrieveExisting = () => client.list().then((r) => r.items);
+    try {
+      const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
+      const client = getSentinelClient(this.teamKey!);
+      const autotasks = await getAutotaskClient(this.teamKey!).list();
+      const notifications = await client.listNotificationChannels();
+      const retrieveExisting = () => client.list().then((r) => r.items);
 
-    await this.wrapper<YSentinel, DefenderSentinel>(
-      this.serverless,
-      'Sentinels',
-      sentinels,
-      retrieveExisting,
-      // on update
-      async (sentinel: YSentinel, match: DefenderSentinel) => {
-        const updatedSentinel = await client.update(
-          match.subscriberId,
-          constructSentinel(this.serverless, match.stackResourceId!, sentinel, notifications, autotasks.items),
-        );
-        return {
-          name: updatedSentinel.stackResourceId!,
-          id: updatedSentinel.subscriberId,
-          success: true,
-          response: updatedSentinel,
-        };
-      },
-      // on create
-      async (sentinel: YSentinel, stackResourceId: string) => {
-        const createdSentinel = await client.create(
-          constructSentinel(this.serverless, stackResourceId, sentinel, notifications, autotasks.items),
-        );
-        return {
-          name: stackResourceId,
-          id: createdSentinel.subscriberId,
-          success: true,
-          response: createdSentinel,
-        };
-      },
-      // on remove
-      async (sentinels: DefenderSentinel[]) => {
-        await Promise.all(sentinels.map(async (s) => await client.delete(s.subscriberId)));
-      },
-      undefined,
-      output,
-      this.ssotDifference?.sentinels,
-    );
+      await this.wrapper<YSentinel, DefenderSentinel>(
+        this.serverless,
+        'Sentinels',
+        sentinels,
+        retrieveExisting,
+        // on update
+        async (sentinel: YSentinel, match: DefenderSentinel) => {
+          const updatedSentinel = await client.update(
+            match.subscriberId,
+            constructSentinel(this.serverless, match.stackResourceId!, sentinel, notifications, autotasks.items),
+          );
+          return {
+            name: updatedSentinel.stackResourceId!,
+            id: updatedSentinel.subscriberId,
+            success: true,
+            response: updatedSentinel,
+          };
+        },
+        // on create
+        async (sentinel: YSentinel, stackResourceId: string) => {
+          const createdSentinel = await client.create(
+            constructSentinel(this.serverless, stackResourceId, sentinel, notifications, autotasks.items),
+          );
+          return {
+            name: stackResourceId,
+            id: createdSentinel.subscriberId,
+            success: true,
+            response: createdSentinel,
+          };
+        },
+        // on remove
+        async (sentinels: DefenderSentinel[]) => {
+          await Promise.all(sentinels.map(async (s) => await client.delete(s.subscriberId)));
+        },
+        undefined,
+        output,
+        this.ssotDifference?.sentinels,
+      );
+    } catch (e) {
+      try {
+        const defenderAPIError = (e as DefenderAPIError).response.data as any;
+        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
+      } catch {
+        this.log.error(e);
+      }
+    }
   }
 
   private async deployAutotasks(output: DeployOutput<DefenderAutotask>) {
@@ -702,7 +711,8 @@ export default class DefenderDeploy {
       }
     } catch (e) {
       try {
-        this.log.error(((e as DefenderAPIError).response.data as any).message);
+        const defenderAPIError = (e as DefenderAPIError).response.data as any;
+        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
       } catch {
         this.log.error(e);
       }

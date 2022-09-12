@@ -7,7 +7,7 @@ import Logger from '../utils/logger';
 import { tailLogsFor } from 'defender-autotask-client/lib/utils';
 
 import { getAutotaskClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
-import { DefenderAutotask, TeamKey } from '../types';
+import { DefenderAPIError, DefenderAutotask, TeamKey } from '../types';
 
 export default class DefenderLogs {
   serverless: Serverless;
@@ -47,7 +47,12 @@ export default class DefenderLogs {
       else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
       this.log.notice('========================================================');
     } catch (e) {
-      this.log.error(e);
+      try {
+        const defenderAPIError = (e as DefenderAPIError).response.data as any;
+        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
+      } catch {
+        this.log.error(e);
+      }
     }
   }
 }

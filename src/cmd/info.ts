@@ -14,6 +14,7 @@ import {
   isTemplateResource,
 } from '../utils';
 import {
+  DefenderAPIError,
   DefenderAutotask,
   DefenderContract,
   DefenderNotification,
@@ -63,30 +64,39 @@ export default class DefenderInfo {
     format: (resource: D) => string,
     output: any[],
   ) {
-    this.log.progress('component-info', `Retrieving ${resourceType}`);
-    this.log.notice(`${resourceType}`);
-    const existing = (await retrieveExistingResources()).filter((e) =>
-      isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
-    );
+    try {
+      this.log.progress('component-info', `Retrieving ${resourceType}`);
+      this.log.notice(`${resourceType}`);
+      const existing = (await retrieveExistingResources()).filter((e) =>
+        isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
+      );
 
-    await Promise.all(
-      existing.map(async (e) => {
-        this.log.notice(`${format(e)}`, 1);
-        let keys: DefenderRelayerApiKey[] = [];
-        // Also print relayer API keys
-        if (resourceType === 'Relayers') {
-          const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(
-            (e as unknown as DefenderRelayer).relayerId,
-          );
-          listRelayerAPIKeys.map((k) => {
-            this.log.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
-          });
-          keys = listRelayerAPIKeys;
-        }
-        if (resourceType === 'Relayers') output.push({ ...e, relayerKeys: keys });
-        else output.push(e);
-      }),
-    );
+      await Promise.all(
+        existing.map(async (e) => {
+          this.log.notice(`${format(e)}`, 1);
+          let keys: DefenderRelayerApiKey[] = [];
+          // Also print relayer API keys
+          if (resourceType === 'Relayers') {
+            const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(
+              (e as unknown as DefenderRelayer).relayerId,
+            );
+            listRelayerAPIKeys.map((k) => {
+              this.log.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
+            });
+            keys = listRelayerAPIKeys;
+          }
+          if (resourceType === 'Relayers') output.push({ ...e, relayerKeys: keys });
+          else output.push(e);
+        }),
+      );
+    } catch (e) {
+      try {
+        const defenderAPIError = (e as DefenderAPIError).response.data as any;
+        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
+      } catch {
+        this.log.error(e);
+      }
+    }
   }
 
   async info() {

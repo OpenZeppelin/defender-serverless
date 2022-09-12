@@ -15,6 +15,7 @@ import {
   isTemplateResource,
 } from '../utils';
 import {
+  DefenderAPIError,
   DefenderAutotask,
   DefenderContract,
   DefenderNotification,
@@ -64,13 +65,22 @@ export default class DefenderRemove {
     onRemove: (resources: D[]) => Promise<void>,
     output: any[] = [],
   ) {
-    this.log.progress('component-info', `Retrieving ${resourceType}`);
-    const existing = (await retrieveExistingResources()).filter((e) =>
-      isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
-    );
-    this.log.progress('component-remove', `Removing ${resourceType} from Defender`);
-    await onRemove(existing);
-    output.push(...existing);
+    try {
+      this.log.progress('component-info', `Retrieving ${resourceType}`);
+      const existing = (await retrieveExistingResources()).filter((e) =>
+        isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
+      );
+      this.log.progress('component-remove', `Removing ${resourceType} from Defender`);
+      await onRemove(existing);
+      output.push(...existing);
+    } catch (e) {
+      try {
+        const defenderAPIError = (e as DefenderAPIError).response.data as any;
+        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
+      } catch {
+        this.log.error(e);
+      }
+    }
   }
 
   private async requestConfirmation() {
@@ -186,33 +196,42 @@ export default class DefenderRemove {
       stdOut.contracts,
     );
 
-    // Relayer API keys
-    const relayClient = getRelayClient(this.teamKey!);
-    const listRelayers = (await relayClient.list()).items;
-    const existingRelayers = listRelayers.filter((e) =>
-      isTemplateResource<YRelayer, DefenderRelayer>(
-        this.serverless,
-        e,
-        'Relayers',
-        this.serverless.service.resources?.Resources?.relayers ?? [],
-      ),
-    );
-    this.log.error('Deleting Relayers is currently only possible via the Defender UI.');
-    this.log.progress('component-info', `Retrieving Relayer API Keys`);
-    await Promise.all(
-      existingRelayers.map(async (relayer) => {
-        this.log.progress('component-info', `Retrieving API Keys for relayer ${relayer.stackResourceId}`);
-        const relayerApiKeys = await relayClient.listKeys(relayer.relayerId);
-        await Promise.all(
-          relayerApiKeys.map(async (e) => {
-            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Defender`);
-            await relayClient.deleteKey(e.relayerId, e.keyId);
-            this.log.success(`Removed ${e.stackResourceId} (${e.keyId})`);
-          }),
-        );
-        stdOut.relayers.push({ relayerId: relayer.relayerId, relayerApiKeys });
-      }),
-    );
+    try {
+      // Relayer API keys
+      const relayClient = getRelayClient(this.teamKey!);
+      const listRelayers = (await relayClient.list()).items;
+      const existingRelayers = listRelayers.filter((e) =>
+        isTemplateResource<YRelayer, DefenderRelayer>(
+          this.serverless,
+          e,
+          'Relayers',
+          this.serverless.service.resources?.Resources?.relayers ?? [],
+        ),
+      );
+      this.log.error('Deleting Relayers is currently only possible via the Defender UI.');
+      this.log.progress('component-info', `Retrieving Relayer API Keys`);
+      await Promise.all(
+        existingRelayers.map(async (relayer) => {
+          this.log.progress('component-info', `Retrieving API Keys for relayer ${relayer.stackResourceId}`);
+          const relayerApiKeys = await relayClient.listKeys(relayer.relayerId);
+          await Promise.all(
+            relayerApiKeys.map(async (e) => {
+              this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Defender`);
+              await relayClient.deleteKey(e.relayerId, e.keyId);
+              this.log.success(`Removed ${e.stackResourceId} (${e.keyId})`);
+            }),
+          );
+          stdOut.relayers.push({ relayerId: relayer.relayerId, relayerApiKeys });
+        }),
+      );
+    } catch (e) {
+      try {
+        const defenderAPIError = (e as DefenderAPIError).response.data as any;
+        this.log.error(defenderAPIError.message ?? defenderAPIError.Message);
+      } catch {
+        this.log.error(e);
+      }
+    }
 
     // Notifications
     const listNotifications = () => sentinelClient.listNotificationChannels();
