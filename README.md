@@ -1,18 +1,22 @@
-# Defender Serverless Framework
+# Defender Serverless Plugin
 
-A Defender plugin for the Serverless framework.
+Defender Serverless is a Serverless Framework plugin for automated resource management on Defender.
 
 ## Installation
 
 You can initialise your Serverless project directly using our pre-configured template:
-`sls install --url https://github.com/OpenZeppelin/defender-serverless/tree/main/template -n my-service`
 
-Or install into an existing project:
+```
+sls install --url https://github.com/OpenZeppelin/defender-serverless/tree/main/template -n my-service
+```
+
+Alternatively, you can install it directly into an existing project with:
+
 `yarn install defender-serverless`
 
 ## Setup
 
-This plugin allows you to define Autotasks, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`.
+This plugin allows you to define Autotasks, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an autotask, a relayer, a policy and a single relayer API key defined:
 
 ```yaml
 service: defender-serverless-template
@@ -61,20 +65,30 @@ plugins:
   - defender-serverless
 ```
 
-This requires setting the `TEAM_API_KEY` and `TEAN_API_SECRET`, either in your environment variables or through a configuration file. Modify the `serverless.yml` accordingly.
-Ensure the Defender Team API Keys are setup with all API capabilities.
+This requires setting the `key` and `secret` under the `defender` property of the YAML file. We recommend using environment variables or a secure (gitignored) configuration file to retrieve these values. Modify the `serverless.yml` accordingly.
 
-The `stackName` is combined with the resource key to uniquely identify each resource. This allows you to deploy, remove and update various stacks within Defender.
-A caveat is when `ssot` is enabled, this will remove resources on your account that do not belong to the current stack.
+Ensure the Defender Team API Keys are setup with all appropriate API capabilities.
+
+The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Defender team.
+
+### SSOT mode
+
+Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
+This means that all Defender resources, that are not defined in your current template file, are removed from Defender, with the exception of Relayers, upon deployment. If SSOT is not defined in the template, it will default to `false`.
 
 ## Commands
 
 ### Deploy
 
 You can use `sls deploy` to deploy your current stack to Defender.
-The deploy takes in an optional `--stage` flag, which is defaulted to `dev`. Moreover, the `serverless.yml` contains a required `ssot` property, which stands for Single Source of Truth.
-When enabled, this will use the resources defined in the template as the single source of truth, removing Defender resources which do not exist in the template, with the exception of Relayers (given these _could_ contain funds).
-:warning: This command _will_ create a log entry and _might_ create a `relayer-keys` folder in the `.defender` folder of the current working directory. The `.defender` folder _should_ be in the `.gitignore` file, as it could contain sensitive information, such as relayer keys and secrets.
+
+The deploy takes in an optional `--stage` flag, which is defaulted to `dev` when installed from the template above.
+
+Moreover, the `serverless.yml` may contain an `ssot` property. More information can be found in the [SSOT mode](#SSOT-mode) section.
+
+This command will append a log entry in the `.defender` folder of the current working directory. Additionally, if any new relayer keys are created, these will be stored as JSON objects in the `.defender/relayer-keys` folder.
+
+> When installed from the template, we ensure the `.defender` folder is ignored from any git commits. However, when installing directly, make sure to add this folder it your `.gitignore` file.
 
 ### Info
 
@@ -82,14 +96,18 @@ You can use `sls info` to retrieve information on every resource defined in the 
 
 ### Remove
 
-You can use `sls remove` to remove all defender resources defined in the `serverless.yml` file, with the exception of Relayers.
+You can use `sls remove` to remove all defender resources defined in the `serverless.yml` file.
+
+> To avoid potential loss of funds, Relayers can only be deleted from the Defender UI directly.
 
 ### Logs
 
-You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest autotask logs for a given autotask stack resource ID (e.g. mystack.autotask-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
+You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest autotask logs for a given autotask identifier (e.g. mystack.autotask-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
 
 ### Invoke
 
-You can use `sls invoke --function <stack_resource_id>` to manually run an autotask, given its stack resource ID (e.g. mystack.autotask-example-1).
+You can use `sls invoke --function <stack_resource_id>` to manually run an autotask, given its identifier (e.g. mystack.autotask-example-1).
 
-Each command has a standard output to a JSON object.
+> Each command has a standard output to a JSON object.
+
+More information can be found on our documentation page [here](https://docs.openzeppelin.com/defender/serverless-plugin.html)

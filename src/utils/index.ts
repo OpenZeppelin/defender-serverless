@@ -77,8 +77,8 @@ export const getStackName = (context: Serverless): string => {
   );
 };
 
-export const isSSOT = (context: Serverless): string => {
-  return (context.service.provider as any).ssot;
+export const isSSOT = (context: Serverless): boolean => {
+  return !!(context.service.provider as any).ssot;
 };
 
 export const getTeamAPIkeysOrThrow = (context: Serverless): TeamKey => {

@@ -5,7 +5,7 @@ import { Logging } from 'serverless/classes/Plugin';
 import Logger from '../utils/logger';
 
 import { getAutotaskClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
-import { DefenderAutotask, TeamKey } from '../types';
+import { DefenderAPIError, DefenderAutotask, TeamKey } from '../types';
 
 export default class DefenderInvoke {
   serverless: Serverless;
@@ -33,19 +33,23 @@ export default class DefenderInvoke {
   }
 
   async invoke() {
-    this.log.notice('========================================================');
-    this.log.progress('logs', `Running Defender Invoke on stack function: ${this.options.function}`);
-    const payload = JSON.parse((this.options as any)?.data ?? '{}');
-    const client = getAutotaskClient(this.teamKey!);
-    const list = (await client.list()).items;
-    const defenderAutotask = getEquivalentResourceByKey<DefenderAutotask>(this.options.function!, list);
-    if (defenderAutotask) {
-      const response = await client.runAutotask(defenderAutotask.autotaskId, payload);
-      this.log.notice(JSON.stringify(response, null, 2));
-      if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(response, null, 2));
-    } else {
-      this.log.error(`No autotask with identifier: ${this.options.function} found.`);
+    try {
+      this.log.notice('========================================================');
+      this.log.progress('logs', `Running Defender Invoke on stack function: ${this.options.function}`);
+      const payload = JSON.parse((this.options as any)?.data ?? '{}');
+      const client = getAutotaskClient(this.teamKey!);
+      const list = (await client.list()).items;
+      const defenderAutotask = getEquivalentResourceByKey<DefenderAutotask>(this.options.function!, list);
+      if (defenderAutotask) {
+        const response = await client.runAutotask(defenderAutotask.autotaskId, payload);
+        this.log.notice(JSON.stringify(response, null, 2));
+        if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(response, null, 2));
+      } else {
+        this.log.error(`No autotask with identifier: ${this.options.function} found.`);
+      }
+      this.log.notice('========================================================');
+    } catch (e) {
+      this.log.tryLogDefenderError(e);
     }
-    this.log.notice('========================================================');
   }
 }

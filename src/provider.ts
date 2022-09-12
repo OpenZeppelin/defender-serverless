@@ -246,7 +246,7 @@ export default class DefenderProvider {
           stackName: tstring,
           ssot: tboolean,
         },
-        required: ['stage', 'ssot'],
+        required: ['stage', 'stackName'],
       },
       resources: {
         type: 'object',
