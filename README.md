@@ -14,6 +14,8 @@ You can initialise your Serverless project directly using our pre-configured tem
 sls install --url https://github.com/OpenZeppelin/defender-serverless/tree/main/template -n my-service
 ```
 
+Note: for the command above to work correctly you need access to this repo.
+
 Alternatively, you can install it directly into an existing project with:
 
 `yarn install defender-serverless`
