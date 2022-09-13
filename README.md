@@ -2,6 +2,10 @@
 
 Defender Serverless is a Serverless Framework plugin for automated resource management on Defender.
 
+## Prerequisites
+
+Serverless Framework: https://www.serverless.com/framework/docs/getting-started/
+
 ## Installation
 
 You can initialise your Serverless project directly using our pre-configured template:
