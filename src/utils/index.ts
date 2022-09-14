@@ -52,18 +52,18 @@ export const isTemplateResource = <Y, D>(
   resourceType: ResourceType,
   resources: Y[],
 ): boolean => {
-  return !!Object.entries(resources).find((a) => {
-    return resourceType === 'Secrets'
+  return !!Object.entries(resources).find((a) =>
+    resourceType === 'Secrets'
       ? // if secret, just compare key
         Object.keys(a[1] as unknown as YSecret)[0] ===
-          (resource as unknown as string).replace(`${getStackName(context)}_`, '')
+        (resource as unknown as string).replace(`${getStackName(context)}_`, '')
       : resourceType === 'Contracts'
       ? // if contracts, compare network and address
         (a[1] as unknown as YContract).network === (resource as unknown as DefenderContract).network &&
         (a[1] as unknown as YContract).address === (resource as unknown as DefenderContract).address
       : // anything else, compare stackResourceId
-        getResourceID(getStackName(context), a[0]) === (resource as D & { stackResourceId: string }).stackResourceId;
-  });
+        getResourceID(getStackName(context), a[0]) === (resource as D & { stackResourceId: string }).stackResourceId,
+  );
 };
 
 export const getResourceID = (stackName: string, resourceName: string): string => {
