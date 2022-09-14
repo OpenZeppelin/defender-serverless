@@ -8,6 +8,7 @@ import Logger from '../utils/logger';
 import {
   getAdminClient,
   getAutotaskClient,
+  getConsolidatedSecrets,
   getRelayClient,
   getSentinelClient,
   getStackName,
@@ -178,9 +179,7 @@ export default class DefenderInfo {
         .listSecrets()
         .then((r) => r.secretNames ?? []);
 
-    const globalSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.global ?? {};
-    const stackSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.stack ?? {};
-    const allSecrets = _.map(_.entries(Object.assign(globalSecrets, stackSecrets)), ([k, v]) => ({ [k]: v }));
+    const allSecrets = getConsolidatedSecrets(this.serverless);
 
     await this.wrapper<YSecret, string>(
       this.serverless,

@@ -1,6 +1,6 @@
 import Serverless from 'serverless';
 
-import { isEqual } from 'lodash';
+import { isEqual, map, entries } from 'lodash';
 import { AutotaskClient } from 'defender-autotask-client';
 import { SentinelClient } from 'defender-sentinel-client';
 import { RelayClient } from 'defender-relay-client';
@@ -46,6 +46,22 @@ export const getEquivalentResourceByKey = <D>(resourceKey: string, currentResour
   return currentResources.find((e: D) => (e as any).stackResourceId === resourceKey);
 };
 
+/**
+ * @dev returns both a list of consolidated secrets for both global and stack, where the latter will be preceded with the stack name.
+ * */
+export const getConsolidatedSecrets = (context: Serverless): YSecret[] => {
+  const globalSecrets: YSecret = context.service.resources?.Resources?.secrets?.global ?? {};
+  const stackSecrets: YSecret = context.service.resources?.Resources?.secrets?.stack ?? {};
+  const stackSecretsPrecededWithStackName = Object.entries(stackSecrets).map(([ssk, ssv]) => {
+    return {
+      [`${getStackName(context)}_${ssk}`]: ssv,
+    };
+  });
+  return map(entries(Object.assign(globalSecrets, ...stackSecretsPrecededWithStackName)), ([k, v]) => ({
+    [k]: v as string,
+  }));
+};
+
 export const isTemplateResource = <Y, D>(
   context: Serverless,
   resource: D,
@@ -55,8 +71,7 @@ export const isTemplateResource = <Y, D>(
   return !!Object.entries(resources).find((a) =>
     resourceType === 'Secrets'
       ? // if secret, just compare key
-        Object.keys(a[1] as unknown as YSecret)[0] ===
-        (resource as unknown as string).replace(`${getStackName(context)}_`, '')
+        Object.keys(a[1] as unknown as YSecret)[0] === (resource as unknown as string)
       : resourceType === 'Contracts'
       ? // if contracts, compare network and address
         (a[1] as unknown as YContract).network === (resource as unknown as DefenderContract).network &&

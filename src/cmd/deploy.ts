@@ -19,6 +19,7 @@ import {
   getEquivalentResource,
   isSSOT,
   getEquivalentResourceByKey,
+  getConsolidatedSecrets,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -36,7 +37,6 @@ import {
   YSentinel,
   DeployOutput,
   DeployResponse,
-  DefenderAPIError,
   ResourceType,
   ListDefenderResources,
 } from '../types';
@@ -145,19 +145,7 @@ export default class DefenderDeploy {
     );
 
     // Secrets
-    const globalSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.global ?? {};
-    const stackSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.stack ?? {};
-
-    const secretsPrecededWithStackName = Object.entries(stackSecrets).map(([ssk, ssv]) => {
-      return {
-        [`${getStackName(this.serverless)}_${ssk}`]: ssv,
-      };
-    });
-
-    const allSecrets = _.map(_.entries(Object.assign(globalSecrets, ...secretsPrecededWithStackName)), ([k, v]) => ({
-      [k]: v,
-    }));
-
+    const allSecrets = getConsolidatedSecrets(this.serverless);
     const dSecrets = (await autotaskClient.listSecrets()).secretNames;
     const secretsDifference = _.differenceWith(
       dSecrets,
@@ -238,10 +226,7 @@ export default class DefenderDeploy {
   }
 
   private async deploySecrets(output: DeployOutput<string>) {
-    const globalSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.global ?? {};
-    const stackSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.stack ?? {};
-    const allSecrets = _.map(_.entries(Object.assign(globalSecrets, stackSecrets)), ([k, v]) => ({ [k]: v }));
-
+    const allSecrets = getConsolidatedSecrets(this.serverless);
     const client = getAutotaskClient(this.teamKey!);
     const retrieveExisting = () => client.listSecrets().then((r) => r.secretNames ?? []);
     await this.wrapper<YSecret, string>(
@@ -251,42 +236,28 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (secret: YSecret, match: string) => {
-        const stackName = getStackName(this.serverless);
-        const [_, value] = Object.entries(secret)[0];
-        const stackSecretMatch = stackSecrets[match];
-        // if secret key matches that of any in stackSecrets, prepend the key with stackName
-        const entry = {
-          [stackSecretMatch ? `${stackName}_${match}` : match]: value,
-        };
         await client.createSecrets({
           deletes: [],
-          secrets: entry as any,
+          secrets: secret as any,
         });
         return {
           name: `Secret`,
           id: `${match}`,
           success: true,
-          response: entry,
+          response: secret,
         };
       },
       // on create
       async (secret: YSecret, _: string) => {
-        const stackName = getStackName(this.serverless);
-        const [key, value] = Object.entries(secret)[0];
-        const stackSecretMatch = stackSecrets[key];
-        // if secret key matches that of any in stackSecrets, prepend the key with stackName
-        const entry = {
-          [stackSecretMatch ? `${stackName}_${key}` : key]: value,
-        };
         await client.createSecrets({
           deletes: [],
-          secrets: entry as any,
+          secrets: secret as any,
         });
         return {
           name: `Secret`,
-          id: `${Object.keys(entry).join(', ')}`,
+          id: `${Object.keys(secret)[0]}`,
           success: true,
-          response: entry,
+          response: secret,
         };
       },
       // on remove
@@ -297,7 +268,7 @@ export default class DefenderDeploy {
         });
       },
       // overrideMatchDefinition
-      (a: string, b: YSecret) => !!b[a.replace(`${getStackName(this.serverless)}_`, '')],
+      (a: string, b: YSecret) => !!b[a],
       output,
       this.ssotDifference?.secrets,
     );

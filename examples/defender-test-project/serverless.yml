@@ -48,6 +48,7 @@ resources:
       global:
         foo: ${self:custom.config.secrets.foo}
         hello: ${self:custom.config.secrets.hello}
+        test: ${self:custom.config.secrets.test}
       # optional - stack secrets (formatted as <stackname>_<secretkey>)
       stack:
         test: ${self:custom.config.secrets.test}
