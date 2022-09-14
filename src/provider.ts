@@ -6,6 +6,49 @@ export default class DefenderProvider {
     const tboolean = { type: 'boolean' };
     const tnumber = { type: 'integer' };
     const taddress = { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' };
+    const tnetwork = {
+      type: 'string',
+      enum: [
+        // public networks
+        'mainnet',
+        'rinkeby',
+        'ropsten',
+        'kovan',
+        'goerli',
+        'xdai',
+        'sokol',
+        'fuse',
+        'bsc',
+        'bsctest',
+        'fantom',
+        'fantomtest',
+        'moonbase',
+        'moonriver',
+        'moonbeam',
+        'matic',
+        'mumbai',
+        'avalanche',
+        'fuji',
+        'optimism',
+        'optimism-kovan',
+        'optimism-goerli',
+        'arbitrum',
+        'arbitrum-rinkeby',
+        'arbitrum-goerli',
+        'celo',
+        'alfajores',
+        'harmony-s0',
+        'harmony-test-s0',
+        'aurora',
+        'auroratest',
+        'hedera',
+        'hederatest',
+
+        // custom networks
+        'x-dfk-avax-chain',
+        'x-dfk-avax-chain-test',
+      ],
+    };
 
     serverless.configSchemaHandler.defineTopLevelProperty('defender', {
       type: 'object',
@@ -30,7 +73,7 @@ export default class DefenderProvider {
           type: 'object',
           properties: {
             name: tstring,
-            network: tstring,
+            network: tnetwork,
             'min-balance': tnumber,
             // 'address-from-relayer': { $ref: '#/definitions/relayer' }, // causes a deep-sort loop
             policy: { $ref: '#/definitions/policy' },
@@ -43,7 +86,7 @@ export default class DefenderProvider {
           properties: {
             name: tstring,
             address: taddress,
-            network: tstring,
+            network: tnetwork,
             abi: tstring,
             'nat-spec': tstring,
           },
@@ -112,7 +155,7 @@ export default class DefenderProvider {
           properties: {
             name: tstring,
             type: { type: 'string', enum: ['BLOCK'] },
-            network: tstring,
+            network: tnetwork,
             addresses: { type: 'array', items: taddress },
             abi: tstring,
             'alert-threshold': {
@@ -167,7 +210,7 @@ export default class DefenderProvider {
           properties: {
             name: tstring,
             type: { type: 'string', enum: ['FORTA'] },
-            network: tstring,
+            network: tnetwork,
             addresses: { type: 'array', items: taddress },
             abi: tstring,
             'alert-threshold': {
