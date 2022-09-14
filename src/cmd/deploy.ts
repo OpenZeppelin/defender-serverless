@@ -822,13 +822,13 @@ export default class DefenderDeploy {
       secrets,
     };
     await this.deploySecrets(stdOut.secrets);
-    // await this.deployContracts(stdOut.contracts);
-    // // Always deploy relayers before autotasks
-    // await this.deployRelayers(stdOut.relayers);
-    // await this.deployAutotasks(stdOut.autotasks);
-    // // Deploy notifications before sentinels
-    // await this.deployNotifications(stdOut.notifications);
-    // await this.deploySentinels(stdOut.sentinels);
+    await this.deployContracts(stdOut.contracts);
+    // Always deploy relayers before autotasks
+    await this.deployRelayers(stdOut.relayers);
+    await this.deployAutotasks(stdOut.autotasks);
+    // Deploy notifications before sentinels
+    await this.deployNotifications(stdOut.notifications);
+    await this.deploySentinels(stdOut.sentinels);
 
     this.log.notice('========================================================');
 
