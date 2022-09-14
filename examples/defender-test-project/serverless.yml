@@ -44,9 +44,13 @@ resources:
         eip1559-pricing: true
 
     secrets:
-      foo: ${self:custom.config.secrets.foo}
-      hello: ${self:custom.config.secrets.hello}
-      test: ${self:custom.config.secrets.test}
+      # optional - global secrets are not affected by stackName changes
+      global:
+        foo: ${self:custom.config.secrets.foo}
+        hello: ${self:custom.config.secrets.hello}
+      # optional - stack secrets (formatted as <stackname>_<secretkey>)
+      stack:
+        test: ${self:custom.config.secrets.test}
       
     contracts:
       contract-2:
@@ -61,7 +65,7 @@ resources:
     relayers:
       relayer-1:
         name: "Test Relayer 1"
-        network: "rinkeby"
+        network: "goerli"
         min-balance: 1000
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
@@ -95,32 +99,32 @@ resources:
         paused: false
 
     sentinels:
-      # unique resource name ?
+      # unique resource name
       block-example:
-        name: "Block Example"
+        name: "Block Example 2"
         type: "BLOCK"
-        network: "rinkeby"
+        network: "goerli"
         addresses: 
           - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
         # optional
         abi: ${file(./abis/erc721.json.abi)}
         # optional
         alert-threshold: 
-          amount: 2
-          window-seconds: 3600
+          amount: 3
+          window-seconds: 5600
         # optional
         paused: false
         # optional
         autotask-condition: ${self:functions.autotask-example-1}
         # optional
-        autotask-trigger: null
+        autotask-trigger: ${self:functions.autotask-example-1}
         # optional
-        confirm-level: 1 # or 'safe' or 'finalized'
+        confirm-level: 'safe' # or 'safe' or 'finalized'
         notify-config:
           timeout: 0 # optional
           message: null # optional
           channels: 
-            - ${self:resources.Resources.notifications.email-1}
+            - ${self:resources.Resources.notifications.slack-1}
         # optional
         conditions:
           event:
@@ -135,7 +139,7 @@ resources:
       forta-example:
         name: "Forta Example"
         type: "FORTA"
-        network: "rinkeby"
+        network: "goerli"
         # optional if agent-ids is defined
         addresses: 
           - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"

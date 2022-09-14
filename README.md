@@ -20,7 +20,7 @@ Note: for the command above to work correctly you need access to this repo.
 
 Alternatively, you can install it directly into an existing project with:
 
-`yarn install defender-serverless`
+`yarn add defender-serverless`
 
 ## Setup
 
@@ -63,7 +63,7 @@ resources:
     relayers:
       relayer-1:
         name: 'Test Relayer 1'
-        network: 'rinkeby'
+        network: 'goerli'
         min-balance: 1000
         policy: ${self:resources.Resources.policies.policy-1}
         api-keys:
@@ -83,6 +83,29 @@ The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1
 
 Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
 This means that all Defender resources, that are not defined in your current template file, are removed from Defender, with the exception of Relayers, upon deployment. If SSOT is not defined in the template, it will default to `false`.
+
+Any resource removed from the `serverless.yml` file does _not_ get automatically deleted in order to prevent inadvertent resource deletion. For this behaviour to be anticipated, SSOT mode must be enabled.
+
+### Secrets
+
+Secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redepoyed under a new stack. Secrets defined under `stack` will be removed (on the condition that [SSOT mode](#SSOT-mode) is enabled), when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>.<secretkey>`, for example `mystack_test`.
+
+```yaml
+secrets:
+  # optional - global secrets are not affected by stackName changes
+  global:
+    foo: ${self:custom.config.secrets.foo}
+    hello: ${self:custom.config.secrets.hello}
+  # optional - stack secrets (formatted as <stackname>_<secretkey>)
+  stack:
+    test: ${self:custom.config.secrets.test}
+```
+
+### Types and Schema validation
+
+The types accepted by the `serverless.yml` can be found [here](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/index.ts). Specifically, the types preceded with `Y` (e.g. YRelayer). You can also check out the [provider.ts](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/provider.ts) file for more information on how the schema is validated.
+
+Additionally, an [example project](https://github.com/OpenZeppelin/defender-serverless/blob/main/examples/defender-test-project/serverless.yml) is available which provides majority of properties that can be defined in the `serverless.yml` file.
 
 ## Commands
 
@@ -119,3 +142,13 @@ You can use `sls invoke --function <stack_resource_id>` to manually run an autot
 > Each command has a standard output to a JSON object.
 
 More information can be found on our documentation page [here](https://docs.openzeppelin.com/defender/serverless-plugin.html)
+
+## Caveats
+
+Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:
+
+- Not having set the API key and secret
+- Insufficient permissions for the API key
+- Validation error of the `serverless.yml` file (see [Types and Schema validation](#Types-and-Schema-validation))
+
+Usually, fixing the error and retrying the deploy should suffice as any existing resources will fall within the `update` clause of the deployment. However, if unsure, you can always call `sls remove` to remove the entire stack, and retry.

@@ -121,8 +121,10 @@ export default class DefenderProvider {
             },
             paused: tboolean,
             'autotask-condition': { $ref: '#/definitions/autotask' },
-            'autotask-trigger': tstring,
-            'confirm-level': tnumber, // {oneOf: [{ type: tnumber }, { type: 'string', enum: ['safe', 'finalized'] }]},
+            'autotask-trigger': { $ref: '#/definitions/autotask' },
+            'confirm-level': {
+              oneOf: [{ type: 'string', enum: ['safe', 'finalized'] }, { type: 'integer' }],
+            },
             'notify-config': {
               type: 'object',
               properties: {
@@ -174,7 +176,7 @@ export default class DefenderProvider {
             },
             paused: tboolean,
             'autotask-condition': { $ref: '#/definitions/autotask' },
-            'autotask-trigger': tstring,
+            'autotask-trigger': { $ref: '#/definitions/autotask' },
             'notify-config': {
               type: 'object',
               properties: {
@@ -271,7 +273,14 @@ export default class DefenderProvider {
                 type: 'object',
                 additionalProperties: { $ref: '#/definitions/contract' },
               },
-              secrets: { type: 'object', additionalProperties: tstring },
+              secrets: {
+                type: 'object',
+                additionalProperties: false,
+                properties: {
+                  global: { type: 'object', additionalProperties: tstring },
+                  stack: { type: 'object', additionalProperties: tstring },
+                },
+              },
               sentinels: {
                 type: 'object',
                 additionalProperties: { $ref: '#/definitions/sentinel' },

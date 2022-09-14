@@ -1,5 +1,6 @@
 import Serverless from 'serverless';
 import prompt from 'prompt';
+import _ from 'lodash';
 
 import { Logging } from 'serverless/classes/Plugin';
 
@@ -247,10 +248,15 @@ export default class DefenderRemove {
 
     // Secrets
     const listSecrets = () => autotaskClient.listSecrets().then((r) => r.secretNames ?? []);
+
+    const globalSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.global ?? {};
+    const stackSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.stack ?? {};
+    const allSecrets = _.map(_.entries(Object.assign(globalSecrets, stackSecrets)), ([k, v]) => ({ [k]: v }));
+
     await this.wrapper<YSecret, string>(
       this.serverless,
       'Secrets',
-      this.serverless.service.resources?.Resources?.secrets,
+      allSecrets,
       listSecrets,
       async (secrets: string[]) => {
         this.log.progress('component-remove-extra', `Removing (${secrets.join(', ')}) from Defender`);
