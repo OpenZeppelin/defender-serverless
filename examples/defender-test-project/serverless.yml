@@ -101,7 +101,7 @@ resources:
     sentinels:
       # unique resource name
       block-example:
-        name: "Block Example 2"
+        name: "Block Example"
         type: "BLOCK"
         network: "goerli"
         addresses: 
