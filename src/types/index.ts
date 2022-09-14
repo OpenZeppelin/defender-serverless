@@ -13,7 +13,8 @@ import {
   DiscordConfig,
   NotificationType,
 } from 'defender-sentinel-client/lib/models/notification';
-import { CreateSentinelResponse } from 'defender-sentinel-client/lib/models/response';
+import { CreateSentinelResponse, BlockWatcher } from 'defender-sentinel-client';
+
 import {
   ExternalCreateBlockSubscriberRequest,
   ExternalCreateFortaSubscriberRequest,
@@ -26,6 +27,7 @@ export type DefenderSecretsMap = SecretsMap;
 export type DefenderContract = Contract;
 export type DefenderRelayer = RelayerGetResponse;
 export type DefenderAutotask = Autotask;
+export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
 export type DefenderSentinel = CreateSentinelResponse;
 export type DefenderBlockSentinel = ExternalCreateBlockSubscriberRequest;
@@ -35,6 +37,7 @@ export type DefenderDatadogConfig = DatadogConfig;
 export type DefenderDiscordConfig = DiscordConfig;
 export type DefenderTelegramConfig = TelegramBotConfig;
 export type DefenderEmailConfig = EmailConfig;
+export type DefenderNetwork = Network;
 
 export type ResourceType = 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets';
 
@@ -103,7 +106,7 @@ export type YBlockSentinel = {
   'alert-threshold'?: { amount: number; 'window-seconds': number };
   paused?: boolean;
   'autotask-condition'?: YAutotask;
-  'autotask-trigger'?: string;
+  'autotask-trigger'?: YAutotask;
   'confirm-level'?: number | 'safe' | 'finalized';
   'notify-config': {
     timeout?: number;
@@ -126,8 +129,7 @@ export type YFortaSentinel = {
   'alert-threshold'?: { amount: number; 'window-seconds': number };
   paused?: boolean;
   'autotask-condition'?: YAutotask;
-  'autotask-trigger'?: string;
-  'confirm-level'?: number | 'safe' | 'finalized';
+  'autotask-trigger'?: YAutotask;
   'notify-config': {
     timeout?: number;
     message?: string;

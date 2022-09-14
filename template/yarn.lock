@@ -1081,10 +1081,10 @@ defender-sentinel-client@^1.31.0-rc.2:
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-serverless@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/defender-serverless/-/defender-serverless-1.0.0.tgz#39c483664eb6e4df0fad2cc71b48297c4de1fec4"
-  integrity sha512-+/SVHb3vP/YtTUHto6gxYZyrm8fi4rn/tJkH31BZUDaA9+XAtXoBJe5CxGvLXTkAV3RLc2vbJdlLKafZrKDBfw==
+defender-serverless@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/defender-serverless/-/defender-serverless-1.0.1.tgz#b6f3335935e3685fd2a032a26d7ff09489361309"
+  integrity sha512-UGf3kXIWu39bDTE/qfLmgYEpRgQE4fLxMs1uZqtrTxYj3qF7eDvq6y9/0OBuTjh+lfcsq08LKPKK2l0dmmqCKg==
   dependencies:
     chalk "^5.0.1"
     defender-admin-client "^1.31.0-rc.2"

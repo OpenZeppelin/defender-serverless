@@ -1,12 +1,13 @@
 import Serverless from 'serverless';
 
-import { isEqual } from 'lodash';
+import { isEqual, map, entries } from 'lodash';
 import { AutotaskClient } from 'defender-autotask-client';
 import { SentinelClient } from 'defender-sentinel-client';
 import { RelayClient } from 'defender-relay-client';
 import { AdminClient } from 'defender-admin-client';
 
 import {
+  YSecret,
   YSentinel,
   YNotification,
   YTelegramConfig,
@@ -22,6 +23,7 @@ import {
   YContract,
   DefenderContract,
   ResourceType,
+  DefenderBlockWatcher,
 } from '../types';
 
 /**
@@ -44,6 +46,22 @@ export const getEquivalentResourceByKey = <D>(resourceKey: string, currentResour
   return currentResources.find((e: D) => (e as any).stackResourceId === resourceKey);
 };
 
+/**
+ * @dev returns both a list of consolidated secrets for both global and stack, where the latter will be preceded with the stack name.
+ * */
+export const getConsolidatedSecrets = (context: Serverless): YSecret[] => {
+  const globalSecrets: YSecret = context.service.resources?.Resources?.secrets?.global ?? {};
+  const stackSecrets: YSecret = context.service.resources?.Resources?.secrets?.stack ?? {};
+  const stackSecretsPrecededWithStackName = Object.entries(stackSecrets).map(([ssk, ssv]) => {
+    return {
+      [`${getStackName(context)}_${ssk}`]: ssv,
+    };
+  });
+  return map(entries(Object.assign(globalSecrets, ...stackSecretsPrecededWithStackName)), ([k, v]) => ({
+    [k]: v as string,
+  }));
+};
+
 export const isTemplateResource = <Y, D>(
   context: Serverless,
   resource: D,
@@ -53,7 +71,7 @@ export const isTemplateResource = <Y, D>(
   return !!Object.entries(resources).find((a) =>
     resourceType === 'Secrets'
       ? // if secret, just compare key
-        a[0] === (resource as unknown as string)
+        Object.keys(a[1] as unknown as YSecret)[0] === (resource as unknown as string)
       : resourceType === 'Contracts'
       ? // if contracts, compare network and address
         (a[1] as unknown as YContract).network === (resource as unknown as DefenderContract).network &&
@@ -169,9 +187,13 @@ export const constructSentinel = (
   sentinel: YSentinel,
   notifications: DefenderNotification[],
   autotasks: DefenderAutotask[],
+  blockwatchers: DefenderBlockWatcher[],
 ): DefenderBlockSentinel | DefenderFortaSentinel => {
   const autotaskCondition =
     sentinel['autotask-condition'] && autotasks.find((a) => a.name === sentinel['autotask-condition']!.name);
+  const autotaskTrigger =
+    sentinel['autotask-trigger'] && autotasks.find((a) => a.name === sentinel['autotask-trigger']!.name);
+
   const commonSentinel = {
     type: sentinel.type,
     name: sentinel.name,
@@ -180,7 +202,7 @@ export const constructSentinel = (
     abi: sentinel.abi && JSON.stringify(sentinel.abi),
     paused: sentinel.paused,
     autotaskCondition: autotaskCondition && autotaskCondition.autotaskId,
-    autotaskTrigger: sentinel['autotask-trigger'],
+    autotaskTrigger: autotaskTrigger && autotaskTrigger.autotaskId,
     alertThreshold: sentinel['alert-threshold'] && {
       amount: sentinel['alert-threshold'].amount,
       windowSeconds: sentinel['alert-threshold']['window-seconds'],
@@ -218,12 +240,18 @@ export const constructSentinel = (
   }
 
   if (sentinel.type === 'BLOCK') {
+    const compatibleBlockWatcher = blockwatchers.find((b) => b.confirmLevel === sentinel['confirm-level']);
+    if (!compatibleBlockWatcher) {
+      throw new Error(
+        `A blockwatcher with confirmation level (${sentinel['confirm-level']}) does not exist. Choose another confirmation level, or use "safe" or "finalized".`,
+      );
+    }
     const blockSentinel: DefenderBlockSentinel = {
       ...commonSentinel,
       type: 'BLOCK',
       network: sentinel.network,
       addresses: sentinel.addresses,
-      confirmLevel: sentinel['confirm-level'],
+      confirmLevel: compatibleBlockWatcher!.confirmLevel,
       eventConditions:
         sentinel.conditions &&
         sentinel.conditions.event.map((c) => {

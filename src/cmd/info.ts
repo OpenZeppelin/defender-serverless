@@ -1,4 +1,5 @@
 import Serverless from 'serverless';
+import _ from 'lodash';
 
 import { Logging } from 'serverless/classes/Plugin';
 
@@ -7,6 +8,7 @@ import Logger from '../utils/logger';
 import {
   getAdminClient,
   getAutotaskClient,
+  getConsolidatedSecrets,
   getRelayClient,
   getSentinelClient,
   getStackName,
@@ -14,7 +16,6 @@ import {
   isTemplateResource,
 } from '../utils';
 import {
-  DefenderAPIError,
   DefenderAutotask,
   DefenderContract,
   DefenderNotification,
@@ -177,10 +178,13 @@ export default class DefenderInfo {
       getAutotaskClient(this.teamKey!)
         .listSecrets()
         .then((r) => r.secretNames ?? []);
+
+    const allSecrets = getConsolidatedSecrets(this.serverless);
+
     await this.wrapper<YSecret, string>(
       this.serverless,
       'Secrets',
-      this.serverless.service.resources?.Resources?.secrets,
+      allSecrets,
       listSecrets,
       (resource: string) => `${resource}`,
       stdOut.secrets,

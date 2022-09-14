@@ -1,4 +1,4 @@
-# Defender Serverless Plugin
+# Defender Serverless Template
 
 Defender Serverless is a Serverless Framework plugin for automated resource management on Defender.
 
@@ -7,20 +7,6 @@ Defender Serverless is a Serverless Framework plugin for automated resource mana
 ## Prerequisites
 
 Serverless Framework: https://www.serverless.com/framework/docs/getting-started/
-
-## Installation
-
-You can initialise your Serverless project directly using our pre-configured template:
-
-```
-sls install --url https://github.com/OpenZeppelin/defender-serverless/tree/main/template -n my-service
-```
-
-Note: for the command above to work correctly you need access to this repo.
-
-Alternatively, you can install it directly into an existing project with:
-
-`yarn add defender-serverless`
 
 ## Setup
 
@@ -88,7 +74,7 @@ Any resource removed from the `serverless.yml` file does _not_ get automatically
 
 ### Secrets
 
-Secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redeployed under a new stack. Secrets defined under `stack` will be removed (on the condition that [SSOT mode](#SSOT-mode) is enabled) when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>_<secretkey>`, for example `mystack_test`.
+Secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redepoyed under a new stack. Secrets defined under `stack` will be removed (on the condition that [SSOT mode](#SSOT-mode) is enabled), when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>.<secretkey>`, for example `mystack_test`.
 
 ```yaml
 secrets:
