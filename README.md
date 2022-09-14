@@ -88,7 +88,7 @@ Any resource removed from the `serverless.yml` file does _not_ get automatically
 
 ### Secrets
 
-Secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redepoyed under a new stack. Secrets defined under `stack` will be removed (on the condition that [SSOT mode](#SSOT-mode) is enabled), when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>.<secretkey>`, for example `mystack_test`.
+Secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redeployed under a new stack. Secrets defined under `stack` will be removed (on the condition that [SSOT mode](#SSOT-mode) is enabled) when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>_<secretkey>`, for example `mystack_test`.
 
 ```yaml
 secrets:
