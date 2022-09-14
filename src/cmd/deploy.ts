@@ -147,11 +147,20 @@ export default class DefenderDeploy {
     // Secrets
     const globalSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.global ?? {};
     const stackSecrets: YSecret = this.serverless.service.resources?.Resources?.secrets?.stack ?? {};
-    const allSecrets = _.map(_.entries(Object.assign(globalSecrets, stackSecrets)), ([k, v]) => ({ [k]: v }));
+
+    const secretsPrecededWithStackName = Object.entries(stackSecrets).map(([ssk, ssv]) => {
+      return {
+        [`${getStackName(this.serverless)}_${ssk}`]: ssv,
+      };
+    });
+
+    const allSecrets = _.map(_.entries(Object.assign(globalSecrets, ...secretsPrecededWithStackName)), ([k, v]) => ({
+      [k]: v,
+    }));
 
     const dSecrets = (await autotaskClient.listSecrets()).secretNames;
     const secretsDifference = _.differenceWith(
-      dSecrets?.map((v) => v.replace(`${getStackName(this.serverless)}_`, '')),
+      dSecrets,
       Object.values(allSecrets).map((k, _) => Object.keys(k)[0]),
       (a: string, b: string) => a === b,
     );
@@ -288,9 +297,7 @@ export default class DefenderDeploy {
         });
       },
       // overrideMatchDefinition
-      (a: string, b: YSecret) => {
-        return !!b[a.replace(`${getStackName(this.serverless)}_`, '')];
-      },
+      (a: string, b: YSecret) => !!b[a.replace(`${getStackName(this.serverless)}_`, '')],
       output,
       this.ssotDifference?.secrets,
     );
@@ -721,7 +728,7 @@ export default class DefenderDeploy {
               resourceType === 'Contracts'
                 ? (match as unknown as DefenderContract).name
                 : resourceType === 'Secrets'
-                ? id
+                ? match
                 : (match as D & { stackResourceId: string }).stackResourceId
             }`,
           );
