@@ -19,12 +19,12 @@ defender:
 
 functions:
   autotask-example-1:
-    name: 'Hello world from serverless'
+    name: 'Hello world from serverless22'
     path: './autotasks/hello-world'
     # optional
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
-      type: "schedule" # or webhook
+      type: "webhook" # or webhook
       # optional if not cron
       frequency: 1500
       # optional if not frequency
@@ -43,10 +43,10 @@ resources:
         # optional
         eip1559-pricing: true
 
-    secrets:
-      foo: ${self:custom.config.secrets.foo}
-      hello: ${self:custom.config.secrets.hello}
-      test: ${self:custom.config.secrets.test}
+    # secrets:
+    #   foo: ${self:custom.config.secrets.foo}
+    #   hello: ${self:custom.config.secrets.hello}
+    #   test: ${self:custom.config.secrets.test}
       
     contracts:
       contract-2:
@@ -87,12 +87,19 @@ resources:
           emails: 
             - ${self:custom.config.notifications.nami}
         paused: false
-      slack-1:
-        type: 'slack'
-        name: 'Workspace Slack'
+      email-2:
+        type: 'email'
+        name: 'AAA'
         config: 
-          url: ${self:custom.config.notifications.slack}
-        paused: false
+          emails: 
+            - ${self:custom.config.notifications.dan}
+        paused: true
+      # slack-1:
+      #   type: 'slack'
+      #   name: 'Workspace Slack'
+      #   config: 
+      #     url: ${self:custom.config.notifications.slack}
+      #   paused: false
 
     sentinels:
       # unique resource name ?
@@ -132,9 +139,45 @@ resources:
               signature: "renounceOwnership()"
               expression: null # optional
           transaction: "gasPrice > 0" # optional expression
+      another-block-example:
+        name: "Another Block Example"
+        type: "BLOCK"
+        network: "rinkeby"
+        addresses: 
+          - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
+        # optional
+        abi: ${file(./abis/erc721.json.abi)}
+        # optional
+        alert-threshold: 
+          amount: 2
+          window-seconds: 3600
+        # optional
+        paused: false
+        # optional
+        autotask-condition: ${self:functions.autotask-example-1}
+        # optional
+        autotask-trigger: null
+        # optional
+        confirm-level: 6
+        notify-config:
+          timeout: 0 # optional
+          message: null # optional
+          channels: 
+            - ${self:resources.Resources.notifications.email-1}
+        # optional
+        conditions:
+          event:
+            -
+              signature: "OwnershipTransferred(address,address)"
+              expression: "previousOwner=0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2" # optional
+          function:
+            -
+              signature: "renounceOwnership()"
+              expression: null # optional
+          transaction: "gasPrice > 0" # optional expression
       forta-example:
-        name: "Forta Example"
-        type: "FORTA"
+        name: "Forta Example switched to block"
+        type: "BLOCK"
         network: "rinkeby"
         # optional if agent-ids is defined
         addresses: 
@@ -156,7 +199,7 @@ resources:
           timeout: 0 # optional
           message: null # optional
           channels: 
-            - ${self:resources.Resources.notifications.slack-1}
+            - ${self:resources.Resources.notifications.email-1}
         # optional
         conditions:
           min-scanner-count: 1
@@ -166,10 +209,10 @@ resources:
             - "123"
             - "456"
         # optional
-        forta-node-id: "123"
+        # forta-node-id: "123"
         # optional if addresses is defined
-        agent-ids:
-          - "0x8fe07f1a4d33b30be2387293f052c273660c829e9a6965cf7e8d485bcb871083"
+        # agent-ids:
+        #   - "0x8fe07f1a4d33b30be2387293f052c273660c829e9a6965cf7e8d485bcb871083"
         # optional
         forta-last-processed-time: null
 
