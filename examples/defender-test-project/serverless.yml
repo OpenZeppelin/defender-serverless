@@ -43,11 +43,16 @@ resources:
         # optional
         eip1559-pricing: true
 
-    # secrets:
-    #   foo: ${self:custom.config.secrets.foo}
-    #   hello: ${self:custom.config.secrets.hello}
-    #   test: ${self:custom.config.secrets.test}
-      
+    secrets:
+      # optional - global secrets are not affected by stackName changes
+      global:
+        foo: ${self:custom.config.secrets.foo}
+        hello: ${self:custom.config.secrets.hello}
+        test: ${self:custom.config.secrets.test}
+      # optional - stack secrets (formatted as <stackname>_<secretkey>)
+      stack:
+        test: ${self:custom.config.secrets.test}
+
     contracts:
       contract-2:
         name: "Demo-Flash"
@@ -61,7 +66,7 @@ resources:
     relayers:
       relayer-1:
         name: "Test Relayer 1"
-        network: "rinkeby"
+        network: "goerli"
         min-balance: 1000
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
@@ -102,11 +107,11 @@ resources:
       #   paused: false
 
     sentinels:
-      # unique resource name ?
+      # unique resource name
       block-example:
         name: "Block Example"
         type: "BLOCK"
-        network: "rinkeby"
+        network: "goerli"
         addresses: 
           - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
         # optional
@@ -176,9 +181,9 @@ resources:
               expression: null # optional
           transaction: "gasPrice > 0" # optional expression
       forta-example:
-        name: "Forta Example switched to block"
-        type: "BLOCK"
-        network: "rinkeby"
+        name: "Forta Example"
+        type: "FORTA"
+        network: "goerli"
         # optional if agent-ids is defined
         addresses: 
           - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"

@@ -2,7 +2,7 @@ import Serverless from 'serverless';
 import prompt from 'prompt';
 
 import { Logging } from 'serverless/classes/Plugin';
-import { differenceWith } from 'lodash';
+import _ from 'lodash';
 
 import Logger from '../utils/logger';
 
@@ -19,6 +19,7 @@ import {
   getEquivalentResource,
   isSSOT,
   getEquivalentResourceByKey,
+  getConsolidatedSecrets,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -36,7 +37,6 @@ import {
   YSentinel,
   DeployOutput,
   DeployResponse,
-  DefenderAPIError,
   ResourceType,
   ListDefenderResources,
 } from '../types';
@@ -80,7 +80,7 @@ export default class DefenderDeploy {
     const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
     const adminClient = getAdminClient(this.teamKey!);
     const dContracts = await adminClient.listContracts();
-    const contractDifference = differenceWith(
+    const contractDifference = _.differenceWith(
       dContracts,
       Object.entries(contracts ?? []),
       (a: DefenderContract, b: [string, YContract]) =>
@@ -91,7 +91,7 @@ export default class DefenderDeploy {
     const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
     const sentinelClient = getSentinelClient(this.teamKey!);
     const dSentinels = (await sentinelClient.list()).items;
-    const sentinelDifference = differenceWith(
+    const sentinelDifference = _.differenceWith(
       dSentinels,
       Object.entries(sentinels ?? []),
       (a: DefenderSentinel, b: [string, YSentinel]) =>
@@ -113,7 +113,7 @@ export default class DefenderDeploy {
         if (dRelayer) {
           const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
           const configuredKeys = relayer['api-keys'];
-          const relayerApiKeyDifference = differenceWith(
+          const relayerApiKeyDifference = _.differenceWith(
             dRelayerApiKeys,
             configuredKeys,
             (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
@@ -126,7 +126,7 @@ export default class DefenderDeploy {
     // Notifications
     const notifications: YNotification[] = this.serverless.service.resources?.Resources?.notifications ?? [];
     const dNotifications = await sentinelClient.listNotificationChannels();
-    const notificationDifference = differenceWith(
+    const notificationDifference = _.differenceWith(
       dNotifications,
       Object.entries(notifications ?? []),
       (a: DefenderNotification, b: [string, YNotification]) =>
@@ -137,7 +137,7 @@ export default class DefenderDeploy {
     const autotasks: YAutotask[] = this.serverless.service.functions as any;
     const autotaskClient = getAutotaskClient(this.teamKey!);
     const dAutotasks = (await autotaskClient.list()).items;
-    const autotaskDifference = differenceWith(
+    const autotaskDifference = _.differenceWith(
       dAutotasks,
       Object.entries(autotasks ?? []),
       (a: DefenderAutotask, b: [string, YAutotask]) =>
@@ -145,9 +145,13 @@ export default class DefenderDeploy {
     );
 
     // Secrets
-    const secrets: YSecret[] = this.serverless.service.resources?.Resources?.secrets ?? [];
+    const allSecrets = getConsolidatedSecrets(this.serverless);
     const dSecrets = (await autotaskClient.listSecrets()).secretNames;
-    const secretsDifference = differenceWith(dSecrets, Object.keys(secrets ?? []), (a: string, b: string) => a === b);
+    const secretsDifference = _.differenceWith(
+      dSecrets,
+      Object.values(allSecrets).map((k, _) => Object.keys(k)[0]),
+      (a: string, b: string) => a === b,
+    );
 
     difference.contracts = contractDifference;
     difference.sentinels = sentinelDifference;
@@ -184,8 +188,11 @@ export default class DefenderDeploy {
           : undefined,
       secrets: withResources.secrets.length > 0 ? withResources.secrets.map((a) => `${a}`) : undefined,
     };
-
-    return `${start}\n${JSON.stringify(formattedResources, null, 2)}\n\n${end}`;
+    return `${start}\n${
+      _.isEmpty(_.omitBy(formattedResources, _.isNil))
+        ? 'None. No differences found.'
+        : JSON.stringify(formattedResources, null, 2)
+    }\n\n${end}`;
   }
 
   private async requestConfirmation() {
@@ -201,6 +208,8 @@ export default class DefenderDeploy {
       this.log.progress('component-deploy', `Retrieving list of resources`);
 
       this.ssotDifference = await this.getSSOTDifference();
+
+      this.log.progress('component-deploy', `Awaiting confirmation from user`);
       prompt.start({
         message: await this.constructConfirmationMessage(this.ssotDifference),
       });
@@ -217,45 +226,38 @@ export default class DefenderDeploy {
   }
 
   private async deploySecrets(output: DeployOutput<string>) {
-    const secrets: YSecret[] = this.serverless.service.resources?.Resources?.secrets ?? [];
+    const allSecrets = getConsolidatedSecrets(this.serverless);
     const client = getAutotaskClient(this.teamKey!);
     const retrieveExisting = () => client.listSecrets().then((r) => r.secretNames ?? []);
-
     await this.wrapper<YSecret, string>(
       this.serverless,
       'Secrets',
-      secrets,
+      allSecrets,
       retrieveExisting,
       // on update
-      async (secret: YSecret, match: any) => {
-        const entry = {
-          [match]: secret,
-        };
+      async (secret: YSecret, match: string) => {
         await client.createSecrets({
           deletes: [],
-          secrets: entry as any,
+          secrets: secret as any,
         });
         return {
           name: `Secret`,
           id: `${match}`,
           success: true,
-          response: entry,
+          response: secret,
         };
       },
       // on create
-      async (secret: YSecret, stackResourceId: string) => {
-        const entry = {
-          [stackResourceId.split('.')[1]]: secret,
-        };
+      async (secret: YSecret, _: string) => {
         await client.createSecrets({
           deletes: [],
-          secrets: entry as any,
+          secrets: secret as any,
         });
         return {
           name: `Secret`,
-          id: `${Object.keys(entry).join(', ')}`,
+          id: `${Object.keys(secret)[0]}`,
           success: true,
-          response: entry,
+          response: secret,
         };
       },
       // on remove
@@ -266,7 +268,7 @@ export default class DefenderDeploy {
         });
       },
       // overrideMatchDefinition
-      (a: string, b: YSecret) => a === (b as unknown as string),
+      (a: string, b: YSecret) => !!b[a],
       output,
       this.ssotDifference?.secrets,
     );
@@ -348,7 +350,7 @@ export default class DefenderDeploy {
         // check existing keys and remove / create accordingly
         const existingRelayerKeys = await client.listKeys(match.relayerId);
         const configuredKeys = relayer['api-keys'];
-        const inDefender = differenceWith(
+        const inDefender = _.differenceWith(
           existingRelayerKeys,
           configuredKeys,
           (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(match.stackResourceId!, b),
@@ -364,7 +366,7 @@ export default class DefenderDeploy {
           output.relayerKeys.removed.push(...inDefender);
         }
 
-        const inTemplate = differenceWith(
+        const inTemplate = _.differenceWith(
           configuredKeys,
           existingRelayerKeys,
           (a: string, b: DefenderRelayerApiKey) => getResourceID(match.stackResourceId!, a) === b.stackResourceId,
@@ -505,9 +507,19 @@ export default class DefenderDeploy {
         retrieveExisting,
         // on update
         async (sentinel: YSentinel, match: DefenderSentinel) => {
+          const blockwatchersForNetwork = (await client.listBlockwatchers()).filter(
+            (b) => b.network === sentinel.network,
+          );
           const updatedSentinel = await client.update(
             match.subscriberId,
-            constructSentinel(this.serverless, match.stackResourceId!, sentinel, notifications, autotasks.items),
+            constructSentinel(
+              this.serverless,
+              match.stackResourceId!,
+              sentinel,
+              notifications,
+              autotasks.items,
+              blockwatchersForNetwork,
+            ),
           );
           return {
             name: updatedSentinel.stackResourceId!,
@@ -518,8 +530,18 @@ export default class DefenderDeploy {
         },
         // on create
         async (sentinel: YSentinel, stackResourceId: string) => {
+          const blockwatchersForNetwork = (await client.listBlockwatchers()).filter(
+            (b) => b.network === sentinel.network,
+          );
           const createdSentinel = await client.create(
-            constructSentinel(this.serverless, stackResourceId, sentinel, notifications, autotasks.items),
+            constructSentinel(
+              this.serverless,
+              stackResourceId,
+              sentinel,
+              notifications,
+              autotasks.items,
+              blockwatchersForNetwork,
+            ),
           );
           return {
             name: stackResourceId,
@@ -665,9 +687,7 @@ export default class DefenderDeploy {
         const entryStackResourceId = getResourceID(stackName, id);
         let match;
         if (overrideMatchDefinition) {
-          match = existing.find((e: D) =>
-            resourceType === 'Secrets' ? overrideMatchDefinition(e, id as any) : overrideMatchDefinition(e, resource),
-          );
+          match = existing.find((e: D) => overrideMatchDefinition(e, resource));
         } else {
           match = existing.find((e: any) => e.stackResourceId === entryStackResourceId);
         }
@@ -679,29 +699,39 @@ export default class DefenderDeploy {
               resourceType === 'Contracts'
                 ? (match as unknown as DefenderContract).name
                 : resourceType === 'Secrets'
-                ? id
+                ? match
                 : (match as D & { stackResourceId: string }).stackResourceId
             }`,
           );
-          const result = await onUpdate(resource, match);
-          if (result.success) {
-            this.log.success(`Updated ${result.name} (${result.id})`);
-            output.updated.push(result.response);
+          try {
+            const result = await onUpdate(resource, match);
+            if (result.success) {
+              this.log.success(`Updated ${result.name} (${result.id})`);
+              output.updated.push(result.response);
+            }
+            if (result.notice) this.log.info(`${result.notice}`, 1);
+            if (result.error) this.log.error(`${result.error}`);
+          } catch (e) {
+            this.log.tryLogDefenderError(e);
           }
-          if (result.notice) this.log.info(`${result.notice}`, 1);
-          if (result.error) this.log.error(`${result.error}`);
         } else {
           this.log.progress(
             'component-deploy-extra',
-            `Creating ${resourceType === 'Secrets' ? id : entryStackResourceId}`,
+            `Creating ${
+              resourceType === 'Secrets' ? Object.keys(resource as unknown as YSecret)[0] : entryStackResourceId
+            }`,
           );
-          const result = await onCreate(resource, entryStackResourceId);
-          if (result.success) {
-            this.log.success(`Created ${result.name} (${result.id})`);
-            output.created.push(result.response);
+          try {
+            const result = await onCreate(resource, entryStackResourceId);
+            if (result.success) {
+              this.log.success(`Created ${result.name} (${result.id})`);
+              output.created.push(result.response);
+            }
+            if (result.notice) this.log.info(`${result.notice}`, 1);
+            if (result.error) this.log.error(`${result.error}`);
+          } catch (e) {
+            this.log.tryLogDefenderError(e);
           }
-          if (result.notice) this.log.info(`${result.notice}`, 1);
-          if (result.error) this.log.error(`${result.error}`);
         }
       }
     } catch (e) {

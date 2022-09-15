@@ -55,7 +55,8 @@ export default class Logger {
       const defenderAPIError = (e as DefenderAPIError).response.data as any;
       this.error(defenderAPIError.message ?? defenderAPIError.Message);
     } catch {
-      this.error(e);
+      if (e.message) this.error(e.message);
+      else this.error(e);
     }
   }
 }
