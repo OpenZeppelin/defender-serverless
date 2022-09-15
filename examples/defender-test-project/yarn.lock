@@ -724,11 +724,6 @@ chalk@^4.1.0, chalk@^4.1.1, chalk@^4.1.2:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.0.1.tgz#ca57d71e82bb534a296df63bbacc4a1c22b2a4b6"
-  integrity sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==
-
 chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
@@ -1081,12 +1076,11 @@ defender-sentinel-client@^1.31.0-rc.2:
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-serverless@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/defender-serverless/-/defender-serverless-1.0.1.tgz#b6f3335935e3685fd2a032a26d7ff09489361309"
-  integrity sha512-UGf3kXIWu39bDTE/qfLmgYEpRgQE4fLxMs1uZqtrTxYj3qF7eDvq6y9/0OBuTjh+lfcsq08LKPKK2l0dmmqCKg==
+defender-serverless@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/defender-serverless/-/defender-serverless-1.0.2.tgz#62518e7dfbb14a732c954fb7dec42af366918930"
+  integrity sha512-d4iIpXNEmX7MMDEf2g1TIHFJkSExZ5QdXSlPeky563erZzbFbeyYr4+OZrieDUw7SGvEDZjREsmskjEf48RqkA==
   dependencies:
-    chalk "^5.0.1"
     defender-admin-client "^1.31.0-rc.2"
     defender-autotask-client "^1.31.0-rc.2"
     defender-relay-client "^1.31.0-rc.2"

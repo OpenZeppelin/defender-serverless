@@ -1,0 +1,3 @@
+## cron Type
+
+`string`

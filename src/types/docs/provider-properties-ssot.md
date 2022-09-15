@@ -1,0 +1,3 @@
+## ssot Type
+
+`boolean`

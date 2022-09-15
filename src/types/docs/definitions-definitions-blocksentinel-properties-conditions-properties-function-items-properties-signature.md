@@ -1,0 +1,3 @@
+## signature Type
+
+`string`

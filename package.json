@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "rm -rf lib tsconfig.tsbuildinfo && tsc",
+    "build": "rm -rf lib tsconfig.tsbuildinfo && tsc && yarn build:schemas",
     "test": "yarn test:unit",
     "test:unit": "jest --verbose --passWithNoTests",
     "watch": "tsc -w",
@@ -14,7 +14,10 @@
     "lint:check": "eslint 'src/**/*.{js,ts}' --quiet",
     "format": "yarn format:check --write",
     "format:check": "prettier --check 'src/**/*.(js|ts)'",
-    "style": "yarn lint && yarn format"
+    "style": "yarn lint && yarn format",
+    "build:schemas": "yarn generate:schemas && yarn format:schemas",
+    "generate:schemas": "rm -rf src/types/docs && jsonschema2md -d src/types/docs-schemas -o src/types/docs -x src/types/schemas -v 07 -h false",
+    "format:schemas": "replace-in-file --configFile=src/types/schemas/config.ts"
   },
   "keywords": [
     "Defender",
@@ -59,12 +62,14 @@
     "typescript": "^3.6.2"
   },
   "dependencies": {
+    "@adobe/jsonschema2md": "^7.1.1",
     "defender-admin-client": "^1.31.0-rc.2",
     "defender-autotask-client": "^1.31.0-rc.2",
     "defender-relay-client": "^1.31.0-rc.2",
     "defender-sentinel-client": "^1.31.0-rc.2",
     "lodash": "^4.17.21",
-    "prompt": "^1.3.0"
+    "prompt": "^1.3.0",
+    "replace-in-file": "^6.3.5"
   },
   "files": [
     "lib",

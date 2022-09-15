@@ -1,0 +1,3 @@
+## abi Type
+
+`string`

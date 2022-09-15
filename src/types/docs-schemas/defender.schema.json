@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Defender",
+  "type": "object",
+  "properties": {
+    "key": { "type": "string" },
+    "secret": { "type": "string" }
+  },
+  "required": ["key", "secret"]
+}

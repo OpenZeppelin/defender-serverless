@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resources",
+  "resources": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "Resources": {
+        "type": "object",
+        "properties": {
+          "notifications": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "definitions.schema.json/#/definitions/notification",
+              "format": "uri-reference"
+            }
+          },
+          "relayers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "definitions.schema.json/#/definitions/relayer",
+              "format": "uri-reference"
+            }
+          },
+          "policies": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "definitions.schema.json/#/definitions/policy",
+              "format": "uri-reference"
+            }
+          },
+          "contracts": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "definitions.schema.json/#/definitions/contract",
+              "format": "uri-reference"
+            }
+          },
+          "secrets": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "global": { "type": "object", "additionalProperties": { "type": "string" } },
+              "stack": { "type": "object", "additionalProperties": { "type": "string" } }
+            }
+          },
+          "sentinels": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "definitions.schema.json/#/definitions/sentinel",
+              "format": "uri-reference"
+            }
+          }
+        }
+      }
+    }
+  }
+}

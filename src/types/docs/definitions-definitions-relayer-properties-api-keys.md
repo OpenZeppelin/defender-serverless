@@ -1,0 +1,3 @@
+## api-keys Type
+
+`string[]`
