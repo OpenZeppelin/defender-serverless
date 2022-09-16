@@ -1,12 +1,12 @@
 ## notifications Type
 
-`object` ([Details](resources-resources-properties-resources-properties-notifications.md))
+`object` ([Notifications](resources-resources-properties-resources-properties-notifications.md))
 
 # notifications Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                     |
 | :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-notification.md "undefined#/resources/properties/Resources/properties/notifications/additionalProperties") |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-notification.md "#/resources/properties/Resources/properties/notifications/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-notification.md "undefined#/resources/properties/Resources/properties/notifications/additionalProperties")
+*   defined in: [Resources](definitions-definitions-notification.md "#/resources/properties/Resources/properties/notifications/additionalProperties")
 
 ### additionalProperties Type
 

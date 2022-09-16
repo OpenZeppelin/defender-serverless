@@ -10,7 +10,7 @@
 
 | Property          | Type    | Required | Nullable       | Defined by                                                                                                                     |
 | :---------------- | :------ | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------- |
-| [emails](#emails) | `array` | Required | cannot be null | [Definitions](definitions-definitions-emailconfig-properties-emails.md "undefined#/definitions/emailConfig/properties/emails") |
+| [emails](#emails) | `array` | Required | cannot be null | [Definitions](definitions-definitions-emailconfig-properties-emails.md "#/definitions/emailConfig/properties/emails") |
 
 ## emails
 
@@ -24,7 +24,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-emailconfig-properties-emails.md "undefined#/definitions/emailConfig/properties/emails")
+*   defined in: [Definitions](definitions-definitions-emailconfig-properties-emails.md "#/definitions/emailConfig/properties/emails")
 
 ### emails Type
 

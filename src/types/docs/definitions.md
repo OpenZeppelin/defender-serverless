@@ -9,7 +9,7 @@ unknown ([Definitions](definitions.md))
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/address"}
+{"$ref":"#/definitions/address"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
@@ -20,7 +20,7 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/network"}
+{"$ref":"#/definitions/network"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
@@ -31,14 +31,14 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/policy"}
+{"$ref":"#/definitions/policy"}
 ```
 
-| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                     |
-| :------------------------------------------ | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
-| [gas-price-cap](#gas-price-cap)             | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "undefined#/definitions/policy/properties/gas-price-cap")             |
-| [whitelist-receivers](#whitelist-receivers) | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-whitelist-receivers.md "undefined#/definitions/policy/properties/whitelist-receivers") |
-| [eip1559-pricing](#eip1559-pricing)         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "undefined#/definitions/policy/properties/eip1559-pricing")         |
+| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                    |
+| :------------------------------------------ | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| [gas-price-cap](#gas-price-cap)             | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "#/definitions/policy/properties/gas-price-cap")            |
+| [whitelist-receivers](#whitelist-receivers) | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-whitelistreceivers.md "#/definitions/policy/properties/whitelist-receivers") |
+| [eip1559-pricing](#eip1559-pricing)         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "#/definitions/policy/properties/eip1559-pricing")        |
 
 ### gas-price-cap
 
@@ -52,7 +52,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "undefined#/definitions/policy/properties/gas-price-cap")
+*   defined in: [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "#/definitions/policy/properties/gas-price-cap")
 
 #### gas-price-cap Type
 
@@ -70,7 +70,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy-properties-whitelist-receivers.md "undefined#/definitions/policy/properties/whitelist-receivers")
+*   defined in: [Definitions](definitions-definitions-policy-properties-whitelistreceivers.md "#/definitions/policy/properties/whitelist-receivers")
 
 #### whitelist-receivers Type
 
@@ -88,7 +88,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "undefined#/definitions/policy/properties/eip1559-pricing")
+*   defined in: [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "#/definitions/policy/properties/eip1559-pricing")
 
 #### eip1559-pricing Type
 
@@ -99,17 +99,17 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/relayer"}
+{"$ref":"#/definitions/relayer"}
 ```
 
-| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                         |
-| :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "undefined#/definitions/relayer/properties/name")                                 |
-| [network](#network)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "undefined#/definitions/relayer/properties/network")                           |
-| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "undefined#/definitions/relayer/properties/min-balance")                   |
-| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-address-from-relayer.md "undefined#/definitions/relayer/properties/address-from-relayer") |
-| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "undefined#/definitions/relayer/properties/policy")                                                |
-| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-api-keys.md "undefined#/definitions/relayer/properties/api-keys")                         |
+| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                       |
+| :-------------------------------------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "#/definitions/relayer/properties/name")                               |
+| [network](#network)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "#/definitions/relayer/properties/network")                         |
+| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "#/definitions/relayer/properties/min-balance")                 |
+| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "#/definitions/relayer/properties/address-from-relayer") |
+| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "#/definitions/relayer/properties/policy")                                              |
+| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "#/definitions/relayer/properties/api-keys")                 |
 
 ### name
 
@@ -123,7 +123,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-name.md "undefined#/definitions/relayer/properties/name")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-name.md "#/definitions/relayer/properties/name")
 
 #### name Type
 
@@ -141,7 +141,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-network.md "undefined#/definitions/relayer/properties/network")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-network.md "#/definitions/relayer/properties/network")
 
 #### network Type
 
@@ -203,7 +203,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-min-balance.md "undefined#/definitions/relayer/properties/min-balance")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-min-balance.md "#/definitions/relayer/properties/min-balance")
 
 #### min-balance Type
 
@@ -217,15 +217,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-relayer-properties-address-from-relayer.md))
+*   Type: `object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-address-from-relayer.md "undefined#/definitions/relayer/properties/address-from-relayer")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "#/definitions/relayer/properties/address-from-relayer")
 
 #### address-from-relayer Type
 
-`object` ([Details](definitions-definitions-relayer-properties-address-from-relayer.md))
+`object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
 
 ### policy
 
@@ -239,7 +239,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy.md "undefined#/definitions/relayer/properties/policy")
+*   defined in: [Definitions](definitions-definitions-policy.md "#/definitions/relayer/properties/policy")
 
 #### policy Type
 
@@ -261,7 +261,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-api-keys.md "undefined#/definitions/relayer/properties/api-keys")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "#/definitions/relayer/properties/api-keys")
 
 #### api-keys Type
 
@@ -272,16 +272,16 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/contract"}
+{"$ref":"#/definitions/contract"}
 ```
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                   |
 | :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-1)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "undefined#/definitions/contract/properties/name")         |
-| [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-address.md "undefined#/definitions/contract/properties/address")   |
-| [network](#network-1) | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-network.md "undefined#/definitions/contract/properties/network")   |
-| [abi](#abi)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-abi.md "undefined#/definitions/contract/properties/abi")           |
-| [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "undefined#/definitions/contract/properties/nat-spec") |
+| [name](#name-1)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "#/definitions/contract/properties/name")         |
+| [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-address.md "#/definitions/contract/properties/address")   |
+| [network](#network-1) | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-network.md "#/definitions/contract/properties/network")   |
+| [abi](#abi)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-abi.md "#/definitions/contract/properties/abi")           |
+| [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "#/definitions/contract/properties/nat-spec") |
 
 ### name
 
@@ -295,7 +295,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-name.md "undefined#/definitions/contract/properties/name")
+*   defined in: [Definitions](definitions-definitions-contract-properties-name.md "#/definitions/contract/properties/name")
 
 #### name Type
 
@@ -313,7 +313,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-address.md "undefined#/definitions/contract/properties/address")
+*   defined in: [Definitions](definitions-definitions-contract-properties-address.md "#/definitions/contract/properties/address")
 
 #### address Type
 
@@ -343,7 +343,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-network.md "undefined#/definitions/contract/properties/network")
+*   defined in: [Definitions](definitions-definitions-contract-properties-network.md "#/definitions/contract/properties/network")
 
 #### network Type
 
@@ -405,7 +405,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-abi.md "undefined#/definitions/contract/properties/abi")
+*   defined in: [Definitions](definitions-definitions-contract-properties-abi.md "#/definitions/contract/properties/abi")
 
 #### abi Type
 
@@ -423,7 +423,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-nat-spec.md "undefined#/definitions/contract/properties/nat-spec")
+*   defined in: [Definitions](definitions-definitions-contract-properties-nat-spec.md "#/definitions/contract/properties/nat-spec")
 
 #### nat-spec Type
 
@@ -434,7 +434,7 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/notificationType"}
+{"$ref":"#/definitions/notificationType"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
@@ -445,13 +445,13 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/datadogConfig"}
+{"$ref":"#/definitions/datadogConfig"}
 ```
 
 | Property                         | Type     | Required | Nullable       | Defined by                                                                                                                                        |
 | :------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [api-key](#api-key)              | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "undefined#/definitions/datadogConfig/properties/api-key")              |
-| [metric-p$refix](#metric-prefix) | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "undefined#/definitions/datadogConfig/properties/metric-p$refix") |
+| [api-key](#api-key)              | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "#/definitions/datadogConfig/properties/api-key")              |
+| [metric-p$refix](#metric-prefix) | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-p$refix") |
 
 ### api-key
 
@@ -465,7 +465,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "undefined#/definitions/datadogConfig/properties/api-key")
+*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "#/definitions/datadogConfig/properties/api-key")
 
 #### api-key Type
 
@@ -483,7 +483,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "undefined#/definitions/datadogConfig/properties/metric-p$refix")
+*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-p$refix")
 
 #### metric-p$refix Type
 
@@ -506,12 +506,12 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/urlConfig"}
+{"$ref":"#/definitions/urlConfig"}
 ```
 
 | Property    | Type     | Required | Nullable       | Defined by                                                                                                           |
 | :---------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------- |
-| [url](#url) | `string` | Required | cannot be null | [Definitions](definitions-definitions-urlconfig-properties-url.md "undefined#/definitions/urlConfig/properties/url") |
+| [url](#url) | `string` | Required | cannot be null | [Definitions](definitions-definitions-urlconfig-properties-url.md "#/definitions/urlConfig/properties/url") |
 
 ### url
 
@@ -525,7 +525,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-urlconfig-properties-url.md "undefined#/definitions/urlConfig/properties/url")
+*   defined in: [Definitions](definitions-definitions-urlconfig-properties-url.md "#/definitions/urlConfig/properties/url")
 
 #### url Type
 
@@ -540,13 +540,13 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/telegramBotConfig"}
+{"$ref":"#/definitions/telegramBotConfig"}
 ```
 
 | Property                | Type     | Required | Nullable       | Defined by                                                                                                                                    |
 | :---------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
-| [bot-token](#bot-token) | `string` | Required | cannot be null | [Definitions](definitions-definitions-telegramconfig-properties-bot-token.md "undefined#/definitions/telegramBotConfig/properties/bot-token") |
-| [chat-id](#chat-id)     | `string` | Required | cannot be null | [Definitions](definitions-definitions-telegramconfig-properties-chat-id.md "undefined#/definitions/telegramBotConfig/properties/chat-id")     |
+| [bot-token](#bot-token) | `string` | Required | cannot be null | [Definitions](definitions-definitions-telegramconfig-properties-bot-token.md "#/definitions/telegramBotConfig/properties/bot-token") |
+| [chat-id](#chat-id)     | `string` | Required | cannot be null | [Definitions](definitions-definitions-telegramconfig-properties-chat-id.md "#/definitions/telegramBotConfig/properties/chat-id")     |
 
 ### bot-token
 
@@ -560,7 +560,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-telegramconfig-properties-bot-token.md "undefined#/definitions/telegramBotConfig/properties/bot-token")
+*   defined in: [Definitions](definitions-definitions-telegramconfig-properties-bot-token.md "#/definitions/telegramBotConfig/properties/bot-token")
 
 #### bot-token Type
 
@@ -578,7 +578,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-telegramconfig-properties-chat-id.md "undefined#/definitions/telegramBotConfig/properties/chat-id")
+*   defined in: [Definitions](definitions-definitions-telegramconfig-properties-chat-id.md "#/definitions/telegramBotConfig/properties/chat-id")
 
 #### chat-id Type
 
@@ -589,12 +589,12 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/emailConfig"}
+{"$ref":"#/definitions/emailConfig"}
 ```
 
 | Property          | Type    | Required | Nullable       | Defined by                                                                                                                     |
 | :---------------- | :------ | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------- |
-| [emails](#emails) | `array` | Required | cannot be null | [Definitions](definitions-definitions-emailconfig-properties-emails.md "undefined#/definitions/emailConfig/properties/emails") |
+| [emails](#emails) | `array` | Required | cannot be null | [Definitions](definitions-definitions-emailconfig-properties-emails.md "#/definitions/emailConfig/properties/emails") |
 
 ### emails
 
@@ -608,7 +608,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-emailconfig-properties-emails.md "undefined#/definitions/emailConfig/properties/emails")
+*   defined in: [Definitions](definitions-definitions-emailconfig-properties-emails.md "#/definitions/emailConfig/properties/emails")
 
 #### emails Type
 
@@ -627,15 +627,15 @@ The default value is:
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/notification"}
+{"$ref":"#/definitions/notification"}
 ```
 
 | Property          | Type      | Required | Nullable       | Defined by                                                                                                                               |
 | :---------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| [type](#type)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-notificationtype.md "undefined#/definitions/notification/properties/type") |
-| [name](#name-2)   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-name.md "undefined#/definitions/notification/properties/name")             |
-| [paused](#paused) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-paused.md "undefined#/definitions/notification/properties/paused")         |
-| [config](#config) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-config.md "undefined#/definitions/notification/properties/config")         |
+| [type](#type)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-notificationtype.md "#/definitions/notification/properties/type") |
+| [name](#name-2)   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-name.md "#/definitions/notification/properties/name")             |
+| [paused](#paused) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-paused.md "#/definitions/notification/properties/paused")         |
+| [config](#config) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-config.md "#/definitions/notification/properties/config")         |
 
 ### type
 
@@ -649,7 +649,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-notification-properties-notificationtype.md "undefined#/definitions/notification/properties/type")
+*   defined in: [Definitions](definitions-definitions-notification-properties-notificationtype.md "#/definitions/notification/properties/type")
 
 #### type Type
 
@@ -682,7 +682,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-notification-properties-name.md "undefined#/definitions/notification/properties/name")
+*   defined in: [Definitions](definitions-definitions-notification-properties-name.md "#/definitions/notification/properties/name")
 
 #### name Type
 
@@ -700,7 +700,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-notification-properties-paused.md "undefined#/definitions/notification/properties/paused")
+*   defined in: [Definitions](definitions-definitions-notification-properties-paused.md "#/definitions/notification/properties/paused")
 
 #### paused Type
 
@@ -714,15 +714,15 @@ Reference this group by using
 
 *   is required
 
-*   Type: `object` ([Details](definitions-definitions-notification-properties-config.md))
+*   Type: `object` ([Config](definitions-definitions-notification-properties-config.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-notification-properties-config.md "undefined#/definitions/notification/properties/config")
+*   defined in: [Definitions](definitions-definitions-notification-properties-config.md "#/definitions/notification/properties/config")
 
 #### config Type
 
-`object` ([Details](definitions-definitions-notification-properties-config.md))
+`object` ([Config](definitions-definitions-notification-properties-config.md))
 
 one (and only one) of
 
@@ -739,23 +739,23 @@ one (and only one) of
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/blockSentinel"}
+{"$ref":"#/definitions/blockSentinel"}
 ```
 
-| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                           |
-| :---------------------------------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-3)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-name.md "undefined#/definitions/blockSentinel/properties/name")                       |
-| [type](#type-1)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "undefined#/definitions/blockSentinel/properties/type")                       |
-| [network](#network-2)                     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-network.md "undefined#/definitions/blockSentinel/properties/network")                 |
-| [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "undefined#/definitions/blockSentinel/properties/addresses")             |
-| [abi](#abi-1)                             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-abi.md "undefined#/definitions/blockSentinel/properties/abi")                         |
-| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-alert-threshold.md "undefined#/definitions/blockSentinel/properties/alert-threshold") |
-| [paused](#paused-1)                       | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-paused.md "undefined#/definitions/blockSentinel/properties/paused")                   |
-| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "undefined#/definitions/blockSentinel/properties/autotask-condition")                              |
-| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "undefined#/definitions/blockSentinel/properties/autotask-trigger")                                |
-| [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "undefined#/definitions/blockSentinel/properties/confirm-level")     |
-| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notify-config.md "undefined#/definitions/blockSentinel/properties/notify-config")     |
-| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "undefined#/definitions/blockSentinel/properties/conditions")           |
+| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                          |
+| :---------------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-3)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")                      |
+| [type](#type-1)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")                      |
+| [network](#network-2)                     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-network.md "#/definitions/blockSentinel/properties/network")                |
+| [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")            |
+| [abi](#abi-1)                             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-abi.md "#/definitions/blockSentinel/properties/abi")                        |
+| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-alertthreshold.md "#/definitions/blockSentinel/properties/alert-threshold") |
+| [paused](#paused-1)                       | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-paused.md "#/definitions/blockSentinel/properties/paused")                  |
+| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-condition")                             |
+| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-trigger")                               |
+| [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "#/definitions/blockSentinel/properties/confirm-level")    |
+| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig.md "#/definitions/blockSentinel/properties/notify-config")     |
+| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "#/definitions/blockSentinel/properties/conditions")          |
 
 ### name
 
@@ -769,7 +769,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-name.md "undefined#/definitions/blockSentinel/properties/name")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")
 
 #### name Type
 
@@ -787,7 +787,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-type.md "undefined#/definitions/blockSentinel/properties/type")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")
 
 #### type Type
 
@@ -813,7 +813,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-network.md "undefined#/definitions/blockSentinel/properties/network")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-network.md "#/definitions/blockSentinel/properties/network")
 
 #### network Type
 
@@ -875,7 +875,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "undefined#/definitions/blockSentinel/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")
 
 #### addresses Type
 
@@ -893,7 +893,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-abi.md "undefined#/definitions/blockSentinel/properties/abi")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-abi.md "#/definitions/blockSentinel/properties/abi")
 
 #### abi Type
 
@@ -907,15 +907,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-blocksentinel-properties-alert-threshold.md))
+*   Type: `object` ([AlertThreshold](definitions-definitions-blocksentinel-properties-alertthreshold.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-alert-threshold.md "undefined#/definitions/blockSentinel/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-alertthreshold.md "#/definitions/blockSentinel/properties/alert-threshold")
 
 #### alert-threshold Type
 
-`object` ([Details](definitions-definitions-blocksentinel-properties-alert-threshold.md))
+`object` ([AlertThreshold](definitions-definitions-blocksentinel-properties-alertthreshold.md))
 
 ### paused
 
@@ -929,7 +929,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-paused.md "undefined#/definitions/blockSentinel/properties/paused")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-paused.md "#/definitions/blockSentinel/properties/paused")
 
 #### paused Type
 
@@ -947,7 +947,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "undefined#/definitions/blockSentinel/properties/autotask-condition")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-condition")
 
 #### autotask-condition Type
 
@@ -969,7 +969,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "undefined#/definitions/blockSentinel/properties/autotask-trigger")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-trigger")
 
 #### autotask-trigger Type
 
@@ -991,7 +991,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "undefined#/definitions/blockSentinel/properties/confirm-level")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "#/definitions/blockSentinel/properties/confirm-level")
 
 #### confirm-level Type
 
@@ -1011,15 +1011,15 @@ one (and only one) of
 
 *   is required
 
-*   Type: `object` ([Details](definitions-definitions-blocksentinel-properties-notify-config.md))
+*   Type: `object` ([NotifyConfig](definitions-definitions-blocksentinel-properties-notifyconfig.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-notify-config.md "undefined#/definitions/blockSentinel/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig.md "#/definitions/blockSentinel/properties/notify-config")
 
 #### notify-config Type
 
-`object` ([Details](definitions-definitions-blocksentinel-properties-notify-config.md))
+`object` ([NotifyConfig](definitions-definitions-blocksentinel-properties-notifyconfig.md))
 
 ### conditions
 
@@ -1029,39 +1029,39 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-blocksentinel-properties-conditions.md))
+*   Type: `object` ([Conditions](definitions-definitions-blocksentinel-properties-conditions.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "undefined#/definitions/blockSentinel/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "#/definitions/blockSentinel/properties/conditions")
 
 #### conditions Type
 
-`object` ([Details](definitions-definitions-blocksentinel-properties-conditions.md))
+`object` ([Conditions](definitions-definitions-blocksentinel-properties-conditions.md))
 
 ## Definitions group fortaSentinel
 
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/fortaSentinel"}
+{"$ref":"#/definitions/fortaSentinel"}
 ```
 
-| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                           |
-| :------------------------------------------ | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-name.md "undefined#/definitions/fortaSentinel/properties/name")                       |
-| [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "undefined#/definitions/fortaSentinel/properties/type")                       |
-| [network](#network-3)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-network.md "undefined#/definitions/fortaSentinel/properties/network")                 |
-| [addresses](#addresses-1)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "undefined#/definitions/fortaSentinel/properties/addresses")             |
-| [abi](#abi-2)                               | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-abi.md "undefined#/definitions/fortaSentinel/properties/abi")                         |
-| [alert-threshold](#alert-threshold-1)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-alert-threshold.md "undefined#/definitions/fortaSentinel/properties/alert-threshold") |
-| [paused](#paused-2)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-paused.md "undefined#/definitions/fortaSentinel/properties/paused")                   |
-| [autotask-condition](#autotask-condition-1) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "undefined#/definitions/fortaSentinel/properties/autotask-condition")                              |
-| [autotask-trigger](#autotask-trigger-1)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "undefined#/definitions/fortaSentinel/properties/autotask-trigger")                                |
-| [notify-config](#notify-config-1)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notify-config.md "undefined#/definitions/fortaSentinel/properties/notify-config")     |
-| [conditions](#conditions-1)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "undefined#/definitions/fortaSentinel/properties/conditions")           |
-| [forta-node-id](#forta-node-id)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "undefined#/definitions/fortaSentinel/properties/forta-node-id")     |
-| [agent-ids](#agent-ids)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-agent-ids.md "undefined#/definitions/fortaSentinel/properties/agent-ids")             |
+| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                          |
+| :------------------------------------------ | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")                      |
+| [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")                      |
+| [network](#network-3)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-network.md "#/definitions/fortaSentinel/properties/network")                |
+| [addresses](#addresses-1)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")            |
+| [abi](#abi-2)                               | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-abi.md "#/definitions/fortaSentinel/properties/abi")                        |
+| [alert-threshold](#alert-threshold-1)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-alertthreshold.md "#/definitions/fortaSentinel/properties/alert-threshold") |
+| [paused](#paused-2)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-paused.md "#/definitions/fortaSentinel/properties/paused")                  |
+| [autotask-condition](#autotask-condition-1) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-condition")                             |
+| [autotask-trigger](#autotask-trigger-1)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-trigger")                               |
+| [notify-config](#notify-config-1)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig.md "#/definitions/fortaSentinel/properties/notify-config")     |
+| [conditions](#conditions-1)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "#/definitions/fortaSentinel/properties/conditions")          |
+| [forta-node-id](#forta-node-id)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "#/definitions/fortaSentinel/properties/forta-node-id")    |
+| [agent-ids](#agent-ids)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-agentids.md "#/definitions/fortaSentinel/properties/agent-ids")             |
 
 ### name
 
@@ -1075,7 +1075,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-name.md "undefined#/definitions/fortaSentinel/properties/name")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")
 
 #### name Type
 
@@ -1093,7 +1093,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-type.md "undefined#/definitions/fortaSentinel/properties/type")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")
 
 #### type Type
 
@@ -1119,7 +1119,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-network.md "undefined#/definitions/fortaSentinel/properties/network")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-network.md "#/definitions/fortaSentinel/properties/network")
 
 #### network Type
 
@@ -1181,7 +1181,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "undefined#/definitions/fortaSentinel/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")
 
 #### addresses Type
 
@@ -1199,7 +1199,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-abi.md "undefined#/definitions/fortaSentinel/properties/abi")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-abi.md "#/definitions/fortaSentinel/properties/abi")
 
 #### abi Type
 
@@ -1213,15 +1213,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-fortasentinel-properties-alert-threshold.md))
+*   Type: `object` ([AlertThreshold](definitions-definitions-fortasentinel-properties-alertthreshold.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-alert-threshold.md "undefined#/definitions/fortaSentinel/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-alertthreshold.md "#/definitions/fortaSentinel/properties/alert-threshold")
 
 #### alert-threshold Type
 
-`object` ([Details](definitions-definitions-fortasentinel-properties-alert-threshold.md))
+`object` ([AlertThreshold](definitions-definitions-fortasentinel-properties-alertthreshold.md))
 
 ### paused
 
@@ -1235,7 +1235,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-paused.md "undefined#/definitions/fortaSentinel/properties/paused")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-paused.md "#/definitions/fortaSentinel/properties/paused")
 
 #### paused Type
 
@@ -1253,7 +1253,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "undefined#/definitions/fortaSentinel/properties/autotask-condition")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-condition")
 
 #### autotask-condition Type
 
@@ -1275,7 +1275,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "undefined#/definitions/fortaSentinel/properties/autotask-trigger")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-trigger")
 
 #### autotask-trigger Type
 
@@ -1293,15 +1293,15 @@ Reference this group by using
 
 *   is required
 
-*   Type: `object` ([Details](definitions-definitions-fortasentinel-properties-notify-config.md))
+*   Type: `object` ([NotifyConfig](definitions-definitions-fortasentinel-properties-notifyconfig.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-notify-config.md "undefined#/definitions/fortaSentinel/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig.md "#/definitions/fortaSentinel/properties/notify-config")
 
 #### notify-config Type
 
-`object` ([Details](definitions-definitions-fortasentinel-properties-notify-config.md))
+`object` ([NotifyConfig](definitions-definitions-fortasentinel-properties-notifyconfig.md))
 
 ### conditions
 
@@ -1311,15 +1311,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-fortasentinel-properties-conditions.md))
+*   Type: `object` ([Conditions](definitions-definitions-fortasentinel-properties-conditions.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "undefined#/definitions/fortaSentinel/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "#/definitions/fortaSentinel/properties/conditions")
 
 #### conditions Type
 
-`object` ([Details](definitions-definitions-fortasentinel-properties-conditions.md))
+`object` ([Conditions](definitions-definitions-fortasentinel-properties-conditions.md))
 
 ### forta-node-id
 
@@ -1333,7 +1333,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "undefined#/definitions/fortaSentinel/properties/forta-node-id")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "#/definitions/fortaSentinel/properties/forta-node-id")
 
 #### forta-node-id Type
 
@@ -1351,7 +1351,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-agent-ids.md "undefined#/definitions/fortaSentinel/properties/agent-ids")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-agentids.md "#/definitions/fortaSentinel/properties/agent-ids")
 
 #### agent-ids Type
 
@@ -1362,7 +1362,7 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/sentinel"}
+{"$ref":"#/definitions/sentinel"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
@@ -1373,16 +1373,16 @@ Reference this group by using
 Reference this group by using
 
 ```json
-{"$ref":"undefined#/definitions/autotask"}
+{"$ref":"#/definitions/autotask"}
 ```
 
 | Property            | Type      | Required | Nullable       | Defined by                                                                                                                 |
 | :------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-5)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-name.md "undefined#/definitions/autotask/properties/name")       |
-| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-path.md "undefined#/definitions/autotask/properties/path")       |
-| [relayer](#relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer.md "undefined#/definitions/autotask/properties/relayer")                     |
-| [trigger](#trigger) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger.md "undefined#/definitions/autotask/properties/trigger") |
-| [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-paused.md "undefined#/definitions/autotask/properties/paused")   |
+| [name](#name-5)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-name.md "#/definitions/autotask/properties/name")       |
+| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-path.md "#/definitions/autotask/properties/path")       |
+| [relayer](#relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer.md "#/definitions/autotask/properties/relayer")                     |
+| [trigger](#trigger) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger.md "#/definitions/autotask/properties/trigger") |
+| [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-paused.md "#/definitions/autotask/properties/paused")   |
 
 ### name
 
@@ -1396,7 +1396,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-name.md "undefined#/definitions/autotask/properties/name")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-name.md "#/definitions/autotask/properties/name")
 
 #### name Type
 
@@ -1414,7 +1414,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-path.md "undefined#/definitions/autotask/properties/path")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-path.md "#/definitions/autotask/properties/path")
 
 #### path Type
 
@@ -1432,7 +1432,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer.md "undefined#/definitions/autotask/properties/relayer")
+*   defined in: [Definitions](definitions-definitions-relayer.md "#/definitions/autotask/properties/relayer")
 
 #### relayer Type
 
@@ -1450,21 +1450,21 @@ Reference this group by using
 
 *   is required
 
-*   Type: `object` ([Details](definitions-definitions-autotask-properties-trigger.md))
+*   Type: `object` ([Trigger](definitions-definitions-autotask-properties-trigger.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger.md "undefined#/definitions/autotask/properties/trigger")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger.md "#/definitions/autotask/properties/trigger")
 
 #### trigger Type
 
-`object` ([Details](definitions-definitions-autotask-properties-trigger.md))
+`object` ([Trigger](definitions-definitions-autotask-properties-trigger.md))
 
 one (and only one) of
 
-*   [Untitled undefined type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-0.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-0.md "check type definition")
 
-*   [Untitled undefined type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-1.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-1.md "check type definition")
 
 ### paused
 
@@ -1478,7 +1478,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-paused.md "undefined#/definitions/autotask/properties/paused")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-paused.md "#/definitions/autotask/properties/paused")
 
 #### paused Type
 

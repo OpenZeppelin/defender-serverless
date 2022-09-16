@@ -8,14 +8,14 @@
 
 # relayer Properties
 
-| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                         |
-| :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "undefined#/definitions/relayer/properties/name")                                 |
-| [network](#network)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "undefined#/definitions/relayer/properties/network")                                              |
-| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "undefined#/definitions/relayer/properties/min-balance")                   |
-| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-address-from-relayer.md "undefined#/definitions/relayer/properties/address-from-relayer") |
-| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "undefined#/definitions/relayer/properties/policy")                                                |
-| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-api-keys.md "undefined#/definitions/relayer/properties/api-keys")                         |
+| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                       |
+| :-------------------------------------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "#/definitions/relayer/properties/name")                               |
+| [network](#network)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/relayer/properties/network")                                            |
+| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "#/definitions/relayer/properties/min-balance")                 |
+| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "#/definitions/relayer/properties/address-from-relayer") |
+| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "#/definitions/relayer/properties/policy")                                              |
+| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "#/definitions/relayer/properties/api-keys")                 |
 
 ## name
 
@@ -29,7 +29,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-name.md "undefined#/definitions/relayer/properties/name")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-name.md "#/definitions/relayer/properties/name")
 
 ### name Type
 
@@ -47,7 +47,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "undefined#/definitions/relayer/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "#/definitions/relayer/properties/network")
 
 ### network Type
 
@@ -109,7 +109,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-min-balance.md "undefined#/definitions/relayer/properties/min-balance")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-min-balance.md "#/definitions/relayer/properties/min-balance")
 
 ### min-balance Type
 
@@ -123,15 +123,15 @@
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-relayer-properties-address-from-relayer.md))
+*   Type: `object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-address-from-relayer.md "undefined#/definitions/relayer/properties/address-from-relayer")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "#/definitions/relayer/properties/address-from-relayer")
 
 ### address-from-relayer Type
 
-`object` ([Details](definitions-definitions-relayer-properties-address-from-relayer.md))
+`object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
 
 ## policy
 
@@ -145,7 +145,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy.md "undefined#/definitions/relayer/properties/policy")
+*   defined in: [Definitions](definitions-definitions-policy.md "#/definitions/relayer/properties/policy")
 
 ### policy Type
 
@@ -167,7 +167,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-api-keys.md "undefined#/definitions/relayer/properties/api-keys")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "#/definitions/relayer/properties/api-keys")
 
 ### api-keys Type
 

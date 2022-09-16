@@ -6,9 +6,9 @@
 
 | Property                | Type      | Required | Nullable       | Defined by                                                                     |
 | :---------------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------- |
-| [stage](#stage)         | `string`  | Required | cannot be null | [Provider](provider-properties-stage.md "undefined#/properties/stage")         |
-| [stackName](#stackname) | `string`  | Required | cannot be null | [Provider](provider-properties-stackname.md "undefined#/properties/stackName") |
-| [ssot](#ssot)           | `boolean` | Optional | cannot be null | [Provider](provider-properties-ssot.md "undefined#/properties/ssot")           |
+| [stage](#stage)         | `string`  | Required | cannot be null | [Provider](provider-properties-stage.md "#/properties/stage")         |
+| [stackName](#stackname) | `string`  | Required | cannot be null | [Provider](provider-properties-stackname.md "#/properties/stackName") |
+| [ssot](#ssot)           | `boolean` | Optional | cannot be null | [Provider](provider-properties-ssot.md "#/properties/ssot")           |
 
 ## stage
 
@@ -22,7 +22,7 @@
 
 *   cannot be null
 
-*   defined in: [Provider](provider-properties-stage.md "undefined#/properties/stage")
+*   defined in: [Provider](provider-properties-stage.md "#/properties/stage")
 
 ### stage Type
 
@@ -40,7 +40,7 @@
 
 *   cannot be null
 
-*   defined in: [Provider](provider-properties-stackname.md "undefined#/properties/stackName")
+*   defined in: [Provider](provider-properties-stackname.md "#/properties/stackName")
 
 ### stackName Type
 
@@ -58,7 +58,7 @@
 
 *   cannot be null
 
-*   defined in: [Provider](provider-properties-ssot.md "undefined#/properties/ssot")
+*   defined in: [Provider](provider-properties-ssot.md "#/properties/ssot")
 
 ### ssot Type
 

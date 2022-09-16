@@ -1,12 +1,12 @@
 ## contracts Type
 
-`object` ([Details](resources-resources-properties-resources-properties-contracts.md))
+`object` ([Contracts](resources-resources-properties-resources-properties-contracts.md))
 
 # contracts Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                             |
 | :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-contract.md "undefined#/resources/properties/Resources/properties/contracts/additionalProperties") |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-contract.md "#/resources/properties/Resources/properties/contracts/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-contract.md "undefined#/resources/properties/Resources/properties/contracts/additionalProperties")
+*   defined in: [Resources](definitions-definitions-contract.md "#/resources/properties/Resources/properties/contracts/additionalProperties")
 
 ### additionalProperties Type
 

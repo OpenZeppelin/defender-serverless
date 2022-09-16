@@ -1,3 +1,3 @@
 ## event Type
 
-`object[]` ([Details](definitions-definitions-blocksentinel-properties-conditions-properties-event-items.md))
+`object[]` ([EventItems](definitions-definitions-blocksentinel-properties-conditions-properties-event-eventitems.md))

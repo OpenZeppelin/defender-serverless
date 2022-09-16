@@ -1,12 +1,12 @@
 ## resources Type
 
-`object` ([Details](resources-resources.md))
+`object` ([Resources](resources-resources.md))
 
 # resources Properties
 
 | Property                | Type     | Required | Nullable       | Defined by                                                                                           |
 | :---------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------- |
-| [Resources](#resources) | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources.md "undefined#/resources/properties/Resources") |
+| [Resources](#resources) | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources.md "#/resources/properties/Resources") |
 
 ## Resources
 
@@ -16,12 +16,12 @@
 
 *   is optional
 
-*   Type: `object` ([Details](resources-resources-properties-resources.md))
+*   Type: `object` ([Resources](resources-resources-properties-resources.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources.md "undefined#/resources/properties/Resources")
+*   defined in: [Resources](resources-resources-properties-resources.md "#/resources/properties/Resources")
 
 ### Resources Type
 
-`object` ([Details](resources-resources-properties-resources.md))
+`object` ([Resources](resources-resources-properties-resources.md))

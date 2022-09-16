@@ -4,9 +4,9 @@
 
 any of
 
-*   [Untitled undefined type in Definitions](definitions-definitions-fortasentinel-anyof-0.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-fortasentinel-anyof-0.md "check type definition")
 
-*   [Untitled undefined type in Definitions](definitions-definitions-fortasentinel-anyof-1.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-fortasentinel-anyof-1.md "check type definition")
 
 ## 1 Constraints
 
@@ -14,21 +14,21 @@ any of
 
 # 1 Properties
 
-| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                           |
-| :---------------------------------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-name.md "undefined#/definitions/fortaSentinel/properties/name")                       |
-| [type](#type)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "undefined#/definitions/fortaSentinel/properties/type")                       |
-| [network](#network)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "undefined#/definitions/fortaSentinel/properties/network")                                          |
-| [addresses](#addresses)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "undefined#/definitions/fortaSentinel/properties/addresses")             |
-| [abi](#abi)                               | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-abi.md "undefined#/definitions/fortaSentinel/properties/abi")                         |
-| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-alert-threshold.md "undefined#/definitions/fortaSentinel/properties/alert-threshold") |
-| [paused](#paused)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-paused.md "undefined#/definitions/fortaSentinel/properties/paused")                   |
-| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "undefined#/definitions/fortaSentinel/properties/autotask-condition")                              |
-| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "undefined#/definitions/fortaSentinel/properties/autotask-trigger")                                |
-| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notify-config.md "undefined#/definitions/fortaSentinel/properties/notify-config")     |
-| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "undefined#/definitions/fortaSentinel/properties/conditions")           |
-| [forta-node-id](#forta-node-id)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "undefined#/definitions/fortaSentinel/properties/forta-node-id")     |
-| [agent-ids](#agent-ids)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-agent-ids.md "undefined#/definitions/fortaSentinel/properties/agent-ids")             |
+| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                          |
+| :---------------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")                      |
+| [type](#type)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")                      |
+| [network](#network)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/fortaSentinel/properties/network")                                         |
+| [addresses](#addresses)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")            |
+| [abi](#abi)                               | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-abi.md "#/definitions/fortaSentinel/properties/abi")                        |
+| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-alertthreshold.md "#/definitions/fortaSentinel/properties/alert-threshold") |
+| [paused](#paused)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-paused.md "#/definitions/fortaSentinel/properties/paused")                  |
+| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-condition")                             |
+| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-trigger")                               |
+| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig.md "#/definitions/fortaSentinel/properties/notify-config")     |
+| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "#/definitions/fortaSentinel/properties/conditions")          |
+| [forta-node-id](#forta-node-id)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "#/definitions/fortaSentinel/properties/forta-node-id")    |
+| [agent-ids](#agent-ids)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-agentids.md "#/definitions/fortaSentinel/properties/agent-ids")             |
 
 ## name
 
@@ -42,7 +42,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-name.md "undefined#/definitions/fortaSentinel/properties/name")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")
 
 ### name Type
 
@@ -60,7 +60,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-type.md "undefined#/definitions/fortaSentinel/properties/type")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")
 
 ### type Type
 
@@ -86,7 +86,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "undefined#/definitions/fortaSentinel/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "#/definitions/fortaSentinel/properties/network")
 
 ### network Type
 
@@ -148,7 +148,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "undefined#/definitions/fortaSentinel/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")
 
 ### addresses Type
 
@@ -166,7 +166,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-abi.md "undefined#/definitions/fortaSentinel/properties/abi")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-abi.md "#/definitions/fortaSentinel/properties/abi")
 
 ### abi Type
 
@@ -180,15 +180,15 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-fortasentinel-properties-alert-threshold.md))
+*   Type: `object` ([AlertThreshold](definitions-definitions-fortasentinel-properties-alertthreshold.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-alert-threshold.md "undefined#/definitions/fortaSentinel/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-alertthreshold.md "#/definitions/fortaSentinel/properties/alert-threshold")
 
 ### alert-threshold Type
 
-`object` ([Details](definitions-definitions-fortasentinel-properties-alert-threshold.md))
+`object` ([AlertThreshold](definitions-definitions-fortasentinel-properties-alertthreshold.md))
 
 ## paused
 
@@ -202,7 +202,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-paused.md "undefined#/definitions/fortaSentinel/properties/paused")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-paused.md "#/definitions/fortaSentinel/properties/paused")
 
 ### paused Type
 
@@ -220,7 +220,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "undefined#/definitions/fortaSentinel/properties/autotask-condition")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-condition")
 
 ### autotask-condition Type
 
@@ -242,7 +242,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "undefined#/definitions/fortaSentinel/properties/autotask-trigger")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-trigger")
 
 ### autotask-trigger Type
 
@@ -260,15 +260,15 @@ any of
 
 *   is required
 
-*   Type: `object` ([Details](definitions-definitions-fortasentinel-properties-notify-config.md))
+*   Type: `object` ([NotifyConfig](definitions-definitions-fortasentinel-properties-notifyconfig.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-notify-config.md "undefined#/definitions/fortaSentinel/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig.md "#/definitions/fortaSentinel/properties/notify-config")
 
 ### notify-config Type
 
-`object` ([Details](definitions-definitions-fortasentinel-properties-notify-config.md))
+`object` ([NotifyConfig](definitions-definitions-fortasentinel-properties-notifyconfig.md))
 
 ## conditions
 
@@ -278,15 +278,15 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-fortasentinel-properties-conditions.md))
+*   Type: `object` ([Conditions](definitions-definitions-fortasentinel-properties-conditions.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "undefined#/definitions/fortaSentinel/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "#/definitions/fortaSentinel/properties/conditions")
 
 ### conditions Type
 
-`object` ([Details](definitions-definitions-fortasentinel-properties-conditions.md))
+`object` ([Conditions](definitions-definitions-fortasentinel-properties-conditions.md))
 
 ## forta-node-id
 
@@ -300,7 +300,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "undefined#/definitions/fortaSentinel/properties/forta-node-id")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "#/definitions/fortaSentinel/properties/forta-node-id")
 
 ### forta-node-id Type
 
@@ -318,7 +318,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-agent-ids.md "undefined#/definitions/fortaSentinel/properties/agent-ids")
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-agentids.md "#/definitions/fortaSentinel/properties/agent-ids")
 
 ### agent-ids Type
 

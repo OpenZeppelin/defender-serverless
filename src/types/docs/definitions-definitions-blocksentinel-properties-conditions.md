@@ -1,14 +1,14 @@
 ## conditions Type
 
-`object` ([Details](definitions-definitions-blocksentinel-properties-conditions.md))
+`object` ([Conditions](definitions-definitions-blocksentinel-properties-conditions.md))
 
 # conditions Properties
 
 | Property                    | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
 | :-------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [event](#event)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-event.md "undefined#/definitions/blockSentinel/properties/conditions/properties/event")             |
-| [function](#function)       | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-function.md "undefined#/definitions/blockSentinel/properties/conditions/properties/function")       |
-| [transaction](#transaction) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-transaction.md "undefined#/definitions/blockSentinel/properties/conditions/properties/transaction") |
+| [event](#event)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-event.md "#/definitions/blockSentinel/properties/conditions/properties/event")             |
+| [function](#function)       | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-function.md "#/definitions/blockSentinel/properties/conditions/properties/function")       |
+| [transaction](#transaction) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-transaction.md "#/definitions/blockSentinel/properties/conditions/properties/transaction") |
 
 ## event
 
@@ -18,15 +18,15 @@
 
 *   is optional
 
-*   Type: `object[]` ([Details](definitions-definitions-blocksentinel-properties-conditions-properties-event-items.md))
+*   Type: `object[]` ([EventItems](definitions-definitions-blocksentinel-properties-conditions-properties-event-eventitems.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-event.md "undefined#/definitions/blockSentinel/properties/conditions/properties/event")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-event.md "#/definitions/blockSentinel/properties/conditions/properties/event")
 
 ### event Type
 
-`object[]` ([Details](definitions-definitions-blocksentinel-properties-conditions-properties-event-items.md))
+`object[]` ([EventItems](definitions-definitions-blocksentinel-properties-conditions-properties-event-eventitems.md))
 
 ## function
 
@@ -36,15 +36,15 @@
 
 *   is optional
 
-*   Type: `object[]` ([Details](definitions-definitions-blocksentinel-properties-conditions-properties-function-items.md))
+*   Type: `object[]` ([FunctionItems](definitions-definitions-blocksentinel-properties-conditions-properties-function-functionitems.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-function.md "undefined#/definitions/blockSentinel/properties/conditions/properties/function")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-function.md "#/definitions/blockSentinel/properties/conditions/properties/function")
 
 ### function Type
 
-`object[]` ([Details](definitions-definitions-blocksentinel-properties-conditions-properties-function-items.md))
+`object[]` ([FunctionItems](definitions-definitions-blocksentinel-properties-conditions-properties-function-functionitems.md))
 
 ## transaction
 
@@ -58,7 +58,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-transaction.md "undefined#/definitions/blockSentinel/properties/conditions/properties/transaction")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions-properties-transaction.md "#/definitions/blockSentinel/properties/conditions/properties/transaction")
 
 ### transaction Type
 

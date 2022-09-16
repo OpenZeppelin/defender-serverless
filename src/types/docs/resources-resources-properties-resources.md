@@ -1,17 +1,17 @@
 ## Resources Type
 
-`object` ([Details](resources-resources-properties-resources.md))
+`object` ([Resources](resources-resources-properties-resources.md))
 
 # Resources Properties
 
 | Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                             |
 | :------------------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [notifications](#notifications) | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-notifications.md "undefined#/resources/properties/Resources/properties/notifications") |
-| [relayers](#relayers)           | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-relayers.md "undefined#/resources/properties/Resources/properties/relayers")           |
-| [policies](#policies)           | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-policies.md "undefined#/resources/properties/Resources/properties/policies")           |
-| [contracts](#contracts)         | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-contracts.md "undefined#/resources/properties/Resources/properties/contracts")         |
-| [secrets](#secrets)             | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-secrets.md "undefined#/resources/properties/Resources/properties/secrets")             |
-| [sentinels](#sentinels)         | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-sentinels.md "undefined#/resources/properties/Resources/properties/sentinels")         |
+| [notifications](#notifications) | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-notifications.md "#/resources/properties/Resources/properties/notifications") |
+| [relayers](#relayers)           | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-relayers.md "#/resources/properties/Resources/properties/relayers")           |
+| [policies](#policies)           | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-policies.md "#/resources/properties/Resources/properties/policies")           |
+| [contracts](#contracts)         | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-contracts.md "#/resources/properties/Resources/properties/contracts")         |
+| [secrets](#secrets)             | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-autotasksecrets.md "#/resources/properties/Resources/properties/secrets")     |
+| [sentinels](#sentinels)         | `object` | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-sentinels.md "#/resources/properties/Resources/properties/sentinels")         |
 
 ## notifications
 
@@ -21,15 +21,15 @@
 
 *   is optional
 
-*   Type: `object` ([Details](resources-resources-properties-resources-properties-notifications.md))
+*   Type: `object` ([Notifications](resources-resources-properties-resources-properties-notifications.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources-properties-notifications.md "undefined#/resources/properties/Resources/properties/notifications")
+*   defined in: [Resources](resources-resources-properties-resources-properties-notifications.md "#/resources/properties/Resources/properties/notifications")
 
 ### notifications Type
 
-`object` ([Details](resources-resources-properties-resources-properties-notifications.md))
+`object` ([Notifications](resources-resources-properties-resources-properties-notifications.md))
 
 ## relayers
 
@@ -39,15 +39,15 @@
 
 *   is optional
 
-*   Type: `object` ([Details](resources-resources-properties-resources-properties-relayers.md))
+*   Type: `object` ([Relayers](resources-resources-properties-resources-properties-relayers.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources-properties-relayers.md "undefined#/resources/properties/Resources/properties/relayers")
+*   defined in: [Resources](resources-resources-properties-resources-properties-relayers.md "#/resources/properties/Resources/properties/relayers")
 
 ### relayers Type
 
-`object` ([Details](resources-resources-properties-resources-properties-relayers.md))
+`object` ([Relayers](resources-resources-properties-resources-properties-relayers.md))
 
 ## policies
 
@@ -57,15 +57,15 @@
 
 *   is optional
 
-*   Type: `object` ([Details](resources-resources-properties-resources-properties-policies.md))
+*   Type: `object` ([Policies](resources-resources-properties-resources-properties-policies.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources-properties-policies.md "undefined#/resources/properties/Resources/properties/policies")
+*   defined in: [Resources](resources-resources-properties-resources-properties-policies.md "#/resources/properties/Resources/properties/policies")
 
 ### policies Type
 
-`object` ([Details](resources-resources-properties-resources-properties-policies.md))
+`object` ([Policies](resources-resources-properties-resources-properties-policies.md))
 
 ## contracts
 
@@ -75,15 +75,15 @@
 
 *   is optional
 
-*   Type: `object` ([Details](resources-resources-properties-resources-properties-contracts.md))
+*   Type: `object` ([Contracts](resources-resources-properties-resources-properties-contracts.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources-properties-contracts.md "undefined#/resources/properties/Resources/properties/contracts")
+*   defined in: [Resources](resources-resources-properties-resources-properties-contracts.md "#/resources/properties/Resources/properties/contracts")
 
 ### contracts Type
 
-`object` ([Details](resources-resources-properties-resources-properties-contracts.md))
+`object` ([Contracts](resources-resources-properties-resources-properties-contracts.md))
 
 ## secrets
 
@@ -93,15 +93,15 @@
 
 *   is optional
 
-*   Type: `object` ([Details](resources-resources-properties-resources-properties-secrets.md))
+*   Type: `object` ([AutotaskSecrets](resources-resources-properties-resources-properties-autotasksecrets.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources-properties-secrets.md "undefined#/resources/properties/Resources/properties/secrets")
+*   defined in: [Resources](resources-resources-properties-resources-properties-autotasksecrets.md "#/resources/properties/Resources/properties/secrets")
 
 ### secrets Type
 
-`object` ([Details](resources-resources-properties-resources-properties-secrets.md))
+`object` ([AutotaskSecrets](resources-resources-properties-resources-properties-autotasksecrets.md))
 
 ## sentinels
 
@@ -111,12 +111,12 @@
 
 *   is optional
 
-*   Type: `object` ([Details](resources-resources-properties-resources-properties-sentinels.md))
+*   Type: `object` ([Sentinels](resources-resources-properties-resources-properties-sentinels.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources-properties-sentinels.md "undefined#/resources/properties/Resources/properties/sentinels")
+*   defined in: [Resources](resources-resources-properties-resources-properties-sentinels.md "#/resources/properties/Resources/properties/sentinels")
 
 ### sentinels Type
 
-`object` ([Details](resources-resources-properties-resources-properties-sentinels.md))
+`object` ([Sentinels](resources-resources-properties-resources-properties-sentinels.md))

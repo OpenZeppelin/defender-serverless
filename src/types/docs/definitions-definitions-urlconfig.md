@@ -10,7 +10,7 @@
 
 | Property    | Type     | Required | Nullable       | Defined by                                                                                                           |
 | :---------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------- |
-| [url](#url) | `string` | Required | cannot be null | [Definitions](definitions-definitions-urlconfig-properties-url.md "undefined#/definitions/urlConfig/properties/url") |
+| [url](#url) | `string` | Required | cannot be null | [Definitions](definitions-definitions-urlconfig-properties-url.md "#/definitions/urlConfig/properties/url") |
 
 ## url
 
@@ -24,7 +24,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-urlconfig-properties-url.md "undefined#/definitions/urlConfig/properties/url")
+*   defined in: [Definitions](definitions-definitions-urlconfig-properties-url.md "#/definitions/urlConfig/properties/url")
 
 ### url Type
 

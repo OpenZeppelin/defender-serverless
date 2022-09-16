@@ -1,12 +1,12 @@
 ## policies Type
 
-`object` ([Details](resources-resources-properties-resources-properties-policies.md))
+`object` ([Policies](resources-resources-properties-resources-properties-policies.md))
 
 # policies Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                          |
 | :-------------------- | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-policy.md "undefined#/resources/properties/Resources/properties/policies/additionalProperties") |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-policy.md "#/resources/properties/Resources/properties/policies/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-policy.md "undefined#/resources/properties/Resources/properties/policies/additionalProperties")
+*   defined in: [Resources](definitions-definitions-policy.md "#/resources/properties/Resources/properties/policies/additionalProperties")
 
 ### additionalProperties Type
 

@@ -1,6 +1,6 @@
 ## config Type
 
-`object` ([Details](definitions-definitions-notification-properties-config.md))
+`object` ([Config](definitions-definitions-notification-properties-config.md))
 
 one (and only one) of
 

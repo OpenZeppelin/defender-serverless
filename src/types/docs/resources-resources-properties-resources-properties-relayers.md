@@ -1,12 +1,12 @@
 ## relayers Type
 
-`object` ([Details](resources-resources-properties-resources-properties-relayers.md))
+`object` ([Relayers](resources-resources-properties-resources-properties-relayers.md))
 
 # relayers Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                           |
 | :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-relayer.md "undefined#/resources/properties/Resources/properties/relayers/additionalProperties") |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-relayer.md "#/resources/properties/Resources/properties/relayers/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-relayer.md "undefined#/resources/properties/Resources/properties/relayers/additionalProperties")
+*   defined in: [Resources](definitions-definitions-relayer.md "#/resources/properties/Resources/properties/relayers/additionalProperties")
 
 ### additionalProperties Type
 

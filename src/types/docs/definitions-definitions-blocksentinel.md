@@ -8,20 +8,20 @@
 
 # 0 Properties
 
-| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                           |
-| :---------------------------------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-name.md "undefined#/definitions/blockSentinel/properties/name")                       |
-| [type](#type)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "undefined#/definitions/blockSentinel/properties/type")                       |
-| [network](#network)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "undefined#/definitions/blockSentinel/properties/network")                                          |
-| [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "undefined#/definitions/blockSentinel/properties/addresses")             |
-| [abi](#abi)                               | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-abi.md "undefined#/definitions/blockSentinel/properties/abi")                         |
-| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-alert-threshold.md "undefined#/definitions/blockSentinel/properties/alert-threshold") |
-| [paused](#paused)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-paused.md "undefined#/definitions/blockSentinel/properties/paused")                   |
-| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "undefined#/definitions/blockSentinel/properties/autotask-condition")                              |
-| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "undefined#/definitions/blockSentinel/properties/autotask-trigger")                                |
-| [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "undefined#/definitions/blockSentinel/properties/confirm-level")     |
-| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notify-config.md "undefined#/definitions/blockSentinel/properties/notify-config")     |
-| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "undefined#/definitions/blockSentinel/properties/conditions")           |
+| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                          |
+| :---------------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")                      |
+| [type](#type)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")                      |
+| [network](#network)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/blockSentinel/properties/network")                                         |
+| [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")            |
+| [abi](#abi)                               | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-abi.md "#/definitions/blockSentinel/properties/abi")                        |
+| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-alertthreshold.md "#/definitions/blockSentinel/properties/alert-threshold") |
+| [paused](#paused)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-paused.md "#/definitions/blockSentinel/properties/paused")                  |
+| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-condition")                             |
+| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-trigger")                               |
+| [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "#/definitions/blockSentinel/properties/confirm-level")    |
+| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig.md "#/definitions/blockSentinel/properties/notify-config")     |
+| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "#/definitions/blockSentinel/properties/conditions")          |
 
 ## name
 
@@ -35,7 +35,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-name.md "undefined#/definitions/blockSentinel/properties/name")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")
 
 ### name Type
 
@@ -53,7 +53,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-type.md "undefined#/definitions/blockSentinel/properties/type")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")
 
 ### type Type
 
@@ -79,7 +79,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "undefined#/definitions/blockSentinel/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "#/definitions/blockSentinel/properties/network")
 
 ### network Type
 
@@ -141,7 +141,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "undefined#/definitions/blockSentinel/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")
 
 ### addresses Type
 
@@ -159,7 +159,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-abi.md "undefined#/definitions/blockSentinel/properties/abi")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-abi.md "#/definitions/blockSentinel/properties/abi")
 
 ### abi Type
 
@@ -173,15 +173,15 @@
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-blocksentinel-properties-alert-threshold.md))
+*   Type: `object` ([AlertThreshold](definitions-definitions-blocksentinel-properties-alertthreshold.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-alert-threshold.md "undefined#/definitions/blockSentinel/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-alertthreshold.md "#/definitions/blockSentinel/properties/alert-threshold")
 
 ### alert-threshold Type
 
-`object` ([Details](definitions-definitions-blocksentinel-properties-alert-threshold.md))
+`object` ([AlertThreshold](definitions-definitions-blocksentinel-properties-alertthreshold.md))
 
 ## paused
 
@@ -195,7 +195,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-paused.md "undefined#/definitions/blockSentinel/properties/paused")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-paused.md "#/definitions/blockSentinel/properties/paused")
 
 ### paused Type
 
@@ -213,7 +213,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "undefined#/definitions/blockSentinel/properties/autotask-condition")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-condition")
 
 ### autotask-condition Type
 
@@ -235,7 +235,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "undefined#/definitions/blockSentinel/properties/autotask-trigger")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-trigger")
 
 ### autotask-trigger Type
 
@@ -257,7 +257,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "undefined#/definitions/blockSentinel/properties/confirm-level")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "#/definitions/blockSentinel/properties/confirm-level")
 
 ### confirm-level Type
 
@@ -277,15 +277,15 @@ one (and only one) of
 
 *   is required
 
-*   Type: `object` ([Details](definitions-definitions-blocksentinel-properties-notify-config.md))
+*   Type: `object` ([NotifyConfig](definitions-definitions-blocksentinel-properties-notifyconfig.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-notify-config.md "undefined#/definitions/blockSentinel/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig.md "#/definitions/blockSentinel/properties/notify-config")
 
 ### notify-config Type
 
-`object` ([Details](definitions-definitions-blocksentinel-properties-notify-config.md))
+`object` ([NotifyConfig](definitions-definitions-blocksentinel-properties-notifyconfig.md))
 
 ## conditions
 
@@ -295,12 +295,12 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-blocksentinel-properties-conditions.md))
+*   Type: `object` ([Conditions](definitions-definitions-blocksentinel-properties-conditions.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "undefined#/definitions/blockSentinel/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "#/definitions/blockSentinel/properties/conditions")
 
 ### conditions Type
 
-`object` ([Details](definitions-definitions-blocksentinel-properties-conditions.md))
+`object` ([Conditions](definitions-definitions-blocksentinel-properties-conditions.md))

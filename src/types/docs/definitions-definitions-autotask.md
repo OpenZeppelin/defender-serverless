@@ -10,11 +10,11 @@
 
 | Property            | Type      | Required | Nullable       | Defined by                                                                                                                 |
 | :------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-name.md "undefined#/definitions/autotask/properties/name")       |
-| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-path.md "undefined#/definitions/autotask/properties/path")       |
-| [relayer](#relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer.md "undefined#/definitions/autotask/properties/relayer")                     |
-| [trigger](#trigger) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger.md "undefined#/definitions/autotask/properties/trigger") |
-| [paused](#paused)   | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-paused.md "undefined#/definitions/autotask/properties/paused")   |
+| [name](#name)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-name.md "#/definitions/autotask/properties/name")       |
+| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-path.md "#/definitions/autotask/properties/path")       |
+| [relayer](#relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer.md "#/definitions/autotask/properties/relayer")                     |
+| [trigger](#trigger) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger.md "#/definitions/autotask/properties/trigger") |
+| [paused](#paused)   | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-paused.md "#/definitions/autotask/properties/paused")   |
 
 ## name
 
@@ -28,7 +28,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-name.md "undefined#/definitions/autotask/properties/name")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-name.md "#/definitions/autotask/properties/name")
 
 ### name Type
 
@@ -46,7 +46,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-path.md "undefined#/definitions/autotask/properties/path")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-path.md "#/definitions/autotask/properties/path")
 
 ### path Type
 
@@ -64,7 +64,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer.md "undefined#/definitions/autotask/properties/relayer")
+*   defined in: [Definitions](definitions-definitions-relayer.md "#/definitions/autotask/properties/relayer")
 
 ### relayer Type
 
@@ -82,21 +82,21 @@
 
 *   is required
 
-*   Type: `object` ([Details](definitions-definitions-autotask-properties-trigger.md))
+*   Type: `object` ([Trigger](definitions-definitions-autotask-properties-trigger.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger.md "undefined#/definitions/autotask/properties/trigger")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger.md "#/definitions/autotask/properties/trigger")
 
 ### trigger Type
 
-`object` ([Details](definitions-definitions-autotask-properties-trigger.md))
+`object` ([Trigger](definitions-definitions-autotask-properties-trigger.md))
 
 one (and only one) of
 
-*   [Untitled undefined type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-0.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-0.md "check type definition")
 
-*   [Untitled undefined type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-1.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-1.md "check type definition")
 
 ## paused
 
@@ -110,7 +110,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-paused.md "undefined#/definitions/autotask/properties/paused")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-paused.md "#/definitions/autotask/properties/paused")
 
 ### paused Type
 

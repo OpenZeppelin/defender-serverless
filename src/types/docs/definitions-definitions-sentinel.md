@@ -8,9 +8,9 @@ one (and only one) of
 
 *   any of
 
-    *   [Untitled undefined type in Definitions](definitions-definitions-fortasentinel-anyof-0.md "check type definition")
+    *   [Untitled  type in Definitions](definitions-definitions-fortasentinel-anyof-0.md "check type definition")
 
-    *   [Untitled undefined type in Definitions](definitions-definitions-fortasentinel-anyof-1.md "check type definition")
+    *   [Untitled  type in Definitions](definitions-definitions-fortasentinel-anyof-1.md "check type definition")
 
 ## additionalProperties Constraints
 

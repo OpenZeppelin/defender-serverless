@@ -1,3 +1,3 @@
 ## function Type
 
-`object[]` ([Details](definitions-definitions-blocksentinel-properties-conditions-properties-function-items.md))
+`object[]` ([FunctionItems](definitions-definitions-blocksentinel-properties-conditions-properties-function-functionitems.md))

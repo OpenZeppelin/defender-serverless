@@ -10,11 +10,11 @@
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                   |
 | :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "undefined#/definitions/contract/properties/name")         |
-| [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-address.md "undefined#/definitions/contract/properties/address")                       |
-| [network](#network)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-network.md "undefined#/definitions/contract/properties/network")                       |
-| [abi](#abi)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-abi.md "undefined#/definitions/contract/properties/abi")           |
-| [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "undefined#/definitions/contract/properties/nat-spec") |
+| [name](#name)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "#/definitions/contract/properties/name")         |
+| [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-address.md "#/definitions/contract/properties/address")                       |
+| [network](#network)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/contract/properties/network")                       |
+| [abi](#abi)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-abi.md "#/definitions/contract/properties/abi")           |
+| [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "#/definitions/contract/properties/nat-spec") |
 
 ## name
 
@@ -28,7 +28,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-name.md "undefined#/definitions/contract/properties/name")
+*   defined in: [Definitions](definitions-definitions-contract-properties-name.md "#/definitions/contract/properties/name")
 
 ### name Type
 
@@ -46,7 +46,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-address.md "undefined#/definitions/contract/properties/address")
+*   defined in: [Definitions](definitions-definitions-address.md "#/definitions/contract/properties/address")
 
 ### address Type
 
@@ -76,7 +76,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "undefined#/definitions/contract/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "#/definitions/contract/properties/network")
 
 ### network Type
 
@@ -138,7 +138,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-abi.md "undefined#/definitions/contract/properties/abi")
+*   defined in: [Definitions](definitions-definitions-contract-properties-abi.md "#/definitions/contract/properties/abi")
 
 ### abi Type
 
@@ -156,7 +156,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-nat-spec.md "undefined#/definitions/contract/properties/nat-spec")
+*   defined in: [Definitions](definitions-definitions-contract-properties-nat-spec.md "#/definitions/contract/properties/nat-spec")
 
 ### nat-spec Type
 

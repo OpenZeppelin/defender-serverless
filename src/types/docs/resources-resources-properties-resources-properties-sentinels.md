@@ -1,12 +1,12 @@
 ## sentinels Type
 
-`object` ([Details](resources-resources-properties-resources-properties-sentinels.md))
+`object` ([Sentinels](resources-resources-properties-resources-properties-sentinels.md))
 
 # sentinels Properties
 
 | Property              | Type   | Required | Nullable       | Defined by                                                                                                                             |
 | :-------------------- | :----- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-sentinel.md "undefined#/resources/properties/Resources/properties/sentinels/additionalProperties") |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-sentinel.md "#/resources/properties/Resources/properties/sentinels/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-sentinel.md "undefined#/resources/properties/Resources/properties/sentinels/additionalProperties")
+*   defined in: [Resources](definitions-definitions-sentinel.md "#/resources/properties/Resources/properties/sentinels/additionalProperties")
 
 ### additionalProperties Type
 
@@ -32,9 +32,9 @@ one (and only one) of
 
 *   any of
 
-    *   [Untitled undefined type in Definitions](definitions-definitions-fortasentinel-anyof-0.md "check type definition")
+    *   [Untitled  type in Definitions](definitions-definitions-fortasentinel-anyof-0.md "check type definition")
 
-    *   [Untitled undefined type in Definitions](definitions-definitions-fortasentinel-anyof-1.md "check type definition")
+    *   [Untitled  type in Definitions](definitions-definitions-fortasentinel-anyof-1.md "check type definition")
 
 ### additionalProperties Constraints
 

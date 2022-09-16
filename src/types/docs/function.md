@@ -6,10 +6,10 @@
 
 | Property            | Type      | Required | Nullable       | Defined by                                                                     |
 | :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------- |
-| [path](#path)       | `string`  | Required | cannot be null | [Function](function-properties-path.md "undefined#/properties/path")           |
-| [relayer](#relayer) | `object`  | Optional | cannot be null | [Function](definitions-definitions-relayer.md "undefined#/properties/relayer") |
-| [trigger](#trigger) | Merged    | Required | cannot be null | [Function](function-properties-trigger.md "undefined#/properties/trigger")     |
-| [paused](#paused)   | `boolean` | Required | cannot be null | [Function](function-properties-paused.md "undefined#/properties/paused")       |
+| [path](#path)       | `string`  | Required | cannot be null | [Function](function-properties-path.md "#/properties/path")           |
+| [relayer](#relayer) | `object`  | Optional | cannot be null | [Function](definitions-definitions-relayer.md "#/properties/relayer") |
+| [trigger](#trigger) | Merged    | Required | cannot be null | [Function](function-properties-trigger.md "#/properties/trigger")     |
+| [paused](#paused)   | `boolean` | Required | cannot be null | [Function](function-properties-paused.md "#/properties/paused")       |
 
 ## path
 
@@ -23,7 +23,7 @@
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-path.md "undefined#/properties/path")
+*   defined in: [Function](function-properties-path.md "#/properties/path")
 
 ### path Type
 
@@ -41,7 +41,7 @@
 
 *   cannot be null
 
-*   defined in: [Function](definitions-definitions-relayer.md "undefined#/properties/relayer")
+*   defined in: [Function](definitions-definitions-relayer.md "#/properties/relayer")
 
 ### relayer Type
 
@@ -63,7 +63,7 @@
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-trigger.md "undefined#/properties/trigger")
+*   defined in: [Function](function-properties-trigger.md "#/properties/trigger")
 
 ### trigger Type
 
@@ -87,7 +87,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-paused.md "undefined#/properties/paused")
+*   defined in: [Function](function-properties-paused.md "#/properties/paused")
 
 ### paused Type
 

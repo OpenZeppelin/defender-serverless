@@ -50,7 +50,7 @@
       "type": "object",
       "properties": {
         "gas-price-cap": { "type": "integer" },
-        "whitelist-receivers": { "type": "array", "items": { "type": "string" } },
+        "whitelist-receivers": { "title": "WhitelistReceivers", "type": "array", "items": { "type": "string" } },
         "eip1559-pricing": { "type": "boolean" }
       }
     },
@@ -61,9 +61,16 @@
         "name": { "type": "string" },
         "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
         "min-balance": { "type": "integer" },
-        "address-from-relayer": { "type": "object" },
+        "address-from-relayer": {
+          "title": "AddressFromRelayer",
+          "type": "object"
+        },
         "policy": { "$ref": "definitions.schema.json/#/definitions/policy", "format": "uri-reference" },
-        "api-keys": { "type": "array", "items": { "type": "string" } }
+        "api-keys": {
+          "title": "RelayerAPIKeys",
+          "type": "array",
+          "items": { "type": "string" }
+        }
       },
       "required": ["name", "network", "min-balance"]
     },
@@ -119,6 +126,7 @@
       "type": "object",
       "properties": {
         "emails": {
+          "title": "Emails",
           "type": "array",
           "items": { "type": "string", "format": "email" },
           "default": []
@@ -134,6 +142,7 @@
         "name": { "type": "string" },
         "paused": { "type": "boolean" },
         "config": {
+          "title": "Config",
           "type": "object",
           "oneOf": [
             { "$ref": "definitions.schema.json/#/definitions/emailConfig", "format": "uri-reference" },
@@ -153,11 +162,13 @@
         "type": { "type": "string", "enum": ["BLOCK"] },
         "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
         "addresses": {
+          "title": "Addresses",
           "type": "array",
           "items": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" }
         },
         "abi": { "type": "string" },
         "alert-threshold": {
+          "title": "AlertThreshold",
           "type": "object",
           "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } }
         },
@@ -168,11 +179,13 @@
           "oneOf": [{ "type": "string", "enum": ["safe", "finalized"] }, { "type": "integer" }]
         },
         "notify-config": {
+          "title": "NotifyConfig",
           "type": "object",
           "properties": {
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
             "channels": {
+              "title": "Channels",
               "type": "array",
               "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
             }
@@ -180,19 +193,24 @@
           "required": ["channels"]
         },
         "conditions": {
+          "title": "Conditions",
           "type": "object",
           "properties": {
             "event": {
+              "title": "Event",
               "type": "array",
               "items": {
+                "title": "EventItems",
                 "type": "object",
                 "properties": { "signature": { "type": "string" }, "expression": { "type": "string" } },
                 "required": ["signature"]
               }
             },
             "function": {
+              "title": "Function",
               "type": "array",
               "items": {
+                "title": "FunctionItems",
                 "type": "object",
                 "properties": { "signature": { "type": "string" }, "expression": { "type": "string" } },
                 "required": ["signature"]
@@ -212,11 +230,13 @@
         "type": { "type": "string", "enum": ["FORTA"] },
         "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
         "addresses": {
+          "title": "Addresses",
           "type": "array",
           "items": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" }
         },
         "abi": { "type": "string" },
         "alert-threshold": {
+          "title": "AlertThreshold",
           "type": "object",
           "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } }
         },
@@ -224,11 +244,13 @@
         "autotask-condition": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
         "autotask-trigger": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
         "notify-config": {
+          "title": "NotifyConfig",
           "type": "object",
           "properties": {
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
             "channels": {
+              "title": "Channels",
               "type": "array",
               "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
             }
@@ -236,16 +258,25 @@
           "required": ["channels"]
         },
         "conditions": {
+          "title": "Conditions",
           "type": "object",
           "properties": {
             "min-scanner-count": { "type": "integer" },
             "severity": { "type": "integer", "enum": [0, 1, 2, 3, 4, 5] },
-            "alert-ids": { "type": "array", "items": { "type": "string" } }
+            "alert-ids": {
+              "title": "AlertIDs",
+              "type": "array",
+              "items": { "type": "string" }
+            }
           },
           "required": ["min-scanner-count"]
         },
         "forta-node-id": { "type": "string" },
-        "agent-ids": { "type": "array", "items": { "type": "string" } }
+        "agent-ids": {
+          "title": "AgentIDs",
+          "type": "array",
+          "items": { "type": "string" }
+        }
       },
       "anyOf": [
         {
@@ -273,6 +304,7 @@
         "path": { "type": "string" },
         "relayer": { "$ref": "definitions.schema.json/#/definitions/relayer", "format": "uri-reference" },
         "trigger": {
+          "title": "Trigger",
           "type": "object",
           "properties": {
             "type": { "type": "string" },

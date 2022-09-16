@@ -10,8 +10,8 @@
 
 | Property                         | Type     | Required | Nullable       | Defined by                                                                                                                                        |
 | :------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [api-key](#api-key)              | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "undefined#/definitions/datadogConfig/properties/api-key")              |
-| [metric-p$refix](#metric-prefix) | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "undefined#/definitions/datadogConfig/properties/metric-p$refix") |
+| [api-key](#api-key)              | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "#/definitions/datadogConfig/properties/api-key")              |
+| [metric-p$refix](#metric-prefix) | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-p$refix") |
 
 ## api-key
 
@@ -25,7 +25,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "undefined#/definitions/datadogConfig/properties/api-key")
+*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "#/definitions/datadogConfig/properties/api-key")
 
 ### api-key Type
 
@@ -43,7 +43,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "undefined#/definitions/datadogConfig/properties/metric-p$refix")
+*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-p$refix")
 
 ### metric-p$refix Type
 

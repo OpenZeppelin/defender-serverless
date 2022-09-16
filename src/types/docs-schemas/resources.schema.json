@@ -2,13 +2,16 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Resources",
   "resources": {
+    "title": "Resources",
     "type": "object",
     "additionalProperties": false,
     "properties": {
       "Resources": {
+        "title": "Resources",
         "type": "object",
         "properties": {
           "notifications": {
+            "title": "Notifications",
             "type": "object",
             "additionalProperties": {
               "$ref": "definitions.schema.json/#/definitions/notification",
@@ -16,6 +19,7 @@
             }
           },
           "relayers": {
+            "title": "Relayers",
             "type": "object",
             "additionalProperties": {
               "$ref": "definitions.schema.json/#/definitions/relayer",
@@ -23,6 +27,7 @@
             }
           },
           "policies": {
+            "title": "Policies",
             "type": "object",
             "additionalProperties": {
               "$ref": "definitions.schema.json/#/definitions/policy",
@@ -30,6 +35,7 @@
             }
           },
           "contracts": {
+            "title": "Contracts",
             "type": "object",
             "additionalProperties": {
               "$ref": "definitions.schema.json/#/definitions/contract",
@@ -37,14 +43,16 @@
             }
           },
           "secrets": {
+            "title": "AutotaskSecrets",
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "global": { "type": "object", "additionalProperties": { "type": "string" } },
-              "stack": { "type": "object", "additionalProperties": { "type": "string" } }
+              "global": { "title": "Global", "type": "object", "additionalProperties": { "type": "string" } },
+              "stack": { "title": "Stack", "type": "object", "additionalProperties": { "type": "string" } }
             }
           },
           "sentinels": {
+            "title": "Sentinels",
             "type": "object",
             "additionalProperties": {
               "$ref": "definitions.schema.json/#/definitions/sentinel",
