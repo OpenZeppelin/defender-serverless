@@ -1,0 +1,3 @@
+## timeout Type
+
+`integer`

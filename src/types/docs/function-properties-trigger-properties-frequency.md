@@ -1,0 +1,3 @@
+## frequency Type
+
+`integer`
