@@ -341,15 +341,30 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (relayer: YRelayer, match: DefenderRelayer) => {
-        const updatedRelayer = await client.update(match.relayerId, {
-          name: relayer.name,
-          minBalance: relayer['min-balance'],
-          policies: relayer.policy && {
-            whitelistReceivers: relayer.policy['whitelist-receivers'],
-            gasPriceCap: relayer.policy['gas-price-cap'],
-            EIP1559Pricing: relayer.policy['eip1559-pricing'],
+        const mappedMatch = {
+          name: match.name,
+          network: match.network,
+          'min-balance': parseInt(match.minBalance.toString()),
+          policy: {
+            'gas-price-cap': match.policies.gasPriceCap,
+            'whitelist-receivers': match.policies.whitelistReceivers,
+            'eip1559-pricing': match.policies.EIP1559Pricing,
           },
-        });
+          // currently not supported by defender-client
+          // paused: match.paused
+        };
+        let updatedRelayer = undefined;
+        if (!_.isEqual(removeNils(_.omit(relayer, ['api-keys', 'address-from-relayer'])), removeNils(mappedMatch))) {
+          updatedRelayer = await client.update(match.relayerId, {
+            name: relayer.name,
+            minBalance: relayer['min-balance'],
+            policies: relayer.policy && {
+              whitelistReceivers: relayer.policy['whitelist-receivers'],
+              gasPriceCap: relayer.policy['gas-price-cap'],
+              EIP1559Pricing: relayer.policy['eip1559-pricing'],
+            },
+          });
+        }
 
         // check existing keys and remove / create accordingly
         const existingRelayerKeys = await client.listKeys(match.relayerId);
@@ -392,10 +407,11 @@ export default class DefenderDeploy {
         }
 
         return {
-          name: updatedRelayer.stackResourceId!,
-          id: updatedRelayer.relayerId,
-          success: true,
-          response: updatedRelayer,
+          name: match.stackResourceId!,
+          id: match.relayerId,
+          success: !!updatedRelayer,
+          response: updatedRelayer ?? match,
+          notice: !updatedRelayer ? `Skipping ${match.stackResourceId} - no changes detected` : undefined,
         };
       },
       // on create
@@ -889,10 +905,10 @@ export default class DefenderDeploy {
     // await this.deploySecrets(stdOut.secrets);
     // await this.deployContracts(stdOut.contracts);
     // Always deploy relayers before autotasks
-    // await this.deployRelayers(stdOut.relayers);
+    await this.deployRelayers(stdOut.relayers);
     // await this.deployAutotasks(stdOut.autotasks);
     // Deploy notifications before sentinels
-    await this.deployNotifications(stdOut.notifications);
+    // await this.deployNotifications(stdOut.notifications);
     // await this.deploySentinels(stdOut.sentinels);
 
     this.log.notice('========================================================');

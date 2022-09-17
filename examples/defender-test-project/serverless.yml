@@ -71,7 +71,7 @@ resources:
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
       relayer-2:
-        name: "Test Relayer 4"
+        name: "Test Relayer 5"
         network: "mainnet"
         min-balance: 1000
         # optional (make sure relayer-1 is above current relayer)
@@ -82,7 +82,7 @@ resources:
         api-keys:
           - key1
           - key2
-          - key5
+          - key6
 
     notifications:
       email-1:
