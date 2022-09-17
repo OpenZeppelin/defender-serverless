@@ -25,10 +25,12 @@ functions:
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
       type: "schedule" # or webhook
-      # optional if not cron
+      # optional if not cron or token
       frequency: 1500
-      # optional if not frequency
+      # optional
       cron: null
+      # optional
+      token: null
     paused: false
 
 resources:

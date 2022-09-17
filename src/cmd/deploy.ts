@@ -43,6 +43,8 @@ import {
   DefenderNotificationReference,
   DefenderBlockSentinelResponse,
   DefenderFortaSentinelResponse,
+  DefenderScheduleTrigger,
+  DefenderWebhookTrigger,
 } from '../types';
 
 export default class DefenderDeploy {
@@ -290,6 +292,7 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (_: YContract, match: DefenderContract) => {
+        // defender-client does not support "updating" contracts (name, abi, ..)
         return {
           name: match.name,
           id: `${match.network}-${match.address}`,
@@ -685,12 +688,56 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (autotask: YAutotask, match: DefenderAutotask) => {
+        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
+        const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
+        const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
+          this.serverless,
+          autotask.relayer,
+          relayers,
+          existingRelayers,
+        );
         // Get new code digest
         const code = await client.getEncodedZippedCodeFromFolder(autotask.path);
         const newDigest = client.getCodeDigest(code);
-
-        // Get existing one
         const { codeDigest } = await client.get(match.autotaskId);
+
+        const isWebhook = (o: DefenderWebhookTrigger | DefenderScheduleTrigger): o is DefenderWebhookTrigger =>
+          o.type === 'webhook';
+        const isSchedule = (o: DefenderWebhookTrigger | DefenderScheduleTrigger): o is DefenderScheduleTrigger =>
+          o.type === 'schedule';
+
+        const mappedMatch = {
+          name: match.name,
+          trigger: {
+            type: match.trigger.type,
+            frequency: (isSchedule(match.trigger) && match.trigger.frequencyMinutes) || undefined,
+            cron: (isSchedule(match.trigger) && match.trigger.cron) || undefined,
+            token: (isWebhook(match.trigger) && match.trigger.token) || undefined,
+          },
+          paused: match.paused,
+          relayerId: match.relayerId,
+          codeDigest: match.codeDigest,
+        };
+
+        if (
+          _.isEqual(
+            removeNils({
+              ..._.omit(autotask, ['events', 'package', 'relayer', 'path']),
+              relayerId: maybeRelayer?.relayerId,
+              codeDigest: newDigest,
+            }),
+            removeNils(mappedMatch),
+          )
+        ) {
+          return {
+            name: match.stackResourceId!,
+            id: match.autotaskId,
+            success: false,
+            response: match,
+            notice: `Skipping ${match.stackResourceId} - no changes detected`,
+          };
+        }
+
         const updatesAutotask = await client.update({
           autotaskId: match.autotaskId,
           name: autotask.name,
@@ -700,6 +747,7 @@ export default class DefenderDeploy {
             frequencyMinutes: autotask.trigger.frequency,
             cron: autotask.trigger.cron ?? undefined,
           },
+          relayerId: maybeRelayer?.relayerId,
         });
 
         if (newDigest === codeDigest) {
@@ -707,7 +755,7 @@ export default class DefenderDeploy {
             name: match.stackResourceId!,
             id: match.autotaskId,
             success: true,
-            notice: `Skipping ${match.stackResourceId} - no changes detected`,
+            notice: `Skipping code upload - no changes detected for ${match.stackResourceId}`,
             response: updatesAutotask,
           };
         } else {
@@ -902,14 +950,14 @@ export default class DefenderDeploy {
       notifications,
       secrets,
     };
-    // await this.deploySecrets(stdOut.secrets);
-    // await this.deployContracts(stdOut.contracts);
+    await this.deploySecrets(stdOut.secrets);
+    await this.deployContracts(stdOut.contracts);
     // Always deploy relayers before autotasks
     await this.deployRelayers(stdOut.relayers);
-    // await this.deployAutotasks(stdOut.autotasks);
+    await this.deployAutotasks(stdOut.autotasks);
     // Deploy notifications before sentinels
-    // await this.deployNotifications(stdOut.notifications);
-    // await this.deploySentinels(stdOut.sentinels);
+    await this.deployNotifications(stdOut.notifications);
+    await this.deploySentinels(stdOut.sentinels);
 
     this.log.notice('========================================================');
 

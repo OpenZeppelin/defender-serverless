@@ -22,7 +22,7 @@ import {
   ExternalCreateFortaSubscriberRequest,
   NotificationReference,
 } from 'defender-sentinel-client/lib/models/subscriber';
-import { Autotask, SecretsMap } from 'defender-autotask-client/lib/models/autotask';
+import { Autotask, ScheduleTrigger, SecretsMap, WebhookTrigger } from 'defender-autotask-client/lib/models/autotask';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -44,6 +44,8 @@ export type DefenderDiscordConfig = DiscordConfig;
 export type DefenderTelegramConfig = TelegramBotConfig;
 export type DefenderEmailConfig = EmailConfig;
 export type DefenderNetwork = Network;
+export type DefenderWebhookTrigger = WebhookTrigger;
+export type DefenderScheduleTrigger = ScheduleTrigger;
 
 export type ResourceType = 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets';
 

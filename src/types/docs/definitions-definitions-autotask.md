@@ -94,9 +94,11 @@
 
 one (and only one) of
 
-*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-0.md "check type definition")
+*   [TriggerCron](definitions-definitions-autotask-properties-trigger-oneof-triggercron.md "check type definition")
 
-*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-1.md "check type definition")
+*   [TriggerFrequency](definitions-definitions-autotask-properties-trigger-oneof-triggerfrequency.md "check type definition")
+
+*   [TriggerToken](definitions-definitions-autotask-properties-trigger-oneof-triggertoken.md "check type definition")
 
 ## paused
 

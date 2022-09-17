@@ -71,9 +71,11 @@
 
 one (and only one) of
 
-*   [Cron](function-properties-trigger-oneof-cron.md "check type definition")
+*   [TriggerCron](function-properties-trigger-oneof-triggercron.md "check type definition")
 
-*   [Frequecy](function-properties-trigger-oneof-frequecy.md "check type definition")
+*   [TriggerFrequency](function-properties-trigger-oneof-triggerfrequency.md "check type definition")
+
+*   [TriggerToken](function-properties-trigger-oneof-triggertoken.md "check type definition")
 
 ## paused
 
