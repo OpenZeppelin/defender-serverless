@@ -1,6 +1,6 @@
 import Serverless from 'serverless';
 
-import { isEqual, map, entries } from 'lodash';
+import _ from 'lodash';
 import { AutotaskClient } from 'defender-autotask-client';
 import { SentinelClient } from 'defender-sentinel-client';
 import { RelayClient } from 'defender-relay-client';
@@ -37,9 +37,14 @@ export const getEquivalentResource = <Y, D>(
   currentResources: D[],
 ) => {
   if (resource) {
-    const [key, _] = Object.entries(resources ?? []).find((a) => isEqual(a[1], resource))!;
+    const [key, value] = Object.entries(resources ?? []).find((a) => _.isEqual(a[1], resource))!;
     return currentResources.find((e: D) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
   }
+};
+
+export const removeNils = (o: object): object => {
+  // The conversion is a neat hack that removes nested `undefined` values
+  return JSON.parse(JSON.stringify(_.omitBy(o, _.isNil)));
 };
 
 export const getEquivalentResourceByKey = <D>(resourceKey: string, currentResources: D[]) => {
@@ -57,7 +62,7 @@ export const getConsolidatedSecrets = (context: Serverless): YSecret[] => {
       [`${getStackName(context)}_${ssk}`]: ssv,
     };
   });
-  return map(entries(Object.assign(globalSecrets, ...stackSecretsPrecededWithStackName)), ([k, v]) => ({
+  return _.map(_.entries(Object.assign(globalSecrets, ...stackSecretsPrecededWithStackName)), ([k, v]) => ({
     [k]: v as string,
   }));
 };
@@ -199,7 +204,7 @@ export const constructSentinel = (
     name: sentinel.name,
     network: sentinel.network,
     addresses: sentinel.addresses,
-    abi: sentinel.abi && JSON.stringify(sentinel.abi),
+    abi: sentinel.abi && JSON.stringify(JSON.parse(sentinel.abi)),
     paused: sentinel.paused,
     autotaskCondition: autotaskCondition && autotaskCondition.autotaskId,
     autotaskTrigger: autotaskTrigger && autotaskTrigger.autotaskId,
@@ -243,7 +248,7 @@ export const constructSentinel = (
     const compatibleBlockWatcher = blockwatchers.find((b) => b.confirmLevel === sentinel['confirm-level']);
     if (!compatibleBlockWatcher) {
       throw new Error(
-        `A blockwatcher with confirmation level (${sentinel['confirm-level']}) does not exist. Choose another confirmation level, or use "safe" or "finalized".`,
+        `A blockwatcher with confirmation level (${sentinel['confirm-level']}) does not exist on ${sentinel.network}. Choose another confirmation level.`,
       );
     }
     const blockSentinel: DefenderBlockSentinel = {

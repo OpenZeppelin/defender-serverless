@@ -16,8 +16,11 @@ import {
 import { CreateSentinelResponse, BlockWatcher } from 'defender-sentinel-client';
 
 import {
+  CreateBlockSubscriberResponse,
+  CreateFortaSubscriberResponse,
   ExternalCreateBlockSubscriberRequest,
   ExternalCreateFortaSubscriberRequest,
+  NotificationReference,
 } from 'defender-sentinel-client/lib/models/subscriber';
 import { Autotask, SecretsMap } from 'defender-autotask-client/lib/models/autotask';
 
@@ -29,7 +32,10 @@ export type DefenderRelayer = RelayerGetResponse;
 export type DefenderAutotask = Autotask;
 export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
+export type DefenderNotificationReference = NotificationReference;
 export type DefenderSentinel = CreateSentinelResponse;
+export type DefenderBlockSentinelResponse = CreateBlockSubscriberResponse;
+export type DefenderFortaSentinelResponse = CreateFortaSubscriberResponse;
 export type DefenderBlockSentinel = ExternalCreateBlockSubscriberRequest;
 export type DefenderFortaSentinel = ExternalCreateFortaSubscriberRequest;
 export type DefenderSlackConfig = SlackConfig;

@@ -17,7 +17,6 @@ import {
   isTemplateResource,
 } from '../utils';
 import {
-  DefenderAPIError,
   DefenderAutotask,
   DefenderContract,
   DefenderNotification,
@@ -38,7 +37,7 @@ export default class DefenderRemove {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
-  log: any;
+  log: Logger;
   hooks: any;
   teamKey?: TeamKey;
 
