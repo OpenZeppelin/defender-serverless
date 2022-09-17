@@ -463,10 +463,12 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (notification: YNotification, match: DefenderNotification) => {
-        console.log(notification);
-        console.log('\n\n');
-        console.log(match);
-        const mappedMatch = {};
+        const mappedMatch = {
+          type: match.type,
+          name: match.name,
+          config: match.config,
+          paused: match.paused,
+        };
         if (_.isEqual(removeNils(notification), removeNils(mappedMatch))) {
           return {
             name: match.stackResourceId!,
