@@ -1,3 +1,7 @@
+/**
+ * @notice copied from https://gist.github.com/simonrenoult/2fa79fec8f035b2d35cef0767363b227
+ * */
+
 import _ from 'lodash';
 
 export const sanitize = (object: object): object | string | null => {

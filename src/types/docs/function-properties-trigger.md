@@ -4,20 +4,20 @@
 
 one (and only one) of
 
-*   [TriggerCron](function-properties-trigger-oneof-triggercron.md "check type definition")
+*   [Untitled  type in Function](function-properties-trigger-oneof-0.md "check type definition")
 
-*   [TriggerFrequency](function-properties-trigger-oneof-triggerfrequency.md "check type definition")
+*   [Untitled  type in Function](function-properties-trigger-oneof-1.md "check type definition")
 
-*   [TriggerToken](function-properties-trigger-oneof-triggertoken.md "check type definition")
+*   [Untitled  type in Function](function-properties-trigger-oneof-2.md "check type definition")
 
 # trigger Properties
 
-| Property                | Type      | Required | Nullable       | Defined by                                                                                                           |
-| :---------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------- |
-| [type](#type)           | `string`  | Required | cannot be null | [Function](function-properties-trigger-properties-triggertype.md "#/properties/trigger/properties/type")    |
-| [cron](#cron)           | `string`  | Optional | cannot be null | [Function](function-properties-trigger-properties-cron.md "#/properties/trigger/properties/cron")           |
-| [frequency](#frequency) | `integer` | Optional | cannot be null | [Function](function-properties-trigger-properties-frequency.md "#/properties/trigger/properties/frequency") |
-| [token](#token)         | `string`  | Optional | cannot be null | [Function](function-properties-trigger-properties-token.md "#/properties/trigger/properties/token")         |
+| Property                | Type      | Required | Nullable       | Defined by                                                                                                                  |
+| :---------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| [type](#type)           | `string`  | Required | cannot be null | [Function](function-properties-trigger-properties-triggertype.md "#/properties/trigger/properties/type")           |
+| [cron](#cron)           | `string`  | Optional | cannot be null | [Function](function-properties-trigger-properties-triggercron.md "#/properties/trigger/properties/cron")           |
+| [frequency](#frequency) | `integer` | Optional | cannot be null | [Function](function-properties-trigger-properties-triggerfrequency.md "#/properties/trigger/properties/frequency") |
+| [token](#token)         | `string`  | Optional | cannot be null | [Function](function-properties-trigger-properties-triggertoken.md "#/properties/trigger/properties/token")         |
 
 ## type
 
@@ -54,15 +54,15 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `string`
+*   Type: `string` ([TriggerCron](function-properties-trigger-properties-triggercron.md))
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-trigger-properties-cron.md "#/properties/trigger/properties/cron")
+*   defined in: [Function](function-properties-trigger-properties-triggercron.md "#/properties/trigger/properties/cron")
 
 ### cron Type
 
-`string`
+`string` ([TriggerCron](function-properties-trigger-properties-triggercron.md))
 
 ## frequency
 
@@ -72,15 +72,15 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `integer`
+*   Type: `integer` ([TriggerFrequency](function-properties-trigger-properties-triggerfrequency.md))
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-trigger-properties-frequency.md "#/properties/trigger/properties/frequency")
+*   defined in: [Function](function-properties-trigger-properties-triggerfrequency.md "#/properties/trigger/properties/frequency")
 
 ### frequency Type
 
-`integer`
+`integer` ([TriggerFrequency](function-properties-trigger-properties-triggerfrequency.md))
 
 ## token
 
@@ -90,12 +90,12 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `string`
+*   Type: `string` ([TriggerToken](function-properties-trigger-properties-triggertoken.md))
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-trigger-properties-token.md "#/properties/trigger/properties/token")
+*   defined in: [Function](function-properties-trigger-properties-triggertoken.md "#/properties/trigger/properties/token")
 
 ### token Type
 
-`string`
+`string` ([TriggerToken](function-properties-trigger-properties-triggertoken.md))

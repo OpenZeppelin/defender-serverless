@@ -73,7 +73,7 @@ resources:
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
       relayer-2:
-        name: "Test Relayer 5"
+        name: "Test Relayer 2"
         network: "mainnet"
         min-balance: 1000
         # optional (make sure relayer-1 is above current relayer)
@@ -84,7 +84,6 @@ resources:
         api-keys:
           - key1
           - key2
-          - key6
 
     notifications:
       email-1:
@@ -122,7 +121,7 @@ resources:
         # optional
         autotask-trigger: null
         # optional
-        confirm-level: 'safe' # or 'safe' or 'finalized'
+        confirm-level: 1 # or 'safe' or 'finalized'
         notify-config:
           timeout: 0 # optional
           message: null # optional
@@ -166,14 +165,14 @@ resources:
           min-scanner-count: 1
           severity: 2 # optional (unknown=0, info=1, low=2, medium=3, high=4, critical=5)
           # optional
-          # alert-ids:
-          #   - "123"
-          #   - "456"
+          alert-ids:
+            - "123"
+            - "456"
         # optional
-        # forta-node-id: "123"
+        forta-node-id: "123"
         # optional if addresses is defined
-        # agent-ids:
-        #   - "0x8fe07f1a4d33b30be2387293f052c273660c829e9a6965cf7e8d485bcb871083"
+        agent-ids:
+          - "0x8fe07f1a4d33b30be2387293f052c273660c829e9a6965cf7e8d485bcb871083"
         # optional
         forta-last-processed-time: null
 

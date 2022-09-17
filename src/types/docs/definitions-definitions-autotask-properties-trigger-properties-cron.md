@@ -1,3 +1,0 @@
-## cron Type
-
-`string`

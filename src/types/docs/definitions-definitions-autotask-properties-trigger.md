@@ -4,20 +4,20 @@
 
 one (and only one) of
 
-*   [TriggerCron](definitions-definitions-autotask-properties-trigger-oneof-triggercron.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-0.md "check type definition")
 
-*   [TriggerFrequency](definitions-definitions-autotask-properties-trigger-oneof-triggerfrequency.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-1.md "check type definition")
 
-*   [TriggerToken](definitions-definitions-autotask-properties-trigger-oneof-triggertoken.md "check type definition")
+*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-2.md "check type definition")
 
 # trigger Properties
 
-| Property                | Type      | Required | Nullable       | Defined by                                                                                                                                                           |
-| :---------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [type](#type)           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger-properties-triggertype.md "#/definitions/autotask/properties/trigger/properties/type")    |
-| [cron](#cron)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger-properties-cron.md "#/definitions/autotask/properties/trigger/properties/cron")           |
-| [frequency](#frequency) | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger-properties-frequency.md "#/definitions/autotask/properties/trigger/properties/frequency") |
-| [token](#token)         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger-properties-token.md "#/definitions/autotask/properties/trigger/properties/token")         |
+| Property                | Type      | Required | Nullable       | Defined by                                                                                                                                                                  |
+| :---------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [type](#type)           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger-properties-triggertype.md "#/definitions/autotask/properties/trigger/properties/type")           |
+| [cron](#cron)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger-properties-triggercron.md "#/definitions/autotask/properties/trigger/properties/cron")           |
+| [frequency](#frequency) | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger-properties-triggerfrequency.md "#/definitions/autotask/properties/trigger/properties/frequency") |
+| [token](#token)         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger-properties-triggertoken.md "#/definitions/autotask/properties/trigger/properties/token")         |
 
 ## type
 
@@ -54,15 +54,15 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `string`
+*   Type: `string` ([TriggerCron](definitions-definitions-autotask-properties-trigger-properties-triggercron.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger-properties-cron.md "#/definitions/autotask/properties/trigger/properties/cron")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger-properties-triggercron.md "#/definitions/autotask/properties/trigger/properties/cron")
 
 ### cron Type
 
-`string`
+`string` ([TriggerCron](definitions-definitions-autotask-properties-trigger-properties-triggercron.md))
 
 ## frequency
 
@@ -72,15 +72,15 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `integer`
+*   Type: `integer` ([TriggerFrequency](definitions-definitions-autotask-properties-trigger-properties-triggerfrequency.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger-properties-frequency.md "#/definitions/autotask/properties/trigger/properties/frequency")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger-properties-triggerfrequency.md "#/definitions/autotask/properties/trigger/properties/frequency")
 
 ### frequency Type
 
-`integer`
+`integer` ([TriggerFrequency](definitions-definitions-autotask-properties-trigger-properties-triggerfrequency.md))
 
 ## token
 
@@ -90,12 +90,12 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `string`
+*   Type: `string` ([TriggerToken](definitions-definitions-autotask-properties-trigger-properties-triggertoken.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger-properties-token.md "#/definitions/autotask/properties/trigger/properties/token")
+*   defined in: [Definitions](definitions-definitions-autotask-properties-trigger-properties-triggertoken.md "#/definitions/autotask/properties/trigger/properties/token")
 
 ### token Type
 
-`string`
+`string` ([TriggerToken](definitions-definitions-autotask-properties-trigger-properties-triggertoken.md))

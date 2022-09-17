@@ -297,7 +297,7 @@ export default class DefenderDeploy {
           name: match.name,
           id: `${match.network}-${match.address}`,
           success: false,
-          notice: `Skipping import - contract ${match.address} already exists on ${match.network}`,
+          notice: `Skipped import - contract ${match.address} already exists on ${match.network}`,
         };
       },
       // on create
@@ -414,7 +414,7 @@ export default class DefenderDeploy {
           id: match.relayerId,
           success: !!updatedRelayer,
           response: updatedRelayer ?? match,
-          notice: !updatedRelayer ? `Skipping ${match.stackResourceId} - no changes detected` : undefined,
+          notice: !updatedRelayer ? `Skipped ${match.stackResourceId} - no changes detected` : undefined,
         };
       },
       // on create
@@ -494,7 +494,7 @@ export default class DefenderDeploy {
             id: match.notificationId,
             success: false,
             response: match,
-            notice: `Skipping ${match.stackResourceId} - no changes detected`,
+            notice: `Skipped ${match.stackResourceId} - no changes detected`,
           };
         }
 
@@ -624,7 +624,7 @@ export default class DefenderDeploy {
               id: match.subscriberId,
               success: false,
               response: match,
-              notice: `Skipping ${match.stackResourceId} - no changes detected`,
+              notice: `Skipped ${match.stackResourceId} - no changes detected`,
             };
           }
 
@@ -734,7 +734,7 @@ export default class DefenderDeploy {
             id: match.autotaskId,
             success: false,
             response: match,
-            notice: `Skipping ${match.stackResourceId} - no changes detected`,
+            notice: `Skipped ${match.stackResourceId} - no changes detected`,
           };
         }
 
@@ -755,7 +755,7 @@ export default class DefenderDeploy {
             name: match.stackResourceId!,
             id: match.autotaskId,
             success: true,
-            notice: `Skipping code upload - no changes detected for ${match.stackResourceId}`,
+            notice: `Skipped code upload - no changes detected for ${match.stackResourceId}`,
             response: updatesAutotask,
           };
         } else {
