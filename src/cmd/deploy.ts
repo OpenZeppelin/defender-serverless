@@ -550,7 +550,7 @@ export default class DefenderDeploy {
           const isBlock = (o: DefenderSentinel): o is DefenderBlockSentinelResponse => o.type === 'BLOCK';
 
           // Warn users when they try to change the sentinel network
-          if (isBlock(match) && match.network !== sentinel.network) {
+          if (match.network !== sentinel.network) {
             this.log.warn(
               `Detected a network change from ${match.network} to ${sentinel.network} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Atlernatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel.`,
             );
