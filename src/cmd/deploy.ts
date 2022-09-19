@@ -20,7 +20,7 @@ import {
   isSSOT,
   getEquivalentResourceByKey,
   getConsolidatedSecrets,
-  removeNils,
+  validateTypesAndSanitise,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -195,7 +195,7 @@ export default class DefenderDeploy {
       secrets: withResources.secrets.length > 0 ? withResources.secrets.map((a) => `${a}`) : undefined,
     };
     return `${start}\n${
-      _.isEmpty(removeNils(formattedResources))
+      _.isEmpty(validateTypesAndSanitise(formattedResources))
         ? 'None. No differences found.'
         : JSON.stringify(formattedResources, null, 2)
     }\n\n${end}`;
@@ -357,7 +357,12 @@ export default class DefenderDeploy {
           // paused: match.paused
         };
         let updatedRelayer = undefined;
-        if (!_.isEqual(removeNils(_.omit(relayer, ['api-keys', 'address-from-relayer'])), removeNils(mappedMatch))) {
+        if (
+          !_.isEqual(
+            validateTypesAndSanitise(_.omit(relayer, ['api-keys', 'address-from-relayer'])),
+            validateTypesAndSanitise(mappedMatch),
+          )
+        ) {
           updatedRelayer = await client.update(match.relayerId, {
             name: relayer.name,
             minBalance: relayer['min-balance'],
@@ -488,7 +493,7 @@ export default class DefenderDeploy {
           config: match.config,
           paused: match.paused,
         };
-        if (_.isEqual(removeNils(notification), removeNils(mappedMatch))) {
+        if (_.isEqual(validateTypesAndSanitise(notification), validateTypesAndSanitise(mappedMatch))) {
           return {
             name: match.stackResourceId!,
             id: match.notificationId,
@@ -618,7 +623,7 @@ export default class DefenderDeploy {
             fortaConditions: (isForta(match) && match.fortaRule.conditions) || undefined,
           };
 
-          if (_.isEqual(removeNils(newSentinel), removeNils(mappedMatch))) {
+          if (_.isEqual(validateTypesAndSanitise(newSentinel), validateTypesAndSanitise(mappedMatch))) {
             return {
               name: match.stackResourceId!,
               id: match.subscriberId,
@@ -721,12 +726,12 @@ export default class DefenderDeploy {
 
         if (
           _.isEqual(
-            removeNils({
+            validateTypesAndSanitise({
               ..._.omit(autotask, ['events', 'package', 'relayer', 'path']),
               relayerId: maybeRelayer?.relayerId,
               codeDigest: newDigest,
             }),
-            removeNils(mappedMatch),
+            validateTypesAndSanitise(mappedMatch),
           )
         ) {
           return {

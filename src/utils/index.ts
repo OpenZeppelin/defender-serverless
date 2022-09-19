@@ -25,7 +25,7 @@ import {
   ResourceType,
   DefenderBlockWatcher,
 } from '../types';
-import { sanitize } from './sanitise';
+import { sanitise } from './sanitise';
 
 /**
  * @dev this function retrieves the Defender equivalent object of the provided template resource
@@ -43,9 +43,8 @@ export const getEquivalentResource = <Y, D>(
   }
 };
 
-export const removeNils = (o: object): object => {
-  // The conversion is a neat hack that removes nested `undefined` values
-  return JSON.parse(JSON.stringify(sanitize(o)));
+export const validateTypesAndSanitise = (o: object): object => {
+  return sanitise(o) as object;
 };
 
 export const getEquivalentResourceByKey = <D>(resourceKey: string, currentResources: D[]) => {
