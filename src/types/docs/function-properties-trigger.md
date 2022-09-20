@@ -2,19 +2,13 @@
 
 `object` ([Trigger](function-properties-trigger.md))
 
-one (and only one) of
-
-*   [Cron](function-properties-trigger-oneof-cron.md "check type definition")
-
-*   [Frequecy](function-properties-trigger-oneof-frequecy.md "check type definition")
-
 # trigger Properties
 
-| Property                | Type      | Required | Nullable       | Defined by                                                                                                           |
-| :---------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------- |
-| [type](#type)           | `string`  | Required | cannot be null | [Function](function-properties-trigger-properties-type.md "#/properties/trigger/properties/type")           |
-| [cron](#cron)           | `string`  | Optional | cannot be null | [Function](function-properties-trigger-properties-cron.md "#/properties/trigger/properties/cron")           |
-| [frequency](#frequency) | `integer` | Optional | cannot be null | [Function](function-properties-trigger-properties-frequency.md "#/properties/trigger/properties/frequency") |
+| Property                | Type      | Required | Nullable       | Defined by                                                                                                                  |
+| :---------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| [type](#type)           | `string`  | Required | cannot be null | [Function](function-properties-trigger-properties-triggertype.md "#/properties/trigger/properties/type")           |
+| [cron](#cron)           | `string`  | Optional | cannot be null | [Function](function-properties-trigger-properties-triggercron.md "#/properties/trigger/properties/cron")           |
+| [frequency](#frequency) | `integer` | Optional | cannot be null | [Function](function-properties-trigger-properties-triggerfrequency.md "#/properties/trigger/properties/frequency") |
 
 ## type
 
@@ -24,15 +18,24 @@ one (and only one) of
 
 *   is required
 
-*   Type: `string`
+*   Type: `string` ([TriggerType](function-properties-trigger-properties-triggertype.md))
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-trigger-properties-type.md "#/properties/trigger/properties/type")
+*   defined in: [Function](function-properties-trigger-properties-triggertype.md "#/properties/trigger/properties/type")
 
 ### type Type
 
-`string`
+`string` ([TriggerType](function-properties-trigger-properties-triggertype.md))
+
+### type Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value        | Explanation |
+| :----------- | :---------- |
+| `"schedule"` |             |
+| `"webhook"`  |             |
 
 ## cron
 
@@ -42,15 +45,15 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `string`
+*   Type: `string` ([TriggerCron](function-properties-trigger-properties-triggercron.md))
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-trigger-properties-cron.md "#/properties/trigger/properties/cron")
+*   defined in: [Function](function-properties-trigger-properties-triggercron.md "#/properties/trigger/properties/cron")
 
 ### cron Type
 
-`string`
+`string` ([TriggerCron](function-properties-trigger-properties-triggercron.md))
 
 ## frequency
 
@@ -60,12 +63,12 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `integer`
+*   Type: `integer` ([TriggerFrequency](function-properties-trigger-properties-triggerfrequency.md))
 
 *   cannot be null
 
-*   defined in: [Function](function-properties-trigger-properties-frequency.md "#/properties/trigger/properties/frequency")
+*   defined in: [Function](function-properties-trigger-properties-triggerfrequency.md "#/properties/trigger/properties/frequency")
 
 ### frequency Type
 
-`integer`
+`integer` ([TriggerFrequency](function-properties-trigger-properties-triggerfrequency.md))

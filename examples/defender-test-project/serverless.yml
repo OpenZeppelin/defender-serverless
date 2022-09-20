@@ -27,8 +27,21 @@ functions:
       type: "schedule" # or webhook
       # optional if not cron
       frequency: 1500
-      # optional if not frequency
+      # optional
       cron: null
+    paused: false
+  autotask-example-2:
+    name: 'Hello world from serverless 2'
+    path: './autotasks/hello-world'
+    trigger:
+      type: "schedule"
+      cron: "0 */12 * * *"
+    paused: false
+  autotask-example-3:
+    name: 'Hello world from serverless 3'
+    path: './autotasks/hello-world'
+    trigger:
+      type: "webhook"
     paused: false
 
 resources:
@@ -71,7 +84,7 @@ resources:
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
       relayer-2:
-        name: "Test Relayer 4"
+        name: "Test Relayer 2"
         network: "mainnet"
         min-balance: 1000
         # optional (make sure relayer-1 is above current relayer)
@@ -82,8 +95,7 @@ resources:
         api-keys:
           - key1
           - key2
-          - key5
-
+  
     notifications:
       email-1:
         type: 'email'
@@ -140,13 +152,10 @@ resources:
       forta-example:
         name: "Forta Example"
         type: "FORTA"
-        network: "goerli"
+        network: "mainnet"
         # optional if agent-ids is defined
         addresses: 
-          - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
-          - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f3"
-        # optional
-        abi: ${file(./abis/erc721.json.abi)}
+          - "0x318958A61A3dFa42fBdAA6A28A4F481678D943cC"
         # optional
         alert-threshold: 
           amount: 2

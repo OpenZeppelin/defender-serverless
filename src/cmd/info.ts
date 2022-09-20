@@ -36,7 +36,7 @@ export default class DefenderInfo {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
-  log: any;
+  log: Logger;
   hooks: any;
   teamKey?: TeamKey;
 
