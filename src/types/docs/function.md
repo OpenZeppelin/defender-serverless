@@ -8,7 +8,7 @@
 | :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------- |
 | [path](#path)       | `string`  | Required | cannot be null | [Function](function-properties-path.md "#/properties/path")           |
 | [relayer](#relayer) | `object`  | Optional | cannot be null | [Function](definitions-definitions-relayer.md "#/properties/relayer") |
-| [trigger](#trigger) | Merged    | Required | cannot be null | [Function](function-properties-trigger.md "#/properties/trigger")     |
+| [trigger](#trigger) | `object`  | Required | cannot be null | [Function](function-properties-trigger.md "#/properties/trigger")     |
 | [paused](#paused)   | `boolean` | Required | cannot be null | [Function](function-properties-paused.md "#/properties/paused")       |
 
 ## path
@@ -68,14 +68,6 @@
 ### trigger Type
 
 `object` ([Trigger](function-properties-trigger.md))
-
-one (and only one) of
-
-*   [Untitled  type in Function](function-properties-trigger-oneof-0.md "check type definition")
-
-*   [Untitled  type in Function](function-properties-trigger-oneof-1.md "check type definition")
-
-*   [Untitled  type in Function](function-properties-trigger-oneof-2.md "check type definition")
 
 ## paused
 

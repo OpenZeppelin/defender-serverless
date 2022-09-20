@@ -25,12 +25,23 @@ functions:
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
       type: "schedule" # or webhook
-      # optional if not cron or token
+      # optional if not cron
       frequency: 1500
       # optional
       cron: null
-      # optional
-      token: null
+    paused: false
+  autotask-example-2:
+    name: 'Hello world from serverless 2'
+    path: './autotasks/hello-world'
+    trigger:
+      type: "schedule"
+      cron: "0 */12 * * *"
+    paused: false
+  autotask-example-3:
+    name: 'Hello world from serverless 3'
+    path: './autotasks/hello-world'
+    trigger:
+      type: "webhook"
     paused: false
 
 resources:
@@ -84,7 +95,7 @@ resources:
         api-keys:
           - key1
           - key2
-
+  
     notifications:
       email-1:
         type: 'email'

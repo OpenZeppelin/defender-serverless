@@ -2,14 +2,6 @@
 
 `object` ([Trigger](function-properties-trigger.md))
 
-one (and only one) of
-
-*   [Untitled  type in Function](function-properties-trigger-oneof-0.md "check type definition")
-
-*   [Untitled  type in Function](function-properties-trigger-oneof-1.md "check type definition")
-
-*   [Untitled  type in Function](function-properties-trigger-oneof-2.md "check type definition")
-
 # trigger Properties
 
 | Property                | Type      | Required | Nullable       | Defined by                                                                                                                  |
@@ -17,7 +9,6 @@ one (and only one) of
 | [type](#type)           | `string`  | Required | cannot be null | [Function](function-properties-trigger-properties-triggertype.md "#/properties/trigger/properties/type")           |
 | [cron](#cron)           | `string`  | Optional | cannot be null | [Function](function-properties-trigger-properties-triggercron.md "#/properties/trigger/properties/cron")           |
 | [frequency](#frequency) | `integer` | Optional | cannot be null | [Function](function-properties-trigger-properties-triggerfrequency.md "#/properties/trigger/properties/frequency") |
-| [token](#token)         | `string`  | Optional | cannot be null | [Function](function-properties-trigger-properties-triggertoken.md "#/properties/trigger/properties/token")         |
 
 ## type
 
@@ -81,21 +72,3 @@ one (and only one) of
 ### frequency Type
 
 `integer` ([TriggerFrequency](function-properties-trigger-properties-triggerfrequency.md))
-
-## token
-
-
-
-`token`
-
-*   is optional
-
-*   Type: `string` ([TriggerToken](function-properties-trigger-properties-triggertoken.md))
-
-*   cannot be null
-
-*   defined in: [Function](function-properties-trigger-properties-triggertoken.md "#/properties/trigger/properties/token")
-
-### token Type
-
-`string` ([TriggerToken](function-properties-trigger-properties-triggertoken.md))

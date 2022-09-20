@@ -1381,7 +1381,7 @@ Reference this group by using
 | [name](#name-5)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-name.md "#/definitions/autotask/properties/name")       |
 | [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-path.md "#/definitions/autotask/properties/path")       |
 | [relayer](#relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer.md "#/definitions/autotask/properties/relayer")                     |
-| [trigger](#trigger) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger.md "#/definitions/autotask/properties/trigger") |
+| [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger.md "#/definitions/autotask/properties/trigger") |
 | [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-paused.md "#/definitions/autotask/properties/paused")   |
 
 ### name
@@ -1459,14 +1459,6 @@ Reference this group by using
 #### trigger Type
 
 `object` ([Trigger](definitions-definitions-autotask-properties-trigger.md))
-
-one (and only one) of
-
-*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-0.md "check type definition")
-
-*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-1.md "check type definition")
-
-*   [Untitled  type in Definitions](definitions-definitions-autotask-properties-trigger-oneof-2.md "check type definition")
 
 ### paused
 

@@ -15,20 +15,22 @@
       "properties": {
         "type": { "title": "TriggerType", "type": "string", "enum": ["schedule", "webhook"] },
         "cron": { "title": "TriggerCron", "type": "string" },
-        "frequency": { "title": "TriggerFrequency", "type": "integer" },
-        "token": { "title": "TriggerToken", "type": "string" }
+        "frequency": { "title": "TriggerFrequency", "type": "integer" }
       },
-      "oneOf": [
-        {
-          "required": ["cron"]
-        },
-        {
-          "required": ["frequency"]
-        },
-        {
-          "required": ["token"]
-        }
-      ],
+      "if": {
+        "properties": { "type": { "const": "schedule" } }
+      },
+      "then": {
+        "oneOf": [
+          {
+            "required": ["cron"]
+          },
+          {
+            "required": ["frequency"]
+          }
+        ]
+      },
+      "else": {},
       "required": ["type"]
     },
     "paused": { "type": "boolean" }

@@ -717,7 +717,6 @@ export default class DefenderDeploy {
             type: match.trigger.type,
             frequency: (isSchedule(match.trigger) && match.trigger.frequencyMinutes) || undefined,
             cron: (isSchedule(match.trigger) && match.trigger.cron) || undefined,
-            token: (isWebhook(match.trigger) && match.trigger.token) || undefined,
           },
           paused: match.paused,
           relayerId: match.relayerId,
@@ -749,7 +748,7 @@ export default class DefenderDeploy {
           paused: autotask.paused,
           trigger: {
             type: autotask.trigger.type,
-            frequencyMinutes: autotask.trigger.frequency,
+            frequencyMinutes: autotask.trigger.frequency ?? undefined,
             cron: autotask.trigger.cron ?? undefined,
           },
           relayerId: maybeRelayer?.relayerId,
@@ -789,7 +788,7 @@ export default class DefenderDeploy {
           name: autotask.name,
           trigger: {
             type: autotask.trigger.type,
-            frequencyMinutes: autotask.trigger.frequency,
+            frequencyMinutes: autotask.trigger.frequency ?? undefined,
             cron: autotask.trigger.cron ?? undefined,
           },
           encodedZippedCode: await client.getEncodedZippedCodeFromFolder(autotask.path),
