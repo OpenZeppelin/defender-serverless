@@ -22,6 +22,6 @@
   "license": "MIT",
   "devDependencies": {
     "serverless": "^3.20.0",
-    "defender-serverless": "^1.0.2"
+    "defender-serverless": "^1.0.3"
   }
 }
