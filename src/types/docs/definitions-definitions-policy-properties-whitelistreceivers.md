@@ -1,0 +1,3 @@
+## whitelist-receivers Type
+
+`string[]`

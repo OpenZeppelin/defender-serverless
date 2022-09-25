@@ -1,0 +1,3 @@
+## window-seconds Type
+
+`integer`

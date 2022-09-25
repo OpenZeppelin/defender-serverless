@@ -1,0 +1,3 @@
+## alert-ids Type
+
+`string[]`

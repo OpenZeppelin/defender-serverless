@@ -1,0 +1,3 @@
+## nat-spec Type
+
+`string`

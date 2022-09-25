@@ -5,13 +5,13 @@ import { Logging } from 'serverless/classes/Plugin';
 import Logger from '../utils/logger';
 
 import { getAutotaskClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
-import { DefenderAPIError, DefenderAutotask, TeamKey } from '../types';
+import { DefenderAutotask, TeamKey } from '../types';
 
 export default class DefenderInvoke {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
-  log: any;
+  log: Logger;
   hooks: any;
   teamKey?: TeamKey;
 

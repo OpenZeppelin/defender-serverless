@@ -1,8 +1,8 @@
 import Serverless from 'serverless';
 import prompt from 'prompt';
+import _ from 'lodash';
 
 import { Logging } from 'serverless/classes/Plugin';
-import _ from 'lodash';
 
 import Logger from '../utils/logger';
 
@@ -20,6 +20,7 @@ import {
   isSSOT,
   getEquivalentResourceByKey,
   getConsolidatedSecrets,
+  validateTypesAndSanitise,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -39,13 +40,18 @@ import {
   DeployResponse,
   ResourceType,
   ListDefenderResources,
+  DefenderNotificationReference,
+  DefenderBlockSentinelResponse,
+  DefenderFortaSentinelResponse,
+  DefenderScheduleTrigger,
+  DefenderWebhookTrigger,
 } from '../types';
 
 export default class DefenderDeploy {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
-  log: any;
+  log: Logger;
   hooks: any;
   teamKey?: TeamKey;
   ssotDifference?: ListDefenderResources;
@@ -189,7 +195,7 @@ export default class DefenderDeploy {
       secrets: withResources.secrets.length > 0 ? withResources.secrets.map((a) => `${a}`) : undefined,
     };
     return `${start}\n${
-      _.isEmpty(_.omitBy(formattedResources, _.isNil))
+      _.isEmpty(validateTypesAndSanitise(formattedResources))
         ? 'None. No differences found.'
         : JSON.stringify(formattedResources, null, 2)
     }\n\n${end}`;
@@ -286,11 +292,12 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (_: YContract, match: DefenderContract) => {
+        // defender-client does not support "updating" contracts (name, abi, ..)
         return {
           name: match.name,
           id: `${match.network}-${match.address}`,
           success: false,
-          notice: `Skipping import - contract ${match.address} already exists on ${match.network}`,
+          notice: `Skipped import - contract ${match.address} already exists on ${match.network}`,
         };
       },
       // on create
@@ -299,7 +306,7 @@ export default class DefenderDeploy {
           name: contract.name,
           network: contract.network,
           address: contract.address,
-          abi: contract.abi && JSON.stringify(contract.abi),
+          abi: contract.abi && JSON.stringify(JSON.parse(contract.abi)),
           natSpec: contract['nat-spec'] ? contract['nat-spec'] : undefined,
         });
         return {
@@ -337,15 +344,35 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (relayer: YRelayer, match: DefenderRelayer) => {
-        const updatedRelayer = await client.update(match.relayerId, {
-          name: relayer.name,
-          minBalance: relayer['min-balance'],
-          policies: relayer.policy && {
-            whitelistReceivers: relayer.policy['whitelist-receivers'],
-            gasPriceCap: relayer.policy['gas-price-cap'],
-            EIP1559Pricing: relayer.policy['eip1559-pricing'],
+        const mappedMatch = {
+          name: match.name,
+          network: match.network,
+          'min-balance': parseInt(match.minBalance.toString()),
+          policy: {
+            'gas-price-cap': match.policies.gasPriceCap,
+            'whitelist-receivers': match.policies.whitelistReceivers,
+            'eip1559-pricing': match.policies.EIP1559Pricing,
           },
-        });
+          // currently not supported by defender-client
+          // paused: match.paused
+        };
+        let updatedRelayer = undefined;
+        if (
+          !_.isEqual(
+            validateTypesAndSanitise(_.omit(relayer, ['api-keys', 'address-from-relayer'])),
+            validateTypesAndSanitise(mappedMatch),
+          )
+        ) {
+          updatedRelayer = await client.update(match.relayerId, {
+            name: relayer.name,
+            minBalance: relayer['min-balance'],
+            policies: relayer.policy && {
+              whitelistReceivers: relayer.policy['whitelist-receivers'],
+              gasPriceCap: relayer.policy['gas-price-cap'],
+              EIP1559Pricing: relayer.policy['eip1559-pricing'],
+            },
+          });
+        }
 
         // check existing keys and remove / create accordingly
         const existingRelayerKeys = await client.listKeys(match.relayerId);
@@ -388,10 +415,11 @@ export default class DefenderDeploy {
         }
 
         return {
-          name: updatedRelayer.stackResourceId!,
-          id: updatedRelayer.relayerId,
-          success: true,
-          response: updatedRelayer,
+          name: match.stackResourceId!,
+          id: match.relayerId,
+          success: !!updatedRelayer,
+          response: updatedRelayer ?? match,
+          notice: !updatedRelayer ? `Skipped ${match.stackResourceId} - no changes detected` : undefined,
         };
       },
       // on create
@@ -459,6 +487,22 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (notification: YNotification, match: DefenderNotification) => {
+        const mappedMatch = {
+          type: match.type,
+          name: match.name,
+          config: match.config,
+          paused: match.paused,
+        };
+        if (_.isEqual(validateTypesAndSanitise(notification), validateTypesAndSanitise(mappedMatch))) {
+          return {
+            name: match.stackResourceId!,
+            id: match.notificationId,
+            success: false,
+            response: match,
+            notice: `Skipped ${match.stackResourceId} - no changes detected`,
+          };
+        }
+
         const updatedNotification = await client.updateNotificationChannel({
           ...constructNotification(notification, match.stackResourceId!),
           notificationId: match.notificationId,
@@ -507,20 +551,94 @@ export default class DefenderDeploy {
         retrieveExisting,
         // on update
         async (sentinel: YSentinel, match: DefenderSentinel) => {
+          const isForta = (o: DefenderSentinel): o is DefenderFortaSentinelResponse => o.type === 'FORTA';
+          const isBlock = (o: DefenderSentinel): o is DefenderBlockSentinelResponse => o.type === 'BLOCK';
+
+          // Warn users when they try to change the sentinel network
+          if (match.network !== sentinel.network) {
+            this.log.warn(
+              `Detected a network change from ${match.network} to ${sentinel.network} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Atlernatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel.`,
+            );
+            sentinel.network = match.network!;
+          }
+
+          // Warn users when they try to change the sentinel type
+          if (sentinel.type !== match.type) {
+            this.log.warn(
+              `Detected a type change from ${match.type} to ${sentinel.type} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the type once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Atlernatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel.`,
+            );
+            sentinel.type = match.type;
+          }
+
           const blockwatchersForNetwork = (await client.listBlockwatchers()).filter(
             (b) => b.network === sentinel.network,
           );
+
+          const newSentinel = constructSentinel(
+            this.serverless,
+            match.stackResourceId!,
+            sentinel,
+            notifications,
+            autotasks.items,
+            blockwatchersForNetwork,
+          );
+
+          // Map match "response" object to that of a "create" object
+          const addressRule =
+            (isBlock(match) && match.addressRules.length > 0 && _.first(match.addressRules)) || undefined;
+          const blockConditions =
+            (addressRule && addressRule.conditions.length > 0 && addressRule.conditions) || undefined;
+          const confirmLevel =
+            (isBlock(match) && match.blockWatcherId.split('-').length > 0 && _.last(match.blockWatcherId.split('-'))) ||
+            undefined;
+
+          const mappedMatch = {
+            name: match.name,
+            abi: addressRule && addressRule.abi,
+            paused: match.paused,
+            alertThreshold: match.alertThreshold,
+            autotaskTrigger: match.notifyConfig?.autotaskId,
+            alertTimeoutMs: match.notifyConfig?.timeoutMs,
+            alertMessageBody: match.notifyConfig?.messageBody,
+            notificationChannels: match.notifyConfig?.notifications.map(
+              (n: DefenderNotificationReference) => n.notificationId,
+            ),
+            type: match.type,
+            stackResourceId: match.stackResourceId,
+            network: match.network,
+            confirmLevel: (confirmLevel && parseInt(confirmLevel)) || confirmLevel,
+            eventConditions: blockConditions && blockConditions.flatMap((c: any) => c.eventConditions),
+            functionConditions: blockConditions && blockConditions.flatMap((c: any) => c.functionConditions),
+            txCondition:
+              blockConditions &&
+              blockConditions[0].txConditions.length > 0 &&
+              blockConditions[0].txConditions[0].expression,
+            privateFortaNodeId: (isForta(match) && match.privateFortaNodeId) || undefined,
+            addresses: isBlock(match) ? addressRule && addressRule.addresses : match.fortaRule?.addresses,
+            autotaskCondition: isBlock(match)
+              ? addressRule && addressRule.autotaskCondition?.autotaskId
+              : match.fortaRule?.autotaskCondition?.autotaskId,
+            fortaLastProcessedTime: (isForta(match) && match.fortaLastProcessedTime) || undefined,
+            agentIDs: (isForta(match) && match.fortaRule?.agentIDs) || undefined,
+            fortaConditions: (isForta(match) && match.fortaRule.conditions) || undefined,
+          };
+
+          if (_.isEqual(validateTypesAndSanitise(newSentinel), validateTypesAndSanitise(mappedMatch))) {
+            return {
+              name: match.stackResourceId!,
+              id: match.subscriberId,
+              success: false,
+              response: match,
+              notice: `Skipped ${match.stackResourceId} - no changes detected`,
+            };
+          }
+
           const updatedSentinel = await client.update(
             match.subscriberId,
-            constructSentinel(
-              this.serverless,
-              match.stackResourceId!,
-              sentinel,
-              notifications,
-              autotasks.items,
-              blockwatchersForNetwork,
-            ),
+            // Do not allow to update network of (existing) sentinels
+            _.omit(newSentinel, ['network']),
           );
+
           return {
             name: updatedSentinel.stackResourceId!,
             id: updatedSentinel.subscriberId,
@@ -575,21 +693,65 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (autotask: YAutotask, match: DefenderAutotask) => {
+        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
+        const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
+        const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
+          this.serverless,
+          autotask.relayer,
+          relayers,
+          existingRelayers,
+        );
         // Get new code digest
         const code = await client.getEncodedZippedCodeFromFolder(autotask.path);
         const newDigest = client.getCodeDigest(code);
-
-        // Get existing one
         const { codeDigest } = await client.get(match.autotaskId);
+
+        const isWebhook = (o: DefenderWebhookTrigger | DefenderScheduleTrigger): o is DefenderWebhookTrigger =>
+          o.type === 'webhook';
+        const isSchedule = (o: DefenderWebhookTrigger | DefenderScheduleTrigger): o is DefenderScheduleTrigger =>
+          o.type === 'schedule';
+
+        const mappedMatch = {
+          name: match.name,
+          trigger: {
+            type: match.trigger.type,
+            frequency: (isSchedule(match.trigger) && match.trigger.frequencyMinutes) || undefined,
+            cron: (isSchedule(match.trigger) && match.trigger.cron) || undefined,
+          },
+          paused: match.paused,
+          relayerId: match.relayerId,
+          codeDigest: match.codeDigest,
+        };
+
+        if (
+          _.isEqual(
+            validateTypesAndSanitise({
+              ..._.omit(autotask, ['events', 'package', 'relayer', 'path']),
+              relayerId: maybeRelayer?.relayerId,
+              codeDigest: newDigest,
+            }),
+            validateTypesAndSanitise(mappedMatch),
+          )
+        ) {
+          return {
+            name: match.stackResourceId!,
+            id: match.autotaskId,
+            success: false,
+            response: match,
+            notice: `Skipped ${match.stackResourceId} - no changes detected`,
+          };
+        }
+
         const updatesAutotask = await client.update({
           autotaskId: match.autotaskId,
           name: autotask.name,
           paused: autotask.paused,
           trigger: {
             type: autotask.trigger.type,
-            frequencyMinutes: autotask.trigger.frequency,
+            frequencyMinutes: autotask.trigger.frequency ?? undefined,
             cron: autotask.trigger.cron ?? undefined,
           },
+          relayerId: maybeRelayer?.relayerId,
         });
 
         if (newDigest === codeDigest) {
@@ -597,7 +759,7 @@ export default class DefenderDeploy {
             name: match.stackResourceId!,
             id: match.autotaskId,
             success: true,
-            notice: `Skipping upload - code digest matches for autotask ${match.stackResourceId}`,
+            notice: `Skipped code upload - no changes detected for ${match.stackResourceId}`,
             response: updatesAutotask,
           };
         } else {
@@ -626,7 +788,7 @@ export default class DefenderDeploy {
           name: autotask.name,
           trigger: {
             type: autotask.trigger.type,
-            frequencyMinutes: autotask.trigger.frequency,
+            frequencyMinutes: autotask.trigger.frequency ?? undefined,
             cron: autotask.trigger.cron ?? undefined,
           },
           encodedZippedCode: await client.getEncodedZippedCodeFromFolder(autotask.path),
@@ -683,7 +845,6 @@ export default class DefenderDeploy {
       for (const [id, resource] of Object.entries(resources ?? [])) {
         // always refresh list after each addition as some resources rely on the previous one
         const existing = await retrieveExistingResources();
-
         const entryStackResourceId = getResourceID(stackName, id);
         let match;
         if (overrideMatchDefinition) {
@@ -709,6 +870,7 @@ export default class DefenderDeploy {
               this.log.success(`Updated ${result.name} (${result.id})`);
               output.updated.push(result.response);
             }
+            // notice logs requires the --verbose flag
             if (result.notice) this.log.info(`${result.notice}`, 1);
             if (result.error) this.log.error(`${result.error}`);
           } catch (e) {

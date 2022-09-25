@@ -5,7 +5,8 @@
       "outDir": "./lib",
       "rootDir": "./src",
       "skipLibCheck": true,
-      "sourceMap": false
+      "sourceMap": false,
+      "resolveJsonModule": true
     },
     "include": ["./src"],
     "exclude": ["./src/types", "node_modules"]
