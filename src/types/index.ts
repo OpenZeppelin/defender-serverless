@@ -119,7 +119,7 @@ export type YBlockSentinel = {
   'notify-config': {
     timeout?: number;
     message?: string;
-    channels: YNotification[];
+    channels?: YNotification[];
   };
   conditions?: {
     event: { signature: string; expression?: string }[];
@@ -141,7 +141,7 @@ export type YFortaSentinel = {
   'notify-config': {
     timeout?: number;
     message?: string;
-    channels: YNotification[];
+    channels?: YNotification[];
   };
   conditions?: {
     'min-scanner-count': number;
