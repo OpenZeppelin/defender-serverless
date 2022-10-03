@@ -67,10 +67,10 @@ resources:
         test: ${self:custom.config.secrets.test}
 
     contracts:
-      contract-2:
+      contract-1:
         name: "Demo-Flash"
         address: "0xA91382E82fB676d4c935E601305E5253b3829dCD"
-        network: "rinkeby"
+        network: "mainnet"
         # optional
         abi: ${file(./abis/demoflash.json.abi)}
         # optional
