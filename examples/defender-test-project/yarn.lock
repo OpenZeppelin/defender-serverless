@@ -1013,7 +1013,7 @@ defaults@^1.0.3:
   dependencies:
     clone "^1.0.2"
 
-defender-admin-client@^1.31.0-rc.2:
+defender-admin-client@^1.31.1:
   version "1.31.1"
   resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.31.1.tgz#469c294ae7dabd3337d68083c4a1d6538c71282e"
   integrity sha512-JnN89C2FbpbKHGnjCKYnns6J+QyTvUchE1HnARoDQLlFqOQroNWXORFPz9W+szE8DYH+XKAQhm9ENgk1k86vvg==
@@ -1023,7 +1023,7 @@ defender-admin-client@^1.31.0-rc.2:
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-autotask-client@^1.31.0-rc.2:
+defender-autotask-client@^1.31.1:
   version "1.31.1"
   resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.31.1.tgz#60487f11c207d196c261d42407779ece7ee3acce"
   integrity sha512-9DdH7S/VRCqy+Gpl9qWq2epo9cArsVxBPiMbcflcDKsV3QhBDjkpcfpU95v4WUBzMSrSf3I2+hCLOlgDb9FmgA==
@@ -1047,7 +1047,7 @@ defender-base-client@1.31.1:
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-relay-client@^1.31.0-rc.2:
+defender-relay-client@^1.31.1:
   version "1.31.1"
   resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.31.1.tgz#ba25a094b3401617d911cd52509ff2284470550c"
   integrity sha512-VrfHcWGvfY68kr7Wyn4gJUQAcdc+lcoIQKB83H+oQUbQfLWkNcOpVzrz3NK33c0xg87w/q/UTW03wIsWkDv2HQ==
@@ -1058,10 +1058,10 @@ defender-relay-client@^1.31.0-rc.2:
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-sentinel-client@^1.31.0-rc.2:
-  version "1.31.1"
-  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.31.1.tgz#e5feffdd701cace11c04818c1fb7e5f84c051e8d"
-  integrity sha512-oMCNQXzBF62ucGXf1SCyMw4pPbOl1nGcN8PxJpBwePsEIInHltgZSw27fycXNhaR8FFyH7akDvjlL4MGUE3Aiw==
+defender-sentinel-client@^1.31.1:
+  version "1.32.0"
+  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.32.0.tgz#6db9752d2ed67a2481204c62aa2a4c557b0d2aa9"
+  integrity sha512-3i3vmPE8SZaYfCdG3c66BYVwtAnZ5QVrCAQ3IWpjYp+45Tpjm0KvqnIaDIVYSHSRHJVh3JcGHH/8cgWLFpVUgw==
   dependencies:
     "@ethersproject/abi" "^5.6.3"
     axios "^0.21.2"
@@ -1069,15 +1069,15 @@ defender-sentinel-client@^1.31.0-rc.2:
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-serverless@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/defender-serverless/-/defender-serverless-1.0.2.tgz#62518e7dfbb14a732c954fb7dec42af366918930"
-  integrity sha512-d4iIpXNEmX7MMDEf2g1TIHFJkSExZ5QdXSlPeky563erZzbFbeyYr4+OZrieDUw7SGvEDZjREsmskjEf48RqkA==
+defender-serverless@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/defender-serverless/-/defender-serverless-1.0.3.tgz#8ea88003a06d9248e92857d33fe6d1a224d9748f"
+  integrity sha512-P9Td0LIwyOjbpCerFggM2SiN6A9QCfiLvaSalbjIQr6o5sZRzbZvwWwHyLUoKYpdsY5bzqA7exO5hkF8CexqmA==
   dependencies:
-    defender-admin-client "^1.31.0-rc.2"
-    defender-autotask-client "^1.31.0-rc.2"
-    defender-relay-client "^1.31.0-rc.2"
-    defender-sentinel-client "^1.31.0-rc.2"
+    defender-admin-client "^1.31.1"
+    defender-autotask-client "^1.31.1"
+    defender-relay-client "^1.31.1"
+    defender-sentinel-client "^1.31.1"
     lodash "^4.17.21"
     prompt "^1.3.0"
 
