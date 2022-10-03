@@ -259,6 +259,7 @@ export const constructSentinel = (
       confirmLevel: compatibleBlockWatcher!.confirmLevel,
       eventConditions:
         sentinel.conditions &&
+        sentinel.conditions.event &&
         sentinel.conditions.event.map((c) => {
           return {
             eventSignature: c.signature,
@@ -267,6 +268,7 @@ export const constructSentinel = (
         }),
       functionConditions:
         sentinel.conditions &&
+        sentinel.conditions.function &&
         sentinel.conditions.function.map((c) => {
           return {
             functionSignature: c.signature,
