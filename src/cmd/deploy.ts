@@ -344,6 +344,14 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (relayer: YRelayer, match: DefenderRelayer) => {
+        // Warn users when they try to change the relayer network
+        if (match.network !== relayer.network) {
+          this.log.warn(
+            `Detected a network change from ${match.network} to ${relayer.network} for Relayer: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Relayer is created. This change will be ignored. To enforce this change, remove this relayer and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer.`,
+          );
+          relayer.network = match.network!;
+        }
+
         const mappedMatch = {
           name: match.name,
           network: match.network,
@@ -557,7 +565,7 @@ export default class DefenderDeploy {
           // Warn users when they try to change the sentinel network
           if (match.network !== sentinel.network) {
             this.log.warn(
-              `Detected a network change from ${match.network} to ${sentinel.network} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Atlernatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel.`,
+              `Detected a network change from ${match.network} to ${sentinel.network} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this sentinel.`,
             );
             sentinel.network = match.network!;
           }
@@ -565,7 +573,7 @@ export default class DefenderDeploy {
           // Warn users when they try to change the sentinel type
           if (sentinel.type !== match.type) {
             this.log.warn(
-              `Detected a type change from ${match.type} to ${sentinel.type} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the type once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Atlernatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel.`,
+              `Detected a type change from ${match.type} to ${sentinel.type} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the type once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this sentinel.`,
             );
             sentinel.type = match.type;
           }
