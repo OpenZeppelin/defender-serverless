@@ -55,6 +55,7 @@ resources:
           - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
         # optional
         eip1559-pricing: true
+        private-transactions: true
 
     secrets:
       # optional - global secrets are not affected by stackName changes
