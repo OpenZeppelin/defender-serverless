@@ -53,6 +53,7 @@ export type YPolicy = {
   'gas-price-cap'?: number;
   'whitelist-receivers'?: string[];
   'eip1559-pricing'?: boolean;
+  'private-transactions'?: boolean;
 };
 
 export type YRelayer = {
