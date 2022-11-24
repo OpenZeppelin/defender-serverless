@@ -2,7 +2,11 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Definitions",
   "definitions": {
-    "address": { "title": "Address", "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+    "address": {
+      "title": "Address",
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$"
+    },
     "network": {
       "title": "Network",
       "type": "string",
@@ -40,86 +44,152 @@
         "auroratest",
         "hedera",
         "hederatest",
-
         "x-dfk-avax-chain",
-        "x-dfk-avax-chain-test"
+        "x-dfk-avax-chain-test",
+        "zksync-goerli"
       ]
     },
     "policy": {
       "title": "Policy",
       "type": "object",
       "properties": {
-        "gas-price-cap": { "type": "integer" },
-        "whitelist-receivers": { "title": "WhitelistReceivers", "type": "array", "items": { "type": "string" } },
-        "eip1559-pricing": { "type": "boolean" }
+        "gas-price-cap": {
+          "type": "integer"
+        },
+        "whitelist-receivers": {
+          "title": "WhitelistReceivers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eip1559-pricing": {
+          "type": "boolean"
+        }
       }
     },
     "relayer": {
       "title": "Relayer",
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
-        "min-balance": { "type": "integer" },
+        "name": {
+          "type": "string"
+        },
+        "network": {
+          "$ref": "definitions.schema.json/#/definitions/network",
+          "format": "uri-reference"
+        },
+        "min-balance": {
+          "type": "integer"
+        },
         "address-from-relayer": {
           "title": "AddressFromRelayer",
           "type": "object"
         },
-        "policy": { "$ref": "definitions.schema.json/#/definitions/policy", "format": "uri-reference" },
+        "policy": {
+          "$ref": "definitions.schema.json/#/definitions/policy",
+          "format": "uri-reference"
+        },
         "api-keys": {
           "title": "RelayerAPIKeys",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
-      "required": ["name", "network", "min-balance"]
+      "required": [
+        "name",
+        "network",
+        "min-balance"
+      ]
     },
     "contract": {
       "title": "Contract",
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "address": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
-        "abi": { "type": "string" },
-        "nat-spec": { "type": "string" }
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "definitions.schema.json/#/definitions/address",
+          "format": "uri-reference"
+        },
+        "network": {
+          "$ref": "definitions.schema.json/#/definitions/network",
+          "format": "uri-reference"
+        },
+        "abi": {
+          "type": "string"
+        },
+        "nat-spec": {
+          "type": "string"
+        }
       },
-      "required": ["name", "address", "network"]
+      "required": [
+        "name",
+        "address",
+        "network"
+      ]
     },
     "notificationType": {
       "title": "NotificationType",
       "type": "string",
-      "enum": ["slack", "email", "discord", "telegram", "datadog", "webhook"]
+      "enum": [
+        "slack",
+        "email",
+        "discord",
+        "telegram",
+        "datadog",
+        "webhook"
+      ]
     },
     "datadogConfig": {
       "title": "DatadogConfig",
       "type": "object",
       "properties": {
-        "api-key": { "type": "string" },
+        "api-key": {
+          "type": "string"
+        },
         "metric-p$refix": {
           "type": "string",
           "maxLength": 100,
           "pattern": "^[A-Za-z]+[A-Za-z0-9_\\.]*\\.$"
         }
       },
-      "required": ["api-key", "metric-p$refix"]
+      "required": [
+        "api-key",
+        "metric-p$refix"
+      ]
     },
     "urlConfig": {
       "title": "UrlConfig",
       "type": "object",
       "properties": {
-        "url": { "type": "string", "format": "uri" }
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
       },
-      "required": ["url"]
+      "required": [
+        "url"
+      ]
     },
     "telegramBotConfig": {
       "title": "TelegramConfig",
       "type": "object",
       "properties": {
-        "bot-token": { "type": "string" },
-        "chat-id": { "type": "string" }
+        "bot-token": {
+          "type": "string"
+        },
+        "chat-id": {
+          "type": "string"
+        }
       },
-      "required": ["bot-token", "chat-id"]
+      "required": [
+        "bot-token",
+        "chat-id"
+      ]
     },
     "emailConfig": {
       "title": "EmailConfig",
@@ -128,69 +198,148 @@
         "emails": {
           "title": "Emails",
           "type": "array",
-          "items": { "type": "string", "format": "email" },
+          "items": {
+            "type": "string",
+            "format": "email"
+          },
           "default": []
         }
       },
-      "required": ["emails"]
+      "required": [
+        "emails"
+      ]
     },
     "notification": {
       "title": "Notification",
       "type": "object",
       "properties": {
-        "type": { "$ref": "definitions.schema.json/#/definitions/notificationType", "format": "uri-reference" },
-        "name": { "type": "string" },
-        "paused": { "type": "boolean" },
+        "type": {
+          "$ref": "definitions.schema.json/#/definitions/notificationType",
+          "format": "uri-reference"
+        },
+        "name": {
+          "type": "string"
+        },
+        "paused": {
+          "type": "boolean"
+        },
         "config": {
           "title": "Config",
           "type": "object",
           "oneOf": [
-            { "$ref": "definitions.schema.json/#/definitions/emailConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/telegramBotConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/datadogConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/urlConfig", "format": "uri-reference" }
+            {
+              "$ref": "definitions.schema.json/#/definitions/emailConfig",
+              "format": "uri-reference"
+            },
+            {
+              "$ref": "definitions.schema.json/#/definitions/telegramBotConfig",
+              "format": "uri-reference"
+            },
+            {
+              "$ref": "definitions.schema.json/#/definitions/datadogConfig",
+              "format": "uri-reference"
+            },
+            {
+              "$ref": "definitions.schema.json/#/definitions/urlConfig",
+              "format": "uri-reference"
+            }
           ]
         }
       },
-      "required": ["type", "name", "paused", "config"]
+      "required": [
+        "type",
+        "name",
+        "paused",
+        "config"
+      ]
     },
     "blockSentinel": {
       "title": "BlockSentinel",
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "type": { "type": "string", "enum": ["BLOCK"] },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BLOCK"
+          ]
+        },
+        "network": {
+          "$ref": "definitions.schema.json/#/definitions/network",
+          "format": "uri-reference"
+        },
         "addresses": {
           "title": "Addresses",
           "type": "array",
-          "items": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" }
+          "items": {
+            "$ref": "definitions.schema.json/#/definitions/address",
+            "format": "uri-reference"
+          }
         },
-        "abi": { "type": "string" },
+        "abi": {
+          "type": "string"
+        },
         "alert-threshold": {
           "title": "AlertThreshold",
           "type": "object",
-          "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } }
+          "properties": {
+            "amount": {
+              "type": "integer"
+            },
+            "window-seconds": {
+              "type": "integer"
+            }
+          }
         },
-        "paused": { "type": "boolean" },
-        "autotask-condition": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
-        "autotask-trigger": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
+        "paused": {
+          "type": "boolean"
+        },
+        "autotask-condition": {
+          "$ref": "definitions.schema.json/#/definitions/autotask",
+          "format": "uri-reference"
+        },
+        "autotask-trigger": {
+          "$ref": "definitions.schema.json/#/definitions/autotask",
+          "format": "uri-reference"
+        },
         "confirm-level": {
-          "oneOf": [{ "type": "string", "enum": ["safe", "finalized"] }, { "type": "integer" }]
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "safe",
+                "finalized"
+              ]
+            },
+            {
+              "type": "integer"
+            }
+          ]
         },
         "notify-config": {
           "title": "NotifyConfig",
           "type": "object",
           "properties": {
-            "timeout": { "type": "integer" },
-            "message": { "type": "string" },
+            "timeout": {
+              "type": "integer"
+            },
+            "message": {
+              "type": "string"
+            },
             "channels": {
               "title": "Channels",
               "type": "array",
-              "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
+              "items": {
+                "$ref": "definitions.schema.json/#/definitions/notification",
+                "format": "uri-reference"
+              }
             }
           },
-          "required": ["channels"]
+          "required": [
+            "channels"
+          ]
         },
         "conditions": {
           "title": "Conditions",
@@ -202,8 +351,17 @@
               "items": {
                 "title": "EventItems",
                 "type": "object",
-                "properties": { "signature": { "type": "string" }, "expression": { "type": "string" } },
-                "required": ["signature"]
+                "properties": {
+                  "signature": {
+                    "type": "string"
+                  },
+                  "expression": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "signature"
+                ]
               }
             },
             "function": {
@@ -212,124 +370,252 @@
               "items": {
                 "title": "FunctionItems",
                 "type": "object",
-                "properties": { "signature": { "type": "string" }, "expression": { "type": "string" } },
-                "required": ["signature"]
+                "properties": {
+                  "signature": {
+                    "type": "string"
+                  },
+                  "expression": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "signature"
+                ]
               }
             },
-            "transaction": { "type": "string" }
+            "transaction": {
+              "type": "string"
+            }
           }
         }
       },
-      "required": ["name", "type", "network", "addresses", "notify-config"]
+      "required": [
+        "name",
+        "type",
+        "network",
+        "addresses",
+        "notify-config"
+      ]
     },
     "fortaSentinel": {
       "title": "FortaSentinel",
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "type": { "type": "string", "enum": ["FORTA"] },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "FORTA"
+          ]
+        },
+        "network": {
+          "$ref": "definitions.schema.json/#/definitions/network",
+          "format": "uri-reference"
+        },
         "addresses": {
           "title": "Addresses",
           "type": "array",
-          "items": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" }
+          "items": {
+            "$ref": "definitions.schema.json/#/definitions/address",
+            "format": "uri-reference"
+          }
         },
-        "abi": { "type": "string" },
+        "abi": {
+          "type": "string"
+        },
         "alert-threshold": {
           "title": "AlertThreshold",
           "type": "object",
-          "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } }
+          "properties": {
+            "amount": {
+              "type": "integer"
+            },
+            "window-seconds": {
+              "type": "integer"
+            }
+          }
         },
-        "paused": { "type": "boolean" },
-        "autotask-condition": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
-        "autotask-trigger": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
+        "paused": {
+          "type": "boolean"
+        },
+        "autotask-condition": {
+          "$ref": "definitions.schema.json/#/definitions/autotask",
+          "format": "uri-reference"
+        },
+        "autotask-trigger": {
+          "$ref": "definitions.schema.json/#/definitions/autotask",
+          "format": "uri-reference"
+        },
         "notify-config": {
           "title": "NotifyConfig",
           "type": "object",
           "properties": {
-            "timeout": { "type": "integer" },
-            "message": { "type": "string" },
+            "timeout": {
+              "type": "integer"
+            },
+            "message": {
+              "type": "string"
+            },
             "channels": {
               "title": "Channels",
               "type": "array",
-              "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
+              "items": {
+                "$ref": "definitions.schema.json/#/definitions/notification",
+                "format": "uri-reference"
+              }
             }
           },
-          "required": ["channels"]
+          "required": [
+            "channels"
+          ]
         },
         "conditions": {
           "title": "Conditions",
           "type": "object",
           "properties": {
-            "min-scanner-count": { "type": "integer" },
-            "severity": { "type": "integer", "enum": [0, 1, 2, 3, 4, 5] },
+            "min-scanner-count": {
+              "type": "integer"
+            },
+            "severity": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
             "alert-ids": {
               "title": "AlertIDs",
               "type": "array",
-              "items": { "type": "string" }
+              "items": {
+                "type": "string"
+              }
             }
           },
-          "required": ["min-scanner-count"]
+          "required": [
+            "min-scanner-count"
+          ]
         },
-        "forta-node-id": { "type": "string" },
+        "forta-node-id": {
+          "type": "string"
+        },
         "agent-ids": {
           "title": "AgentIDs",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
       "anyOf": [
         {
-          "required": ["agent-ids"]
+          "required": [
+            "agent-ids"
+          ]
         },
         {
-          "required": ["addresses"]
+          "required": [
+            "addresses"
+          ]
         }
       ],
-      "required": ["name", "type", "network", "notify-config"]
+      "required": [
+        "name",
+        "type",
+        "network",
+        "notify-config"
+      ]
     },
     "sentinel": {
       "title": "Sentinel",
       "type": "object",
       "oneOf": [
-        { "$ref": "definitions.schema.json/#/definitions/blockSentinel", "format": "uri-reference" },
-        { "$ref": "definitions.schema.json/#/definitions/fortaSentinel", "format": "uri-reference" }
+        {
+          "$ref": "definitions.schema.json/#/definitions/blockSentinel",
+          "format": "uri-reference"
+        },
+        {
+          "$ref": "definitions.schema.json/#/definitions/fortaSentinel",
+          "format": "uri-reference"
+        }
       ]
     },
     "autotask": {
       "title": "Autotask",
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "path": { "type": "string" },
-        "relayer": { "$ref": "definitions.schema.json/#/definitions/relayer", "format": "uri-reference" },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "relayer": {
+          "$ref": "definitions.schema.json/#/definitions/relayer",
+          "format": "uri-reference"
+        },
         "trigger": {
           "title": "Trigger",
           "type": "object",
           "properties": {
-            "type": { "title": "TriggerType", "type": "string", "enum": ["schedule", "webhook"] },
-            "cron": { "title": "TriggerCron", "type": "string" },
-            "frequency": { "title": "TriggerFrequency", "type": "integer" }
+            "type": {
+              "title": "TriggerType",
+              "type": "string",
+              "enum": [
+                "schedule",
+                "webhook"
+              ]
+            },
+            "cron": {
+              "title": "TriggerCron",
+              "type": "string"
+            },
+            "frequency": {
+              "title": "TriggerFrequency",
+              "type": "integer"
+            }
           },
           "if": {
-            "properties": { "type": { "const": "schedule" } }
+            "properties": {
+              "type": {
+                "const": "schedule"
+              }
+            }
           },
           "then": {
             "oneOf": [
               {
-                "required": ["cron"]
+                "required": [
+                  "cron"
+                ]
               },
               {
-                "required": ["frequency"]
+                "required": [
+                  "frequency"
+                ]
               }
             ]
           },
           "else": {},
-          "required": ["type"]
+          "required": [
+            "type"
+          ]
         },
-        "paused": { "type": "boolean" }
+        "paused": {
+          "type": "boolean"
+        }
       },
-      "required": ["name", "path", "trigger", "paused"]
+      "required": [
+        "name",
+        "path",
+        "trigger",
+        "paused"
+      ]
     }
   }
 }
