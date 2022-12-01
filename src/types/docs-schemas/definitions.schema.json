@@ -40,9 +40,9 @@
         "auroratest",
         "hedera",
         "hederatest",
-
         "x-dfk-avax-chain",
-        "x-dfk-avax-chain-test"
+        "x-dfk-avax-chain-test",
+        "zksync-goerli"
       ]
     },
     "policy": {
