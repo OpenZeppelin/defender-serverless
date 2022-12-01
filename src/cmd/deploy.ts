@@ -360,6 +360,7 @@ export default class DefenderDeploy {
             'gas-price-cap': match.policies.gasPriceCap,
             'whitelist-receivers': match.policies.whitelistReceivers,
             'eip1559-pricing': match.policies.EIP1559Pricing,
+            'private-transactions': match.policies.privateTransactions,
           },
           // currently not supported by defender-client
           // paused: match.paused
@@ -378,6 +379,7 @@ export default class DefenderDeploy {
               whitelistReceivers: relayer.policy['whitelist-receivers'],
               gasPriceCap: relayer.policy['gas-price-cap'],
               EIP1559Pricing: relayer.policy['eip1559-pricing'],
+              privateTransactions: relayer.policy['private-transactions'],
             },
           });
         }
@@ -450,6 +452,7 @@ export default class DefenderDeploy {
             whitelistReceivers: relayer.policy['whitelist-receivers'],
             gasPriceCap: relayer.policy['gas-price-cap'],
             EIP1559Pricing: relayer.policy['eip1559-pricing'],
+            privateTransactions: relayer.policy['private-transactions'],
           },
           stackResourceId,
         });

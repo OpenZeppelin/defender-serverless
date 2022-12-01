@@ -65,6 +65,9 @@
         },
         "eip1559-pricing": {
           "type": "boolean"
+        },
+        "private-transactions": {
+          "type": "boolean"
         }
       }
     },
