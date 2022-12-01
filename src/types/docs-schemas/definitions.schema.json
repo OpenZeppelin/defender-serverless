@@ -205,7 +205,9 @@
             "type": "string",
             "format": "email"
           },
-          "default": []
+          "default": [
+            
+          ]
         }
       },
       "required": [
@@ -604,7 +606,9 @@
               }
             ]
           },
-          "else": {},
+          "else": {
+            
+          },
           "required": [
             "type"
           ]
