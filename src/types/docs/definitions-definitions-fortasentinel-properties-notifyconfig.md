@@ -8,6 +8,7 @@
 | :-------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [timeout](#timeout)   | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig-properties-timeout.md "#/definitions/fortaSentinel/properties/notify-config/properties/timeout")   |
 | [message](#message)   | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig-properties-message.md "#/definitions/fortaSentinel/properties/notify-config/properties/message")   |
+| [category](#category) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig-properties-category.md "#/definitions/fortaSentinel/properties/notify-config/properties/category") |
 | [channels](#channels) | `array`   | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig-properties-channels.md "#/definitions/fortaSentinel/properties/notify-config/properties/channels") |
 
 ## timeout
@@ -43,6 +44,24 @@
 *   defined in: [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig-properties-message.md "#/definitions/fortaSentinel/properties/notify-config/properties/message")
 
 ### message Type
+
+`string`
+
+## category
+
+
+
+`category`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig-properties-category.md "#/definitions/fortaSentinel/properties/notify-config/properties/category")
+
+### category Type
 
 `string`
 

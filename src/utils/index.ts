@@ -25,6 +25,7 @@ import {
   ResourceType,
   DefenderBlockWatcher,
   YCategory,
+  DefenderCategory,
 } from '../types';
 import { sanitise } from './sanitise';
 
@@ -217,11 +218,28 @@ export const constructSentinel = (
   notifications: DefenderNotification[],
   autotasks: DefenderAutotask[],
   blockwatchers: DefenderBlockWatcher[],
+  categories: DefenderCategory[],
 ): DefenderBlockSentinel | DefenderFortaSentinel => {
   const autotaskCondition =
     sentinel['autotask-condition'] && autotasks.find((a) => a.name === sentinel['autotask-condition']!.name);
   const autotaskTrigger =
     sentinel['autotask-trigger'] && autotasks.find((a) => a.name === sentinel['autotask-trigger']!.name);
+
+  const notificationChannels = sentinel['notify-config'].channels
+    .map((notification) => {
+      const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+        context,
+        notification,
+        context.service.resources?.Resources?.notifications,
+        notifications,
+      );
+      return maybeNotification?.notificationId;
+    })
+    .filter(isResource);
+
+  const sentinelCategory = sentinel['notify-config'].category;
+  const notificationCategoryId =
+    sentinelCategory && categories.find((c) => c.name === sentinelCategory.name)?.categoryId;
 
   const commonSentinel = {
     type: sentinel.type,
@@ -238,17 +256,8 @@ export const constructSentinel = (
     },
     alertMessageBody: sentinel['notify-config'].message,
     alertTimeoutMs: sentinel['notify-config'].timeout,
-    notificationChannels: sentinel['notify-config'].channels
-      .map((notification) => {
-        const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
-          context,
-          notification,
-          context.service.resources?.Resources?.notifications,
-          notifications,
-        );
-        return maybeNotification?.notificationId;
-      })
-      .filter(isResource),
+    notificationChannels: notificationChannels,
+    notificationCategoryId: _.isEmpty(notificationChannels) ? notificationCategoryId : undefined,
     stackResourceId: stackResourceId,
   };
 

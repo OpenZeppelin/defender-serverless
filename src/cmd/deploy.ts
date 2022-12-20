@@ -81,6 +81,7 @@ export default class DefenderDeploy {
       sentinels: [],
       autotasks: [],
       notifications: [],
+      categories: [],
       contracts: [],
       relayerApiKeys: [],
       secrets: [],
@@ -142,6 +143,16 @@ export default class DefenderDeploy {
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
+    // Notification Categories
+    const categories: YCategory[] = this.serverless.service.resources?.Resources?.categories ?? [];
+    const dCategories = await sentinelClient.listNotificationCategories();
+    const categoryDifference = _.differenceWith(
+      dCategories,
+      Object.entries(categories ?? []),
+      (a: DefenderCategory, b: [string, YCategory]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    );
+
     // Autotasks
     const autotasks: YAutotask[] = this.serverless.service.functions as any;
     const autotaskClient = getAutotaskClient(this.teamKey!);
@@ -165,6 +176,7 @@ export default class DefenderDeploy {
     difference.contracts = contractDifference;
     difference.sentinels = sentinelDifference;
     difference.notifications = notificationDifference;
+    difference.categories = categoryDifference;
     difference.autotasks = autotaskDifference;
     difference.secrets = secretsDifference;
 
@@ -603,7 +615,7 @@ export default class DefenderDeploy {
       },
       // on remove
       async (categories: DefenderCategory[]) => {
-        await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n)));
+        await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n.categoryId)));
       },
       undefined,
       output,
@@ -617,6 +629,7 @@ export default class DefenderDeploy {
       const client = getSentinelClient(this.teamKey!);
       const autotasks = await getAutotaskClient(this.teamKey!).list();
       const notifications = await client.listNotificationChannels();
+      const categories = await client.listNotificationCategories();
       const retrieveExisting = () => client.list().then((r) => r.items);
 
       await this.wrapper<YSentinel, DefenderSentinel>(
@@ -656,6 +669,7 @@ export default class DefenderDeploy {
             notifications,
             autotasks.items,
             blockwatchersForNetwork,
+            categories,
           );
 
           // Map match "response" object to that of a "create" object
@@ -678,6 +692,9 @@ export default class DefenderDeploy {
             notificationChannels: match.notifyConfig?.notifications.map(
               (n: DefenderNotificationReference) => n.notificationId,
             ),
+            notificationCategoryId: _.isEmpty(match.notifyConfig?.notifications)
+              ? match.notifyConfig?.notificationCategoryId
+              : undefined,
             type: match.type,
             stackResourceId: match.stackResourceId,
             network: match.network,
@@ -734,6 +751,7 @@ export default class DefenderDeploy {
               notifications,
               autotasks.items,
               blockwatchersForNetwork,
+              categories,
             ),
           );
           return {

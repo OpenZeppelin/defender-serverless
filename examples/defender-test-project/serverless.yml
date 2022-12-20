@@ -112,6 +112,24 @@ resources:
           url: ${self:custom.config.notifications.slack}
         paused: false
 
+    categories:
+      high-severity:
+        name: High Severity
+        # optional
+        description: A default category to be assigned for high risk monitors.
+      low-severity:
+        name: Low Severity
+        # optional
+        description: A default category to be assigned for low risk monitors.
+      medium-severity:
+        name: Medium Severity
+        # optional
+        description: A default category to be assigned for medium risk monitors.
+        # optional
+        notification-ids:
+          - ${self:resources.Resources.notifications.email-1}
+          - ${self:resources.Resources.notifications.slack-1}
+
     sentinels:
       # unique resource name
       block-example:

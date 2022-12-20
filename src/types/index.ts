@@ -12,8 +12,9 @@ import {
   EmailConfig,
   DiscordConfig,
   NotificationType,
-  NotificationCategory,
 } from 'defender-sentinel-client/lib/models/notification';
+
+import { NotificationCategory } from 'defender-sentinel-client/lib/models/category';
 import { CreateSentinelResponse, BlockWatcher } from 'defender-sentinel-client';
 
 import {
@@ -135,6 +136,7 @@ export type YBlockSentinel = {
   'notify-config': {
     timeout?: number;
     message?: string;
+    category?: YCategory;
     channels: YNotification[];
   };
   conditions?: {
@@ -157,6 +159,7 @@ export type YFortaSentinel = {
   'notify-config': {
     timeout?: number;
     message?: string;
+    category?: YCategory;
     channels: YNotification[];
   };
   conditions?: {

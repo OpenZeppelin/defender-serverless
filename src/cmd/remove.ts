@@ -264,7 +264,7 @@ export default class DefenderRemove {
               'component-remove-extra',
               `Removing ${e.stackResourceId} (${e.categoryId}) from Defender`,
             );
-            await sentinelClient.deleteNotificationCategory(e);
+            await sentinelClient.deleteNotificationCategory(e.categoryId);
             this.log.success(`Removed ${e.stackResourceId} (${e.categoryId})`);
           }),
         );
