@@ -188,8 +188,8 @@ resources:
         notify-config:
           timeout: 0 # optional
           message: null # optional
-          channels: 
-            - ${self:resources.Resources.notifications.slack-1}
+          category:
+            - ${self:resources.Resources.categories.medium-severity}
         # optional
         conditions:
           min-scanner-count: 1
