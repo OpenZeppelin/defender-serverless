@@ -21,6 +21,7 @@ import {
   getEquivalentResourceByKey,
   getConsolidatedSecrets,
   validateTypesAndSanitise,
+  constructNotificationCategory,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -45,6 +46,8 @@ import {
   DefenderFortaSentinelResponse,
   DefenderScheduleTrigger,
   DefenderWebhookTrigger,
+  DefenderCategory,
+  YCategory,
 } from '../types';
 
 export default class DefenderDeploy {
@@ -547,6 +550,67 @@ export default class DefenderDeploy {
     );
   }
 
+  private async deployCategories(output: DeployOutput<DefenderCategory>) {
+    const categories: YCategory[] = this.serverless.service.resources?.Resources?.categories ?? [];
+    const client = getSentinelClient(this.teamKey!);
+    const notifications = await client.listNotificationChannels();
+    const retrieveExisting = () => client.listNotificationCategories();
+
+    await this.wrapper<YCategory, DefenderCategory>(
+      this.serverless,
+      'Categories',
+      categories,
+      retrieveExisting,
+      // on update
+      async (category: YCategory, match: DefenderCategory) => {
+        const mappedMatch = {
+          name: match.name,
+          description: match.description,
+          notificationIds: match.notificationIds,
+        };
+        if (_.isEqual(validateTypesAndSanitise(category), validateTypesAndSanitise(mappedMatch))) {
+          return {
+            name: match.stackResourceId!,
+            id: match.categoryId,
+            success: false,
+            response: match,
+            notice: `Skipped ${match.stackResourceId} - no changes detected`,
+          };
+        }
+
+        const updatedCategory = await client.updateNotificationCategory({
+          ...constructNotificationCategory(this.serverless, category, match.stackResourceId!, notifications),
+          categoryId: match.categoryId,
+        });
+        return {
+          name: updatedCategory.stackResourceId!,
+          id: updatedCategory.categoryId,
+          success: true,
+          response: updatedCategory,
+        };
+      },
+      // on create
+      async (category: YCategory, stackResourceId: string) => {
+        const createdCategory = await client.createNotificationCategory(
+          constructNotificationCategory(this.serverless, category, stackResourceId, notifications),
+        );
+        return {
+          name: stackResourceId,
+          id: createdCategory.categoryId,
+          success: true,
+          response: createdCategory,
+        };
+      },
+      // on remove
+      async (categories: DefenderCategory[]) => {
+        await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n)));
+      },
+      undefined,
+      output,
+      this.ssotDifference?.categories,
+    );
+  }
+
   private async deploySentinels(output: DeployOutput<DefenderSentinel>) {
     try {
       const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
@@ -937,6 +1001,11 @@ export default class DefenderDeploy {
       created: [],
       updated: [],
     };
+    const categories: DeployOutput<DefenderCategory> = {
+      removed: [],
+      created: [],
+      updated: [],
+    };
     const secrets: DeployOutput<string> = {
       removed: [],
       created: [],
@@ -963,6 +1032,7 @@ export default class DefenderDeploy {
       contracts,
       relayers,
       notifications,
+      categories,
       secrets,
     };
     await this.deploySecrets(stdOut.secrets);
@@ -970,8 +1040,9 @@ export default class DefenderDeploy {
     // Always deploy relayers before autotasks
     await this.deployRelayers(stdOut.relayers);
     await this.deployAutotasks(stdOut.autotasks);
-    // Deploy notifications before sentinels
+    // Deploy notifications before sentinels and categories
     await this.deployNotifications(stdOut.notifications);
+    await this.deployCategories(stdOut.categories);
     await this.deploySentinels(stdOut.sentinels);
 
     this.log.notice('========================================================');

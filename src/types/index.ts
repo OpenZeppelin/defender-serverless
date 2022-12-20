@@ -12,6 +12,7 @@ import {
   EmailConfig,
   DiscordConfig,
   NotificationType,
+  NotificationCategory,
 } from 'defender-sentinel-client/lib/models/notification';
 import { CreateSentinelResponse, BlockWatcher } from 'defender-sentinel-client';
 
@@ -32,6 +33,7 @@ export type DefenderRelayer = RelayerGetResponse;
 export type DefenderAutotask = Autotask;
 export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
+export type DefenderCategory = NotificationCategory;
 export type DefenderNotificationReference = NotificationReference;
 export type DefenderSentinel = CreateSentinelResponse;
 export type DefenderBlockSentinelResponse = CreateBlockSubscriberResponse;
@@ -47,7 +49,14 @@ export type DefenderNetwork = Network;
 export type DefenderWebhookTrigger = WebhookTrigger;
 export type DefenderScheduleTrigger = ScheduleTrigger;
 
-export type ResourceType = 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets';
+export type ResourceType =
+  | 'Sentinels'
+  | 'Relayers'
+  | 'Notifications'
+  | 'Categories'
+  | 'Autotasks'
+  | 'Contracts'
+  | 'Secrets';
 
 export type YPolicy = {
   'gas-price-cap'?: number;
@@ -104,6 +113,12 @@ export type YNotification = SaveNotificationRequest & {
   name: string;
   paused: boolean;
   config: YSlackConfig | YTelegramConfig | YDatadogConfig | YDiscordConfig | YEmailConfig;
+};
+
+export type YCategory = {
+  name: string;
+  description: string;
+  'notification-ids': YNotification[];
 };
 
 export type YBlockSentinel = {
@@ -188,6 +203,7 @@ export type ListDefenderResources = {
   sentinels: DefenderSentinel[];
   autotasks: DefenderAutotask[];
   notifications: DefenderNotification[];
+  categories: DefenderCategory[];
   contracts: DefenderContract[];
   relayerApiKeys: DefenderRelayerApiKey[];
   secrets: string[];

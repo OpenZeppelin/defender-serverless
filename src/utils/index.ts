@@ -24,6 +24,7 @@ import {
   DefenderContract,
   ResourceType,
   DefenderBlockWatcher,
+  YCategory,
 } from '../types';
 import { sanitise } from './sanitise';
 
@@ -182,6 +183,29 @@ export const constructNotification = (notification: YNotification, stackResource
   }
 };
 
+export const constructNotificationCategory = (
+  context: Serverless,
+  category: YCategory,
+  stackResourceId: string,
+  notifications: DefenderNotification[],
+) => {
+  return {
+    name: category.name,
+    description: category.description,
+    notificationIds: category['notification-ids']
+      .map((notification) => {
+        const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+          context,
+          notification,
+          context.service.resources?.Resources?.notifications,
+          notifications,
+        );
+        return maybeNotification?.notificationId;
+      })
+      .filter(isResource),
+    stackResourceId,
+  };
+};
 const isResource = <T>(item: T | undefined): item is T => {
   return !!item;
 };
