@@ -188,8 +188,8 @@ resources:
         notify-config:
           timeout: 0 # optional
           message: null # optional
-          category:
-            - ${self:resources.Resources.categories.medium-severity}
+          channels: [] # assign channels as empty list if you wish to use a category
+          category: ${self:resources.Resources.categories.medium-severity} # optional (only used if channels is empty)
         # optional
         conditions:
           min-scanner-count: 1

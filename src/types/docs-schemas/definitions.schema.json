@@ -198,7 +198,7 @@
           "properties": {
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
-            "category": { "type": "string" },
+            "category": { "$ref": "definitions.schema.json/#/definitions/category", "format": "uri-reference" },
             "channels": {
               "title": "Channels",
               "type": "array",
@@ -264,7 +264,7 @@
           "properties": {
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
-            "category": { "type": "string" },
+            "category": { "$ref": "definitions.schema.json/#/definitions/category", "format": "uri-reference" },
             "channels": {
               "title": "Channels",
               "type": "array",

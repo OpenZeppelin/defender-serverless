@@ -2,6 +2,10 @@
 
 `object` ([Category](definitions-definitions-category.md))
 
+## category Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
 # category Properties
 
 | Property                            | Type     | Required | Nullable       | Defined by                                                                                                                                 |
