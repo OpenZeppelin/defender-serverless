@@ -21,6 +21,7 @@ import {
   getEquivalentResourceByKey,
   getConsolidatedSecrets,
   validateTypesAndSanitise,
+  validateAdditionalPermissionsOrThrow,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -838,8 +839,10 @@ export default class DefenderDeploy {
   ) {
     try {
       const stackName = getStackName(context);
-      this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
       this.log.notice(`${resourceType}`);
+      this.log.progress('component-deploy', `Validating permissions for ${resourceType}`);
+      await validateAdditionalPermissionsOrThrow<Y>(context, resources, resourceType);
+      this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
 
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {

@@ -1,0 +1,3 @@
+# Apply override to all files and directories in the directory
+src/types/docs/** linguist-generated
+src/types/schemas/** linguist-generated
