@@ -24,6 +24,8 @@ import {
   DefenderContract,
   ResourceType,
   DefenderBlockWatcher,
+  DefenderAPIError,
+  YAutotask,
 } from '../types';
 import { sanitise } from './sanitise';
 
@@ -281,4 +283,73 @@ export const constructSentinel = (
   }
 
   throw new Error('Incompatible sentinel type. Type must be either FORTA or BLOCK');
+};
+
+export const validateAdditionalPermissionsOrThrow = async <T>(
+  context: Serverless,
+  resources: T[] | undefined,
+  resourceType: ResourceType,
+) => {
+  if (!resources) return;
+  const teamApiKey = getTeamAPIkeysOrThrow(context);
+  switch (resourceType) {
+    case 'Sentinels':
+      // Check for access to Autotasks
+      // Enumerate all sentinels, and check if any sentinel has an autotask associated
+      const sentinelsWithAutotasks = (Object.values(resources) as unknown as YSentinel[]).filter(
+        (r) => !!r['autotask-condition'] || !!r['autotask-trigger'],
+      );
+      // If there are sentinels with autotasks associated, then try to list autotasks
+      if (!_.isEmpty(sentinelsWithAutotasks)) {
+        try {
+          await getAutotaskClient(teamApiKey).list();
+          return;
+        } catch (e) {
+          // catch the error and verify it is an unauthorised access error
+          if (isUnauthorisedError(e)) {
+            // if this fails (due to permissions issue), we re-throw the error with more context
+            throw new Error(
+              'At least one Sentinel is associated with an Autotask. Additional API key permissions are required to access Autotasks. Alternatively, remove the association with the autotask to complete this action.',
+            );
+          }
+          // also throw with original error if its not a permission issue
+          throw e;
+        }
+      }
+    case 'Autotasks':
+      // Check for access to Relayers
+      // Enumerate all autotasks, and check if any autotask has a relayer associated
+      const autotasksWithRelayers = (Object.values(resources) as unknown as YAutotask[]).filter((r) => !!r.relayer);
+      // If there are autotasks with relayers associated, then try to list relayers
+      if (!_.isEmpty(autotasksWithRelayers)) {
+        try {
+          await getRelayClient(teamApiKey).list();
+          return;
+        } catch (e) {
+          // catch the error and verify it is an unauthorised access error
+          if (isUnauthorisedError(e)) {
+            // if this fails (due to permissions issue), we re-throw the error with more context
+            throw new Error(
+              'At least one Autotask is associated with a Relayer. Additional API key permissions are required to access Relayers. Alternatively, remove the association with the relayer to complete this action.',
+            );
+          }
+          // also throw with original error if its not a permission issue
+          throw e;
+        }
+      }
+    // No other resources require additional permissions
+    default:
+      return;
+  }
+};
+
+export const isUnauthorisedError = (e: any): boolean => {
+  try {
+    const defenderErrorStatus = (e as DefenderAPIError).response.status as number;
+    return defenderErrorStatus === 403;
+  } catch {
+    // if it is not a DefenderApiError,
+    // the error is most likely caused due to something else
+    return false;
+  }
 };
