@@ -196,16 +196,18 @@ export const constructNotificationCategory = (
     name: category.name,
     description: category.description,
     notificationIds: category['notification-ids']
-      .map((notification) => {
-        const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
-          context,
-          notification,
-          context.service.resources?.Resources?.notifications,
-          notifications,
-        );
-        return maybeNotification?.notificationId;
-      })
-      .filter(isResource),
+      ? category['notification-ids']
+          .map((notification) => {
+            const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+              context,
+              notification,
+              context.service.resources?.Resources?.notifications,
+              notifications,
+            );
+            return maybeNotification?.notificationId;
+          })
+          .filter(isResource)
+      : [],
     stackResourceId,
   };
 };

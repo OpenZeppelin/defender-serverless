@@ -576,12 +576,19 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (category: YCategory, match: DefenderCategory) => {
+        const newCategory = constructNotificationCategory(
+          this.serverless,
+          category,
+          match.stackResourceId!,
+          notifications,
+        );
         const mappedMatch = {
           name: match.name,
           description: match.description,
           notificationIds: match.notificationIds,
+          stackResourceId: match.stackResourceId,
         };
-        if (_.isEqual(validateTypesAndSanitise(category), validateTypesAndSanitise(mappedMatch))) {
+        if (_.isEqual(validateTypesAndSanitise(newCategory), validateTypesAndSanitise(mappedMatch))) {
           return {
             name: match.stackResourceId!,
             id: match.categoryId,
@@ -590,9 +597,15 @@ export default class DefenderDeploy {
             notice: `Skipped ${match.stackResourceId} - no changes detected`,
           };
         }
+        // Warn users when they try to change the category name
+        if (match.name !== category.name) {
+          this.log.warn(
+            `Detected a name change from ${match.name} to ${category.name} for Category: ${match.stackResourceId}. Defender does not currently allow to update a category name. This change will be ignored.`,
+          );
+        }
 
         const updatedCategory = await client.updateNotificationCategory({
-          ...constructNotificationCategory(this.serverless, category, match.stackResourceId!, notifications),
+          ...newCategory,
           categoryId: match.categoryId,
         });
         return {
