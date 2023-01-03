@@ -251,26 +251,28 @@ export default class DefenderRemove {
     );
 
     // Categories
-    const listNotificationCategories = () => sentinelClient.listNotificationCategories();
-    await this.wrapper<YCategory, DefenderCategory>(
-      this.serverless,
-      'Categories',
-      this.serverless.service.resources?.Resources?.categories,
-      listNotificationCategories,
-      async (categories: DefenderCategory[]) => {
-        await Promise.all(
-          categories.map(async (e) => {
-            this.log.progress(
-              'component-remove-extra',
-              `Removing ${e.stackResourceId} (${e.categoryId}) from Defender`,
-            );
-            await sentinelClient.deleteNotificationCategory(e.categoryId);
-            this.log.success(`Removed ${e.stackResourceId} (${e.categoryId})`);
-          }),
-        );
-      },
-      stdOut.categories,
-    );
+
+    // Temporarily Disabled
+    // const listNotificationCategories = () => sentinelClient.listNotificationCategories();
+    // await this.wrapper<YCategory, DefenderCategory>(
+    //   this.serverless,
+    //   'Categories',
+    //   this.serverless.service.resources?.Resources?.categories,
+    //   listNotificationCategories,
+    //   async (categories: DefenderCategory[]) => {
+    //     await Promise.all(
+    //       categories.map(async (e) => {
+    //         this.log.progress(
+    //           'component-remove-extra',
+    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Defender`,
+    //         );
+    //         await sentinelClient.deleteNotificationCategory(e.categoryId);
+    //         this.log.success(`Removed ${e.stackResourceId} (${e.categoryId})`);
+    //       }),
+    //     );
+    //   },
+    //   stdOut.categories,
+    // );
 
     // Secrets
     const listSecrets = () => autotaskClient.listSecrets().then((r) => r.secretNames ?? []);

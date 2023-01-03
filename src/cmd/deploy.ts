@@ -22,6 +22,7 @@ import {
   getConsolidatedSecrets,
   validateTypesAndSanitise,
   constructNotificationCategory,
+  validateAdditionalPermissionsOrThrow,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -603,19 +604,26 @@ export default class DefenderDeploy {
       },
       // on create
       async (category: YCategory, stackResourceId: string) => {
-        const createdCategory = await client.createNotificationCategory(
-          constructNotificationCategory(this.serverless, category, stackResourceId, notifications),
-        );
         return {
           name: stackResourceId,
-          id: createdCategory.categoryId,
-          success: true,
-          response: createdCategory,
+          id: '',
+          success: false,
+          notice: 'Creating custom notification categories is not yet supported',
         };
+        // const createdCategory = await client.createNotificationCategory(
+        //   constructNotificationCategory(this.serverless, category, stackResourceId, notifications),
+        // );
+        // return {
+        //   name: stackResourceId,
+        //   id: createdCategory.categoryId,
+        //   success: true,
+        //   response: createdCategory,
+        // };
       },
       // on remove
       async (categories: DefenderCategory[]) => {
-        await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n.categoryId)));
+        this.log.warn(`Deleting notification categories is not yet supported.`);
+        // await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n.categoryId)));
       },
       undefined,
       output,
@@ -920,8 +928,10 @@ export default class DefenderDeploy {
   ) {
     try {
       const stackName = getStackName(context);
-      this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
       this.log.notice(`${resourceType}`);
+      this.log.progress('component-deploy', `Validating permissions for ${resourceType}`);
+      await validateAdditionalPermissionsOrThrow<Y>(context, resources, resourceType);
+      this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
 
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
