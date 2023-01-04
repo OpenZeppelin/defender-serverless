@@ -28,6 +28,7 @@ import {
   DefenderCategory,
   DefenderAPIError,
   YAutotask,
+  DefenderNotificationReference,
 } from '../types';
 import { sanitise } from './sanitise';
 
@@ -195,7 +196,7 @@ export const constructNotificationCategory = (
   return {
     name: category.name,
     description: category.description,
-    notificationIds: category['notification-ids']
+    notificationIds: (category['notification-ids']
       ? category['notification-ids']
           .map((notification) => {
             const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
@@ -204,10 +205,14 @@ export const constructNotificationCategory = (
               context.service.resources?.Resources?.notifications,
               notifications,
             );
-            return maybeNotification?.notificationId;
+            if (maybeNotification)
+              return {
+                notificationId: maybeNotification.notificationId,
+                type: maybeNotification.type,
+              } as DefenderNotificationReference;
           })
           .filter(isResource)
-      : [],
+      : []) as [] | [DefenderNotificationReference] | [DefenderNotificationReference, DefenderNotificationReference],
     stackResourceId,
   };
 };
