@@ -265,7 +265,7 @@ export const constructSentinel = (
     },
     alertMessageBody: sentinel['notify-config'].message,
     alertTimeoutMs: sentinel['notify-config'].timeout,
-    notificationChannels: notificationChannels,
+    notificationChannels,
     notificationCategoryId: _.isEmpty(notificationChannels) ? notificationCategoryId : undefined,
     stackResourceId: stackResourceId,
   };
