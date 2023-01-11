@@ -17,6 +17,7 @@ import {
 } from '../utils';
 import {
   DefenderAutotask,
+  DefenderCategory,
   DefenderContract,
   DefenderNotification,
   DefenderRelayer,
@@ -25,6 +26,7 @@ import {
   ResourceType,
   TeamKey,
   YAutotask,
+  YCategory,
   YContract,
   YNotification,
   YRelayer,
@@ -106,6 +108,7 @@ export default class DefenderInfo {
       contracts: [],
       relayers: [],
       notifications: [],
+      categories: [],
       secrets: [],
     };
     // Sentinels
@@ -171,6 +174,17 @@ export default class DefenderInfo {
       listNotifications,
       (resource: DefenderNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
       stdOut.notifications,
+    );
+
+    // Categories
+    const listNotificationCategories = () => getSentinelClient(this.teamKey!).listNotificationCategories();
+    await this.wrapper<YCategory, DefenderCategory>(
+      this.serverless,
+      'Categories',
+      this.serverless.service.resources?.Resources?.categories,
+      listNotificationCategories,
+      (resource: DefenderCategory) => `${resource.stackResourceId}: ${resource.categoryId}`,
+      stdOut.categories,
     );
 
     // Secrets

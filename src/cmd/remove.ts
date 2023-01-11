@@ -18,6 +18,7 @@ import {
 } from '../utils';
 import {
   DefenderAutotask,
+  DefenderCategory,
   DefenderContract,
   DefenderNotification,
   DefenderRelayer,
@@ -26,6 +27,7 @@ import {
   ResourceType,
   TeamKey,
   YAutotask,
+  YCategory,
   YContract,
   YNotification,
   YRelayer,
@@ -115,6 +117,7 @@ export default class DefenderRemove {
       contracts: DefenderContract[];
       relayers: { relayerId: string; relayerApiKeys: DefenderRelayerApiKey[] }[];
       notifications: DefenderNotification[];
+      categories: DefenderCategory[];
       secrets: string[];
     } = {
       stack: stackName,
@@ -123,6 +126,7 @@ export default class DefenderRemove {
       contracts: [],
       relayers: [],
       notifications: [],
+      categories: [],
       secrets: [],
     };
     // Sentinels
@@ -245,6 +249,30 @@ export default class DefenderRemove {
       },
       stdOut.notifications,
     );
+
+    // Categories
+
+    // Temporarily Disabled
+    // const listNotificationCategories = () => sentinelClient.listNotificationCategories();
+    // await this.wrapper<YCategory, DefenderCategory>(
+    //   this.serverless,
+    //   'Categories',
+    //   this.serverless.service.resources?.Resources?.categories,
+    //   listNotificationCategories,
+    //   async (categories: DefenderCategory[]) => {
+    //     await Promise.all(
+    //       categories.map(async (e) => {
+    //         this.log.progress(
+    //           'component-remove-extra',
+    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Defender`,
+    //         );
+    //         await sentinelClient.deleteNotificationCategory(e.categoryId);
+    //         this.log.success(`Removed ${e.stackResourceId} (${e.categoryId})`);
+    //       }),
+    //     );
+    //   },
+    //   stdOut.categories,
+    // );
 
     // Secrets
     const listSecrets = () => autotaskClient.listSecrets().then((r) => r.secretNames ?? []);

@@ -8,6 +8,7 @@
 | :-------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [timeout](#timeout)   | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig-properties-timeout.md "#/definitions/blockSentinel/properties/notify-config/properties/timeout")   |
 | [message](#message)   | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig-properties-message.md "#/definitions/blockSentinel/properties/notify-config/properties/message")   |
+| [category](#category) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-category.md "#/definitions/blockSentinel/properties/notify-config/properties/category")                                                  |
 | [channels](#channels) | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig-properties-channels.md "#/definitions/blockSentinel/properties/notify-config/properties/channels") |
 
 ## timeout
@@ -45,6 +46,28 @@
 ### message Type
 
 `string`
+
+## category
+
+
+
+`category`
+
+*   is optional
+
+*   Type: `object` ([Category](definitions-definitions-category.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-category.md "#/definitions/blockSentinel/properties/notify-config/properties/category")
+
+### category Type
+
+`object` ([Category](definitions-definitions-category.md))
+
+### category Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 ## channels
 

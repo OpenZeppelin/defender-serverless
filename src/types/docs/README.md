@@ -28,6 +28,8 @@
 
 *   [BlockSentinel](./definitions-definitions-blocksentinel.md) – `#/definitions/blockSentinel`
 
+*   [Category](./definitions-definitions-category.md) – `#/definitions/category`
+
 *   [Conditions](./definitions-definitions-blocksentinel-properties-conditions.md) – `#/definitions/blockSentinel/properties/conditions`
 
 *   [Conditions](./definitions-definitions-fortasentinel-properties-conditions.md) – `#/definitions/fortaSentinel/properties/conditions`
@@ -105,6 +107,8 @@
 *   [Function](./definitions-definitions-blocksentinel-properties-conditions-properties-function.md) – `#/definitions/blockSentinel/properties/conditions/properties/function`
 
 *   [RelayerAPIKeys](./definitions-definitions-relayer-properties-relayerapikeys.md) – `#/definitions/relayer/properties/api-keys`
+
+*   [Untitled array in Definitions](./definitions-definitions-category-properties-notificationids.md) – `#/definitions/category/properties/notificationIds`
 
 *   [WhitelistReceivers](./definitions-definitions-policy-properties-whitelistreceivers.md) – `#/definitions/policy/properties/whitelist-receivers`
 

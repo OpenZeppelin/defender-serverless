@@ -152,6 +152,14 @@ More information can be found on our documentation page [here](https://docs.open
 
 ## Caveats
 
+Note that when setting up the notification configuration for a sentinel, the `channels` property will always be prioritised over `category`. A notification category can only be associated to a sentinel with no linked notification channels. This means that the `channels` property should be assigned the value `[]` in order to prioritise the `category` property.
+
+```yaml
+notify-config:
+  channels: [] # assign channels as empty list if you wish to use a category
+  category: ${self:resources.Resources.categories.medium-severity} # optional
+```
+
 Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:
 
 - Not having set the API key and secret
