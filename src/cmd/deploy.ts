@@ -597,12 +597,6 @@ export default class DefenderDeploy {
             notice: `Skipped ${match.stackResourceId} - no changes detected`,
           };
         }
-        // Warn users when they try to change the category name
-        if (match.name !== category.name) {
-          this.log.warn(
-            `Detected a name change from ${match.name} to ${category.name} for Category: ${match.stackResourceId}. Defender does not currently allow to update a category name. This change will be ignored.`,
-          );
-        }
 
         const updatedCategory = await client.updateNotificationCategory({
           ...newCategory,
