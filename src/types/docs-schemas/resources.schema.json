@@ -58,6 +58,22 @@
               "$ref": "definitions.schema.json/#/definitions/sentinel",
               "format": "uri-reference"
             }
+          },
+          "deployment-configs": {
+            "title": "Deployment Configs",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "definitions.schema.json/#/definitions/deployment-config",
+              "format": "uri-reference"
+            }
+          },
+          "block-explorer-api-keys": {
+            "title": "Block Explorer Api Keys",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "definitions.schema.json/#/definitions/block-explorer-api-key",
+              "format": "uri-reference"
+            }
           }
         }
       }

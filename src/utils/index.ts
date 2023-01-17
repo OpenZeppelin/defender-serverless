@@ -28,6 +28,7 @@ import {
   YAutotask,
 } from '../types';
 import { sanitise } from './sanitise';
+import { BlockExplorerApiKeyClient, DeploymentConfigClient } from 'platform-deploy-client';
 
 /**
  * @dev this function retrieves the Defender equivalent object of the provided template resource
@@ -133,6 +134,14 @@ export const getRelayClient = (key: TeamKey): RelayClient => {
 
 export const getAdminClient = (key: TeamKey): AdminClient => {
   return new AdminClient(key);
+};
+
+export const getDeploymentConfigClient = (key: TeamKey): DeploymentConfigClient => {
+  return new DeploymentConfigClient(key);
+};
+
+export const getBlockExplorerApiKeyClient = (key: TeamKey): BlockExplorerApiKeyClient => {
+  return new BlockExplorerApiKeyClient(key);
 };
 
 export const constructNotification = (notification: YNotification, stackResourceId: string) => {
