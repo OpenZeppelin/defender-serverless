@@ -4,9 +4,9 @@
 
 # deployment-configs Properties
 
-| Property              | Type          | Required | Nullable       | Defined by                                                                                                                                                                                                 |
-| :-------------------- | :------------ | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | Not specified | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-deployment-configs-additionalproperties.md "#/resources/properties/Resources/properties/deployment-configs/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                              |
+| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-deploymentconfig.md "#/resources/properties/Resources/properties/deployment-configs/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,15 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: unknown
+*   Type: `object` ([DeploymentConfig](definitions-definitions-deploymentconfig.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources-properties-deployment-configs-additionalproperties.md "#/resources/properties/Resources/properties/deployment-configs/additionalProperties")
+*   defined in: [Resources](definitions-definitions-deploymentconfig.md "#/resources/properties/Resources/properties/deployment-configs/additionalProperties")
 
 ### additionalProperties Type
 
-unknown
+`object` ([DeploymentConfig](definitions-definitions-deploymentconfig.md))
 
 ### additionalProperties Constraints
 

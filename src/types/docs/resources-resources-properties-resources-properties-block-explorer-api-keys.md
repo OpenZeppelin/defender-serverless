@@ -4,9 +4,9 @@
 
 # block-explorer-api-keys Properties
 
-| Property              | Type          | Required | Nullable       | Defined by                                                                                                                                                                                                           |
-| :-------------------- | :------------ | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | Not specified | Optional | cannot be null | [Resources](resources-resources-properties-resources-properties-block-explorer-api-keys-additionalproperties.md "#/resources/properties/Resources/properties/block-explorer-api-keys/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                      |
+| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-blockexplorerapikey.md "#/resources/properties/Resources/properties/block-explorer-api-keys/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,15 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: unknown
+*   Type: `object` ([BlockExplorerApiKey](definitions-definitions-blockexplorerapikey.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-resources-properties-resources-properties-block-explorer-api-keys-additionalproperties.md "#/resources/properties/Resources/properties/block-explorer-api-keys/additionalProperties")
+*   defined in: [Resources](definitions-definitions-blockexplorerapikey.md "#/resources/properties/Resources/properties/block-explorer-api-keys/additionalProperties")
 
 ### additionalProperties Type
 
-unknown
+`object` ([BlockExplorerApiKey](definitions-definitions-blockexplorerapikey.md))
 
 ### additionalProperties Constraints
 

@@ -63,7 +63,7 @@
             "title": "Deployment Configs",
             "type": "object",
             "additionalProperties": {
-              "$ref": "definitions.schema.json/#/definitions/deployment-config",
+              "$ref": "definitions.schema.json/#/definitions/deploymentConfig",
               "format": "uri-reference"
             }
           },
@@ -71,7 +71,7 @@
             "title": "Block Explorer Api Keys",
             "type": "object",
             "additionalProperties": {
-              "$ref": "definitions.schema.json/#/definitions/block-explorer-api-key",
+              "$ref": "definitions.schema.json/#/definitions/blockExplorerApiKey",
               "format": "uri-reference"
             }
           }
