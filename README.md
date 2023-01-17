@@ -88,7 +88,7 @@ Any resource removed from the `serverless.yml` file does _not_ get automatically
 
 ### Block Explorer Api Keys
 
-Exported serverless configurations with Block Explorer Api Keys will not contain the `key` field but instead a `keyHash` field which is a keccak256 hash of the key. This must be replaced with the actual `key` field (and `keyHash` removed) before deploying
+Exported serverless configurations with Block Explorer Api Keys will not contain the `key` field but instead a `key-hash` field which is a keccak256 hash of the key. This must be replaced with the actual `key` field (and `key-hash` removed) before deploying
 
 ### Secrets (Autotask)
 
