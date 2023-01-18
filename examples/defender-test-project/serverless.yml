@@ -143,6 +143,7 @@ resources:
         confirm-level: 1 # or 'safe' or 'finalized'
         notify-config:
           timeout: 0 # optional
+          message-subject: null # optional
           message: null # optional
           channels: 
             - ${self:resources.Resources.notifications.email-1}
@@ -179,6 +180,7 @@ resources:
         confirm-level: 6
         notify-config:
           timeout: 0 # optional
+          message-subject: null # optional
           message: null # optional
           channels: 
             - ${self:resources.Resources.notifications.email-1}
@@ -212,6 +214,7 @@ resources:
         autotask-trigger: null
         notify-config:
           timeout: 0 # optional
+          message-subject: null # optional
           message: null # optional
           channels: 
             - ${self:resources.Resources.notifications.email-1}

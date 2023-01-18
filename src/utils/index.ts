@@ -215,6 +215,7 @@ export const constructSentinel = (
       windowSeconds: sentinel['alert-threshold']['window-seconds'],
     },
     alertMessageBody: sentinel['notify-config'].message,
+    alertMessageSubject: sentinel['notify-config']['message-subject'],
     alertTimeoutMs: sentinel['notify-config'].timeout,
     notificationChannels: sentinel['notify-config'].channels
       .map((notification) => {
