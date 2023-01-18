@@ -1,12 +1,12 @@
-## relayer Type
+## additionalProperties Type
 
 `object` ([Relayer](definitions-definitions-relayer.md))
 
-## relayer Constraints
+## additionalProperties Constraints
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
-# relayer Properties
+# additionalProperties Properties
 
 | Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                       |
 | :-------------------------------------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -94,6 +94,7 @@
 | `"hederatest"`            |             |
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
+| `"zksync-goerli"`         |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 

@@ -40,9 +40,9 @@
         "auroratest",
         "hedera",
         "hederatest",
-
         "x-dfk-avax-chain",
-        "x-dfk-avax-chain-test"
+        "x-dfk-avax-chain-test",
+        "zksync-goerli"
       ]
     },
     "policy": {
@@ -51,7 +51,8 @@
       "properties": {
         "gas-price-cap": { "type": "integer" },
         "whitelist-receivers": { "title": "WhitelistReceivers", "type": "array", "items": { "type": "string" } },
-        "eip1559-pricing": { "type": "boolean" }
+        "eip1559-pricing": { "type": "boolean" },
+        "private-transactions": { "type": "boolean" }
       }
     },
     "relayer": {

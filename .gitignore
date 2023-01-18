@@ -7,3 +7,5 @@ lib
 *.log
 .DS_Store
 tsconfig.tsbuildinfo
+
+.vscode

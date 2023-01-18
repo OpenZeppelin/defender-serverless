@@ -21,6 +21,7 @@ import {
   getEquivalentResourceByKey,
   getConsolidatedSecrets,
   validateTypesAndSanitise,
+  validateAdditionalPermissionsOrThrow,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -344,6 +345,14 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (relayer: YRelayer, match: DefenderRelayer) => {
+        // Warn users when they try to change the relayer network
+        if (match.network !== relayer.network) {
+          this.log.warn(
+            `Detected a network change from ${match.network} to ${relayer.network} for Relayer: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Relayer is created. This change will be ignored. To enforce this change, remove this relayer and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer.`,
+          );
+          relayer.network = match.network!;
+        }
+
         const mappedMatch = {
           name: match.name,
           network: match.network,
@@ -352,6 +361,7 @@ export default class DefenderDeploy {
             'gas-price-cap': match.policies.gasPriceCap,
             'whitelist-receivers': match.policies.whitelistReceivers,
             'eip1559-pricing': match.policies.EIP1559Pricing,
+            'private-transactions': match.policies.privateTransactions,
           },
           // currently not supported by defender-client
           // paused: match.paused
@@ -370,6 +380,7 @@ export default class DefenderDeploy {
               whitelistReceivers: relayer.policy['whitelist-receivers'],
               gasPriceCap: relayer.policy['gas-price-cap'],
               EIP1559Pricing: relayer.policy['eip1559-pricing'],
+              privateTransactions: relayer.policy['private-transactions'],
             },
           });
         }
@@ -442,6 +453,7 @@ export default class DefenderDeploy {
             whitelistReceivers: relayer.policy['whitelist-receivers'],
             gasPriceCap: relayer.policy['gas-price-cap'],
             EIP1559Pricing: relayer.policy['eip1559-pricing'],
+            privateTransactions: relayer.policy['private-transactions'],
           },
           stackResourceId,
         });
@@ -557,7 +569,7 @@ export default class DefenderDeploy {
           // Warn users when they try to change the sentinel network
           if (match.network !== sentinel.network) {
             this.log.warn(
-              `Detected a network change from ${match.network} to ${sentinel.network} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Atlernatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel.`,
+              `Detected a network change from ${match.network} to ${sentinel.network} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this sentinel.`,
             );
             sentinel.network = match.network!;
           }
@@ -565,7 +577,7 @@ export default class DefenderDeploy {
           // Warn users when they try to change the sentinel type
           if (sentinel.type !== match.type) {
             this.log.warn(
-              `Detected a type change from ${match.type} to ${sentinel.type} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the type once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Atlernatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel.`,
+              `Detected a type change from ${match.type} to ${sentinel.type} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the type once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this sentinel.`,
             );
             sentinel.type = match.type;
           }
@@ -827,8 +839,10 @@ export default class DefenderDeploy {
   ) {
     try {
       const stackName = getStackName(context);
-      this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
       this.log.notice(`${resourceType}`);
+      this.log.progress('component-deploy', `Validating permissions for ${resourceType}`);
+      await validateAdditionalPermissionsOrThrow<Y>(context, resources, resourceType);
+      this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
 
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {

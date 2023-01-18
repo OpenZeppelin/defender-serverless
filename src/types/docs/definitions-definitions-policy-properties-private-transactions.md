@@ -1,0 +1,3 @@
+## private-transactions Type
+
+`boolean`
