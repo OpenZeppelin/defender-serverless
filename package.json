@@ -1,6 +1,6 @@
 {
   "name": "defender-serverless",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Configure your Defender environment via code",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -64,10 +64,10 @@
     "typescript": "^3.6.2"
   },
   "dependencies": {
-    "defender-admin-client": "^1.37.0",
-    "defender-autotask-client": "^1.37.0",
-    "defender-relay-client": "^1.37.0",
-    "defender-sentinel-client": "^1.37.0",
+    "defender-admin-client": "^1.38.0",
+    "defender-autotask-client": "^1.38.0",
+    "defender-relay-client": "^1.38.0",
+    "defender-sentinel-client": "^1.38.0",
     "lodash": "^4.17.21",
     "prompt": "^1.3.0"
   },

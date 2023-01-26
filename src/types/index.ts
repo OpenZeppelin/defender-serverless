@@ -13,6 +13,8 @@ import {
   DiscordConfig,
   NotificationType,
 } from 'defender-sentinel-client/lib/models/notification';
+
+import { NotificationCategory } from 'defender-sentinel-client/lib/models/category';
 import { CreateSentinelResponse, BlockWatcher } from 'defender-sentinel-client';
 
 import {
@@ -22,7 +24,13 @@ import {
   ExternalCreateFortaSubscriberRequest,
   NotificationReference,
 } from 'defender-sentinel-client/lib/models/subscriber';
-import { Autotask, ScheduleTrigger, SecretsMap, WebhookTrigger } from 'defender-autotask-client/lib/models/autotask';
+import {
+  Autotask,
+  ScheduleTrigger,
+  SecretsMap,
+  SentinelTrigger,
+  WebhookTrigger,
+} from 'defender-autotask-client/lib/models/autotask';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -32,6 +40,7 @@ export type DefenderRelayer = RelayerGetResponse;
 export type DefenderAutotask = Autotask;
 export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
+export type DefenderCategory = NotificationCategory;
 export type DefenderNotificationReference = NotificationReference;
 export type DefenderSentinel = CreateSentinelResponse;
 export type DefenderBlockSentinelResponse = CreateBlockSubscriberResponse;
@@ -46,8 +55,16 @@ export type DefenderEmailConfig = EmailConfig;
 export type DefenderNetwork = Network;
 export type DefenderWebhookTrigger = WebhookTrigger;
 export type DefenderScheduleTrigger = ScheduleTrigger;
+export type DefenderSentinelTrigger = SentinelTrigger;
 
-export type ResourceType = 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets';
+export type ResourceType =
+  | 'Sentinels'
+  | 'Relayers'
+  | 'Notifications'
+  | 'Categories'
+  | 'Autotasks'
+  | 'Contracts'
+  | 'Secrets';
 
 export type YPolicy = {
   'gas-price-cap'?: number;
@@ -106,6 +123,12 @@ export type YNotification = SaveNotificationRequest & {
   config: YSlackConfig | YTelegramConfig | YDatadogConfig | YDiscordConfig | YEmailConfig;
 };
 
+export type YCategory = {
+  name: string;
+  description: string;
+  'notification-ids': YNotification[];
+};
+
 export type YBlockSentinel = {
   name: string;
   type: 'BLOCK';
@@ -120,6 +143,7 @@ export type YBlockSentinel = {
   'notify-config': {
     timeout?: number;
     message?: string;
+    category?: YCategory;
     channels: YNotification[];
   };
   conditions?: {
@@ -142,6 +166,7 @@ export type YFortaSentinel = {
   'notify-config': {
     timeout?: number;
     message?: string;
+    category?: YCategory;
     channels: YNotification[];
   };
   conditions?: {
@@ -188,6 +213,7 @@ export type ListDefenderResources = {
   sentinels: DefenderSentinel[];
   autotasks: DefenderAutotask[];
   notifications: DefenderNotification[];
+  categories: DefenderCategory[];
   contracts: DefenderContract[];
   relayerApiKeys: DefenderRelayerApiKey[];
   secrets: string[];

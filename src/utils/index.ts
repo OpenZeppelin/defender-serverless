@@ -24,8 +24,11 @@ import {
   DefenderContract,
   ResourceType,
   DefenderBlockWatcher,
+  YCategory,
+  DefenderCategory,
   DefenderAPIError,
   YAutotask,
+  DefenderNotificationReference,
 } from '../types';
 import { sanitise } from './sanitise';
 
@@ -184,6 +187,35 @@ export const constructNotification = (notification: YNotification, stackResource
   }
 };
 
+export const constructNotificationCategory = (
+  context: Serverless,
+  category: YCategory,
+  stackResourceId: string,
+  notifications: DefenderNotification[],
+) => {
+  return {
+    name: category.name,
+    description: category.description,
+    notificationIds: (category['notification-ids']
+      ? category['notification-ids']
+          .map((notification) => {
+            const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+              context,
+              notification,
+              context.service.resources?.Resources?.notifications,
+              notifications,
+            );
+            if (maybeNotification)
+              return {
+                notificationId: maybeNotification.notificationId,
+                type: maybeNotification.type,
+              } as DefenderNotificationReference;
+          })
+          .filter(isResource)
+      : []) as [] | [DefenderNotificationReference] | [DefenderNotificationReference, DefenderNotificationReference],
+    stackResourceId,
+  };
+};
 const isResource = <T>(item: T | undefined): item is T => {
   return !!item;
 };
@@ -195,11 +227,28 @@ export const constructSentinel = (
   notifications: DefenderNotification[],
   autotasks: DefenderAutotask[],
   blockwatchers: DefenderBlockWatcher[],
+  categories: DefenderCategory[],
 ): DefenderBlockSentinel | DefenderFortaSentinel => {
   const autotaskCondition =
     sentinel['autotask-condition'] && autotasks.find((a) => a.name === sentinel['autotask-condition']!.name);
   const autotaskTrigger =
     sentinel['autotask-trigger'] && autotasks.find((a) => a.name === sentinel['autotask-trigger']!.name);
+
+  const notificationChannels = sentinel['notify-config'].channels
+    .map((notification) => {
+      const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+        context,
+        notification,
+        context.service.resources?.Resources?.notifications,
+        notifications,
+      );
+      return maybeNotification?.notificationId;
+    })
+    .filter(isResource);
+
+  const sentinelCategory = sentinel['notify-config'].category;
+  const notificationCategoryId =
+    sentinelCategory && categories.find((c) => c.name === sentinelCategory.name)?.categoryId;
 
   const commonSentinel = {
     type: sentinel.type,
@@ -216,17 +265,8 @@ export const constructSentinel = (
     },
     alertMessageBody: sentinel['notify-config'].message,
     alertTimeoutMs: sentinel['notify-config'].timeout,
-    notificationChannels: sentinel['notify-config'].channels
-      .map((notification) => {
-        const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
-          context,
-          notification,
-          context.service.resources?.Resources?.notifications,
-          notifications,
-        );
-        return maybeNotification?.notificationId;
-      })
-      .filter(isResource),
+    notificationChannels,
+    notificationCategoryId: _.isEmpty(notificationChannels) ? notificationCategoryId : undefined,
     stackResourceId: stackResourceId,
   };
 

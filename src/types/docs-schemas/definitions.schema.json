@@ -155,6 +155,19 @@
       },
       "required": ["type", "name", "paused", "config"]
     },
+    "category": {
+      "title": "Category",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "notificationIds": {
+          "type": "array",
+          "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
+        }
+      },
+      "required": ["name"]
+    },
     "blockSentinel": {
       "title": "BlockSentinel",
       "type": "object",
@@ -185,6 +198,7 @@
           "properties": {
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
+            "category": { "$ref": "definitions.schema.json/#/definitions/category", "format": "uri-reference" },
             "channels": {
               "title": "Channels",
               "type": "array",
@@ -250,6 +264,7 @@
           "properties": {
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
+            "category": { "$ref": "definitions.schema.json/#/definitions/category", "format": "uri-reference" },
             "channels": {
               "title": "Channels",
               "type": "array",
