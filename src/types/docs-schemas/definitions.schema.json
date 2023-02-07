@@ -233,6 +233,11 @@
             },
             "transaction": { "type": "string" }
           }
+        },
+        "risk-category": {
+          "title": "RiskCategory",
+          "type": "string",
+          "enum": ["NONE", "GOVERNANCE", "PRIVILEGED", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
         }
       },
       "required": ["name", "type", "network", "addresses", "notify-config"]
@@ -292,6 +297,11 @@
           "title": "AgentIDs",
           "type": "array",
           "items": { "type": "string" }
+        },
+        "risk-category": {
+          "title": "RiskCategory",
+          "type": "string",
+          "enum": ["NONE", "GOVERNANCE", "PRIVILEGED", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
         }
       },
       "anyOf": [

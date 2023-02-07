@@ -267,6 +267,7 @@ export const constructSentinel = (
     alertTimeoutMs: sentinel['notify-config'].timeout,
     notificationChannels,
     notificationCategoryId: _.isEmpty(notificationChannels) ? notificationCategoryId : undefined,
+    riskCategory: sentinel['risk-category'],
     stackResourceId: stackResourceId,
   };
 

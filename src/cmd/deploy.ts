@@ -633,7 +633,11 @@ export default class DefenderDeploy {
         this.log.warn(`Deleting notification categories is not yet supported.`);
         // await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n.categoryId)));
       },
-      undefined,
+      // overrideMatchDefinition
+      // TODO: remove this when we allow creating new categories
+      (a: DefenderCategory, b: YCategory) => {
+        return a.name === b.name;
+      },
       output,
       this.ssotDifference?.categories,
     );
@@ -729,6 +733,7 @@ export default class DefenderDeploy {
             fortaLastProcessedTime: (isForta(match) && match.fortaLastProcessedTime) || undefined,
             agentIDs: (isForta(match) && match.fortaRule?.agentIDs) || undefined,
             fortaConditions: (isForta(match) && match.fortaRule.conditions) || undefined,
+            riskCategory: match.riskCategory,
           };
 
           if (_.isEqual(validateTypesAndSanitise(newSentinel), validateTypesAndSanitise(mappedMatch))) {
@@ -1078,7 +1083,7 @@ export default class DefenderDeploy {
     // Deploy notifications before sentinels and categories
     await this.deployNotifications(stdOut.notifications);
     await this.deployCategories(stdOut.categories);
-    await this.deploySentinels(stdOut.sentinels);
+    // await this.deploySentinels(stdOut.sentinels);
 
     this.log.notice('========================================================');
 
