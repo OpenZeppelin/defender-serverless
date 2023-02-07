@@ -1083,7 +1083,7 @@ export default class DefenderDeploy {
     // Deploy notifications before sentinels and categories
     await this.deployNotifications(stdOut.notifications);
     await this.deployCategories(stdOut.categories);
-    // await this.deploySentinels(stdOut.sentinels);
+    await this.deploySentinels(stdOut.sentinels);
 
     this.log.notice('========================================================');
 
