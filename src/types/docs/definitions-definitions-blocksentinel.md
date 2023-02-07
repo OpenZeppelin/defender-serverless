@@ -22,7 +22,7 @@
 | [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "#/definitions/blockSentinel/properties/confirm-level")    |
 | [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig.md "#/definitions/blockSentinel/properties/notify-config")     |
 | [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "#/definitions/blockSentinel/properties/conditions")          |
-| [risk-category](#risk-category)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-riskcategory.md "#/definitions/blockSentinel/properties/risk-category")     |
+| [risk-category](#risk-category)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "#/definitions/blockSentinel/properties/risk-category")                              |
 
 ## name
 
@@ -315,15 +315,15 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `string` ([RiskCategory](definitions-definitions-blocksentinel-properties-riskcategory.md))
+*   Type: `string` ([RiskCategory](definitions-definitions-riskcategory.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-riskcategory.md "#/definitions/blockSentinel/properties/risk-category")
+*   defined in: [Definitions](definitions-definitions-riskcategory.md "#/definitions/blockSentinel/properties/risk-category")
 
 ### risk-category Type
 
-`string` ([RiskCategory](definitions-definitions-blocksentinel-properties-riskcategory.md))
+`string` ([RiskCategory](definitions-definitions-riskcategory.md))
 
 ### risk-category Constraints
 

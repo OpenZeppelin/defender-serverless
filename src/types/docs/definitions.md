@@ -15,6 +15,17 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group risk-category
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/risk-category"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group network
 
 Reference this group by using

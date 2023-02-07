@@ -3,6 +3,11 @@
   "title": "Definitions",
   "definitions": {
     "address": { "title": "Address", "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+    "risk-category": {
+      "title": "RiskCategory",
+      "type": "string",
+      "enum": ["NONE", "GOVERNANCE", "PRIVILEGED", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
+    },
     "network": {
       "title": "Network",
       "type": "string",
@@ -234,11 +239,7 @@
             "transaction": { "type": "string" }
           }
         },
-        "risk-category": {
-          "title": "RiskCategory",
-          "type": "string",
-          "enum": ["NONE", "GOVERNANCE", "PRIVILEGED", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
-        }
+        "risk-category": { "$ref": "definitions.schema.json/#/definitions/risk-category" }
       },
       "required": ["name", "type", "network", "addresses", "notify-config"]
     },
@@ -298,11 +299,7 @@
           "type": "array",
           "items": { "type": "string" }
         },
-        "risk-category": {
-          "title": "RiskCategory",
-          "type": "string",
-          "enum": ["NONE", "GOVERNANCE", "PRIVILEGED", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
-        }
+        "risk-category": { "$ref": "definitions.schema.json/#/definitions/risk-category" }
       },
       "anyOf": [
         {

@@ -1,6 +1,6 @@
 ## risk-category Type
 
-`string` ([RiskCategory](definitions-definitions-blocksentinel-properties-riskcategory.md))
+`string` ([RiskCategory](definitions-definitions-riskcategory.md))
 
 ## risk-category Constraints
 
