@@ -8,7 +8,7 @@ export default class DefenderProvider {
     serverless.configSchemaHandler.defineProvider('defender', {
       definitions: DefinitionsSchema.definitions,
       provider: ProviderSchema,
-      resources: ResourcesSchema.resources,
+      resources: ResourcesSchema,
       function: FunctionSchema,
     });
   }

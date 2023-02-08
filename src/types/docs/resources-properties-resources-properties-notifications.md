@@ -1,12 +1,12 @@
-## relayers Type
+## notifications Type
 
-`object` ([Relayers](resources-resources-properties-resources-properties-relayers.md))
+`object` ([Notifications](resources-properties-resources-properties-notifications.md))
 
-# relayers Properties
+# notifications Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                           |
 | :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-relayer.md "#/resources/properties/Resources/properties/relayers/additionalProperties") |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-notification.md "#/properties/Resources/properties/notifications/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,15 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([Relayer](definitions-definitions-relayer.md))
+*   Type: `object` ([Notification](definitions-definitions-notification.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-relayer.md "#/resources/properties/Resources/properties/relayers/additionalProperties")
+*   defined in: [Resources](definitions-definitions-notification.md "#/properties/Resources/properties/notifications/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([Relayer](definitions-definitions-relayer.md))
+`object` ([Notification](definitions-definitions-notification.md))
 
 ### additionalProperties Constraints
 
