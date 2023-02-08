@@ -24,7 +24,7 @@
 
 *   [Autotask](./definitions-definitions-autotask.md) – `#/definitions/autotask`
 
-*   [AutotaskSecrets](./resources-resources-properties-resources-properties-autotasksecrets.md) – `#/resources/properties/Resources/properties/secrets`
+*   [AutotaskSecrets](./resources-properties-resources-properties-autotasksecrets.md) – `#/properties/Resources/properties/secrets`
 
 *   [BlockSentinel](./definitions-definitions-blocksentinel.md) – `#/definitions/blockSentinel`
 
@@ -38,7 +38,7 @@
 
 *   [Contract](./definitions-definitions-contract.md) – `#/definitions/contract`
 
-*   [Contracts](./resources-resources-properties-resources-properties-contracts.md) – `#/resources/properties/Resources/properties/contracts`
+*   [Contracts](./resources-properties-resources-properties-contracts.md) – `#/properties/Resources/properties/contracts`
 
 *   [DatadogConfig](./definitions-definitions-datadogconfig.md) – `#/definitions/datadogConfig`
 
@@ -50,33 +50,31 @@
 
 *   [FunctionItems](./definitions-definitions-blocksentinel-properties-conditions-properties-function-functionitems.md) – `#/definitions/blockSentinel/properties/conditions/properties/function/items`
 
-*   [Global](./resources-resources-properties-resources-properties-autotasksecrets-properties-global.md) – `#/resources/properties/Resources/properties/secrets/properties/global`
+*   [Global](./resources-properties-resources-properties-autotasksecrets-properties-global.md) – `#/properties/Resources/properties/secrets/properties/global`
 
 *   [Notification](./definitions-definitions-notification.md) – `#/definitions/notification`
 
-*   [Notifications](./resources-resources-properties-resources-properties-notifications.md) – `#/resources/properties/Resources/properties/notifications`
+*   [Notifications](./resources-properties-resources-properties-notifications.md) – `#/properties/Resources/properties/notifications`
 
 *   [NotifyConfig](./definitions-definitions-blocksentinel-properties-notifyconfig.md) – `#/definitions/blockSentinel/properties/notify-config`
 
 *   [NotifyConfig](./definitions-definitions-fortasentinel-properties-notifyconfig.md) – `#/definitions/fortaSentinel/properties/notify-config`
 
-*   [Policies](./resources-resources-properties-resources-properties-policies.md) – `#/resources/properties/Resources/properties/policies`
+*   [Policies](./resources-properties-resources-properties-policies.md) – `#/properties/Resources/properties/policies`
 
 *   [Policy](./definitions-definitions-policy.md) – `#/definitions/policy`
 
 *   [Relayer](./definitions-definitions-relayer.md) – `#/definitions/relayer`
 
-*   [Relayers](./resources-resources-properties-resources-properties-relayers.md) – `#/resources/properties/Resources/properties/relayers`
+*   [Relayers](./resources-properties-resources-properties-relayers.md) – `#/properties/Resources/properties/relayers`
 
-*   [Resources](./resources-resources.md) – `#/resources`
-
-*   [Resources](./resources-resources-properties-resources.md) – `#/resources/properties/Resources`
+*   [Resources](./resources-properties-resources.md) – `#/properties/Resources`
 
 *   [Sentinel](./definitions-definitions-sentinel.md) – `#/definitions/sentinel`
 
-*   [Sentinels](./resources-resources-properties-resources-properties-sentinels.md) – `#/resources/properties/Resources/properties/sentinels`
+*   [Sentinels](./resources-properties-resources-properties-sentinels.md) – `#/properties/Resources/properties/sentinels`
 
-*   [Stack](./resources-resources-properties-resources-properties-autotasksecrets-properties-stack.md) – `#/resources/properties/Resources/properties/secrets/properties/stack`
+*   [Stack](./resources-properties-resources-properties-autotasksecrets-properties-stack.md) – `#/properties/Resources/properties/secrets/properties/stack`
 
 *   [TelegramConfig](./definitions-definitions-telegramconfig.md) – `#/definitions/telegramBotConfig`
 
