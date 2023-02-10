@@ -82,6 +82,7 @@
 | `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
+| `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
