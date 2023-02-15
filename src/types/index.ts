@@ -23,6 +23,7 @@ import {
   ExternalCreateBlockSubscriberRequest,
   ExternalCreateFortaSubscriberRequest,
   NotificationReference,
+  SubscriberRiskCategory,
 } from 'defender-sentinel-client/lib/models/subscriber';
 import {
   Autotask,
@@ -56,6 +57,7 @@ export type DefenderNetwork = Network;
 export type DefenderWebhookTrigger = WebhookTrigger;
 export type DefenderScheduleTrigger = ScheduleTrigger;
 export type DefenderSentinelTrigger = SentinelTrigger;
+export type DefenderSubscriberRiskCategory = SubscriberRiskCategory;
 
 export type ResourceType =
   | 'Sentinels'
@@ -151,6 +153,7 @@ export type YBlockSentinel = {
     function: { signature: string; expression?: string }[];
     transaction?: string;
   };
+  'risk-category': DefenderSubscriberRiskCategory;
 };
 
 export type YFortaSentinel = {
@@ -177,6 +180,7 @@ export type YFortaSentinel = {
   'forta-node-id'?: string;
   'agent-ids'?: string[];
   'forta-last-processed-time'?: string;
+  'risk-category': DefenderSubscriberRiskCategory;
 };
 
 export type YSentinel = YBlockSentinel | YFortaSentinel;

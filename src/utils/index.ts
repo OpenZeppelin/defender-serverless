@@ -43,7 +43,7 @@ export const getEquivalentResource = <Y, D>(
   currentResources: D[],
 ) => {
   if (resource) {
-    const [key, value] = Object.entries(resources ?? []).find((a) => _.isEqual(a[1], resource))!;
+    const [key, value] = Object.entries(resources ?? []).find(a => _.isEqual(a[1], resource))!;
     return currentResources.find((e: D) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
   }
 };
@@ -78,7 +78,7 @@ export const isTemplateResource = <Y, D>(
   resourceType: ResourceType,
   resources: Y[],
 ): boolean => {
-  return !!Object.entries(resources).find((a) =>
+  return !!Object.entries(resources).find(a =>
     resourceType === 'Secrets'
       ? // if secret, just compare key
         Object.keys(a[1] as unknown as YSecret)[0] === (resource as unknown as string)
@@ -198,7 +198,7 @@ export const constructNotificationCategory = (
     description: category.description,
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
-          .map((notification) => {
+          .map(notification => {
             const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
               context,
               notification,
@@ -230,12 +230,12 @@ export const constructSentinel = (
   categories: DefenderCategory[],
 ): DefenderBlockSentinel | DefenderFortaSentinel => {
   const autotaskCondition =
-    sentinel['autotask-condition'] && autotasks.find((a) => a.name === sentinel['autotask-condition']!.name);
+    sentinel['autotask-condition'] && autotasks.find(a => a.name === sentinel['autotask-condition']!.name);
   const autotaskTrigger =
-    sentinel['autotask-trigger'] && autotasks.find((a) => a.name === sentinel['autotask-trigger']!.name);
+    sentinel['autotask-trigger'] && autotasks.find(a => a.name === sentinel['autotask-trigger']!.name);
 
   const notificationChannels = sentinel['notify-config'].channels
-    .map((notification) => {
+    .map(notification => {
       const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
         context,
         notification,
@@ -247,8 +247,7 @@ export const constructSentinel = (
     .filter(isResource);
 
   const sentinelCategory = sentinel['notify-config'].category;
-  const notificationCategoryId =
-    sentinelCategory && categories.find((c) => c.name === sentinelCategory.name)?.categoryId;
+  const notificationCategoryId = sentinelCategory && categories.find(c => c.name === sentinelCategory.name)?.categoryId;
 
   const commonSentinel = {
     type: sentinel.type,
@@ -267,6 +266,7 @@ export const constructSentinel = (
     alertTimeoutMs: sentinel['notify-config'].timeout,
     notificationChannels,
     notificationCategoryId: _.isEmpty(notificationChannels) ? notificationCategoryId : undefined,
+    riskCategory: sentinel['risk-category'],
     stackResourceId: stackResourceId,
   };
 
@@ -287,7 +287,7 @@ export const constructSentinel = (
   }
 
   if (sentinel.type === 'BLOCK') {
-    const compatibleBlockWatcher = blockwatchers.find((b) => b.confirmLevel === sentinel['confirm-level']);
+    const compatibleBlockWatcher = blockwatchers.find(b => b.confirmLevel === sentinel['confirm-level']);
     if (!compatibleBlockWatcher) {
       throw new Error(
         `A blockwatcher with confirmation level (${sentinel['confirm-level']}) does not exist on ${sentinel.network}. Choose another confirmation level.`,
@@ -302,7 +302,7 @@ export const constructSentinel = (
       eventConditions:
         sentinel.conditions &&
         sentinel.conditions.event &&
-        sentinel.conditions.event.map((c) => {
+        sentinel.conditions.event.map(c => {
           return {
             eventSignature: c.signature,
             expression: c.expression,
@@ -311,7 +311,7 @@ export const constructSentinel = (
       functionConditions:
         sentinel.conditions &&
         sentinel.conditions.function &&
-        sentinel.conditions.function.map((c) => {
+        sentinel.conditions.function.map(c => {
           return {
             functionSignature: c.signature,
             expression: c.expression,
@@ -337,7 +337,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
       // Check for access to Autotasks
       // Enumerate all sentinels, and check if any sentinel has an autotask associated
       const sentinelsWithAutotasks = (Object.values(resources) as unknown as YSentinel[]).filter(
-        (r) => !!r['autotask-condition'] || !!r['autotask-trigger'],
+        r => !!r['autotask-condition'] || !!r['autotask-trigger'],
       );
       // If there are sentinels with autotasks associated, then try to list autotasks
       if (!_.isEmpty(sentinelsWithAutotasks)) {
@@ -359,7 +359,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
     case 'Autotasks':
       // Check for access to Relayers
       // Enumerate all autotasks, and check if any autotask has a relayer associated
-      const autotasksWithRelayers = (Object.values(resources) as unknown as YAutotask[]).filter((r) => !!r.relayer);
+      const autotasksWithRelayers = (Object.values(resources) as unknown as YAutotask[]).filter(r => !!r.relayer);
       // If there are autotasks with relayers associated, then try to list relayers
       if (!_.isEmpty(autotasksWithRelayers)) {
         try {

@@ -136,6 +136,7 @@ resources:
         name: "Block Example"
         type: "BLOCK"
         network: "goerli"
+        risk-category: "TECHNICAL" # optional
         addresses: 
           - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
         # optional

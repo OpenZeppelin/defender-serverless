@@ -70,12 +70,12 @@ export default class DefenderInfo {
     try {
       this.log.progress('component-info', `Retrieving ${resourceType}`);
       this.log.notice(`${resourceType}`);
-      const existing = (await retrieveExistingResources()).filter((e) =>
+      const existing = (await retrieveExistingResources()).filter(e =>
         isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
       );
 
       await Promise.all(
-        existing.map(async (e) => {
+        existing.map(async e => {
           this.log.notice(`${format(e)}`, 1);
           let keys: DefenderRelayerApiKey[] = [];
           // Also print relayer API keys
@@ -83,7 +83,7 @@ export default class DefenderInfo {
             const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(
               (e as unknown as DefenderRelayer).relayerId,
             );
-            listRelayerAPIKeys.map((k) => {
+            listRelayerAPIKeys.map(k => {
               this.log.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
             });
             keys = listRelayerAPIKeys;
@@ -115,7 +115,7 @@ export default class DefenderInfo {
     const listSentinels = () =>
       getSentinelClient(this.teamKey!)
         .list()
-        .then((i) => i.items);
+        .then(i => i.items);
 
     await this.wrapper<YSentinel, DefenderSentinel>(
       this.serverless,
@@ -130,7 +130,7 @@ export default class DefenderInfo {
     const listAutotasks = () =>
       getAutotaskClient(this.teamKey!)
         .list()
-        .then((r) => r.items);
+        .then(r => r.items);
     await this.wrapper<YAutotask, DefenderAutotask>(
       this.serverless,
       'Autotasks',
@@ -155,7 +155,7 @@ export default class DefenderInfo {
     const listRelayers = () =>
       getRelayClient(this.teamKey!)
         .list()
-        .then((r) => r.items);
+        .then(r => r.items);
     await this.wrapper<YRelayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
@@ -191,7 +191,7 @@ export default class DefenderInfo {
     const listSecrets = () =>
       getAutotaskClient(this.teamKey!)
         .listSecrets()
-        .then((r) => r.secretNames ?? []);
+        .then(r => r.secretNames ?? []);
 
     const allSecrets = getConsolidatedSecrets(this.serverless);
 
