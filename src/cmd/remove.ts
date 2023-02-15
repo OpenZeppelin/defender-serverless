@@ -96,7 +96,7 @@ export default class DefenderRemove {
       });
       const { confirm } = await prompt.get(properties);
 
-      if (confirm.toString().toLowerCase() !== 'y') {
+      if (confirm!.toString().toLowerCase() !== 'y') {
         this.log.error('Confirmation not acquired. Terminating command');
         return;
       }
