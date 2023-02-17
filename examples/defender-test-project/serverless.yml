@@ -92,10 +92,6 @@ resources:
         address-from-relayer: ${self:resources.Resources.relayers.relayer-1} 
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
-        # optional
-        api-keys:
-          - key1
-          - key2
   
     notifications:
       email-1:
