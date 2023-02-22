@@ -29,6 +29,7 @@ any of
 | [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "#/definitions/fortaSentinel/properties/conditions")          |
 | [forta-node-id](#forta-node-id)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "#/definitions/fortaSentinel/properties/forta-node-id")    |
 | [agent-ids](#agent-ids)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-agentids.md "#/definitions/fortaSentinel/properties/agent-ids")             |
+| [risk-category](#risk-category)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "#/definitions/fortaSentinel/properties/risk-category")                              |
 
 ## name
 
@@ -325,3 +326,34 @@ any of
 ### agent-ids Type
 
 `string[]`
+
+## risk-category
+
+
+
+`risk-category`
+
+*   is optional
+
+*   Type: `string` ([RiskCategory](definitions-definitions-riskcategory.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-riskcategory.md "#/definitions/fortaSentinel/properties/risk-category")
+
+### risk-category Type
+
+`string` ([RiskCategory](definitions-definitions-riskcategory.md))
+
+### risk-category Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value          | Explanation |
+| :------------- | :---------- |
+| `"NONE"`       |             |
+| `"GOVERNANCE"` |             |
+| `"PRIVILEGED"` |             |
+| `"SUSPICIOUS"` |             |
+| `"FINANCIAL"`  |             |
+| `"TECHNICAL"`  |             |
