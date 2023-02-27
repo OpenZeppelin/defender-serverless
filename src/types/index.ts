@@ -29,8 +29,8 @@ import {
   Autotask,
   ScheduleTrigger,
   SecretsMap,
-  SentinelTrigger,
   WebhookTrigger,
+  SentinelTrigger,
 } from 'defender-autotask-client/lib/models/autotask';
 
 export type DefenderAPIError = DefenderApiResponseError;
@@ -57,6 +57,7 @@ export type DefenderNetwork = Network;
 export type DefenderWebhookTrigger = WebhookTrigger;
 export type DefenderScheduleTrigger = ScheduleTrigger;
 export type DefenderSentinelTrigger = SentinelTrigger;
+export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
 export type DefenderSubscriberRiskCategory = SubscriberRiskCategory;
 
 export type ResourceType =
@@ -89,7 +90,7 @@ export type YAutotask = {
   path: string;
   relayer?: YRelayer;
   trigger: {
-    type: 'schedule' | 'webhook';
+    type: 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
     frequency?: number;
     cron?: string;
   };

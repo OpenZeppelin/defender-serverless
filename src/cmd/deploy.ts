@@ -47,9 +47,10 @@ import {
   DefenderFortaSentinelResponse,
   DefenderScheduleTrigger,
   DefenderWebhookTrigger,
+  DefenderSentinelTrigger,
+  DefenderMonitorFilterTrigger,
   DefenderCategory,
   YCategory,
-  DefenderSentinelTrigger,
 } from '../types';
 
 export default class DefenderDeploy {
@@ -821,7 +822,7 @@ export default class DefenderDeploy {
         const { codeDigest } = await client.get(match.autotaskId);
 
         const isSchedule = (
-          o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderSentinelTrigger,
+          o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderSentinelTrigger | DefenderMonitorFilterTrigger,
         ): o is DefenderScheduleTrigger => o.type === 'schedule';
 
         const mappedMatch = {
