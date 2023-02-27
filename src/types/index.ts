@@ -27,10 +27,11 @@ import {
 } from 'defender-sentinel-client/lib/models/subscriber';
 import {
   Autotask,
-  ScheduleTrigger,
   SecretsMap,
+  ScheduleTrigger,
   WebhookTrigger,
   SentinelTrigger,
+  MonitorFilterTrigger,
 } from 'defender-autotask-client/lib/models/autotask';
 
 export type DefenderAPIError = DefenderApiResponseError;
