@@ -354,6 +354,23 @@
         "paused": { "type": "boolean" }
       },
       "required": ["name", "path", "trigger", "paused"]
+    },
+    "deploymentConfig": {
+      "title": "DeploymentConfig",
+      "type": "object",
+      "properties": {
+        "relayer": { "$ref": "definitions.schema.json/#/definitions/relayer", "format": "uri-reference" }
+      },
+      "required": ["relayer"]
+    },
+    "blockExplorerApiKey": {
+      "title": "BlockExplorerApiKey",
+      "type": "object",
+      "properties": {
+        "key": { "type": "string" },
+        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" }
+      },
+      "required": ["key", "network"]
     }
   }
 }

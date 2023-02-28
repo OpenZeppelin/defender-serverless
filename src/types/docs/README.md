@@ -26,6 +26,10 @@
 
 *   [AutotaskSecrets](./resources-properties-resources-properties-autotasksecrets.md) – `#/properties/Resources/properties/secrets`
 
+*   [Block Explorer Api Keys](./resources-properties-resources-properties-block-explorer-api-keys.md) – `#/properties/Resources/properties/block-explorer-api-keys`
+
+*   [BlockExplorerApiKey](./definitions-definitions-blockexplorerapikey.md) – `#/definitions/blockExplorerApiKey`
+
 *   [BlockSentinel](./definitions-definitions-blocksentinel.md) – `#/definitions/blockSentinel`
 
 *   [Category](./definitions-definitions-category.md) – `#/definitions/category`
@@ -41,6 +45,10 @@
 *   [Contracts](./resources-properties-resources-properties-contracts.md) – `#/properties/Resources/properties/contracts`
 
 *   [DatadogConfig](./definitions-definitions-datadogconfig.md) – `#/definitions/datadogConfig`
+
+*   [Deployment Configs](./resources-properties-resources-properties-deployment-configs.md) – `#/properties/Resources/properties/deployment-configs`
+
+*   [DeploymentConfig](./definitions-definitions-deploymentconfig.md) – `#/definitions/deploymentConfig`
 
 *   [EmailConfig](./definitions-definitions-emailconfig.md) – `#/definitions/emailConfig`
 
