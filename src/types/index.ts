@@ -89,7 +89,7 @@ export type YAutotask = {
   path: string;
   relayer?: YRelayer;
   trigger: {
-    type: 'schedule' | 'webhook';
+    type: 'schedule' | 'webhook' | 'sentinel';
     frequency?: number;
     cron?: string;
   };
