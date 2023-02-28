@@ -92,10 +92,6 @@ resources:
         address-from-relayer: ${self:resources.Resources.relayers.relayer-1} 
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
-        # optional
-        api-keys:
-          - key1
-          - key2
   
     notifications:
       email-1:
@@ -112,12 +108,31 @@ resources:
           url: ${self:custom.config.notifications.slack}
         paused: false
 
+    categories:
+      high-severity:
+        name: High Severity
+        # optional
+        description: A default category to be assigned for high risk monitors.
+      low-severity:
+        name: Low Severity
+        # optional
+        description: A default category to be assigned for low risk monitors.
+      medium-severity:
+        name: Medium Severity
+        # optional
+        description: A default category to be assigned for medium risk monitors.
+        # optional
+        notification-ids:
+          - ${self:resources.Resources.notifications.email-1}
+          - ${self:resources.Resources.notifications.slack-1}
+
     sentinels:
       # unique resource name
       block-example:
         name: "Block Example"
         type: "BLOCK"
         network: "goerli"
+        risk-category: "TECHNICAL" # optional
         addresses: 
           - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
         # optional
@@ -170,8 +185,8 @@ resources:
         notify-config:
           timeout: 0 # optional
           message: null # optional
-          channels: 
-            - ${self:resources.Resources.notifications.slack-1}
+          channels: [] # assign channels as empty list if you wish to use a category
+          category: ${self:resources.Resources.categories.medium-severity} # optional (only used if channels is empty)
         # optional
         conditions:
           min-scanner-count: 1
