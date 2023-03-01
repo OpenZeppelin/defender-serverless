@@ -1166,14 +1166,14 @@ one (and only one) of
 
 **enum**: the value of this property must be equal to one of the following values:
 
-| Value          | Explanation |
-| :------------- | :---------- |
-| `"NONE"`       |             |
-| `"GOVERNANCE"` |             |
-| `"PRIVILEGED"` |             |
-| `"SUSPICIOUS"` |             |
-| `"FINANCIAL"`  |             |
-| `"TECHNICAL"`  |             |
+| Value              | Explanation |
+| :----------------- | :---------- |
+| `"NONE"`           |             |
+| `"GOVERNANCE"`     |             |
+| `"ACCESS-CONTROL"` |             |
+| `"SUSPICIOUS"`     |             |
+| `"FINANCIAL"`      |             |
+| `"TECHNICAL"`      |             |
 
 ## Definitions group fortaSentinel
 
@@ -1518,14 +1518,14 @@ Reference this group by using
 
 **enum**: the value of this property must be equal to one of the following values:
 
-| Value          | Explanation |
-| :------------- | :---------- |
-| `"NONE"`       |             |
-| `"GOVERNANCE"` |             |
-| `"PRIVILEGED"` |             |
-| `"SUSPICIOUS"` |             |
-| `"FINANCIAL"`  |             |
-| `"TECHNICAL"`  |             |
+| Value              | Explanation |
+| :----------------- | :---------- |
+| `"NONE"`           |             |
+| `"GOVERNANCE"`     |             |
+| `"ACCESS-CONTROL"` |             |
+| `"SUSPICIOUS"`     |             |
+| `"FINANCIAL"`      |             |
+| `"TECHNICAL"`      |             |
 
 ## Definitions group sentinel
 
