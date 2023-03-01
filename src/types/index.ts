@@ -33,6 +33,7 @@ import {
   SentinelTrigger,
   MonitorFilterTrigger,
 } from 'defender-autotask-client/lib/models/autotask';
+import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from 'platform-deploy-client';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -57,6 +58,8 @@ export type DefenderEmailConfig = EmailConfig;
 export type DefenderNetwork = Network;
 export type DefenderWebhookTrigger = WebhookTrigger;
 export type DefenderScheduleTrigger = ScheduleTrigger;
+export type DefenderDeploymentConfig = DeploymentConfigResponse;
+export type DefenderBlockExplorerApiKey = BlockExplorerApiKeyResponse;
 export type DefenderSentinelTrigger = SentinelTrigger;
 export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
 export type DefenderSubscriberRiskCategory = SubscriberRiskCategory;
@@ -68,7 +71,9 @@ export type ResourceType =
   | 'Categories'
   | 'Autotasks'
   | 'Contracts'
-  | 'Secrets';
+  | 'Secrets'
+  | 'Deployment Configs'
+  | 'Block Explorer Api Keys';
 
 export type YPolicy = {
   'gas-price-cap'?: number;
@@ -223,4 +228,15 @@ export type ListDefenderResources = {
   contracts: DefenderContract[];
   relayerApiKeys: DefenderRelayerApiKey[];
   secrets: string[];
+  deploymentConfigs: DefenderDeploymentConfig[];
+  blockExplorerApiKeys: DefenderBlockExplorerApiKey[];
+};
+
+export type YDeploymentConfig = {
+  relayer: YRelayer;
+};
+
+export type YBlockExplorerApiKey = {
+  key: string;
+  network: Network;
 };
