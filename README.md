@@ -86,6 +86,10 @@ This means that all Defender resources, that are not defined in your current tem
 
 Any resource removed from the `serverless.yml` file does _not_ get automatically deleted in order to prevent inadvertent resource deletion. For this behaviour to be anticipated, SSOT mode must be enabled.
 
+### Block Explorer Api Keys
+
+Exported serverless configurations with Block Explorer Api Keys will not contain the `key` field but instead a `key-hash` field which is a keccak256 hash of the key. This must be replaced with the actual `key` field (and `key-hash` removed) before deploying
+
 ### Secrets (Autotask)
 
 Autotask secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redeployed under a new stack. Secrets defined under `stack` will be removed (on the condition that [SSOT mode](#SSOT-mode) is enabled) when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>_<secretkey>`, for example `mystack_test`.
@@ -108,7 +112,7 @@ We provide auto-generated documentation based on the JSON schemas:
 - [Defender Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/defender.md)
 - [Provider Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/provider.md)
 - [Function (Autotask) Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/function.md)
-- [Resources Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/resources-resources.md)
+- [Resources Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/resources.md)
 
 More information on types can be found [here](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/index.ts). Specifically, the types preceded with `Y` (e.g. YRelayer). For the schemas, you can check out the [docs-schema](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs-schemas) folder.
 
@@ -151,6 +155,14 @@ You can use `sls invoke --function <stack_resource_id>` to manually run an autot
 More information can be found on our documentation page [here](https://docs.openzeppelin.com/defender/serverless-plugin.html)
 
 ## Caveats
+
+Note that when setting up the notification configuration for a sentinel, the `channels` property will always be prioritised over `category`. A notification category can only be associated to a sentinel with no linked notification channels. This means that the `channels` property should be assigned the value `[]` in order to prioritise the `category` property.
+
+```yaml
+notify-config:
+  channels: [] # assign channels as empty list if you wish to use a category
+  category: ${self:resources.Resources.categories.medium-severity} # optional
+```
 
 Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:
 

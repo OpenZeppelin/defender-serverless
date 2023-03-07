@@ -108,7 +108,7 @@ We provide auto-generated documentation based on the JSON schemas:
 - [Defender Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/defender.md)
 - [Provider Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/provider.md)
 - [Function (Autotask) Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/function.md)
-- [Resources Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/resources-resources.md)
+- [Resources Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/resources.md)
 
 More information on types can be found [here](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/index.ts). Specifically, the types preceded with `Y` (e.g. YRelayer). For the schemas, you can check out the [docs-schema](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs-schemas) folder.
 

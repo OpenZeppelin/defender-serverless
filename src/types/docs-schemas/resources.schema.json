@@ -1,63 +1,76 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Resources",
-  "resources": {
-    "title": "Resources",
-    "type": "object",
-    "additionalProperties": false,
-    "properties": {
-      "Resources": {
-        "title": "Resources",
-        "type": "object",
-        "properties": {
-          "notifications": {
-            "title": "Notifications",
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "definitions.schema.json/#/definitions/notification",
-              "format": "uri-reference"
-            }
-          },
-          "relayers": {
-            "title": "Relayers",
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "definitions.schema.json/#/definitions/relayer",
-              "format": "uri-reference"
-            }
-          },
-          "policies": {
-            "title": "Policies",
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "definitions.schema.json/#/definitions/policy",
-              "format": "uri-reference"
-            }
-          },
-          "contracts": {
-            "title": "Contracts",
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "definitions.schema.json/#/definitions/contract",
-              "format": "uri-reference"
-            }
-          },
-          "secrets": {
-            "title": "AutotaskSecrets",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "global": { "title": "Global", "type": "object", "additionalProperties": { "type": "string" } },
-              "stack": { "title": "Stack", "type": "object", "additionalProperties": { "type": "string" } }
-            }
-          },
-          "sentinels": {
-            "title": "Sentinels",
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "definitions.schema.json/#/definitions/sentinel",
-              "format": "uri-reference"
-            }
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "Resources": {
+      "title": "Resources",
+      "type": "object",
+      "properties": {
+        "notifications": {
+          "title": "Notifications",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "definitions.schema.json/#/definitions/notification",
+            "format": "uri-reference"
+          }
+        },
+        "relayers": {
+          "title": "Relayers",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "definitions.schema.json/#/definitions/relayer",
+            "format": "uri-reference"
+          }
+        },
+        "policies": {
+          "title": "Policies",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "definitions.schema.json/#/definitions/policy",
+            "format": "uri-reference"
+          }
+        },
+        "contracts": {
+          "title": "Contracts",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "definitions.schema.json/#/definitions/contract",
+            "format": "uri-reference"
+          }
+        },
+        "secrets": {
+          "title": "AutotaskSecrets",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "global": { "title": "Global", "type": "object", "additionalProperties": { "type": "string" } },
+            "stack": { "title": "Stack", "type": "object", "additionalProperties": { "type": "string" } }
+          }
+        },
+        "sentinels": {
+          "title": "Sentinels",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "definitions.schema.json/#/definitions/sentinel",
+            "format": "uri-reference"
+          }
+        },
+        "deployment-configs": {
+          "title": "Deployment Configs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "definitions.schema.json/#/definitions/deploymentConfig",
+            "format": "uri-reference"
+          }
+        },
+        "block-explorer-api-keys": {
+          "title": "Block Explorer Api Keys",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "definitions.schema.json/#/definitions/blockExplorerApiKey",
+            "format": "uri-reference"
           }
         }
       }

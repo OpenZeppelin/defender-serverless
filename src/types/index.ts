@@ -13,6 +13,8 @@ import {
   DiscordConfig,
   NotificationType,
 } from 'defender-sentinel-client/lib/models/notification';
+
+import { NotificationCategory } from 'defender-sentinel-client/lib/models/category';
 import { CreateSentinelResponse, BlockWatcher } from 'defender-sentinel-client';
 
 import {
@@ -21,8 +23,16 @@ import {
   ExternalCreateBlockSubscriberRequest,
   ExternalCreateFortaSubscriberRequest,
   NotificationReference,
+  SubscriberRiskCategory,
 } from 'defender-sentinel-client/lib/models/subscriber';
-import { Autotask, ScheduleTrigger, SecretsMap, WebhookTrigger } from 'defender-autotask-client/lib/models/autotask';
+import {
+  Autotask,
+  ScheduleTrigger,
+  SecretsMap,
+  SentinelTrigger,
+  WebhookTrigger,
+} from 'defender-autotask-client/lib/models/autotask';
+import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from 'platform-deploy-client';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -32,6 +42,7 @@ export type DefenderRelayer = RelayerGetResponse;
 export type DefenderAutotask = Autotask;
 export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
+export type DefenderCategory = NotificationCategory;
 export type DefenderNotificationReference = NotificationReference;
 export type DefenderSentinel = CreateSentinelResponse;
 export type DefenderBlockSentinelResponse = CreateBlockSubscriberResponse;
@@ -46,8 +57,21 @@ export type DefenderEmailConfig = EmailConfig;
 export type DefenderNetwork = Network;
 export type DefenderWebhookTrigger = WebhookTrigger;
 export type DefenderScheduleTrigger = ScheduleTrigger;
+export type DefenderDeploymentConfig = DeploymentConfigResponse;
+export type DefenderBlockExplorerApiKey = BlockExplorerApiKeyResponse;
+export type DefenderSentinelTrigger = SentinelTrigger;
+export type DefenderSubscriberRiskCategory = SubscriberRiskCategory;
 
-export type ResourceType = 'Sentinels' | 'Relayers' | 'Notifications' | 'Autotasks' | 'Contracts' | 'Secrets';
+export type ResourceType =
+  | 'Sentinels'
+  | 'Relayers'
+  | 'Notifications'
+  | 'Categories'
+  | 'Autotasks'
+  | 'Contracts'
+  | 'Secrets'
+  | 'Deployment Configs'
+  | 'Block Explorer Api Keys';
 
 export type YPolicy = {
   'gas-price-cap'?: number;
@@ -70,7 +94,7 @@ export type YAutotask = {
   path: string;
   relayer?: YRelayer;
   trigger: {
-    type: 'schedule' | 'webhook';
+    type: 'schedule' | 'webhook' | 'sentinel';
     frequency?: number;
     cron?: string;
   };
@@ -106,6 +130,12 @@ export type YNotification = SaveNotificationRequest & {
   config: YSlackConfig | YTelegramConfig | YDatadogConfig | YDiscordConfig | YEmailConfig;
 };
 
+export type YCategory = {
+  name: string;
+  description: string;
+  'notification-ids': YNotification[];
+};
+
 export type YBlockSentinel = {
   name: string;
   type: 'BLOCK';
@@ -121,6 +151,7 @@ export type YBlockSentinel = {
     timeout?: number;
     message?: string;
     'message-subject'?: string;
+    category?: YCategory;
     channels: YNotification[];
   };
   conditions?: {
@@ -128,6 +159,7 @@ export type YBlockSentinel = {
     function: { signature: string; expression?: string }[];
     transaction?: string;
   };
+  'risk-category': DefenderSubscriberRiskCategory;
 };
 
 export type YFortaSentinel = {
@@ -144,6 +176,7 @@ export type YFortaSentinel = {
     timeout?: number;
     message?: string;
     'message-subject'?: string;
+    category?: YCategory;
     channels: YNotification[];
   };
   conditions?: {
@@ -154,6 +187,7 @@ export type YFortaSentinel = {
   'forta-node-id'?: string;
   'agent-ids'?: string[];
   'forta-last-processed-time'?: string;
+  'risk-category': DefenderSubscriberRiskCategory;
 };
 
 export type YSentinel = YBlockSentinel | YFortaSentinel;
@@ -190,7 +224,19 @@ export type ListDefenderResources = {
   sentinels: DefenderSentinel[];
   autotasks: DefenderAutotask[];
   notifications: DefenderNotification[];
+  categories: DefenderCategory[];
   contracts: DefenderContract[];
   relayerApiKeys: DefenderRelayerApiKey[];
   secrets: string[];
+  deploymentConfigs: DefenderDeploymentConfig[];
+  blockExplorerApiKeys: DefenderBlockExplorerApiKey[];
+};
+
+export type YDeploymentConfig = {
+  relayer: YRelayer;
+};
+
+export type YBlockExplorerApiKey = {
+  key: string;
+  network: Network;
 };

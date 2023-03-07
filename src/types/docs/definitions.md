@@ -15,6 +15,17 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group risk-category
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/risk-category"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group network
 
 Reference this group by using
@@ -195,6 +206,7 @@ Reference this group by using
 | `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
+| `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
@@ -398,6 +410,7 @@ Reference this group by using
 | `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
+| `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
@@ -755,6 +768,74 @@ one (and only one) of
 
 *   [UrlConfig](definitions-definitions-urlconfig.md "check type definition")
 
+## Definitions group category
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/category"}
+```
+
+| Property                            | Type     | Required | Nullable       | Defined by                                                                                                                                 |
+| :---------------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-3)                     | `string` | Required | cannot be null | [Definitions](definitions-definitions-category-properties-name.md "#/definitions/category/properties/name")                       |
+| [description](#description)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-description.md "#/definitions/category/properties/description")         |
+| [notificationIds](#notificationids) | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-notificationids.md "#/definitions/category/properties/notificationIds") |
+
+### name
+
+
+
+`name`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-category-properties-name.md "#/definitions/category/properties/name")
+
+#### name Type
+
+`string`
+
+### description
+
+
+
+`description`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-category-properties-description.md "#/definitions/category/properties/description")
+
+#### description Type
+
+`string`
+
+### notificationIds
+
+
+
+`notificationIds`
+
+*   is optional
+
+*   Type: `object[]` ([Notification](definitions-definitions-notification.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-category-properties-notificationids.md "#/definitions/category/properties/notificationIds")
+
+#### notificationIds Type
+
+`object[]` ([Notification](definitions-definitions-notification.md))
+
 ## Definitions group blockSentinel
 
 Reference this group by using
@@ -765,7 +846,7 @@ Reference this group by using
 
 | Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                          |
 | :---------------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-3)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")                      |
+| [name](#name-4)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")                      |
 | [type](#type-1)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")                      |
 | [network](#network-2)                     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-network.md "#/definitions/blockSentinel/properties/network")                |
 | [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")            |
@@ -777,6 +858,7 @@ Reference this group by using
 | [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "#/definitions/blockSentinel/properties/confirm-level")    |
 | [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig.md "#/definitions/blockSentinel/properties/notify-config")     |
 | [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "#/definitions/blockSentinel/properties/conditions")          |
+| [risk-category](#risk-category)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-riskcategory.md "#/definitions/blockSentinel/properties/risk-category")     |
 
 ### name
 
@@ -869,6 +951,7 @@ Reference this group by using
 | `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
+| `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
@@ -1061,6 +1144,37 @@ one (and only one) of
 
 `object` ([Conditions](definitions-definitions-blocksentinel-properties-conditions.md))
 
+### risk-category
+
+
+
+`risk-category`
+
+*   is optional
+
+*   Type: `string` ([RiskCategory](definitions-definitions-blocksentinel-properties-riskcategory.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-riskcategory.md "#/definitions/blockSentinel/properties/risk-category")
+
+#### risk-category Type
+
+`string` ([RiskCategory](definitions-definitions-blocksentinel-properties-riskcategory.md))
+
+#### risk-category Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value              | Explanation |
+| :----------------- | :---------- |
+| `"NONE"`           |             |
+| `"GOVERNANCE"`     |             |
+| `"ACCESS-CONTROL"` |             |
+| `"SUSPICIOUS"`     |             |
+| `"FINANCIAL"`      |             |
+| `"TECHNICAL"`      |             |
+
 ## Definitions group fortaSentinel
 
 Reference this group by using
@@ -1071,7 +1185,7 @@ Reference this group by using
 
 | Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                          |
 | :------------------------------------------ | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")                      |
+| [name](#name-5)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")                      |
 | [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")                      |
 | [network](#network-3)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-network.md "#/definitions/fortaSentinel/properties/network")                |
 | [addresses](#addresses-1)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")            |
@@ -1084,6 +1198,7 @@ Reference this group by using
 | [conditions](#conditions-1)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "#/definitions/fortaSentinel/properties/conditions")          |
 | [forta-node-id](#forta-node-id)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "#/definitions/fortaSentinel/properties/forta-node-id")    |
 | [agent-ids](#agent-ids)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-agentids.md "#/definitions/fortaSentinel/properties/agent-ids")             |
+| [risk-category](#risk-category-1)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-riskcategory.md "#/definitions/fortaSentinel/properties/risk-category")     |
 
 ### name
 
@@ -1176,6 +1291,7 @@ Reference this group by using
 | `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
+| `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
@@ -1380,6 +1496,37 @@ Reference this group by using
 
 `string[]`
 
+### risk-category
+
+
+
+`risk-category`
+
+*   is optional
+
+*   Type: `string` ([RiskCategory](definitions-definitions-fortasentinel-properties-riskcategory.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-riskcategory.md "#/definitions/fortaSentinel/properties/risk-category")
+
+#### risk-category Type
+
+`string` ([RiskCategory](definitions-definitions-fortasentinel-properties-riskcategory.md))
+
+#### risk-category Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value              | Explanation |
+| :----------------- | :---------- |
+| `"NONE"`           |             |
+| `"GOVERNANCE"`     |             |
+| `"ACCESS-CONTROL"` |             |
+| `"SUSPICIOUS"`     |             |
+| `"FINANCIAL"`      |             |
+| `"TECHNICAL"`      |             |
+
 ## Definitions group sentinel
 
 Reference this group by using
@@ -1401,7 +1548,7 @@ Reference this group by using
 
 | Property            | Type      | Required | Nullable       | Defined by                                                                                                                 |
 | :------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-5)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-name.md "#/definitions/autotask/properties/name")       |
+| [name](#name-6)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-name.md "#/definitions/autotask/properties/name")       |
 | [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-path.md "#/definitions/autotask/properties/path")       |
 | [relayer](#relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer.md "#/definitions/autotask/properties/relayer")                     |
 | [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-autotask-properties-trigger.md "#/definitions/autotask/properties/trigger") |
@@ -1500,3 +1647,132 @@ Reference this group by using
 #### paused Type
 
 `boolean`
+
+## Definitions group deploymentConfig
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/deploymentConfig"}
+```
+
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                     |
+| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------- |
+| [relayer](#relayer-1) | `object` | Required | cannot be null | [Definitions](definitions-definitions-relayer.md "#/definitions/deploymentConfig/properties/relayer") |
+
+### relayer
+
+
+
+`relayer`
+
+*   is required
+
+*   Type: `object` ([Relayer](definitions-definitions-relayer.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayer.md "#/definitions/deploymentConfig/properties/relayer")
+
+#### relayer Type
+
+`object` ([Relayer](definitions-definitions-relayer.md))
+
+#### relayer Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+## Definitions group blockExplorerApiKey
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/blockExplorerApiKey"}
+```
+
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                       |
+| :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [key](#key)           | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "#/definitions/blockExplorerApiKey/properties/key")         |
+| [network](#network-4) | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-network.md "#/definitions/blockExplorerApiKey/properties/network") |
+
+### key
+
+
+
+`key`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "#/definitions/blockExplorerApiKey/properties/key")
+
+#### key Type
+
+`string`
+
+### network
+
+
+
+`network`
+
+*   is required
+
+*   Type: `string` ([Network](definitions-definitions-blockexplorerapikey-properties-network.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-blockexplorerapikey-properties-network.md "#/definitions/blockExplorerApiKey/properties/network")
+
+#### network Type
+
+`string` ([Network](definitions-definitions-blockexplorerapikey-properties-network.md))
+
+#### network Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value                     | Explanation |
+| :------------------------ | :---------- |
+| `"mainnet"`               |             |
+| `"rinkeby"`               |             |
+| `"ropsten"`               |             |
+| `"kovan"`                 |             |
+| `"goerli"`                |             |
+| `"xdai"`                  |             |
+| `"sokol"`                 |             |
+| `"fuse"`                  |             |
+| `"bsc"`                   |             |
+| `"bsctest"`               |             |
+| `"fantom"`                |             |
+| `"fantomtest"`            |             |
+| `"moonbase"`              |             |
+| `"moonriver"`             |             |
+| `"moonbeam"`              |             |
+| `"matic"`                 |             |
+| `"mumbai"`                |             |
+| `"avalanche"`             |             |
+| `"fuji"`                  |             |
+| `"optimism"`              |             |
+| `"optimism-kovan"`        |             |
+| `"optimism-goerli"`       |             |
+| `"arbitrum"`              |             |
+| `"arbitrum-nova"`         |             |
+| `"arbitrum-rinkeby"`      |             |
+| `"arbitrum-goerli"`       |             |
+| `"celo"`                  |             |
+| `"alfajores"`             |             |
+| `"harmony-s0"`            |             |
+| `"harmony-test-s0"`       |             |
+| `"aurora"`                |             |
+| `"auroratest"`            |             |
+| `"hedera"`                |             |
+| `"hederatest"`            |             |
+| `"x-dfk-avax-chain"`      |             |
+| `"x-dfk-avax-chain-test"` |             |
+| `"zksync-goerli"`         |             |
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
