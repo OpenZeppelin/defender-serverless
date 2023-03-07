@@ -774,6 +774,7 @@ export default class DefenderDeploy {
             autotaskTrigger: match.notifyConfig?.autotaskId,
             alertTimeoutMs: match.notifyConfig?.timeoutMs,
             alertMessageBody: match.notifyConfig?.messageBody,
+            alertMessageSubject: match.notifyConfig?.messageSubject,
             notificationChannels: match.notifyConfig?.notifications.map(
               (n: DefenderNotificationReference) => n.notificationId,
             ),

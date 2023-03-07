@@ -150,6 +150,7 @@ export type YBlockSentinel = {
   'notify-config': {
     timeout?: number;
     message?: string;
+    'message-subject'?: string;
     category?: YCategory;
     channels: YNotification[];
   };
@@ -174,6 +175,7 @@ export type YFortaSentinel = {
   'notify-config': {
     timeout?: number;
     message?: string;
+    'message-subject'?: string;
     category?: YCategory;
     channels: YNotification[];
   };
