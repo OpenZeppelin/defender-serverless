@@ -343,13 +343,43 @@ export default class DefenderDeploy {
       contracts,
       retrieveExisting,
       // on update
-      async (_: YContract, match: DefenderContract) => {
-        // defender-client does not support "updating" contracts (name, abi, ..)
-        return {
+      async (contract: YContract, match: DefenderContract) => {
+        const mappedMatch = {
           name: match.name,
+          network: match.network,
+          address: match.address,
+          abi: match.abi && JSON.stringify(JSON.parse(match.abi)),
+          'nat-spec': match.natSpec ? match.natSpec : undefined,
+        };
+
+        // in reality this will never be called as long as defender-client does not return ABI as part of the list response
+        if (_.isEqual(validateTypesAndSanitise(contract), validateTypesAndSanitise(mappedMatch))) {
+          return {
+            name: match.name,
+            id: `${match.network}-${match.address}`,
+            success: false,
+            response: match,
+            notice: `Skipped import - contract ${match.address} already exists on ${match.network}`,
+          };
+        }
+
+        this.log.notice(
+          `Contracts will always update regardless of changes due to certain limitations in Defender API clients.`,
+        );
+
+        const updatedContract = await client.addContract({
+          name: contract.name,
+          network: match.network,
+          address: match.address,
+          abi: contract.abi && JSON.stringify(JSON.parse(contract.abi)),
+          natSpec: contract['nat-spec'] ? contract['nat-spec'] : undefined,
+        });
+
+        return {
+          name: updatedContract.name,
           id: `${match.network}-${match.address}`,
-          success: false,
-          notice: `Skipped import - contract ${match.address} already exists on ${match.network}`,
+          success: true,
+          response: updatedContract,
         };
       },
       // on create
