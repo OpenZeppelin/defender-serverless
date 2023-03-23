@@ -6,7 +6,7 @@
     "risk-category": {
       "title": "RiskCategory",
       "type": "string",
-      "enum": ["NONE", "GOVERNANCE", "PRIVILEGED", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
+      "enum": ["NONE", "GOVERNANCE", "ACCESS-CONTROL", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
     },
     "network": {
       "title": "Network",
