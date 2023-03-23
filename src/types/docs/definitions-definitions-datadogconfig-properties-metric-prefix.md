@@ -1,8 +1,8 @@
-## metric-p$refix Type
+## metric-prefix Type
 
 `string`
 
-## metric-p$refix Constraints
+## metric-prefix Constraints
 
 **maximum length**: the maximum number of characters for this string is: `100`
 
