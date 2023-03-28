@@ -48,6 +48,7 @@
         "hederatest",
         "x-dfk-avax-chain",
         "x-dfk-avax-chain-test",
+        "zksync",
         "zksync-goerli"
       ]
     },
