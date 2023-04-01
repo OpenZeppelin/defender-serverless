@@ -48,6 +48,7 @@
         "hederatest",
         "x-dfk-avax-chain",
         "x-dfk-avax-chain-test",
+        "zksync",
         "zksync-goerli"
       ]
     },
@@ -103,13 +104,13 @@
       "type": "object",
       "properties": {
         "api-key": { "type": "string" },
-        "metric-p$refix": {
+        "metric-prefix": {
           "type": "string",
           "maxLength": 100,
           "pattern": "^[A-Za-z]+[A-Za-z0-9_\\.]*\\.$"
         }
       },
-      "required": ["api-key", "metric-p$refix"]
+      "required": ["api-key", "metric-prefix"]
     },
     "urlConfig": {
       "title": "UrlConfig",

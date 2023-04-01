@@ -219,6 +219,7 @@ Reference this group by using
 | `"hederatest"`            |             |
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
+| `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
@@ -423,6 +424,7 @@ Reference this group by using
 | `"hederatest"`            |             |
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
+| `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
@@ -482,10 +484,10 @@ Reference this group by using
 {"$ref":"#/definitions/datadogConfig"}
 ```
 
-| Property                         | Type     | Required | Nullable       | Defined by                                                                                                                                        |
-| :------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [api-key](#api-key)              | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "#/definitions/datadogConfig/properties/api-key")              |
-| [metric-p$refix](#metric-prefix) | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-p$refix") |
+| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                       |
+| :------------------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [api-key](#api-key)             | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "#/definitions/datadogConfig/properties/api-key")             |
+| [metric-prefix](#metric-prefix) | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-prefix") |
 
 ### api-key
 
@@ -505,11 +507,11 @@ Reference this group by using
 
 `string`
 
-### metric-p$refix
+### metric-prefix
 
 
 
-`metric-p$refix`
+`metric-prefix`
 
 *   is required
 
@@ -517,13 +519,13 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-p$refix")
+*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-prefix")
 
-#### metric-p$refix Type
+#### metric-prefix Type
 
 `string`
 
-#### metric-p$refix Constraints
+#### metric-prefix Constraints
 
 **maximum length**: the maximum number of characters for this string is: `100`
 
@@ -964,6 +966,7 @@ Reference this group by using
 | `"hederatest"`            |             |
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
+| `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
@@ -1304,6 +1307,7 @@ Reference this group by using
 | `"hederatest"`            |             |
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
+| `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
@@ -1773,6 +1777,7 @@ Reference this group by using
 | `"hederatest"`            |             |
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
+| `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
