@@ -907,34 +907,34 @@ deep-is@^0.1.3:
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
 
-defender-admin-client@^1.38.0:
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.40.0.tgz#a1aaabb869ce9dd386b75122cad3e354a69f2b92"
-  integrity sha512-9rk59t8YMP0K7i5ANkE7H4/O3m8XPap0zVt9bCVEsyipfq7nlZlo5WrypQ6d4Wg//5uTvXs+taPsvZyQTS777Q==
+defender-admin-client@^1.41.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.41.0.tgz#35d6ab51187f322e83dd129a6f9bb35d001188c2"
+  integrity sha512-vNz2Ut2bNYsgJEvoBaA03fFotVkXf9dx3zgJr6JzcGrfvJVgjuzFEu/tTt62mxc0KxQOP3hvJVv3JqgfE5R1QA==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "1.40.0"
+    defender-base-client "1.41.0"
     ethers "^5.7.2"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-autotask-client@^1.38.0:
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.40.0.tgz#1cf59dbef13efae796b7e55a6c5e29aecd1fa148"
-  integrity sha512-BwqfKJpCNx5ynIp8iCs04teiemyTd2CqzBdR6r41x/6/lWr3xdfmJEdVn3BOrRvpqmemnJU5YgW+LUcjhIRtzA==
+defender-autotask-client@^1.41.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.41.0.tgz#44fb3a386519b28ddbcfb826b8685ba06cb06f4e"
+  integrity sha512-Kkk/hDU6ygMUGI2GP0LOG5PZmq+AzvSvsAPHBLji9JhGlInntjLVJ17cUBGzyV0k6BEGKklynPYN9mfcTm8lwA==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "1.40.0"
+    defender-base-client "1.41.0"
     dotenv "^10.0.0"
     glob "^7.1.6"
     jszip "^3.5.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-base-client@1.39.0:
-  version "1.39.0"
-  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.39.0.tgz#c6768821527b608047de903ed682267bd86b50fd"
-  integrity sha512-x5GqEL2IHwnOLEqgzlyp0qa08hWCOGLn1idY8PucTrXo6ZMQGxQtPMx8LAquBvOD4rC3EPsr2qzln00isFcr/A==
+defender-base-client@1.41.0, defender-base-client@^1.40.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.41.0.tgz#514628d1a592d5c63920efec790df779f54d1b3c"
+  integrity sha512-ngoy9OTQ35pDKeZS7A1X/yMU8ehwxuJWQoyfU8AHxE4u1Eya+9qhDjiOyE1jYH8uQ+AQXdIJK5ESgd4IHIhpkg==
   dependencies:
     amazon-cognito-identity-js "^6.0.1"
     async-retry "^1.3.3"
@@ -942,36 +942,25 @@ defender-base-client@1.39.0:
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-base-client@1.40.0:
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.40.0.tgz#70e2aa4de2ae3d0c207a6317b7bacc6d00ee5ed4"
-  integrity sha512-cm9RUvAfGES+zB+BkAG4Hl8fDyohPS25B/0Nnlz/9hYEOoN5mF3Y3OtiMChxDnMaz0hCSt+OAOUqhg3gYe8Jtw==
-  dependencies:
-    amazon-cognito-identity-js "^6.0.1"
-    async-retry "^1.3.3"
-    axios "^0.21.2"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
-
-defender-relay-client@^1.38.0:
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.40.0.tgz#87c9a8250c548c3037ab832b4b90dc44ea834037"
-  integrity sha512-8Jn4YFOfUj/knKdbLsUS30e+/WHxtpPqjQlS1Bhzy8Avr0e6OJVLkZcWvddl62kMXH7cJUC/+KDJ7VRstZLqxg==
+defender-relay-client@^1.41.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.41.0.tgz#e19a458cb2a9f9cad442221ff1e80520d1f604d4"
+  integrity sha512-g/4+67hf54ggM1+WmsRAPqyamznnHaNAtPsT3q6TN7u2pPmUWPMjWe3qBVshAC0CC9c/PzMNtFe/HjWhYU8ycA==
   dependencies:
     amazon-cognito-identity-js "^6.0.1"
     axios "^0.21.2"
-    defender-base-client "1.40.0"
+    defender-base-client "1.41.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-sentinel-client@^1.38.0:
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.40.0.tgz#743c2ef48807ea5a56ee41a1dac5b00eb1b036ec"
-  integrity sha512-AAcOHWR3nPlvLfe7mq4Zth3Tfi+nn8JDFBsv1TsEaCMt4PId9UtcMlBExYw5S4SozIr+Q6u9qA0JS+Q1Uq65bA==
+defender-sentinel-client@^1.41.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.41.0.tgz#69efc64b2ea544d1536918795515c6debbe879dc"
+  integrity sha512-F7SYfkDL0upe4aTj51YbP8TVxonrPGupPrNwoohIf0UOZbt/OfnLTIKM05kdKvPXXX9MmK5vmIpnCXudN3f6xQ==
   dependencies:
     "@ethersproject/abi" "^5.6.3"
     axios "^0.21.2"
-    defender-base-client "1.40.0"
+    defender-base-client "1.41.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
@@ -2206,14 +2195,14 @@ picomatch@^2.2.1, picomatch@^2.3.1:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-platform-deploy-client@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/platform-deploy-client/-/platform-deploy-client-0.3.2.tgz#caa23905c86b1814aad9daedd55c430ba81c682e"
-  integrity sha512-+KO84LA1DGgehPiX4tgNPZkuYO3lQ1PRQI025MMa3DJDvzCNnb97wOkCf5IsbPJIsuXHO/rQLQjhAPir2l/pmA==
+platform-deploy-client@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/platform-deploy-client/-/platform-deploy-client-0.3.3.tgz#7358d3ee2747fdc8c094d8fed66929d8caeb09c7"
+  integrity sha512-CO7P0h8OHSa19QjA7hWbpmLPE0TPacDgdwA8Vwu9NnUdlYvXfF+q4f0FwaeS0vb1ruWtpkTfeIxy7Sc+TxgcNQ==
   dependencies:
     "@ethersproject/abi" "^5.6.3"
     axios "^0.21.2"
-    defender-base-client "1.39.0"
+    defender-base-client "^1.40.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
