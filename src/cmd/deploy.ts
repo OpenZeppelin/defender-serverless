@@ -49,13 +49,14 @@ import {
   DefenderFortaSentinelResponse,
   DefenderScheduleTrigger,
   DefenderWebhookTrigger,
+  DefenderSentinelTrigger,
+  DefenderMonitorFilterTrigger,
   DefenderDeploymentConfig,
   YDeploymentConfig,
   DefenderBlockExplorerApiKey,
   YBlockExplorerApiKey,
   DefenderCategory,
   YCategory,
-  DefenderSentinelTrigger,
 } from '../types';
 import keccak256 from 'keccak256';
 
@@ -887,7 +888,7 @@ export default class DefenderDeploy {
         const { codeDigest } = await client.get(match.autotaskId);
 
         const isSchedule = (
-          o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderSentinelTrigger,
+          o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderSentinelTrigger | DefenderMonitorFilterTrigger,
         ): o is DefenderScheduleTrigger => o.type === 'schedule';
 
         const mappedMatch = {

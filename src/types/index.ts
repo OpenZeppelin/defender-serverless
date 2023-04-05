@@ -27,10 +27,11 @@ import {
 } from 'defender-sentinel-client/lib/models/subscriber';
 import {
   Autotask,
-  ScheduleTrigger,
   SecretsMap,
-  SentinelTrigger,
+  ScheduleTrigger,
   WebhookTrigger,
+  SentinelTrigger,
+  MonitorFilterTrigger,
 } from 'defender-autotask-client/lib/models/autotask';
 import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from 'platform-deploy-client';
 
@@ -60,6 +61,7 @@ export type DefenderScheduleTrigger = ScheduleTrigger;
 export type DefenderDeploymentConfig = DeploymentConfigResponse;
 export type DefenderBlockExplorerApiKey = BlockExplorerApiKeyResponse;
 export type DefenderSentinelTrigger = SentinelTrigger;
+export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
 export type DefenderSubscriberRiskCategory = SubscriberRiskCategory;
 
 export type ResourceType =
@@ -94,7 +96,7 @@ export type YAutotask = {
   path: string;
   relayer?: YRelayer;
   trigger: {
-    type: 'schedule' | 'webhook' | 'sentinel';
+    type: 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
     frequency?: number;
     cron?: string;
   };
