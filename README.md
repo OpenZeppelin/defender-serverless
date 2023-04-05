@@ -171,3 +171,16 @@ Errors thrown during the `deploy` process, will not revert any prior changes. Co
 - Validation error of the `serverless.yml` file (see [Types and Schema validation](#Types-and-Schema-validation))
 
 Usually, fixing the error and retrying the deploy should suffice as any existing resources will fall within the `update` clause of the deployment. However, if unsure, you can always call `sls remove` to remove the entire stack, and retry.
+
+## Publish a new release
+
+```bash
+npm login
+git checkout master
+git pull origin master
+yarn publish --no-git-tag-version
+# enter new version at prompt
+git add package.json
+git commit -m 'v{version here}'
+git push origin master
+```

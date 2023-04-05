@@ -1,6 +1,6 @@
 {
   "name": "defender-serverless",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Configure your Defender environment via code",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
