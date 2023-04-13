@@ -9,3 +9,7 @@ lib
 tsconfig.tsbuildinfo
 
 .vscode
+
+# example deployments
+examples/defender-test-project/.defender
+examples/defender-test-project/.serverless
