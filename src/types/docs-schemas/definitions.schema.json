@@ -49,7 +49,8 @@
         "x-dfk-avax-chain",
         "x-dfk-avax-chain-test",
         "zksync",
-        "zksync-goerli"
+        "zksync-goerli",
+        "base-goerli"
       ]
     },
     "policy": {
