@@ -176,11 +176,11 @@ Usually, fixing the error and retrying the deploy should suffice as any existing
 
 ```bash
 npm login
-git checkout master
-git pull origin master
+git checkout main
+git pull origin main
 yarn publish --no-git-tag-version
 # enter new version at prompt
 git add package.json
 git commit -m 'v{version here}'
-git push origin master
+git push origin main
 ```
