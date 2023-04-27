@@ -14,7 +14,7 @@
 | [type](#type)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")                      |
 | [network](#network)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/blockSentinel/properties/network")                                         |
 | [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")            |
-| [abi](#abi)                               | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-abi.md "#/definitions/blockSentinel/properties/abi")                        |
+| [abi](#abi)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/blockSentinel/properties/abi")                                             |
 | [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-alertthreshold.md "#/definitions/blockSentinel/properties/alert-threshold") |
 | [paused](#paused)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-paused.md "#/definitions/blockSentinel/properties/paused")                  |
 | [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-condition")                             |
@@ -160,15 +160,21 @@
 
 *   is optional
 
-*   Type: `string`
+*   Type: merged type ([AbiType](definitions-definitions-abitype.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-abi.md "#/definitions/blockSentinel/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/blockSentinel/properties/abi")
 
 ### abi Type
 
-`string`
+merged type ([AbiType](definitions-definitions-abitype.md))
+
+any of
+
+*   [StringABI](definitions-definitions-abitype-anyof-stringabi.md "check type definition")
+
+*   [ArrayABI](definitions-definitions-abitype-anyof-arrayabi.md "check type definition")
 
 ## alert-threshold
 

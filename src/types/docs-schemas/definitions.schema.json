@@ -188,7 +188,7 @@
           "type": "array",
           "items": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" }
         },
-        "abi": { "type": "string" },
+        "abi": { "$ref": "definitions.schema.json/#/definitions/abi" },
         "alert-threshold": {
           "title": "AlertThreshold",
           "type": "object",
@@ -258,7 +258,7 @@
           "type": "array",
           "items": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" }
         },
-        "abi": { "type": "string" },
+        "abi": { "$ref": "definitions.schema.json/#/definitions/abi" },
         "alert-threshold": {
           "title": "AlertThreshold",
           "type": "object",
