@@ -1,7 +1,7 @@
 import { Network } from 'defender-base-client';
 import { Contract } from 'defender-admin-client';
 import { RelayerGetResponse, RelayerApiKey } from 'defender-relay-client';
-
+import { JsonFragment } from '@ethersproject/abi';
 import { DefenderApiResponseError } from 'defender-base-client/lib/api/api-error';
 import {
   SaveNotificationRequest,
@@ -143,7 +143,7 @@ export type YBlockSentinel = {
   type: 'BLOCK';
   network: Network;
   addresses: string[];
-  abi?: string;
+  abi?: string | string[] | JsonFragment[];
   'alert-threshold'?: { amount: number; 'window-seconds': number };
   paused?: boolean;
   'autotask-condition'?: YAutotask;
@@ -169,7 +169,7 @@ export type YFortaSentinel = {
   type: 'FORTA';
   network?: Network;
   addresses?: string[];
-  abi?: string;
+  abi?: string | string[] | JsonFragment[];
   'alert-threshold'?: { amount: number; 'window-seconds': number };
   paused?: boolean;
   'autotask-condition'?: YAutotask;
@@ -198,7 +198,7 @@ export type YContract = {
   name: string;
   address: string;
   network: Network;
-  abi?: string;
+  abi?: string | string[] | JsonFragment[];
   'nat-spec'?: string;
 };
 

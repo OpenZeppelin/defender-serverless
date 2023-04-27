@@ -314,7 +314,7 @@ Reference this group by using
 | [name](#name-1)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "#/definitions/contract/properties/name")         |
 | [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-address.md "#/definitions/contract/properties/address")   |
 | [network](#network-1) | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-network.md "#/definitions/contract/properties/network")   |
-| [abi](#abi)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-abi.md "#/definitions/contract/properties/abi")           |
+| [abi](#abi)           | Merged   | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/contract/properties/abi")                           |
 | [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "#/definitions/contract/properties/nat-spec") |
 
 ### name
@@ -439,15 +439,21 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `string`
+*   Type: merged type ([AbiType](definitions-definitions-abitype.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-abi.md "#/definitions/contract/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/contract/properties/abi")
 
 #### abi Type
 
-`string`
+merged type ([AbiType](definitions-definitions-abitype.md))
+
+any of
+
+*   [StringABI](definitions-definitions-abitype-anyof-stringabi.md "check type definition")
+
+*   [ArrayABI](definitions-definitions-abitype-anyof-arrayabi.md "check type definition")
 
 ### nat-spec
 
@@ -1786,3 +1792,14 @@ Reference this group by using
 | `"base-goerli"`           |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+## Definitions group abi
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/abi"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |

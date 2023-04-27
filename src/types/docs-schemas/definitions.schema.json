@@ -90,7 +90,7 @@
         "name": { "type": "string" },
         "address": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" },
         "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
-        "abi": { "type": "string" },
+        "abi": { "$ref": "definitions.schema.json/#/definitions/abi" },
         "nat-spec": { "type": "string" }
       },
       "required": ["name", "address", "network"]
@@ -373,6 +373,13 @@
         "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" }
       },
       "required": ["key", "network"]
+    },
+    "abi": {
+      "title": "AbiType",
+      "anyOf": [
+        { "title": "StringABI", "type": "string" },
+        { "title": "ArrayABI", "type": "array" }
+      ]
     }
   }
 }

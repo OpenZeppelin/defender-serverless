@@ -178,7 +178,7 @@ export default class DefenderRemove {
     // Contracts
     const adminClient = getAdminClient(this.teamKey!);
     const listContracts = () => adminClient.listContracts();
-    await this.wrapper<YContract, DefenderContract>(
+    await this.wrapper<Omit<YContract, 'abi'> & { abi?: string }, DefenderContract>(
       this.serverless,
       'Contracts',
       this.serverless.service.resources?.Resources?.contracts,

@@ -263,7 +263,7 @@ export const constructSentinel = (
     name: sentinel.name,
     network: sentinel.network,
     addresses: sentinel.addresses,
-    abi: sentinel.abi && JSON.stringify(JSON.parse(sentinel.abi)),
+    abi: sentinel.abi && JSON.stringify(typeof sentinel.abi === 'string' ? JSON.parse(sentinel.abi) : sentinel.abi),
     paused: sentinel.paused,
     autotaskCondition: autotaskCondition && autotaskCondition.autotaskId,
     autotaskTrigger: autotaskTrigger && autotaskTrigger.autotaskId,
