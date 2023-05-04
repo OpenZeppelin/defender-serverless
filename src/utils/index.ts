@@ -403,3 +403,7 @@ export const isUnauthorisedError = (e: any): boolean => {
     return false;
   }
 };
+
+export const formatABI = (abi: YContract['abi']) => {
+  return abi && JSON.stringify(typeof abi === 'string' ? JSON.parse(abi) : abi);
+};
