@@ -263,7 +263,7 @@ export const constructSentinel = (
     name: sentinel.name,
     network: sentinel.network,
     addresses: sentinel.addresses,
-    abi: sentinel.abi && JSON.stringify(JSON.parse(sentinel.abi)),
+    abi: sentinel.abi && JSON.stringify(typeof sentinel.abi === 'string' ? JSON.parse(sentinel.abi) : sentinel.abi),
     paused: sentinel.paused,
     autotaskCondition: autotaskCondition && autotaskCondition.autotaskId,
     autotaskTrigger: autotaskTrigger && autotaskTrigger.autotaskId,
@@ -402,4 +402,8 @@ export const isUnauthorisedError = (e: any): boolean => {
     // the error is most likely caused due to something else
     return false;
   }
+};
+
+export const formatABI = (abi: YContract['abi']) => {
+  return abi && JSON.stringify(typeof abi === 'string' ? JSON.parse(abi) : abi);
 };

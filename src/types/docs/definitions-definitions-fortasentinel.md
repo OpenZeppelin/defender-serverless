@@ -20,7 +20,7 @@ any of
 | [type](#type)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")                      |
 | [network](#network)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/fortaSentinel/properties/network")                                         |
 | [addresses](#addresses)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")            |
-| [abi](#abi)                               | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-abi.md "#/definitions/fortaSentinel/properties/abi")                        |
+| [abi](#abi)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/fortaSentinel/properties/abi")                                             |
 | [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-alertthreshold.md "#/definitions/fortaSentinel/properties/alert-threshold") |
 | [paused](#paused)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-paused.md "#/definitions/fortaSentinel/properties/paused")                  |
 | [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-condition")                             |
@@ -167,15 +167,21 @@ any of
 
 *   is optional
 
-*   Type: `string`
+*   Type: merged type ([AbiType](definitions-definitions-abitype.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-abi.md "#/definitions/fortaSentinel/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/fortaSentinel/properties/abi")
 
 ### abi Type
 
-`string`
+merged type ([AbiType](definitions-definitions-abitype.md))
+
+any of
+
+*   [StringABI](definitions-definitions-abitype-anyof-stringabi.md "check type definition")
+
+*   [ArrayABI](definitions-definitions-abitype-anyof-arrayabi.md "check type definition")
 
 ## alert-threshold
 

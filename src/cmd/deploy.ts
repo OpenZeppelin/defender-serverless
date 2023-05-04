@@ -25,6 +25,7 @@ import {
   validateAdditionalPermissionsOrThrow,
   getDeploymentConfigClient,
   getBlockExplorerApiKeyClient,
+  formatABI,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -372,7 +373,7 @@ export default class DefenderDeploy {
           name: contract.name,
           network: match.network,
           address: match.address,
-          abi: contract.abi && JSON.stringify(JSON.parse(contract.abi)),
+          abi: formatABI(contract.abi),
           natSpec: contract['nat-spec'] ? contract['nat-spec'] : undefined,
         });
 
@@ -389,7 +390,7 @@ export default class DefenderDeploy {
           name: contract.name,
           network: contract.network,
           address: contract.address,
-          abi: contract.abi && JSON.stringify(JSON.parse(contract.abi)),
+          abi: formatABI(contract.abi),
           natSpec: contract['nat-spec'] ? contract['nat-spec'] : undefined,
         });
         return {

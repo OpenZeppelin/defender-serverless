@@ -13,7 +13,7 @@
 | [name](#name)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "#/definitions/contract/properties/name")         |
 | [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-address.md "#/definitions/contract/properties/address")                       |
 | [network](#network)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/contract/properties/network")                       |
-| [abi](#abi)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-abi.md "#/definitions/contract/properties/abi")           |
+| [abi](#abi)           | Merged   | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/contract/properties/abi")                           |
 | [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "#/definitions/contract/properties/nat-spec") |
 
 ## name
@@ -138,15 +138,21 @@
 
 *   is optional
 
-*   Type: `string`
+*   Type: merged type ([AbiType](definitions-definitions-abitype.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-abi.md "#/definitions/contract/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/contract/properties/abi")
 
 ### abi Type
 
-`string`
+merged type ([AbiType](definitions-definitions-abitype.md))
+
+any of
+
+*   [StringABI](definitions-definitions-abitype-anyof-stringabi.md "check type definition")
+
+*   [ArrayABI](definitions-definitions-abitype-anyof-arrayabi.md "check type definition")
 
 ## nat-spec
 
