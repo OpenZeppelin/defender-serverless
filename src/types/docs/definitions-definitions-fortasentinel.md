@@ -100,6 +100,7 @@ any of
 | Value                     | Explanation |
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
+| `"sepolia"`               |             |
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |

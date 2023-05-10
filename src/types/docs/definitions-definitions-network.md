@@ -9,6 +9,7 @@
 | Value                     | Explanation |
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
+| `"sepolia"`               |             |
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |

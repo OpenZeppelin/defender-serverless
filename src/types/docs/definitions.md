@@ -184,6 +184,7 @@ Reference this group by using
 | Value                     | Explanation |
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
+| `"sepolia"`               |             |
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
@@ -390,6 +391,7 @@ Reference this group by using
 | Value                     | Explanation |
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
+| `"sepolia"`               |             |
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
@@ -939,6 +941,7 @@ Reference this group by using
 | Value                     | Explanation |
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
+| `"sepolia"`               |             |
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
@@ -1287,6 +1290,7 @@ Reference this group by using
 | Value                     | Explanation |
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
+| `"sepolia"`               |             |
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
@@ -1764,6 +1768,7 @@ Reference this group by using
 | Value                     | Explanation |
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
+| `"sepolia"`               |             |
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
