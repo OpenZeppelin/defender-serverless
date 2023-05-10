@@ -13,6 +13,7 @@
       "type": "string",
       "enum": [
         "mainnet",
+        "sepolia",
         "rinkeby",
         "ropsten",
         "kovan",
