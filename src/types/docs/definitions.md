@@ -668,6 +668,672 @@ The default value is:
 []
 ```
 
+## Definitions group opsgenieUserType
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/opsgenieUserType"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group opsgeniePriorityLevel
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/opsgeniePriorityLevel"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group opsgenieInstanceLocation
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/opsgenieInstanceLocation"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group opsgenieUser
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/opsgenieUser"}
+```
+
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                               |
+| :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| [username](#username) | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-username.md "#/definitions/opsgenieUser/properties/username")     |
+| [fullName](#fullname) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-fullname.md "#/definitions/opsgenieUser/properties/fullName")     |
+| [id](#id)             | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-id.md "#/definitions/opsgenieUser/properties/id")                 |
+| [type](#type)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md "#/definitions/opsgenieUser/properties/type") |
+
+### username
+
+
+
+`username`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-username.md "#/definitions/opsgenieUser/properties/username")
+
+#### username Type
+
+`string`
+
+### fullName
+
+
+
+`fullName`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-fullname.md "#/definitions/opsgenieUser/properties/fullName")
+
+#### fullName Type
+
+`string`
+
+### id
+
+
+
+`id`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-id.md "#/definitions/opsgenieUser/properties/id")
+
+#### id Type
+
+`string`
+
+### type
+
+
+
+`type`
+
+*   is required
+
+*   Type: `string` ([opsgenieUserType](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md "#/definitions/opsgenieUser/properties/type")
+
+#### type Type
+
+`string` ([opsgenieUserType](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md))
+
+#### type Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value          | Explanation |
+| :------------- | :---------- |
+| `"team"`       |             |
+| `"user"`       |             |
+| `"escalation"` |             |
+| `"schedule"`   |             |
+
+## Definitions group opsgenieConfig
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/opsgenieConfig"}
+```
+
+| Property                              | Type     | Required | Nullable       | Defined by                                                                                                                                                       |
+| :------------------------------------ | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [apiKey](#apikey)                     | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-apikey.md "#/definitions/opsgenieConfig/properties/apiKey")                             |
+| [instanceLocation](#instancelocation) | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieinstancelocation.md "#/definitions/opsgenieConfig/properties/instanceLocation") |
+| [alias](#alias)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-alias.md "#/definitions/opsgenieConfig/properties/alias")                               |
+| [responders](#responders)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-responders.md "#/definitions/opsgenieConfig/properties/responders")                     |
+| [visibleTo](#visibleto)               | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-visibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")                       |
+| [actions](#actions)                   | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-actions.md "#/definitions/opsgenieConfig/properties/actions")                           |
+| [tags](#tags)                         | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-tags.md "#/definitions/opsgenieConfig/properties/tags")                                 |
+| [details](#details)                   | `object` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-details.md "#/definitions/opsgenieConfig/properties/details")                           |
+| [entity](#entity)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-entity.md "#/definitions/opsgenieConfig/properties/entity")                             |
+| [priority](#priority)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieprioritylevel.md "#/definitions/opsgenieConfig/properties/priority")            |
+| [note](#note)                         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-note.md "#/definitions/opsgenieConfig/properties/note")                                 |
+
+### apiKey
+
+
+
+`apiKey`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-apikey.md "#/definitions/opsgenieConfig/properties/apiKey")
+
+#### apiKey Type
+
+`string`
+
+### instanceLocation
+
+
+
+`instanceLocation`
+
+*   is required
+
+*   Type: `string` ([OpsgenieInstanceLocation](definitions-definitions-opsgenieconfig-properties-opsgenieinstancelocation.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieinstancelocation.md "#/definitions/opsgenieConfig/properties/instanceLocation")
+
+#### instanceLocation Type
+
+`string` ([OpsgenieInstanceLocation](definitions-definitions-opsgenieconfig-properties-opsgenieinstancelocation.md))
+
+#### instanceLocation Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value  | Explanation |
+| :----- | :---------- |
+| `"US"` |             |
+| `"EU"` |             |
+
+### alias
+
+
+
+`alias`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-alias.md "#/definitions/opsgenieConfig/properties/alias")
+
+#### alias Type
+
+`string`
+
+#### alias Constraints
+
+**maximum length**: the maximum number of characters for this string is: `512`
+
+### responders
+
+
+
+`responders`
+
+*   is optional
+
+*   Type: `object[]` ([Details](definitions-definitions-opsgenieuser.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-responders.md "#/definitions/opsgenieConfig/properties/responders")
+
+#### responders Type
+
+`object[]` ([Details](definitions-definitions-opsgenieuser.md))
+
+### visibleTo
+
+
+
+`visibleTo`
+
+*   is optional
+
+*   Type: `object[]` ([Details](definitions-definitions-opsgenieuser.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-visibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")
+
+#### visibleTo Type
+
+`object[]` ([Details](definitions-definitions-opsgenieuser.md))
+
+### actions
+
+
+
+`actions`
+
+*   is optional
+
+*   Type: `string[]`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-actions.md "#/definitions/opsgenieConfig/properties/actions")
+
+#### actions Type
+
+`string[]`
+
+#### actions Constraints
+
+**maximum number of items**: the maximum number of items for this array is: `10`
+
+### tags
+
+
+
+`tags`
+
+*   is optional
+
+*   Type: `string[]`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-tags.md "#/definitions/opsgenieConfig/properties/tags")
+
+#### tags Type
+
+`string[]`
+
+#### tags Constraints
+
+**maximum number of items**: the maximum number of items for this array is: `10`
+
+### details
+
+
+
+`details`
+
+*   is optional
+
+*   Type: `object` ([Details](definitions-definitions-opsgenieconfig-properties-details.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-details.md "#/definitions/opsgenieConfig/properties/details")
+
+#### details Type
+
+`object` ([Details](definitions-definitions-opsgenieconfig-properties-details.md))
+
+### entity
+
+
+
+`entity`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-entity.md "#/definitions/opsgenieConfig/properties/entity")
+
+#### entity Type
+
+`string`
+
+#### entity Constraints
+
+**maximum length**: the maximum number of characters for this string is: `512`
+
+### priority
+
+
+
+`priority`
+
+*   is optional
+
+*   Type: `string` ([OpsgeniePriorityLevel](definitions-definitions-opsgenieconfig-properties-opsgenieprioritylevel.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieprioritylevel.md "#/definitions/opsgenieConfig/properties/priority")
+
+#### priority Type
+
+`string` ([OpsgeniePriorityLevel](definitions-definitions-opsgenieconfig-properties-opsgenieprioritylevel.md))
+
+#### priority Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value  | Explanation |
+| :----- | :---------- |
+| `"P1"` |             |
+| `"P2"` |             |
+| `"P3"` |             |
+| `"P4"` |             |
+| `"P5"` |             |
+
+### note
+
+
+
+`note`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-note.md "#/definitions/opsgenieConfig/properties/note")
+
+#### note Type
+
+`string`
+
+#### note Constraints
+
+**maximum length**: the maximum number of characters for this string is: `25000`
+
+## Definitions group pagerDutyEventType
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/pagerDutyEventType"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group pagerDutyEventAction
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/pagerDutyEventAction"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group pagerDutySeverity
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/pagerDutySeverity"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group pagerDutyConfig
+
+Reference this group by using
+
+```json
+{"$ref":"#/definitions/pagerDutyConfig"}
+```
+
+| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                                |
+| :------------------------------ | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [token](#token)                 | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-token.md "#/definitions/pagerDutyConfig/properties/token")                      |
+| [eventType](#eventtype)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventtype.md "#/definitions/pagerDutyConfig/properties/eventType")     |
+| [routingKey](#routingkey)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-routingkey.md "#/definitions/pagerDutyConfig/properties/routingKey")            |
+| [eventAction](#eventaction)     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventaction.md "#/definitions/pagerDutyConfig/properties/eventAction") |
+| [dedupKey](#dedupkey)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-dedupkey.md "#/definitions/pagerDutyConfig/properties/dedupKey")                |
+| [severity](#severity)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyseverity.md "#/definitions/pagerDutyConfig/properties/severity")       |
+| [component](#component)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-component.md "#/definitions/pagerDutyConfig/properties/component")              |
+| [group](#group)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-group.md "#/definitions/pagerDutyConfig/properties/group")                      |
+| [class](#class)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-class.md "#/definitions/pagerDutyConfig/properties/class")                      |
+| [customDetails](#customdetails) | `object` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-customdetails.md "#/definitions/pagerDutyConfig/properties/customDetails")      |
+
+### token
+
+
+
+`token`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-token.md "#/definitions/pagerDutyConfig/properties/token")
+
+#### token Type
+
+`string`
+
+### eventType
+
+
+
+`eventType`
+
+*   is required
+
+*   Type: `string` ([PagerDutyEventType](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventtype.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventtype.md "#/definitions/pagerDutyConfig/properties/eventType")
+
+#### eventType Type
+
+`string` ([PagerDutyEventType](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventtype.md))
+
+#### eventType Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value      | Explanation |
+| :--------- | :---------- |
+| `"change"` |             |
+| `"alert"`  |             |
+
+### routingKey
+
+
+
+`routingKey`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-routingkey.md "#/definitions/pagerDutyConfig/properties/routingKey")
+
+#### routingKey Type
+
+`string`
+
+#### routingKey Constraints
+
+**maximum length**: the maximum number of characters for this string is: `32`
+
+**minimum length**: the minimum number of characters for this string is: `32`
+
+### eventAction
+
+
+
+`eventAction`
+
+*   is optional
+
+*   Type: `string` ([PagerDutyEventAction](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventaction.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventaction.md "#/definitions/pagerDutyConfig/properties/eventAction")
+
+#### eventAction Type
+
+`string` ([PagerDutyEventAction](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventaction.md))
+
+#### eventAction Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value           | Explanation |
+| :-------------- | :---------- |
+| `"trigger"`     |             |
+| `"acknowledge"` |             |
+| `"resolve"`     |             |
+
+### dedupKey
+
+
+
+`dedupKey`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-dedupkey.md "#/definitions/pagerDutyConfig/properties/dedupKey")
+
+#### dedupKey Type
+
+`string`
+
+#### dedupKey Constraints
+
+**maximum length**: the maximum number of characters for this string is: `255`
+
+### severity
+
+
+
+`severity`
+
+*   is optional
+
+*   Type: `string` ([PagerDutySeverity](definitions-definitions-pagerdutyconfig-properties-pagerdutyseverity.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyseverity.md "#/definitions/pagerDutyConfig/properties/severity")
+
+#### severity Type
+
+`string` ([PagerDutySeverity](definitions-definitions-pagerdutyconfig-properties-pagerdutyseverity.md))
+
+#### severity Constraints
+
+**enum**: the value of this property must be equal to one of the following values:
+
+| Value        | Explanation |
+| :----------- | :---------- |
+| `"critical"` |             |
+| `"error"`    |             |
+| `"warning"`  |             |
+| `"info"`     |             |
+
+### component
+
+
+
+`component`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-component.md "#/definitions/pagerDutyConfig/properties/component")
+
+#### component Type
+
+`string`
+
+### group
+
+
+
+`group`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-group.md "#/definitions/pagerDutyConfig/properties/group")
+
+#### group Type
+
+`string`
+
+### class
+
+
+
+`class`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-class.md "#/definitions/pagerDutyConfig/properties/class")
+
+#### class Type
+
+`string`
+
+### customDetails
+
+
+
+`customDetails`
+
+*   is optional
+
+*   Type: `object` ([Details](definitions-definitions-pagerdutyconfig-properties-customdetails.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-customdetails.md "#/definitions/pagerDutyConfig/properties/customDetails")
+
+#### customDetails Type
+
+`object` ([Details](definitions-definitions-pagerdutyconfig-properties-customdetails.md))
+
 ## Definitions group notification
 
 Reference this group by using
@@ -678,7 +1344,7 @@ Reference this group by using
 
 | Property          | Type      | Required | Nullable       | Defined by                                                                                                                               |
 | :---------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| [type](#type)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-notificationtype.md "#/definitions/notification/properties/type") |
+| [type](#type-1)   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-notificationtype.md "#/definitions/notification/properties/type") |
 | [name](#name-2)   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-name.md "#/definitions/notification/properties/name")             |
 | [paused](#paused) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-paused.md "#/definitions/notification/properties/paused")         |
 | [config](#config) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-config.md "#/definitions/notification/properties/config")         |
@@ -782,6 +1448,10 @@ one (and only one) of
 
 *   [UrlConfig](definitions-definitions-urlconfig.md "check type definition")
 
+*   [OpsgenieConfig](definitions-definitions-opsgenieconfig.md "check type definition")
+
+*   [PagerDutyConfig](definitions-definitions-pagerdutyconfig.md "check type definition")
+
 ## Definitions group category
 
 Reference this group by using
@@ -861,7 +1531,7 @@ Reference this group by using
 | Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                          |
 | :---------------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name-4)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")                      |
-| [type](#type-1)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")                      |
+| [type](#type-2)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")                      |
 | [network](#network-2)                     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-network.md "#/definitions/blockSentinel/properties/network")                |
 | [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")            |
 | [abi](#abi-1)                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/blockSentinel/properties/abi")                                             |
@@ -1209,7 +1879,7 @@ Reference this group by using
 | Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                          |
 | :------------------------------------------ | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name-5)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")                      |
-| [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")                      |
+| [type](#type-3)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")                      |
 | [network](#network-3)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-network.md "#/definitions/fortaSentinel/properties/network")                |
 | [addresses](#addresses-1)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")            |
 | [abi](#abi-2)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/fortaSentinel/properties/abi")                                             |

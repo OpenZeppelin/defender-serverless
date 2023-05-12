@@ -113,3 +113,7 @@ one (and only one) of
 *   [DatadogConfig](definitions-definitions-datadogconfig.md "check type definition")
 
 *   [UrlConfig](definitions-definitions-urlconfig.md "check type definition")
+
+*   [OpsgenieConfig](definitions-definitions-opsgenieconfig.md "check type definition")
+
+*   [PagerDutyConfig](definitions-definitions-pagerdutyconfig.md "check type definition")

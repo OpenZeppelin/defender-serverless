@@ -144,6 +144,189 @@
       },
       "required": ["emails"]
     },
+    "opsgenieUserType": {
+      "title": "opsgenieUserType",
+      "type": "string",
+      "enum": ["team", "user", "escalation", "schedule"]
+    },
+    "opsgeniePriorityLevel": {
+      "title": "OpsgeniePriorityLevel",
+      "type": "string",
+      "enum": ["P1", "P2", "P3", "P4", "P5"]
+    },
+    "opsgenieInstanceLocation": {
+      "title": "OpsgenieInstanceLocation",
+      "type": "string",
+      "enum": ["US", "EU"]
+    },
+    "opsgenieUser": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "definitions.schema.json/#/definitions/opsgenieUserType"
+        }
+      },
+      "required": ["type", "username"],
+      "additionalProperties": false
+    },
+    "opsgenieConfig": {
+      "title": "OpsgenieConfig",
+      "properties": {
+        "apiKey": {
+          "type": "string"
+        },
+        "instanceLocation": {
+          "$ref": "definitions.schema.json/#/definitions/opsgenieInstanceLocation"
+        },
+        "alias": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "responders": {
+          "type": "array",
+          "items": {
+            "$ref": "definitions.schema.json/#/definitions/opsgenieUser"
+          }
+        },
+        "visibleTo": {
+          "type": "array",
+          "items": {
+            "$ref": "definitions.schema.json/#/definitions/opsgenieUser"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "maxLength": 50
+          }
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "maxLength": 50
+          }
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entity": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "priority": {
+          "$ref": "definitions.schema.json/#/definitions/opsgeniePriorityLevel"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 25000
+        }
+      },
+      "required": ["apiKey", "instanceLocation"],
+      "additionalProperties": false
+    },
+    "pagerDutyEventType": {
+      "title": "PagerDutyEventType",
+      "type": "string",
+      "enum": [
+        "change",
+        "alert"
+      ]
+    },
+    "pagerDutyEventAction": {
+      "title": "PagerDutyEventAction",
+      "type": "string",
+      "enum": [
+        "trigger",
+        "acknowledge",
+        "resolve"
+      ]
+    },
+    "pagerDutySeverity": {
+      "title": "PagerDutySeverity",
+      "type": "string",
+      "enum": [
+        "critical",
+        "error",
+        "warning",
+        "info"
+      ]
+    },
+    "pagerDutyConfig": {
+      "title": "PagerDutyConfig",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "eventType": {
+          "$ref": "definitions.schema.json/#/definitions/pagerDutyEventType"
+        },
+        "routingKey": {
+          "type": "string",
+          "maxLength": 32,
+          "minLength": 32
+        },
+        "eventAction": {
+          "$ref": "definitions.schema.json/#/definitions/pagerDutyEventAction"
+        },
+        "dedupKey": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "severity": {
+          "$ref": "definitions.schema.json/#/definitions/pagerDutySeverity"
+        },
+        "component": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string"
+        },
+        "customDetails": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "eventType": {
+            "const": "alert"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "eventAction",
+          "severity"
+        ]
+      },
+      "required": [
+        "token",
+        "eventType",
+        "routingKey"
+      ],
+      "additionalProperties": false
+    },
     "notification": {
       "title": "Notification",
       "type": "object",
@@ -158,7 +341,9 @@
             { "$ref": "definitions.schema.json/#/definitions/emailConfig", "format": "uri-reference" },
             { "$ref": "definitions.schema.json/#/definitions/telegramBotConfig", "format": "uri-reference" },
             { "$ref": "definitions.schema.json/#/definitions/datadogConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/urlConfig", "format": "uri-reference" }
+            { "$ref": "definitions.schema.json/#/definitions/urlConfig", "format": "uri-reference" },
+            { "$ref": "definitions.schema.json/#/definitions/opsgenieConfig", "format": "uri-reference" },
+            { "$ref": "definitions.schema.json/#/definitions/pagerDutyConfig", "format": "uri-reference" }
           ]
         }
       },
