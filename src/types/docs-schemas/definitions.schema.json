@@ -99,7 +99,7 @@
     "notificationType": {
       "title": "NotificationType",
       "type": "string",
-      "enum": ["slack", "email", "discord", "telegram", "datadog", "webhook"]
+      "enum": ["slack", "email", "discord", "telegram", "datadog", "webhook", "opsgenie", "pager-duty"]
     },
     "datadogConfig": {
       "title": "DatadogConfig",
