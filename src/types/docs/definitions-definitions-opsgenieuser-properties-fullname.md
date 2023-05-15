@@ -1,0 +1,3 @@
+## fullName Type
+
+`string`

@@ -90,6 +90,12 @@
 
 *   [Trigger](./function-properties-trigger.md) – `#/properties/trigger`
 
+*   [Untitled object in Definitions](./definitions-definitions-opsgenieuser.md) – `#/definitions/opsgenieUser`
+
+*   [Untitled object in Definitions](./definitions-definitions-opsgenieconfig-properties-details.md) – `#/definitions/opsgenieConfig/properties/details`
+
+*   [Untitled object in Definitions](./definitions-definitions-pagerdutyconfig-properties-customdetails.md) – `#/definitions/pagerDutyConfig/properties/customDetails`
+
 *   [UrlConfig](./definitions-definitions-urlconfig.md) – `#/definitions/urlConfig`
 
 ### Arrays
@@ -115,6 +121,14 @@
 *   [Function](./definitions-definitions-blocksentinel-properties-conditions-properties-function.md) – `#/definitions/blockSentinel/properties/conditions/properties/function`
 
 *   [RelayerAPIKeys](./definitions-definitions-relayer-properties-relayerapikeys.md) – `#/definitions/relayer/properties/api-keys`
+
+*   [Untitled array in Definitions](./definitions-definitions-opsgenieconfig-properties-responders.md) – `#/definitions/opsgenieConfig/properties/responders`
+
+*   [Untitled array in Definitions](./definitions-definitions-opsgenieconfig-properties-visibleto.md) – `#/definitions/opsgenieConfig/properties/visibleTo`
+
+*   [Untitled array in Definitions](./definitions-definitions-opsgenieconfig-properties-actions.md) – `#/definitions/opsgenieConfig/properties/actions`
+
+*   [Untitled array in Definitions](./definitions-definitions-opsgenieconfig-properties-tags.md) – `#/definitions/opsgenieConfig/properties/tags`
 
 *   [Untitled array in Definitions](./definitions-definitions-category-properties-notificationids.md) – `#/definitions/category/properties/notificationIds`
 
