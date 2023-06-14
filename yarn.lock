@@ -493,6 +493,74 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@openzeppelin/defender-admin-client@^1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-admin-client/-/defender-admin-client-1.46.0.tgz#b8af0269bda215a01108ce04d2bc6db872d84367"
+  integrity sha512-ZOt8z6Vce3vC1CgwZ3wt5paepfw1EHNcb0hssLkrbXBNeANcHI8e37p+VE6/DdEECoAKdQj2qQwggcsPqc19OQ==
+  dependencies:
+    "@openzeppelin/defender-base-client" "1.46.0"
+    axios "^0.21.2"
+    ethers "^5.7.2"
+    lodash "^4.17.19"
+    node-fetch "^2.6.0"
+
+"@openzeppelin/defender-autotask-client@^1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-autotask-client/-/defender-autotask-client-1.46.0.tgz#b89649ff039c1ac8013146dac7179218cb6c03a0"
+  integrity sha512-3HgVf6t7gNkMRikYUkN8UxG7syAskot9ExNt7okLRc8sMAaoMQu0f9KPMiidwUEm/dGRg5jmGTkl1l9r2KaVIw==
+  dependencies:
+    "@openzeppelin/defender-base-client" "1.46.0"
+    axios "^0.21.2"
+    dotenv "^10.0.0"
+    glob "^7.1.6"
+    jszip "^3.5.0"
+    lodash "^4.17.19"
+    node-fetch "^2.6.0"
+
+"@openzeppelin/defender-base-client@1.46.0", "@openzeppelin/defender-base-client@^1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-base-client/-/defender-base-client-1.46.0.tgz#aa5177f8fbad23fd03d78f3dbe06664bbe9333ff"
+  integrity sha512-EMnVBcfE6ZN5yMxfaxrFF3eqyGp2RQp3oSRSRP+R3yuCRJf8VCc2ArdZf1QPmQQzbq70nl8EZa03mmAqPauNlQ==
+  dependencies:
+    amazon-cognito-identity-js "^6.0.1"
+    async-retry "^1.3.3"
+    axios "^0.21.2"
+    lodash "^4.17.19"
+    node-fetch "^2.6.0"
+
+"@openzeppelin/defender-relay-client@^1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-relay-client/-/defender-relay-client-1.46.0.tgz#4c937edfd049a7b8a5fa3f15e63d6c9d44cc5d37"
+  integrity sha512-tkbNkdEaLZV0np32vX7c7/ExEuoWfyA4Q5WZzF7G09SWmbS38dvrBqRevT4bLDLgZcSvC0WU5jqBpQk1pqI8pw==
+  dependencies:
+    "@openzeppelin/defender-base-client" "1.46.0"
+    amazon-cognito-identity-js "^6.0.1"
+    axios "^0.21.2"
+    lodash "^4.17.19"
+    node-fetch "^2.6.0"
+
+"@openzeppelin/defender-sentinel-client@^1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sentinel-client/-/defender-sentinel-client-1.46.0.tgz#b5f27b005a6c1ede7f584b7d1bef95b0deaee242"
+  integrity sha512-oQMmLlDMHzOmX6sU2tOQZEK5jq25fv58e3F6M/vvo9tCXUvNHYHwie2Ug/SSdHhIkPvrGKX1npUI0+MrBAyLPA==
+  dependencies:
+    "@ethersproject/abi" "^5.6.3"
+    "@openzeppelin/defender-base-client" "1.46.0"
+    axios "^0.21.2"
+    lodash "^4.17.19"
+    node-fetch "^2.6.0"
+
+"@openzeppelin/platform-deploy-client@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/platform-deploy-client/-/platform-deploy-client-0.8.0.tgz#af6596275a19c283d6145f0128cc1247d18223c1"
+  integrity sha512-POx3AsnKwKSV/ZLOU/gheksj0Lq7Is1q2F3pKmcFjGZiibf+4kjGxr4eSMrT+2qgKYZQH1ZLQZ+SkbguD8fTvA==
+  dependencies:
+    "@ethersproject/abi" "^5.6.3"
+    "@openzeppelin/defender-base-client" "^1.46.0"
+    axios "^0.21.2"
+    lodash "^4.17.19"
+    node-fetch "^2.6.0"
+
 "@polka/url@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-0.5.0.tgz#b21510597fd601e5d7c95008b76bf0d254ebfd31"
@@ -928,63 +996,6 @@ deep-is@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
-
-defender-admin-client@^1.41.0:
-  version "1.44.0"
-  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.44.0.tgz#74a6019d064460487148952f3a5d92d432b63f8c"
-  integrity sha512-Uxt6Ca4/spH1KS5pCHJPc0X2TNVpXsah97mShu4E+WaV4Vhy2yaTjQ9ZpdoTBay0gADKZCBtIuVJ9YwBxiIOqA==
-  dependencies:
-    axios "^0.21.2"
-    defender-base-client "1.44.0"
-    ethers "^5.7.2"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
-
-defender-autotask-client@^1.41.0:
-  version "1.44.0"
-  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.44.0.tgz#72842f585e611a99eb1c0b6a108069b53f26a40e"
-  integrity sha512-IOEju6vi3i/4blzFRFzxrk/PLzHeoCh4tltp6/8fnTenWP3A+miGIEq6US2KLkrDMOYFhEfW9R3ZDO/3L0ckCg==
-  dependencies:
-    axios "^0.21.2"
-    defender-base-client "1.44.0"
-    dotenv "^10.0.0"
-    glob "^7.1.6"
-    jszip "^3.5.0"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
-
-defender-base-client@1.44.0, defender-base-client@^1.44.0:
-  version "1.44.0"
-  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.44.0.tgz#afe724447c0f9177b999b70b9f14dd70d61d5a7a"
-  integrity sha512-8ZgGA93+FlxNwG9LN1nu/Au5AyCKwAWJGNf0VLiPmh4GX/Nali/7kv72K+OtZgGxTLtKDKfgN4cnhEZwfrc8dg==
-  dependencies:
-    amazon-cognito-identity-js "^6.0.1"
-    async-retry "^1.3.3"
-    axios "^0.21.2"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
-
-defender-relay-client@^1.41.0:
-  version "1.44.0"
-  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.44.0.tgz#8272a5fe734f34136a15be62f958cbfabe4c724f"
-  integrity sha512-9ohzq8wt7xm2ieoSPsCC/RvidxKOCDjEZH7aFn8R/WWfK5ehJMlDGE0daugfffoOL2eL2zqwQLVxtzNN2OSBDA==
-  dependencies:
-    amazon-cognito-identity-js "^6.0.1"
-    axios "^0.21.2"
-    defender-base-client "1.44.0"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
-
-defender-sentinel-client@^1.41.0:
-  version "1.44.0"
-  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.44.0.tgz#3e2caa608980b5489ee26dee77a247fbb3eb4978"
-  integrity sha512-s9EPqWQCySw6Mo8i0IMsks0SbBZ/crf3xAw3mwl/1CDs4cyP0Vjc80TreyPhQpL2z3RpVNiqlzcb5gYLDj025g==
-  dependencies:
-    "@ethersproject/abi" "^5.6.3"
-    axios "^0.21.2"
-    defender-base-client "1.44.0"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
 
 dequal@^2.0.0:
   version "2.0.3"
@@ -2203,17 +2214,6 @@ picomatch@^2.2.1, picomatch@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
-
-platform-deploy-client@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/platform-deploy-client/-/platform-deploy-client-0.6.0.tgz#1f7a59d0cbae2e78f65ad253d7cc1aff67e3de0e"
-  integrity sha512-mBfnOvF2gb9acGJjlXBQ6VOAkKFRdljsNKHUVY5xKqzKP2PNh/RqCIvi5AR5NqLMrQ3XaMIwRvmwAjtGw7JhYg==
-  dependencies:
-    "@ethersproject/abi" "^5.6.3"
-    axios "^0.21.2"
-    defender-base-client "^1.44.0"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
 
 polka@^0.5.2:
   version "0.5.2"

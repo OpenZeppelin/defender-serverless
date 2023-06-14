@@ -1,10 +1,10 @@
 import Serverless from 'serverless';
 
 import _ from 'lodash';
-import { AutotaskClient } from 'defender-autotask-client';
-import { SentinelClient } from 'defender-sentinel-client';
-import { RelayClient } from 'defender-relay-client';
-import { AdminClient } from 'defender-admin-client';
+import { AutotaskClient } from '@openzeppelin/defender-autotask-client';
+import { SentinelClient } from '@openzeppelin/defender-sentinel-client';
+import { RelayClient } from '@openzeppelin/defender-relay-client';
+import { AdminClient } from '@openzeppelin/defender-admin-client';
 
 import {
   YSecret,
@@ -31,7 +31,7 @@ import {
   DefenderNotificationReference,
 } from '../types';
 import { sanitise } from './sanitise';
-import { BlockExplorerApiKeyClient, DeploymentConfigClient } from 'platform-deploy-client';
+import { BlockExplorerApiKeyClient, DeploymentConfigClient } from '@openzeppelin/platform-deploy-client';
 
 /**
  * @dev this function retrieves the Defender equivalent object of the provided template resource
