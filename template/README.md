@@ -20,7 +20,7 @@ Note: for the command above to work correctly you need access to this repo.
 
 Alternatively, you can install it directly into an existing project with:
 
-`yarn add defender-serverless`
+`yarn add @openzeppelin/defender-serverless`
 
 ## Setup
 

@@ -1,5 +1,5 @@
 {
-  "name": "defender-serverless",
+  "name": "@openzeppelin/defender-serverless",
   "version": "1.1.0",
   "description": "Configure your Defender environment via code",
   "main": "./lib/index.js",

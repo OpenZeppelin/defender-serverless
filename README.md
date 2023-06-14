@@ -20,7 +20,7 @@ Note: for the command above to work correctly you need access to this repo.
 
 Alternatively, you can install it directly into an existing project with:
 
-`yarn add defender-serverless`
+`yarn add @openzeppelin/defender-serverless`
 
 ## Setup
 
@@ -70,7 +70,7 @@ resources:
           - key1
 
 plugins:
-  - defender-serverless
+  - @openzeppelin/defender-serverless
 ```
 
 This requires setting the `key` and `secret` under the `defender` property of the YAML file. We recommend using environment variables or a secure (gitignored) configuration file to retrieve these values. Modify the `serverless.yml` accordingly.

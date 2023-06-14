@@ -6,10 +6,10 @@ provider:
   name: defender
   stage: ${opt:stage, 'dev'}
   stackName: 'mystack'
-  # SSOT: use this template as a single source of truth. 
+  # SSOT: use this template as a single source of truth.
   # This will delete Defender resources (with the exception of Relayers) not found in this template upon deployment.
-  ssot: false  
-  
+  ssot: false
+
 custom:
   config: ${file(secrets.${self:provider.stage}.yml)}
 
@@ -24,7 +24,7 @@ functions:
     # optional
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
-      type: "schedule" # or webhook
+      type: 'schedule' # or webhook
       # optional if not cron
       frequency: 1500
       # optional
@@ -34,14 +34,14 @@ functions:
     name: 'Hello world from serverless 2'
     path: './autotasks/hello-world'
     trigger:
-      type: "schedule"
-      cron: "0 */12 * * *"
+      type: 'schedule'
+      cron: '0 */12 * * *'
     paused: false
   autotask-example-3:
     name: 'Hello world from serverless 3'
     path: './autotasks/hello-world'
     trigger:
-      type: "webhook"
+      type: 'webhook'
     paused: false
 
 resources:
@@ -52,7 +52,7 @@ resources:
         gas-price-cap: 1000
         # optional
         whitelist-receivers:
-          - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
+          - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
         # optional
         eip1559-pricing: true
         private-transactions: true
@@ -69,9 +69,9 @@ resources:
 
     contracts:
       contract-1:
-        name: "Demo-Flash"
-        address: "0xA91382E82fB676d4c935E601305E5253b3829dCD"
-        network: "mainnet"
+        name: 'Demo-Flash'
+        address: '0xA91382E82fB676d4c935E601305E5253b3829dCD'
+        network: 'mainnet'
         # optional
         abi: ${file(./abis/demoflash.json.abi)}
         # optional
@@ -79,32 +79,32 @@ resources:
 
     relayers:
       relayer-1:
-        name: "Test Relayer 1"
-        network: "goerli"
+        name: 'Test Relayer 1'
+        network: 'goerli'
         min-balance: 1000
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
       relayer-2:
-        name: "Test Relayer 2"
-        network: "mainnet"
+        name: 'Test Relayer 2'
+        network: 'mainnet'
         min-balance: 1000
         # optional (make sure relayer-1 is above current relayer)
-        address-from-relayer: ${self:resources.Resources.relayers.relayer-1} 
+        address-from-relayer: ${self:resources.Resources.relayers.relayer-1}
         # optional
         policy: ${self:resources.Resources.policies.policy-1}
-  
+
     notifications:
       email-1:
         type: 'email'
         name: 'Nami'
-        config: 
-          emails: 
+        config:
+          emails:
             - ${self:custom.config.notifications.nami}
         paused: false
       slack-1:
         type: 'slack'
         name: 'Workspace Slack'
-        config: 
+        config:
           url: ${self:custom.config.notifications.slack}
         paused: false
 
@@ -129,16 +129,16 @@ resources:
     sentinels:
       # unique resource name
       block-example:
-        name: "Block Example"
-        type: "BLOCK"
-        network: "goerli"
-        risk-category: "TECHNICAL" # optional
-        addresses: 
-          - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
+        name: 'Block Example'
+        type: 'BLOCK'
+        network: 'goerli'
+        risk-category: 'TECHNICAL' # optional
+        addresses:
+          - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
         # optional
         abi: ${file(./abis/erc721.json.abi)}
         # optional
-        alert-threshold: 
+        alert-threshold:
           amount: 2
           window-seconds: 3600
         # optional
@@ -152,28 +152,26 @@ resources:
         notify-config:
           timeout: 0 # optional
           message: null # optional
-          channels: 
+          channels:
             - ${self:resources.Resources.notifications.email-1}
         # optional
         conditions:
           event:
-            -
-              signature: "OwnershipTransferred(address,address)"
-              expression: "previousOwner=0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2" # optional
+            - signature: 'OwnershipTransferred(address,address)'
+              expression: 'previousOwner=0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2' # optional
           function:
-            -
-              signature: "renounceOwnership()"
+            - signature: 'renounceOwnership()'
               expression: null # optional
-          transaction: "gasPrice > 0" # optional expression
+          transaction: 'gasPrice > 0' # optional expression
       forta-example:
-        name: "Forta Example"
-        type: "FORTA"
-        network: "mainnet"
+        name: 'Forta Example'
+        type: 'FORTA'
+        network: 'mainnet'
         # optional if agent-ids is defined
-        addresses: 
-          - "0x318958A61A3dFa42fBdAA6A28A4F481678D943cC"
+        addresses:
+          - '0x318958A61A3dFa42fBdAA6A28A4F481678D943cC'
         # optional
-        alert-threshold: 
+        alert-threshold:
           amount: 2
           window-seconds: 3600
         # optional
@@ -193,15 +191,15 @@ resources:
           severity: 2 # optional (unknown=0, info=1, low=2, medium=3, high=4, critical=5)
           # optional
           alert-ids:
-            - "123"
-            - "456"
+            - '123'
+            - '456'
         # optional
-        forta-node-id: "123"
+        forta-node-id: '123'
         # optional if addresses is defined
         agent-ids:
-          - "0x8fe07f1a4d33b30be2387293f052c273660c829e9a6965cf7e8d485bcb871083"
+          - '0x8fe07f1a4d33b30be2387293f052c273660c829e9a6965cf7e8d485bcb871083'
         # optional
         forta-last-processed-time: null
 
 plugins:
-  - defender-serverless
+  - '@openzeppelin/defender-serverless'

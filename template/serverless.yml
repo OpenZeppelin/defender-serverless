@@ -6,13 +6,13 @@ provider:
   name: defender
   stage: ${opt:stage, 'dev'}
   stackName: 'mystack'
-  # SSOT: use this template as a single source of truth. 
+  # SSOT: use this template as a single source of truth.
   # This will delete Defender resources (with the exception of Relayers) not found in this template upon deployment.
   ssot: false
 
 defender:
-  key: "${env:TEAM_API_KEY}"
-  secret: "${env:TEAM_API_SECRET}"
+  key: '${env:TEAM_API_KEY}'
+  secret: '${env:TEAM_API_SECRET}'
 
 functions:
   autotask-example-1:
@@ -20,7 +20,7 @@ functions:
     path: './autotasks/hello-world'
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
-      type: "schedule"
+      type: 'schedule'
       frequency: 1500
     paused: false
 
@@ -30,20 +30,18 @@ resources:
       policy-1:
         gas-price-cap: 1000
         whitelist-receivers:
-          - "0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2"
+          - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
         eip1559-pricing: true
         private-transactions: true
 
     relayers:
       relayer-1:
-        name: "My Relayer"
-        network: "goerli"
+        name: 'My Relayer'
+        network: 'goerli'
         min-balance: 1000
         policy: ${self:resources.Resources.policies.policy-1}
         api-keys:
           - key1
 
 plugins:
-  - defender-serverless
-
-
+  - '@openzeppelin/defender-serverless'
