@@ -4,7 +4,7 @@ import { Logging } from 'serverless/classes/Plugin';
 
 import Logger from '../utils/logger';
 
-import { tailLogsFor } from 'defender-autotask-client/lib/utils';
+import { tailLogsFor } from '@openzeppelin/defender-autotask-client/lib/utils';
 
 import { getAutotaskClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
 import { DefenderAutotask, TeamKey } from '../types';

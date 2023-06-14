@@ -1,8 +1,8 @@
-import { Network } from 'defender-base-client';
-import { Contract } from 'defender-admin-client';
-import { RelayerGetResponse, RelayerApiKey } from 'defender-relay-client';
+import { Network } from '@openzeppelin/defender-base-client';
+import { Contract } from '@openzeppelin/defender-admin-client';
+import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/defender-relay-client';
 import { JsonFragment } from '@ethersproject/abi';
-import { DefenderApiResponseError } from 'defender-base-client/lib/api/api-error';
+import { DefenderApiResponseError } from '@openzeppelin/defender-base-client/lib/api/api-error';
 import {
   SaveNotificationRequest,
   NotificationSummary,
@@ -12,10 +12,10 @@ import {
   EmailConfig,
   DiscordConfig,
   NotificationType,
-} from 'defender-sentinel-client/lib/models/notification';
+} from '@openzeppelin/defender-sentinel-client/lib/models/notification';
 
-import { NotificationCategory } from 'defender-sentinel-client/lib/models/category';
-import { CreateSentinelResponse, BlockWatcher } from 'defender-sentinel-client';
+import { NotificationCategory } from '@openzeppelin/defender-sentinel-client/lib/models/category';
+import { CreateSentinelResponse, BlockWatcher } from '@openzeppelin/defender-sentinel-client';
 
 import {
   CreateBlockSubscriberResponse,
@@ -24,7 +24,7 @@ import {
   ExternalCreateFortaSubscriberRequest,
   NotificationReference,
   SubscriberRiskCategory,
-} from 'defender-sentinel-client/lib/models/subscriber';
+} from '@openzeppelin/defender-sentinel-client/lib/models/subscriber';
 import {
   Autotask,
   SecretsMap,
@@ -32,8 +32,8 @@ import {
   WebhookTrigger,
   SentinelTrigger,
   MonitorFilterTrigger,
-} from 'defender-autotask-client/lib/models/autotask';
-import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from 'platform-deploy-client';
+} from '@openzeppelin/defender-autotask-client/lib/models/autotask';
+import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-deploy-client';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
