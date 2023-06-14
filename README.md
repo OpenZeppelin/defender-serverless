@@ -70,7 +70,7 @@ resources:
           - key1
 
 plugins:
-  - @openzeppelin/defender-serverless
+  - '@openzeppelin/defender-serverless'
 ```
 
 This requires setting the `key` and `secret` under the `defender` property of the YAML file. We recommend using environment variables or a secure (gitignored) configuration file to retrieve these values. Modify the `serverless.yml` accordingly.
