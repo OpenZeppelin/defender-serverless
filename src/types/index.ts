@@ -125,11 +125,45 @@ export type YDatadogConfig = {
   'metric-prefix': string;
 };
 
+export type YOpsgenieConfig = {
+  apiKey: string;
+  instanceLocation: string;
+  alias?: string;
+  responders?: object[];
+  visibleTo?: object[];
+  actions?: object[];
+  tags?: string[];
+  details?: object;
+  entity?: string;
+  priority?: string;
+  note?: string;
+};
+
+export type YPagerdutyConfig = {
+  token: string;
+  eventType: string;
+  routingKey: string;
+  eventAction?: string;
+  dedupKey?: string;
+  severity?: string;
+  component?: string;
+  group?: string;
+  class?: string;
+  customDetails?: object;
+};
+
 export type YNotification = SaveNotificationRequest & {
   type: NotificationType;
   name: string;
   paused: boolean;
-  config: YSlackConfig | YTelegramConfig | YDatadogConfig | YDiscordConfig | YEmailConfig;
+  config:
+    | YSlackConfig
+    | YTelegramConfig
+    | YDatadogConfig
+    | YDiscordConfig
+    | YEmailConfig
+    | YOpsgenieConfig
+    | YPagerdutyConfig;
 };
 
 export type YCategory = {
