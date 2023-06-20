@@ -34,6 +34,8 @@ import {
   MonitorFilterTrigger,
 } from '@openzeppelin/defender-autotask-client/lib/models/autotask';
 import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-deploy-client';
+import { OpsgenieConfig } from '@openzeppelin/defender-sentinel-client/lib/models/opsgenie';
+import { PagerDutyConfig } from '@openzeppelin/defender-sentinel-client/lib/models/pager-duty';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -125,32 +127,8 @@ export type YDatadogConfig = {
   'metric-prefix': string;
 };
 
-export type YOpsgenieConfig = {
-  apiKey: string;
-  instanceLocation: string;
-  alias?: string;
-  responders?: object[];
-  visibleTo?: object[];
-  actions?: object[];
-  tags?: string[];
-  details?: object;
-  entity?: string;
-  priority?: string;
-  note?: string;
-};
-
-export type YPagerdutyConfig = {
-  token: string;
-  eventType: string;
-  routingKey: string;
-  eventAction?: string;
-  dedupKey?: string;
-  severity?: string;
-  component?: string;
-  group?: string;
-  class?: string;
-  customDetails?: object;
-};
+export type YOpsgenieConfig = OpsgenieConfig;
+export type YPagerdutyConfig = PagerDutyConfig;
 
 export type YNotification = SaveNotificationRequest & {
   type: NotificationType;

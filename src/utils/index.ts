@@ -197,7 +197,7 @@ export const constructNotification = (notification: YNotification, stackResource
       currentConfig = notification.config as YOpsgenieConfig;
       config = currentConfig;
       return { ...commonNotification, config };
-    case 'pagerduty':
+    case 'pager-duty':
       currentConfig = notification.config as YPagerdutyConfig;
       config = currentConfig;
       return { ...commonNotification, config };
