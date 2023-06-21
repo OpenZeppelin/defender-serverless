@@ -34,6 +34,8 @@ import {
   MonitorFilterTrigger,
 } from '@openzeppelin/defender-autotask-client/lib/models/autotask';
 import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-deploy-client';
+import { OpsgenieConfig } from '@openzeppelin/defender-sentinel-client/lib/models/opsgenie';
+import { PagerDutyConfig } from '@openzeppelin/defender-sentinel-client/lib/models/pager-duty';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -125,11 +127,21 @@ export type YDatadogConfig = {
   'metric-prefix': string;
 };
 
+export type YOpsgenieConfig = OpsgenieConfig;
+export type YPagerdutyConfig = PagerDutyConfig;
+
 export type YNotification = SaveNotificationRequest & {
   type: NotificationType;
   name: string;
   paused: boolean;
-  config: YSlackConfig | YTelegramConfig | YDatadogConfig | YDiscordConfig | YEmailConfig;
+  config:
+    | YSlackConfig
+    | YTelegramConfig
+    | YDatadogConfig
+    | YDiscordConfig
+    | YEmailConfig
+    | YOpsgenieConfig
+    | YPagerdutyConfig;
 };
 
 export type YCategory = {

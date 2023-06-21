@@ -15,6 +15,8 @@ import {
   YEmailConfig,
   YDiscordConfig,
   YDatadogConfig,
+  YOpsgenieConfig,
+  YPagerdutyConfig,
   DefenderAutotask,
   DefenderNotification,
   DefenderBlockSentinel,
@@ -190,6 +192,14 @@ export const constructNotification = (notification: YNotification, stackResource
         botToken: currentConfig['bot-token'],
         chatId: currentConfig['chat-id'],
       };
+      return { ...commonNotification, config };
+    case 'opsgenie':
+      currentConfig = notification.config as YOpsgenieConfig;
+      config = currentConfig;
+      return { ...commonNotification, config };
+    case 'pager-duty':
+      currentConfig = notification.config as YPagerdutyConfig;
+      config = currentConfig;
       return { ...commonNotification, config };
     default:
       throw new Error(`Incompatible notification type ${notification.type}`);
