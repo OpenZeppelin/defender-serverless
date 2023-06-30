@@ -244,29 +244,17 @@
     "pagerDutyEventType": {
       "title": "PagerDutyEventType",
       "type": "string",
-      "enum": [
-        "change",
-        "alert"
-      ]
+      "enum": ["change", "alert"]
     },
     "pagerDutyEventAction": {
       "title": "PagerDutyEventAction",
       "type": "string",
-      "enum": [
-        "trigger",
-        "acknowledge",
-        "resolve"
-      ]
+      "enum": ["trigger", "acknowledge", "resolve"]
     },
     "pagerDutySeverity": {
       "title": "PagerDutySeverity",
       "type": "string",
-      "enum": [
-        "critical",
-        "error",
-        "warning",
-        "info"
-      ]
+      "enum": ["critical", "error", "warning", "info"]
     },
     "pagerDutyConfig": {
       "title": "PagerDutyConfig",
@@ -316,16 +304,9 @@
         }
       },
       "then": {
-        "required": [
-          "eventAction",
-          "severity"
-        ]
+        "required": ["eventAction", "severity"]
       },
-      "required": [
-        "token",
-        "eventType",
-        "routingKey"
-      ],
+      "required": ["token", "eventType", "routingKey"],
       "additionalProperties": false
     },
     "notification": {
@@ -520,7 +501,11 @@
           "title": "Trigger",
           "type": "object",
           "properties": {
-            "type": { "title": "TriggerType", "type": "string", "enum": ["schedule", "webhook"] },
+            "type": {
+              "title": "TriggerType",
+              "type": "string",
+              "enum": ["schedule", "webhook", "sentinel", "monitor-filter"]
+            },
             "cron": { "title": "TriggerCron", "type": "string" },
             "frequency": { "title": "TriggerFrequency", "type": "integer" }
           },
