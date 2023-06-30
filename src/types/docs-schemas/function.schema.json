@@ -13,7 +13,11 @@
       "title": "Trigger",
       "type": "object",
       "properties": {
-        "type": { "title": "TriggerType", "type": "string", "enum": ["schedule", "webhook"] },
+        "type": {
+          "title": "TriggerType",
+          "type": "string",
+          "enum": ["schedule", "webhook", "sentinel", "monitor-filter"]
+        },
         "cron": { "title": "TriggerCron", "type": "string" },
         "frequency": { "title": "TriggerFrequency", "type": "integer" }
       },
