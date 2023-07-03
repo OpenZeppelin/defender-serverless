@@ -1,6 +1,8 @@
 import Serverless from 'serverless';
-import prompt from 'prompt';
 import _ from 'lodash';
+
+import prompt from 'prompt';
+import keccak256 from 'keccak256';
 
 import { Logging } from 'serverless/classes/Plugin';
 
@@ -26,6 +28,7 @@ import {
   getDeploymentConfigClient,
   getBlockExplorerApiKeyClient,
   formatABI,
+  validateListPermissions,
 } from '../utils';
 import {
   DefenderAutotask,
@@ -59,7 +62,6 @@ import {
   DefenderCategory,
   YCategory,
 } from '../types';
-import keccak256 from 'keccak256';
 
 export default class DefenderDeploy {
   serverless: Serverless;
@@ -99,83 +101,134 @@ export default class DefenderDeploy {
       deploymentConfigs: [],
       blockExplorerApiKeys: [],
     };
+
+    let hasPermission = false;
+
     // Contracts
     const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
     const adminClient = getAdminClient(this.teamKey!);
-    const dContracts = await adminClient.listContracts();
-    const contractDifference = _.differenceWith(
-      dContracts,
-      Object.entries(contracts ?? []),
-      (a: DefenderContract, b: [string, YContract]) =>
-        `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
-    );
+    let contractDifference: DefenderContract[] = [];
+    this.log.progress('ssot-difference', `Validating permissions for Contracts`);
+    hasPermission = await validateListPermissions<YContract>(adminClient, contracts, 'Contracts');
+
+    if (hasPermission) {
+      const dContracts = await adminClient.listContracts();
+      contractDifference = _.differenceWith(
+        dContracts,
+        Object.entries(contracts ?? []),
+        (a: DefenderContract, b: [string, YContract]) =>
+          `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
+      );
+    } else {
+      this.log.warn(`Skipping validation for Contracts`);
+    }
 
     // Sentinels
     const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
     const sentinelClient = getSentinelClient(this.teamKey!);
-    const dSentinels = (await sentinelClient.list()).items;
-    const sentinelDifference = _.differenceWith(
-      dSentinels,
-      Object.entries(sentinels ?? []),
-      (a: DefenderSentinel, b: [string, YSentinel]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
-    );
+    let sentinelDifference: DefenderSentinel[] = [];
+    this.log.progress('ssot-difference', `Validating permissions for Sentinels`);
+    hasPermission = await validateListPermissions<YSentinel>(sentinelClient, sentinels, 'Sentinels');
+
+    if (hasPermission) {
+      const dSentinels = (await sentinelClient.list()).items;
+      sentinelDifference = _.differenceWith(
+        dSentinels,
+        Object.entries(sentinels ?? []),
+        (a: DefenderSentinel, b: [string, YSentinel]) =>
+          a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      );
+    } else {
+      this.log.warn(`Skipping validation for Sentinels`);
+    }
 
     // Relayers
     const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
     const relayerClient = getRelayClient(this.teamKey!);
-    const dRelayers = (await relayerClient.list()).items;
 
-    // Relayers API keys
-    await Promise.all(
-      Object.entries(relayers).map(async ([id, relayer]) => {
-        const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
-          getResourceID(getStackName(this.serverless), id),
-          dRelayers,
-        );
-        if (dRelayer) {
-          const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
-          const configuredKeys = relayer['api-keys'];
-          const relayerApiKeyDifference = _.differenceWith(
-            dRelayerApiKeys,
-            configuredKeys,
-            (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
+    this.log.progress('ssot-difference', `Validating permissions for Relayers`);
+    hasPermission = await validateListPermissions<YRelayer>(relayerClient, relayers, 'Relayers');
+
+    if (hasPermission) {
+      const dRelayers = (await relayerClient.list()).items;
+      // Relayers API keys
+      await Promise.all(
+        Object.entries(relayers).map(async ([id, relayer]) => {
+          const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
+            getResourceID(getStackName(this.serverless), id),
+            dRelayers,
           );
-          difference.relayerApiKeys.push(...relayerApiKeyDifference);
-        }
-      }),
-    );
+          if (dRelayer) {
+            const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
+            const configuredKeys = relayer['api-keys'];
+            const relayerApiKeyDifference = _.differenceWith(
+              dRelayerApiKeys,
+              configuredKeys,
+              (a: DefenderRelayerApiKey, b: string) =>
+                a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
+            );
+            difference.relayerApiKeys.push(...relayerApiKeyDifference);
+          }
+        }),
+      );
+    } else {
+      this.log.warn(`Skipping validation for Relayer API Keys`);
+    }
 
     // Notifications
     const notifications: YNotification[] = this.serverless.service.resources?.Resources?.notifications ?? [];
-    const dNotifications = await sentinelClient.listNotificationChannels();
-    const notificationDifference = _.differenceWith(
-      dNotifications,
-      Object.entries(notifications ?? []),
-      (a: DefenderNotification, b: [string, YNotification]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
-    );
+    let notificationDifference: DefenderNotification[] = [];
+    this.log.progress('ssot-difference', `Validating permissions for Notifications`);
+    hasPermission = await validateListPermissions<YNotification>(sentinelClient, notifications, 'Notifications');
+
+    if (hasPermission) {
+      const dNotifications = await sentinelClient.listNotificationChannels();
+      notificationDifference = _.differenceWith(
+        dNotifications,
+        Object.entries(notifications ?? []),
+        (a: DefenderNotification, b: [string, YNotification]) =>
+          a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      );
+    } else {
+      this.log.warn(`Skipping validation for Notifications`);
+    }
 
     // Notification Categories
     const categories: YCategory[] = this.serverless.service.resources?.Resources?.categories ?? [];
-    const dCategories = await sentinelClient.listNotificationCategories();
-    const categoryDifference = _.differenceWith(
-      dCategories,
-      Object.entries(categories ?? []),
-      (a: DefenderCategory, b: [string, YCategory]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
-    );
+    let categoryDifference: DefenderCategory[] = [];
+    this.log.progress('ssot-difference', `Validating permissions for Categories`);
+    hasPermission = await validateListPermissions<YCategory>(sentinelClient, categories, 'Categories');
+
+    if (hasPermission) {
+      const dCategories = await sentinelClient.listNotificationCategories();
+      categoryDifference = _.differenceWith(
+        dCategories,
+        Object.entries(categories ?? []),
+        (a: DefenderCategory, b: [string, YCategory]) =>
+          a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      );
+    } else {
+      this.log.warn(`Skipping validation for Categories`);
+    }
 
     // Autotasks
     const autotasks: YAutotask[] = this.serverless.service.functions as any;
     const autotaskClient = getAutotaskClient(this.teamKey!);
-    const dAutotasks = (await autotaskClient.list()).items;
-    const autotaskDifference = _.differenceWith(
-      dAutotasks,
-      Object.entries(autotasks ?? []),
-      (a: DefenderAutotask, b: [string, YAutotask]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
-    );
+    let autotaskDifference: DefenderAutotask[] = [];
+    this.log.progress('ssot-difference', `Validating permissions for Autotasks`);
+    hasPermission = await validateListPermissions<YAutotask>(autotaskClient, autotasks, 'Autotasks');
+
+    if (hasPermission) {
+      const dAutotasks = (await autotaskClient.list()).items;
+      autotaskDifference = _.differenceWith(
+        dAutotasks,
+        Object.entries(autotasks ?? []),
+        (a: DefenderAutotask, b: [string, YAutotask]) =>
+          a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      );
+    } else {
+      this.log.warn(`Skipping validation for Autotasks`);
+    }
 
     // Secrets
     const allSecrets = getConsolidatedSecrets(this.serverless);
@@ -190,25 +243,53 @@ export default class DefenderDeploy {
     const deploymentConfigs: YDeploymentConfig[] =
       this.serverless.service.resources?.Resources?.['deployment-configs'] ?? [];
     const deploymentConfigClient = getDeploymentConfigClient(this.teamKey!);
-    const dDeploymentConfigs = await deploymentConfigClient.list();
-    const deploymentConfigDifference = _.differenceWith(
-      dDeploymentConfigs,
-      Object.entries(deploymentConfigs ?? []),
-      (a: DefenderDeploymentConfig, b: [string, YDeploymentConfig]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    let deploymentConfigDifference: DefenderDeploymentConfig[] = [];
+
+    this.log.progress('ssot-difference', `Validating permissions for Deployment Configs`);
+    hasPermission = await validateListPermissions<YDeploymentConfig>(
+      deploymentConfigClient,
+      deploymentConfigs,
+      'Deployment Configs',
     );
+
+    if (hasPermission) {
+      const dDeploymentConfigs = await deploymentConfigClient.list();
+      deploymentConfigDifference = _.differenceWith(
+        dDeploymentConfigs,
+        Object.entries(deploymentConfigs ?? []),
+        (a: DefenderDeploymentConfig, b: [string, YDeploymentConfig]) =>
+          a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      );
+    } else {
+      this.log.warn(`Skipping validation for Deployment Configs`);
+    }
 
     // Block Explorer Api Keys
     const blockExplorerApiKeys: YBlockExplorerApiKey[] =
       this.serverless.service.resources?.Resources?.['block-explorer-api-keys'] ?? [];
     const blockExplorerApiKeysClient = getBlockExplorerApiKeyClient(this.teamKey!);
-    const dBlockExplorerApiKeys = await blockExplorerApiKeysClient.list();
-    const blockExplorerApiKeyDifference = _.differenceWith(
-      dBlockExplorerApiKeys,
-      Object.entries(blockExplorerApiKeys ?? []),
-      (a: DefenderBlockExplorerApiKey, b: [string, YBlockExplorerApiKey]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+    let blockExplorerApiKeyDifference: DefenderBlockExplorerApiKey[] = [];
+
+    this.log.progress('ssot-difference', `Validating permissions for Block Explorer Api Keys`);
+    hasPermission = await validateListPermissions<YBlockExplorerApiKey>(
+      blockExplorerApiKeysClient,
+      blockExplorerApiKeys,
+      'Block Explorer Api Keys',
     );
+
+    if (hasPermission) {
+      const dBlockExplorerApiKeys = await blockExplorerApiKeysClient.list();
+      blockExplorerApiKeyDifference = _.differenceWith(
+        dBlockExplorerApiKeys,
+        Object.entries(blockExplorerApiKeys ?? []),
+        (a: DefenderBlockExplorerApiKey, b: [string, YBlockExplorerApiKey]) =>
+          a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      );
+    } else {
+      this.log.warn(`Skipping validation for Block Explorer Api Keys`);
+    }
+
+    this.log.removeProgress('ssot-difference');
 
     difference.contracts = contractDifference;
     difference.sentinels = sentinelDifference;

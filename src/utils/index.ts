@@ -5,6 +5,7 @@ import { AutotaskClient } from '@openzeppelin/defender-autotask-client';
 import { SentinelClient } from '@openzeppelin/defender-sentinel-client';
 import { RelayClient } from '@openzeppelin/defender-relay-client';
 import { AdminClient } from '@openzeppelin/defender-admin-client';
+import { BlockExplorerApiKeyClient, DeploymentConfigClient } from '@openzeppelin/platform-deploy-client';
 
 import {
   YSecret,
@@ -33,7 +34,7 @@ import {
   DefenderNotificationReference,
 } from '../types';
 import { sanitise } from './sanitise';
-import { BlockExplorerApiKeyClient, DeploymentConfigClient } from '@openzeppelin/platform-deploy-client';
+import Logger from './logger';
 
 /**
  * @dev this function retrieves the Defender equivalent object of the provided template resource
@@ -345,6 +346,64 @@ export const constructSentinel = (
   throw new Error('Incompatible sentinel type. Type must be either FORTA or BLOCK');
 };
 
+export const validateListPermissions = async <T>(
+  client:
+    | SentinelClient
+    | AutotaskClient
+    | DeploymentConfigClient
+    | RelayClient
+    | AdminClient
+    | BlockExplorerApiKeyClient,
+  resources: T[] | undefined,
+  resourceType: ResourceType,
+): Promise<boolean> => {
+  if (!resources) return true;
+  try {
+    switch (resourceType) {
+      case 'Sentinels':
+        await (client as SentinelClient).list();
+        break;
+      case 'Autotasks':
+        await (client as AutotaskClient).list();
+        break;
+      case 'Deployment Configs':
+        await (client as DeploymentConfigClient).list();
+        break;
+      case 'Relayers':
+        await (client as RelayClient).list();
+        break;
+      case 'Notifications':
+        await (client as SentinelClient).listNotificationChannels();
+        break;
+      case 'Categories':
+        await (client as SentinelClient).listNotificationCategories();
+        break;
+      case 'Contracts':
+        await (client as AdminClient).listContracts();
+        break;
+      case 'Secrets':
+        await (client as AutotaskClient).listSecrets();
+        break;
+      case 'Block Explorer Api Keys':
+        await (client as BlockExplorerApiKeyClient).list();
+        break;
+      default:
+        return true;
+    }
+    return true;
+  } catch (e) {
+    // catch the error and verify it is an unauthorised access error
+    if (isUnauthorisedError(e)) {
+      Logger.getInstance().error(
+        `Unauthorised to access ${resourceType}. Additional API key permissions are required to access this resource.`,
+      );
+      return false;
+    }
+    // we throw with original error if its not a permission issue
+    throw e;
+  }
+};
+
 export const validateAdditionalPermissionsOrThrow = async <T>(
   context: Serverless,
   resources: T[] | undefined,
@@ -396,6 +455,22 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
           // also throw with original error if its not a permission issue
           throw e;
         }
+      }
+    case 'Deployment Configs':
+      // Check for access to Deployment Config
+      try {
+        await getDeploymentConfigClient(teamApiKey).list();
+        return;
+      } catch (e) {
+        // catch the error and verify it is an unauthorised access error
+        if (isUnauthorisedError(e)) {
+          // if this fails (due to permissions issue), we re-throw the error with more context
+          throw new Error(
+            'Additional API key permissions ("Manage Deployments") are required to access Deployment Configurations.',
+          );
+        }
+        // also throw with original error if its not a permission issue
+        throw e;
       }
     // No other resources require additional permissions
     default:
