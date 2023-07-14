@@ -178,8 +178,8 @@ Usually, fixing the error and retrying the deploy should suffice as any existing
 npm login
 git checkout main
 git pull origin main
-yarn publish --no-git-tag-version
-# enter new version at prompt
+# increment version in package.json
+npm publish
 git add package.json
 git commit -m 'v{version here}'
 git push origin main
