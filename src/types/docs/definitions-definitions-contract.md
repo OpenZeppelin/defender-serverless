@@ -127,6 +127,7 @@
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
+| `"base"`                  |             |
 | `"base-goerli"`           |             |
 | `"linea-goerli"`          |             |
 
