@@ -53,6 +53,7 @@
         "zksync-goerli",
         "base",
         "base-goerli",
+        "linea",
         "linea-goerli"
       ]
     },
