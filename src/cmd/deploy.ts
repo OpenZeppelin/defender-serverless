@@ -61,6 +61,7 @@ import {
   YBlockExplorerApiKey,
   DefenderCategory,
   YCategory,
+  DefenderScenarioTrigger,
 } from '../types';
 
 export default class DefenderDeploy {
@@ -970,7 +971,12 @@ export default class DefenderDeploy {
         const { codeDigest } = await client.get(match.autotaskId);
 
         const isSchedule = (
-          o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderSentinelTrigger | DefenderMonitorFilterTrigger,
+          o:
+            | DefenderWebhookTrigger
+            | DefenderScheduleTrigger
+            | DefenderSentinelTrigger
+            | DefenderMonitorFilterTrigger
+            | DefenderScenarioTrigger,
         ): o is DefenderScheduleTrigger => o.type === 'schedule';
 
         const mappedMatch = {

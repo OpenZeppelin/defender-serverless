@@ -32,6 +32,7 @@ import {
   WebhookTrigger,
   SentinelTrigger,
   MonitorFilterTrigger,
+  ScenarioTrigger,
 } from '@openzeppelin/defender-autotask-client/lib/models/autotask';
 import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-deploy-client';
 import { OpsgenieConfig } from '@openzeppelin/defender-sentinel-client/lib/models/opsgenie';
@@ -58,6 +59,7 @@ export type DefenderDiscordConfig = DiscordConfig;
 export type DefenderTelegramConfig = TelegramBotConfig;
 export type DefenderEmailConfig = EmailConfig;
 export type DefenderNetwork = Network;
+export type DefenderScenarioTrigger = ScenarioTrigger;
 export type DefenderWebhookTrigger = WebhookTrigger;
 export type DefenderScheduleTrigger = ScheduleTrigger;
 export type DefenderDeploymentConfig = DeploymentConfigResponse;
