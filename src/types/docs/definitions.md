@@ -188,7 +188,6 @@ Reference this group by using
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
-| `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
 | `"fuse"`                  |             |
@@ -205,11 +204,9 @@ Reference this group by using
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
 | `"optimism-kovan"`        |             |
-| `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
-| `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
 | `"harmony-s0"`            |             |
@@ -221,9 +218,7 @@ Reference this group by using
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
 | `"base"`                  |             |
-| `"base-goerli"`           |             |
 | `"linea"`                 |             |
 | `"linea-goerli"`          |             |
 
@@ -398,7 +393,6 @@ Reference this group by using
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
-| `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
 | `"fuse"`                  |             |
@@ -415,11 +409,9 @@ Reference this group by using
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
 | `"optimism-kovan"`        |             |
-| `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
-| `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
 | `"harmony-s0"`            |             |
@@ -431,9 +423,7 @@ Reference this group by using
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
 | `"base"`                  |             |
-| `"base-goerli"`           |             |
 | `"linea"`                 |             |
 | `"linea-goerli"`          |             |
 
@@ -1623,7 +1613,6 @@ Reference this group by using
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
-| `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
 | `"fuse"`                  |             |
@@ -1640,11 +1629,9 @@ Reference this group by using
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
 | `"optimism-kovan"`        |             |
-| `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
-| `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
 | `"harmony-s0"`            |             |
@@ -1656,9 +1643,7 @@ Reference this group by using
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
 | `"base"`                  |             |
-| `"base-goerli"`           |             |
 | `"linea"`                 |             |
 | `"linea-goerli"`          |             |
 
@@ -1975,7 +1960,6 @@ Reference this group by using
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
-| `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
 | `"fuse"`                  |             |
@@ -1992,11 +1976,9 @@ Reference this group by using
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
 | `"optimism-kovan"`        |             |
-| `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
-| `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
 | `"harmony-s0"`            |             |
@@ -2008,9 +1990,7 @@ Reference this group by using
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
 | `"base"`                  |             |
-| `"base-goerli"`           |             |
 | `"linea"`                 |             |
 | `"linea-goerli"`          |             |
 
@@ -2456,7 +2436,6 @@ Reference this group by using
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
-| `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
 | `"fuse"`                  |             |
@@ -2473,11 +2452,9 @@ Reference this group by using
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
 | `"optimism-kovan"`        |             |
-| `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
-| `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
 | `"harmony-s0"`            |             |
@@ -2489,9 +2466,7 @@ Reference this group by using
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
 | `"base"`                  |             |
-| `"base-goerli"`           |             |
 | `"linea"`                 |             |
 | `"linea-goerli"`          |             |
 

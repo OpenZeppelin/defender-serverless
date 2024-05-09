@@ -104,7 +104,6 @@ any of
 | `"rinkeby"`               |             |
 | `"ropsten"`               |             |
 | `"kovan"`                 |             |
-| `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
 | `"fuse"`                  |             |
@@ -121,11 +120,9 @@ any of
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
 | `"optimism-kovan"`        |             |
-| `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
 | `"arbitrum-rinkeby"`      |             |
-| `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
 | `"harmony-s0"`            |             |
@@ -137,9 +134,7 @@ any of
 | `"x-dfk-avax-chain"`      |             |
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
 | `"base"`                  |             |
-| `"base-goerli"`           |             |
 | `"linea"`                 |             |
 | `"linea-goerli"`          |             |
 
