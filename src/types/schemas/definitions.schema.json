@@ -24,6 +24,7 @@
       "type": "string",
       "enum": [
         "alfajores",
+        "amoy",
         "arbitrum",
         "arbitrum-nova",
         "arbitrum-rinkeby",
