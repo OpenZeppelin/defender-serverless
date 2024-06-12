@@ -504,12 +504,12 @@
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-"@openzeppelin/defender-autotask-client@^1.48.0":
-  version "1.48.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-autotask-client/-/defender-autotask-client-1.48.0.tgz#42242c7d83dbb2ab0140eb9157e094e1f905a2c9"
-  integrity sha512-n/ozewIMYmLUfSxa4v8uwHL+/YsRfQn6YM8Is0LLmd3+jziU02akFzaRuid5DFKmhVokXdsIPG682I/FBPUvlw==
+"@openzeppelin/defender-autotask-client@^1.54.4":
+  version "1.54.6"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-autotask-client/-/defender-autotask-client-1.54.6.tgz#2a9ad0ab4ddfd8e204706034fd7f2a429e0f2ef2"
+  integrity sha512-UEJnAuOBdUQhfFyHRKGqzB8gbqt35pCPHsRCYu5Zzrfr++mXnDx6g/RBdVbZflzQf/lQRXEaWhKortd4b43kpA==
   dependencies:
-    "@openzeppelin/defender-base-client" "1.48.0"
+    "@openzeppelin/defender-base-client" "1.54.6"
     axios "^1.4.0"
     dotenv "^10.0.0"
     glob "^7.1.6"
@@ -521,6 +521,17 @@
   version "1.48.0"
   resolved "https://registry.yarnpkg.com/@openzeppelin/defender-base-client/-/defender-base-client-1.48.0.tgz#9103b1b036db0451b52d7899a277bf24db4c4b06"
   integrity sha512-HFO87s010hRrMjyh2xYOCEAkLe21BfIbho7n5/kikA6A1ZgXi7MsEiqnQv1zP4bxMJgxGZ5b3t4tt6fWrakbag==
+  dependencies:
+    amazon-cognito-identity-js "^6.0.1"
+    async-retry "^1.3.3"
+    axios "^1.4.0"
+    lodash "^4.17.19"
+    node-fetch "^2.6.0"
+
+"@openzeppelin/defender-base-client@1.54.6":
+  version "1.54.6"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-base-client/-/defender-base-client-1.54.6.tgz#b65a90dba49375ac1439d638832382344067a0b9"
+  integrity sha512-PTef+rMxkM5VQ7sLwLKSjp2DBakYQd661ZJiSRywx+q/nIpm3B/HYGcz5wPZCA5O/QcEP6TatXXDoeMwimbcnw==
   dependencies:
     amazon-cognito-identity-js "^6.0.1"
     async-retry "^1.3.3"
