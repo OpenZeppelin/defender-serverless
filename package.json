@@ -64,7 +64,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@openzeppelin/defender-admin-client": "^1.48.0",
+    "@openzeppelin/defender-admin-client": "^1.54.4",
     "@openzeppelin/defender-autotask-client": "^1.48.0",
     "@openzeppelin/defender-relay-client": "^1.48.0",
     "@openzeppelin/defender-sentinel-client": "^1.48.0",
